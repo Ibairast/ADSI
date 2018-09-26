@@ -2,80 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9acc0cde-6baf-4289-9dc8-77f65c4085f5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_21_0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$AyudaListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$AyudaListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta1Listener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta1Listener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta2Listener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta2Listener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta3Listener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta3Listener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta4Listener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$ElegirCarta4Listener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$JugarListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$JugarListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$JugarTurnoListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$JugarTurnoListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$RankingListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$RankingListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$SiguienteListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador$SiguienteListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packControlador/Controlador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Animal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/AnimalFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/AnimalFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Bar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Bar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Camaleon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Camaleon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Canguro.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Canguro.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Carta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Carta.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Cebra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Cebra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Cocodrilo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Cocodrilo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/EnumColor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/EnumColor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/EsLoQueHay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/EsLoQueHay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Foca.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Foca.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Hipopotamo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Hipopotamo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/IRecurrente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/IRecurrente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Jirafa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Jirafa.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Jugador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Jugador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/JugadorReal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/JugadorReal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Leon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Leon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/ListaCartas$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/ListaCartas$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/ListaCartas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/ListaCartas.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Loro.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Loro.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Maquina.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Maquina.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Mofeta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Mofeta.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Mono.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Mono.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Partida.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Partida.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/RankingDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/RankingDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Serpiente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Serpiente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Tablero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packModelo/Tablero.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packPrincipal/BarBestial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packPrincipal/BarBestial.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaAyuda.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaAyuda.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaInicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaInicio.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaJuego.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaJuego.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaRanking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BarBestial/packVista/VentanaRanking.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/.directory" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Bar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CamaleonAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CamaleonVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CanguroAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CanguroVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CebraAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CebraVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CocodriloAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/CocodriloVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/FocaAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/FocaVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/HipopotamoAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/HipopotamoVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/JirafaAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/JirafaVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/LeonAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/LeonVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/LoroAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/LoroVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/MofetaAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/MofetaVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/MonoAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/MonoVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Patada.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/PuertaCielo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Reverso.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/SerpienteAzul.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/SerpienteVerde.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/images/Vacio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBestial.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BarBestial.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/.directory" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/.directory" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/Bar.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Bar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CamaleonAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CamaleonAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CamaleonVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CamaleonVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CanguroAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CanguroAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CanguroVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CanguroVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CebraAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CebraAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CebraVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CebraVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CocodriloAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CocodriloAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/CocodriloVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/CocodriloVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/FocaAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/FocaAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/FocaVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/FocaVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/HipopotamoAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/HipopotamoAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/HipopotamoVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/HipopotamoVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/JirafaAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/JirafaAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/JirafaVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/JirafaVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/LeonAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/LeonAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/LeonVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/LeonVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/LoroAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/LoroAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/LoroVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/LoroVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/MofetaAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/MofetaAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/MofetaVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/MofetaVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/MonoAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/MonoAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/MonoVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/MonoVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/Patada.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Patada.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/PuertaCielo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/PuertaCielo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/Reverso.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Reverso.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/SerpienteAzul.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/SerpienteAzul.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/SerpienteVerde.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/SerpienteVerde.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/images/Vacio.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/Vacio.png" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,8 +49,8 @@
       <file leaf-file-name="BarBestial.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/packPrincipal/BarBestial.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="190">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -99,7 +58,7 @@
       <file leaf-file-name="VentanaInicio.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/packVista/VentanaInicio.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
+            <state relative-caret-position="1121">
               <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
             </state>
           </provider>
@@ -132,26 +91,21 @@
     <option name="width" value="1400" />
     <option name="height" value="995" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="BarBestial" type="b2602c69:ProjectViewProjectNode" />
               <item name="BarBestial" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BarBestial" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BarBestial" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BarBestial" type="b2602c69:ProjectViewProjectNode" />
@@ -172,6 +126,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -260,7 +216,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1035" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
@@ -277,7 +232,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="DB Browser" order="2" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3297414" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32937366" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -299,6 +254,27 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/packPrincipal/BarBestial.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/packVista/VentanaInicio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/packControlador/Controlador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/packPrincipal/BarBestial.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -343,15 +319,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/packVista/VentanaInicio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
+        <state relative-caret-position="1121">
           <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/packPrincipal/BarBestial.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="190">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
