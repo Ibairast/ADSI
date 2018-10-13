@@ -50,10 +50,10 @@ public class Controlador {
 
         /* Listeners VentanaJuego */
         this.ventanaJuego.addJugarTurnoListener(new JugarTurnoListener());
-//        this.ventanaJuego.addElegirCarta1Listener(new ElegirCarta1Listener());
-//        this.ventanaJuego.addElegirCarta2Listener(new ElegirCarta2Listener());
-//        this.ventanaJuego.addElegirCarta3Listener(new ElegirCarta3Listener());
-//        this.ventanaJuego.addElegirCarta4Listener(new ElegirCarta4Listener());
+        this.ventanaJuego.addElegirCarta1Listener(new ElegirCarta1Listener());
+        this.ventanaJuego.addElegirCarta2Listener(new ElegirCarta2Listener());
+        this.ventanaJuego.addElegirCarta3Listener(new ElegirCarta3Listener());
+        this.ventanaJuego.addElegirCarta4Listener(new ElegirCarta4Listener());
         this.ventanaJuego.addSiguienteListener(new SiguienteListener());
 
         this.ventanaJuego.desactivarBotonJugarTurno();
