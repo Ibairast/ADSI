@@ -47,6 +47,8 @@ public class VentanaJuego extends JFrame implements Observer {
     private JLabel bestLabel4;
     private JButton btnJugarTurno;
     private JButton btnSiguiente;
+    private JButton btnGuardar;
+    private JButton btnAyuda;
 
     /**
      * Create the frame.
@@ -98,24 +100,25 @@ public class VentanaJuego extends JFrame implements Observer {
         panelElegirCartas = new JPanel();
         panelJugadorReal.add(panelElegirCartas, BorderLayout.SOUTH);
 
-        //Tablero.getMiTablero().anadirObservador(this);
-
-        btnElegirCarta1 = new JButton("Elegir");
-        btnElegirCarta1.setPreferredSize(new Dimension(160, 25));
-        panelElegirCartas.add(btnElegirCarta1);
 
 
-        btnElegirCarta2 = new JButton("Elegir");
-        btnElegirCarta2.setPreferredSize(new Dimension(160, 25));
-        panelElegirCartas.add(btnElegirCarta2);
 
-        btnElegirCarta3 = new JButton("Elegir");
-        btnElegirCarta3.setPreferredSize(new Dimension(160, 25));
-        panelElegirCartas.add(btnElegirCarta3);
-
-        btnElegirCarta4 = new JButton("Elegir");
-        btnElegirCarta4.setPreferredSize(new Dimension(160, 25));
-        panelElegirCartas.add(btnElegirCarta4);
+//        btnElegirCarta1 = new JButton("Elegir");
+//        btnElegirCarta1.setPreferredSize(new Dimension(160, 25));
+//        panelElegirCartas.add(btnElegirCarta1);
+//
+//
+//        btnElegirCarta2 = new JButton("Elegir");
+//        btnElegirCarta2.setPreferredSize(new Dimension(160, 25));
+//        panelElegirCartas.add(btnElegirCarta2);
+//
+//        btnElegirCarta3 = new JButton("Elegir");
+//        btnElegirCarta3.setPreferredSize(new Dimension(160, 25));
+//        panelElegirCartas.add(btnElegirCarta3);
+//
+//        btnElegirCarta4 = new JButton("Elegir");
+//        btnElegirCarta4.setPreferredSize(new Dimension(160, 25));
+//        panelElegirCartas.add(btnElegirCarta4);
 
         btnJugarTurno = new JButton("Jugar turno");
         btnJugarTurno.setPreferredSize(new Dimension(120, 25));
@@ -124,6 +127,15 @@ public class VentanaJuego extends JFrame implements Observer {
         btnSiguiente = new JButton("Siguiente");
         btnSiguiente.setPreferredSize(new Dimension(120, 25));
         panelElegirCartas.add(btnSiguiente);
+
+        btnGuardar = new JButton("Guardar");
+        btnGuardar.setPreferredSize(new Dimension(120, 25));
+        panelElegirCartas.add(btnGuardar);
+
+        btnAyuda = new JButton("Ayuda");
+        btnAyuda.setPreferredSize(new Dimension(120, 25));
+        panelElegirCartas.add(btnAyuda);
+
 
         panelCola = new JPanel();
         contentPane.add(panelCola, BorderLayout.CENTER);
@@ -323,21 +335,21 @@ public class VentanaJuego extends JFrame implements Observer {
         btnSiguiente.addActionListener(listenForBtnSiguiente);
     }
 
-    public void addElegirCarta1Listener(ActionListener listenForBtnElegirCarta1) {
-        btnElegirCarta1.addActionListener(listenForBtnElegirCarta1);
-    }
-
-    public void addElegirCarta2Listener(ActionListener listenForBtnElegirCarta2) {
-        btnElegirCarta2.addActionListener(listenForBtnElegirCarta2);
-    }
-
-    public void addElegirCarta3Listener(ActionListener listenForBtnElegirCarta3) {
-        btnElegirCarta3.addActionListener(listenForBtnElegirCarta3);
-    }
-
-    public void addElegirCarta4Listener(ActionListener listenForBtnElegirCarta4) {
-        btnElegirCarta4.addActionListener(listenForBtnElegirCarta4);
-    }
+//    public void addElegirCarta1Listener(ActionListener listenForBtnElegirCarta1) {
+//        btnElegirCarta1.addActionListener(listenForBtnElegirCarta1);
+//    }
+//
+//    public void addElegirCarta2Listener(ActionListener listenForBtnElegirCarta2) {
+//        btnElegirCarta2.addActionListener(listenForBtnElegirCarta2);
+//    }
+//
+//    public void addElegirCarta3Listener(ActionListener listenForBtnElegirCarta3) {
+//        btnElegirCarta3.addActionListener(listenForBtnElegirCarta3);
+//    }
+//
+//    public void addElegirCarta4Listener(ActionListener listenForBtnElegirCarta4) {
+//        btnElegirCarta4.addActionListener(listenForBtnElegirCarta4);
+//    }
 
     private void popUpEspeciesCola(String pInfoEspeciesCola) {
         Object[] posibilidades = pInfoEspeciesCola.split(" ");

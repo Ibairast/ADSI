@@ -1,12 +1,16 @@
 -Casos de uso  ---- 14 Octubre
-	- Funcionalidades comunes menú principal
-		- Visualizar ranking
-
 Casos de uso extendidos:
--Login ->
+-Login -> Paul *Falta revisión
 -Ranking -> Andrea
 -Save/Load -> Ibai
 -Ayuda -> Ibon
 -Personalización -> Alain
 -Control de acceso -> Josu
 -RRSS -> Cristian
+
+- Funcionalidades comunes menú principal
+	- Visualizar ranking  ->done
+	- nueva partida ->done
+	- instrucciones ->done
+	- personalizar ->done
+	- cambiar contraseña ->done

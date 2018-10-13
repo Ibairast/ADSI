@@ -9,11 +9,15 @@ public class VentanaInicio extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textFieldNombre;
 
-    private JButton btnJugar;
-    private JButton btnAyuda;
+
+    private JButton btnNuevaPartida;
+    private JButton btnInstrucciones;
     private JButton btnRanking;
+    private JButton btnCargarPartida;
+    private JButton btnCambiarContraseña;
+    private JButton btnPersonalizar;
+
 
     /**
      * Create the frame.
@@ -40,21 +44,24 @@ public class VentanaInicio extends JFrame {
         JPanel panelMenu = new JPanel();
         contentPane.add(panelMenu, BorderLayout.SOUTH);
 
-        JLabel lblIntroduceTuNombre = new JLabel("Introduce tu nombre:");
-        panelMenu.add(lblIntroduceTuNombre);
 
-        this.textFieldNombre = new JTextField();
-        panelMenu.add(textFieldNombre);
-        textFieldNombre.setColumns(10);
+        this.btnNuevaPartida = new JButton("Nueva Partida");
+        panelMenu.add(btnNuevaPartida);
 
-        this.btnJugar = new JButton("Jugar");
-        panelMenu.add(btnJugar);
+        this.btnCargarPartida = new JButton("Cargar Partida");
+        panelMenu.add(btnCargarPartida);
 
-        this.btnAyuda = new JButton("Ayuda");
-        panelMenu.add(btnAyuda);
+        this.btnInstrucciones = new JButton("Instrucciones");
+        panelMenu.add(btnInstrucciones);
 
         this.btnRanking = new JButton("Ranking");
         panelMenu.add(btnRanking);
+
+        this.btnPersonalizar = new JButton("Personalizar");
+        panelMenu.add(btnPersonalizar);
+
+        this.btnCambiarContraseña = new JButton("Cambiar contraseña");
+        panelMenu.add(btnCambiarContraseña);
 
         JPanel panelImagenBar = new JPanel();
         contentPane.add(panelImagenBar, BorderLayout.CENTER);
@@ -78,21 +85,28 @@ public class VentanaInicio extends JFrame {
         });
     }
 
-    public void addJugarListener(ActionListener listenForBtnJugar) {
-        btnJugar.addActionListener(listenForBtnJugar);
+    public void addNuevaPartidaListener(ActionListener listenForBtnNuevaPartida) {
+        btnNuevaPartida.addActionListener(listenForBtnNuevaPartida);
     }
 
-    public void addAyudaListener(ActionListener listenForBtnAyuda) {
-        btnAyuda.addActionListener(listenForBtnAyuda);
+    public void addInstrucionesListener(ActionListener listenForBtnInstrucciones) {
+        btnInstrucciones.addActionListener(listenForBtnInstrucciones);
     }
 
     public void addRankingListener(ActionListener listenForBtnRanking) {
         btnRanking.addActionListener(listenForBtnRanking);
     }
 
-    public String getTextFieldNombreValue() {
-        return this.textFieldNombre.getText();
+    public void addCargarPartidaListener(ActionListener listenForBtnCargarPartida) {
+        btnCargarPartida.addActionListener(listenForBtnCargarPartida);
     }
+    public void addCambiarContraseniaListener(ActionListener listenForBtnCambiarContrasenia) {
+        btnNuevaPartida.addActionListener(listenForBtnCambiarContrasenia);
+    }
+    public void addPersonalizarListener(ActionListener listenForBtnPersonalizar) {
+        btnNuevaPartida.addActionListener(listenForBtnPersonalizar);
+    }
+
 
     public void showNombreErrorMessage() {
         JOptionPane.showMessageDialog(this,
