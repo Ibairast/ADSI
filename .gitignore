@@ -5,3 +5,5 @@
 *.xml
 
 *.iml
+
+*.vpp.bak_*
