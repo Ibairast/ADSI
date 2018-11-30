@@ -2,7 +2,7 @@ package packModelo;
 
 public class Bar {
     private static Bar miBar;
-    private ListaCartas lista;
+    private ListaCartas lista; //Cielo
 
     private Bar() {
         lista = new ListaCartas();
