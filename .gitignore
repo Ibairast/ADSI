@@ -5,3 +5,7 @@
 *.xml
 
 *.iml
+
+*.vpp.bak_*
+
+BarBestial/

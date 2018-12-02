@@ -1,0 +1,10 @@
+
+
+-Login -> Paul -> (Alain)
+-Ranking -> Andrea (Ibai)
+-Save/Load -> Ibai (Andrea)
+-Ayuda -> Ibon (Cristian)
+-Personalización -> Alain (Ibon)
+-Control de acceso -> Josu (Paul)
+-RRSS -> Cristian (Josu)
+
