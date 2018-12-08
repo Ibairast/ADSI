@@ -58,6 +58,13 @@ public class Controlador {
 
         this.ventanaJuego.desactivarBotonJugarTurno();
         this.ventanaJuego.desactivarBotonSiguiente();
+
+        /* Listeners VentanaRanking */
+        this.ventanaRanking.addMisMejoresPartidas(new MisMejoresPartidasListener());
+        this.ventanaRanking.addMejorPuntuacionDia(new MejorPuntuacionDiaListener());
+        this.ventanaRanking.addMejoresPartidas(new MejoresPartidasListener());
+        this.ventanaRanking.addMejorMedia(new MejorMediaListener());
+
     }
 
     public static Controlador getMiControlador() {
@@ -132,7 +139,7 @@ public class Controlador {
     class RankingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            actualizarRanking();
+            //actualizarRanking();
             mostrarVentanaRanking();
         }
     }
@@ -213,6 +220,37 @@ public class Controlador {
         }
     }
 
+
+    class MisMejoresPartidasListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            actualizarRanking();
+        }
+    }
+
+
+    class MejorPuntuacionDiaListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+        }
+    }
+
+
+    class MejoresPartidasListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+        }
+    }
+
+
+    class MejorMediaListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+        }
+    }
 
 
 }
