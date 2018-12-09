@@ -23,7 +23,9 @@ public class VentanaRanking extends JFrame {
      */
     public VentanaRanking() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 800, 220);
+        setBounds(0, 0, 850, 620);
+
+        //setBounds(100, 100, 800, 220);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
@@ -48,18 +50,14 @@ public class VentanaRanking extends JFrame {
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
         panelMenu.add(btnMisMejoresPartidas);
 
-        this.btnMejorPuntuacionDia = new JButton("Mejor puntuación del día");
+        this.btnMejorPuntuacionDia = new JButton("Puntuación día");
         panelMenu.add(btnMejorPuntuacionDia);
 
         this.btnMejoresPartidas = new JButton("Mejores partidas");
-        panelMenu.add(btnMisMejoresPartidas);
+        panelMenu.add(btnMejoresPartidas);
 
         this.btnMejorMedia = new JButton("Mejor media");
         panelMenu.add(btnMejorMedia);
-
-        JPanel panelImagenBar = new JPanel();
-        contentPane.add(panelImagenBar, BorderLayout.CENTER);
-
 
 
     }
@@ -108,5 +106,58 @@ public class VentanaRanking extends JFrame {
     public void addMejorMedia(ActionListener listenForBtnMejorMedia) {
         btnMejorMedia.addActionListener(listenForBtnMejorMedia);
     }
+
+
+    public void obtenerMisMejoresPartidas(Vector<Vector<String>> pData){
+        Vector<String> columnas = new Vector<>();
+        columnas.add("Puntuacion");
+        //columnas.add("Fecha");
+
+        table = new JTable (pData, columnas);
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        contentPane.add(table, BorderLayout.CENTER);
+        table.setFillsViewportHeight(true);
+    }
+
+    public void obtenerMejorPuntuacionDia(Vector<Vector<String>> pData){
+        Vector<String> columnas = new Vector<>();
+        columnas.add("Usuario");
+        columnas.add("Puntuacion");
+
+        table = new JTable (pData, columnas);
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        contentPane.add(table, BorderLayout.CENTER);
+        table.setFillsViewportHeight(true);
+    }
+
+    public void obtenerMejoresPartidas(Vector<Vector<String>> pData){
+        Vector<String> columnas = new Vector<>();
+        columnas.add("Usuario");
+        columnas.add("Puntuacion");
+        columnas.add("Fecha");
+
+        table = new JTable (pData, columnas);
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        contentPane.add(table, BorderLayout.CENTER);
+        table.setFillsViewportHeight(true);
+    }
+
+    public void obtenerMejorMedia(Vector<Vector<String>> pData){
+        Vector<String> columnas = new Vector<>();
+        columnas.add("Usuario");
+        columnas.add("Media");
+
+        table = new JTable (pData, columnas);
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        contentPane.add(table, BorderLayout.CENTER);
+        table.setFillsViewportHeight(true);
+    }
+
+
+
 }
 
