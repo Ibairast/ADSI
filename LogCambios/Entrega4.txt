@@ -17,4 +17,4 @@ Esto ha conllevado el cambio de todos los diagramas anteriores.
 
 Funcionalidad 6:
 Se ha han añadido el tipo de datos a la pruebas de la funcionalidad 7.
-Se ha aumentado el tamaño del diagrama de comunicación además de añadir los casos de error.
+Se ha aumentado el tamaño del diagrama de comunicación además de añadir los casos de error.Se ha añadido los pies de las fotos y las referencias
