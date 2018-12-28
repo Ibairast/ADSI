@@ -10,4 +10,6 @@ Añadidos/modificados nuevos popUps: popUpSuccessRegistro, popUpErrorRegistro, p
 
 Funcionalidad 2:
 
-....
+Funcionalidad3:
+Se ha replanteado la forma de guardar y cargar los datos.
+Esto ha conllevado el cambio de todos los diagramas anteriores.
