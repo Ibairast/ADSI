@@ -9,3 +9,5 @@
 *.vpp.bak_*
 
 BarBestial/
+
+*.class
