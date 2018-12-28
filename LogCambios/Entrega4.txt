@@ -1,15 +1,15 @@
 Cambios respecto a la entrega 3.
 
 Funcionalidad 1:
-M√©todo cargarUsuario, ahora recibe un par√°metro m√°s, un JSON.
-M√©todo comprobarUsuario, ahora devuelve un integer en vez de un boolean.
-Interfaz IV_Contrase√±a, se ha eliminado el bot√≥n "Salir".
+MÈtodo cargarUsuario, ahora recibe un par·metro m·s, un JSON.
+MÈtodo comprobarUsuario, ahora devuelve un integer en vez de un boolean.
+Interfaz IV_ContraseÒa, se ha eliminado el botÛn "Salir".
 Interfaz IV_Login, IV_SignUp y IV_RContra, se ha cambiado la label "Nombre" por "Correo".
-Varios errores corregidos en los diagramas de comunicaci√≥n.
-A√±adidos/modificados popUps: popUpSuccessRegistro, popUpErrorRegistro, popUpErrorLogin, popUpRContraError, popUpRContraSuccess, popUpChangePassError, popUpChangePassSuccess.
+Varios errores corregidos en los diagramas de comunicaciÛn.
+AÒadidos/modificados popUps: popUpSuccessRegistro, popUpErrorRegistro, popUpErrorLogin, popUpRContraError, popUpRContraSuccess, popUpChangePassError, popUpChangePassSuccess.
 
 Funcionalidad 2:
-Se ha cambiado el m√©todo obtenerMisMejoresPartidas(), de manera que ya no recibe un usuario como par√°metro dado que e Usuario es singleton y se accede a √©l directamente. Para ello, se ha modificado el correspondiente diagrama de comunicaci√≥n. 
+Se ha cambiado el mÈtodo obtenerMisMejoresPartidas(), de manera que ya no recibe un usuario como par·metro dado que e Usuario es singleton y se accede a Èl directamente. Para ello, se ha modificado el correspondiente diagrama de comunicaciÛn. 
 
 
 Funcionalidad 3:
@@ -17,9 +17,13 @@ Se ha replanteado la forma de guardar y cargar los datos.
 Esto ha conllevado el cambio de todos los diagramas anteriores.
 Se han corregido los errores del plan de pruebas.
 
+Funcionalidad 4:
+Se ha rehecho la forma en la que el usuario elige la carta y varios errores de coherencia. Se han actualizado los diagramas de comunicaciÛn corrigiendo errores.
+
+
 Funcionalidad 5:
-Se ha corregido el plan de pruebas. En concreto, se ha tenido en cuenta la obtenci√≥n de ayudas y que solo se puede utilizar una ayuda por turno. (Realizado por el responsable de la funcionalidad 7)
+Se ha corregido el plan de pruebas. En concreto, se ha tenido en cuenta la obtenciÛn de ayudas y que solo se puede utilizar una ayuda por turno. (Realizado por el responsable de la funcionalidad 7)
 
 Funcionalidad 6:
-Se ha han a√±adido el tipo de datos a la pruebas de la funcionalidad 7.
-Se ha aumentado el tama√±o del diagrama de comunicaci√≥n adem√°s de a√±adir los casos de error.Se ha a√±adido los pies de las fotos y las referencias.
+Se ha han aÒadido el tipo de datos a la pruebas de la funcionalidad 7.
+Se ha aumentado el tamaÒo del diagrama de comunicaciÛn adem·s de aÒadir los casos de error.Se ha aÒadido los pies de las fotos y las referencias.
