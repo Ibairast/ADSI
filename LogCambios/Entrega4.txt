@@ -6,7 +6,7 @@ Método comprobarUsuario, ahora devuelve un integer en vez de un boolean.
 Interfaz IV_Contraseña, se ha eliminado el botón "Salir".
 Interfaz IV_Login, IV_SignUp y IV_RContra, se ha cambiado la label "Nombre" por "Correo".
 Varios errores corregidos en los diagramas de comunicación.
-Añadidos/modificados popUps: popUpSuccessRegistro, popUpErrorRegistro, popUpErrorLogin, popUpRContraError, popUpRContraSuccess
+Añadidos/modificados popUps: popUpSuccessRegistro, popUpErrorRegistro, popUpErrorLogin, popUpRContraError, popUpRContraSuccess, popUpChangePassError, popUpChangePassSuccess.
 
 Funcionalidad 2:
 
