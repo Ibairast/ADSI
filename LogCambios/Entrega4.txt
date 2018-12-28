@@ -9,10 +9,13 @@ Varios errores corregidos en los diagramas de comunicación.
 Añadidos/modificados popUps: popUpSuccessRegistro, popUpErrorRegistro, popUpErrorLogin, popUpRContraError, popUpRContraSuccess, popUpChangePassError, popUpChangePassSuccess.
 
 Funcionalidad 2:
+Se ha cambiado el método obtenerMisMejoresPartidas(), de manera que ya no recibe un usuario como parámetro dado que e Usuario es singleton y se accede a él directamente. Para ello, se ha modificado el correspondiente diagrama de comunicación. 
+
 
 Funcionalidad 3:
 Se ha replanteado la forma de guardar y cargar los datos.
 Esto ha conllevado el cambio de todos los diagramas anteriores.
+Se han corregido los errores del plan de pruebas.
 
 Funcionalidad 5:
 Se ha corregido el plan de pruebas. En concreto, se ha tenido en cuenta la obtención de ayudas y que solo se puede utilizar una ayuda por turno. (Realizado por el responsable de la funcionalidad 7)
