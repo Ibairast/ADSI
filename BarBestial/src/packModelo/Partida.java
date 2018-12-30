@@ -154,4 +154,16 @@ public class Partida extends Observable {
         super.setChanged();
         super.notifyObservers(pInformacion);
     }
+
+    /**
+     * Función principal para guardar la partida
+     * @param nombreP: String con el id de la partida de la bd
+     */
+    public void guardarPartida(String nombreP) {
+        Bar.getMiBar().guardarCielo(nombreP);
+        Tablero.getMiTablero().guardarCola(nombreP);
+        for (Jugador j:this.listaJugadores) {
+            j.guardarMazos(nombreP);
+        }
+    }
 }

@@ -291,4 +291,10 @@ public class ListaCartas {
         }
         return i;
     }
+
+    public void guardarLista(String nombreP) {
+        for (Carta carta:this.lista) {
+            carta.guardarCarta(nombreP);
+        }
+    }
 }
