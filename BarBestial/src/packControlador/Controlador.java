@@ -1,9 +1,14 @@
 package packControlador;
 
-import packModelo.*;
-import packVista.*;
+import packModelo.Jugador;
+import packModelo.Partida;
+import packModelo.SGBD;
+import packModelo.Tablero;
+import packVista.VentanaAyuda;
+import packVista.VentanaInicio;
+import packVista.VentanaJuego;
+import packVista.VentanaRanking;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,12 +26,12 @@ public class Controlador {
     private VentanaJuego ventanaJuego;
     private VentanaAyuda ventanaAyuda;
     private VentanaRanking ventanaRanking;
-    private IU_Carga ventanaCarga;
+    //private IU_Carga ventanaCarga;
 
     public Controlador() {
         this.partida = Partida.getMiPartida();
         this.tablero = Tablero.getMiTablero();
-        this.database = SGBD.getSGBD();
+        this.database = SGBD.getMiSGBD();
 
         this.ventanaInicio = new VentanaInicio();
         this.ventanaJuego = new VentanaJuego();
@@ -90,7 +95,7 @@ public class Controlador {
         this.ventanaRanking.setVisible(true);
     }
 
-    private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
+    //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
 
     private void setUpObservers() {
         ArrayList<Jugador> jugadores = this.partida.obtenerJugadores();
