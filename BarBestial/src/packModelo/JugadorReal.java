@@ -22,7 +22,7 @@ public class JugadorReal extends Jugador {
     public String obtenerInformacionCartasMano() {
     	return "jugadorreal-" + this.mano.obtenerInformacionCartas();
     }
-    
+
     public void actualizarEspecieElegida(String pEspecie) {
     	this.especieElegidaCola = pEspecie;
     }
@@ -30,4 +30,5 @@ public class JugadorReal extends Jugador {
     public void actualizarSaltosCanguro(int pSaltos) {
     	this.saltosElegidos = pSaltos;
     }
+
 }

@@ -46,4 +46,8 @@ public class Bar {
     public void anadirCarta(Carta pCarta) {
         this.lista.anadirCarta(pCarta);
     }
+
+    public void guardarCielo(String nombreP){
+        this.lista.guardarLista(nombreP);
+    }
 }

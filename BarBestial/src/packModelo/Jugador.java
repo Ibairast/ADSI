@@ -157,4 +157,9 @@ public abstract class Jugador extends Observable {
     private boolean hayCartasEnMano() {
     	return !this.mano.vacia();
     }
+
+    public void guardarMazos(String nombreP){
+        this.mano.guardarLista(nombreP);
+        this.mazo.guardarLista(nombreP);
+    }
 }

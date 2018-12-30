@@ -41,4 +41,9 @@ public class Carta implements Comparable<Carta> {
             }
         }
     }
+
+    public void guardarCarta(String nombreP) {
+        //TODO Sentencia sql en SGBD
+        //TODO Ver si hace falta guardar la posición
+    }
 }

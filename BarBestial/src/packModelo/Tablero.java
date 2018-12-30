@@ -156,4 +156,8 @@ public class Tablero extends Observable {
             b.anadirCarta(c);
         }
     }
+
+    public void guardarCola(String nombreP) {
+        this.cola.guardarLista(nombreP);
+    }
 }
