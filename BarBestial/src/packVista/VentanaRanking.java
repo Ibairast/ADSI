@@ -1,9 +1,13 @@
 package packVista;
 
+import org.json.JSONObject;
+import packControlador.GestorRanking;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.Vector;
 
 public class VentanaRanking extends JFrame {
@@ -48,6 +52,7 @@ public class VentanaRanking extends JFrame {
 
 
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
+        //this.btnMejoresPartidas.setBackground(new Color (36, 47, 65));
         panelMenu.add(btnMisMejoresPartidas);
 
         this.btnMejorPuntuacionDia = new JButton("Puntuación día");
@@ -76,20 +81,6 @@ public class VentanaRanking extends JFrame {
         });
     }
 
-    public void actualizarRanking(Vector<Vector<String>> pData) {
-        Vector<String> columnas = new Vector<>();
-        columnas.add("Nombre");
-        columnas.add("Numero de cartas en Bar");
-        columnas.add("Fuerza de las cartas en Bar");
-        columnas.add("Fecha");
-
-        table = new JTable(pData, columnas);
-
-        contentPane.setLayout(new BorderLayout());
-        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
-        contentPane.add(table, BorderLayout.CENTER);
-        table.setFillsViewportHeight(true);
-    }
 
     public void addMisMejoresPartidas(ActionListener listenForBtnMisMejoresPartidas) {
         btnMisMejoresPartidas.addActionListener(listenForBtnMisMejoresPartidas);
@@ -108,11 +99,27 @@ public class VentanaRanking extends JFrame {
     }
 
 
-    public void obtenerMisMejoresPartidas(Vector<Vector<String>> pData){
+    public void obtenerMisMejoresPartidas(){
+        Vector<String> puntuacion = new Vector<>();
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        JSONObject json = GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+        Iterator<String> itr = json.keys();
+        while (itr.hasNext()){
+            String key = itr.next();
+            String value = (String) json.get(key);
+            puntuacion.add(value);
+        }
+
+        puntuaciones.add(puntuacion);
+
+
         Vector<String> columnas = new Vector<>();
         columnas.add("Puntuacion");
-        //columnas.add("Fecha");
+        createTable(puntuaciones, columnas);
+    }
 
+    private void createTable(Vector<Vector<String>> pData, Vector<String> columnas){
         table = new JTable (pData, columnas);
         contentPane.setLayout(new BorderLayout());
         contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
@@ -120,41 +127,38 @@ public class VentanaRanking extends JFrame {
         table.setFillsViewportHeight(true);
     }
 
-    public void obtenerMejorPuntuacionDia(Vector<Vector<String>> pData){
+    public void obtenerMejorPuntuacionDia(){ ////SIN TERMINAR
+
+        Vector<String> puntuacion = new Vector<>();
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        JSONObject json = GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
+        Iterator<String> itr = json.keys();
+
+        puntuaciones.add(puntuacion);
+
+
         Vector<String> columnas = new Vector<>();
         columnas.add("Usuario");
         columnas.add("Puntuacion");
+        createTable(puntuaciones, columnas);
 
-        table = new JTable (pData, columnas);
-        contentPane.setLayout(new BorderLayout());
-        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
-        contentPane.add(table, BorderLayout.CENTER);
-        table.setFillsViewportHeight(true);
     }
 
-    public void obtenerMejoresPartidas(Vector<Vector<String>> pData){
+    public void obtenerMejoresPartidas(){ ////SIN TERMINAR
         Vector<String> columnas = new Vector<>();
         columnas.add("Usuario");
         columnas.add("Puntuacion");
         columnas.add("Fecha");
 
-        table = new JTable (pData, columnas);
-        contentPane.setLayout(new BorderLayout());
-        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
-        contentPane.add(table, BorderLayout.CENTER);
-        table.setFillsViewportHeight(true);
+
     }
 
-    public void obtenerMejorMedia(Vector<Vector<String>> pData){
+    public void obtenerMejorMedia(){ ////SIN TERMINAR
         Vector<String> columnas = new Vector<>();
         columnas.add("Usuario");
         columnas.add("Media");
 
-        table = new JTable (pData, columnas);
-        contentPane.setLayout(new BorderLayout());
-        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
-        contentPane.add(table, BorderLayout.CENTER);
-        table.setFillsViewportHeight(true);
     }
 
 

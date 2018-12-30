@@ -1,17 +1,14 @@
 package packControlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import packModelo.Jugador;
-import packModelo.Partida;
-import packModelo.RankingDB;
-import packModelo.Tablero;
+import packModelo.*;
 import packVista.VentanaAyuda;
 import packVista.VentanaInicio;
 import packVista.VentanaJuego;
 import packVista.VentanaRanking;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Controlador {
     private static Controlador miControlador;
@@ -19,7 +16,7 @@ public class Controlador {
     /* Modelo */
     private Partida partida;
     private Tablero tablero;
-    private RankingDB rankingDB;
+    private SGBD database;
 
     /* Vista */
     private VentanaInicio ventanaInicio;
@@ -30,7 +27,7 @@ public class Controlador {
     public Controlador() {
         this.partida = Partida.getMiPartida();
         this.tablero = Tablero.getMiTablero();
-        this.rankingDB = RankingDB.getRankingDB();
+        this.database = SGBD.getMiSGBD();
 
         this.ventanaInicio = new VentanaInicio();
         this.ventanaJuego = new VentanaJuego();
@@ -88,10 +85,6 @@ public class Controlador {
 
     private void mostrarVentanaAyuda() {
         this.ventanaAyuda.setVisible(true);
-    }
-
-    private void actualizarRanking() {
-        this.ventanaRanking.actualizarRanking(rankingDB.obtenerMejoresPuntuaciones());
     }
 
     private void mostrarVentanaRanking() {
@@ -221,10 +214,30 @@ public class Controlador {
     }
 
 
+
+    //RANKING
+
+    private void obtenerMisMejoresPartidas() {
+        this.ventanaRanking.obtenerMisMejoresPartidas();
+    }
+
+    private void obtenerMejorPuntuacionDia() {
+        this.ventanaRanking.obtenerMejorPuntuacionDia();
+    }
+
+    private void obtenerMejoresPartidas() {
+        this.ventanaRanking.obtenerMejoresPartidas();
+    }
+
+    private void obtenerMejorMedia() {
+        this.ventanaRanking.obtenerMejorMedia();
+    }
+
+
     class MisMejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            actualizarRanking();
+            obtenerMisMejoresPartidas();
         }
     }
 
@@ -232,7 +245,7 @@ public class Controlador {
     class MejorPuntuacionDiaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-
+            obtenerMejorPuntuacionDia();
         }
     }
 
@@ -240,7 +253,7 @@ public class Controlador {
     class MejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-
+            obtenerMejoresPartidas();
         }
     }
 
@@ -248,6 +261,7 @@ public class Controlador {
     class MejorMediaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
+            obtenerMejorMedia();
 
         }
     }
