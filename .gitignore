@@ -8,8 +8,6 @@
 
 *.vpp.bak_*
 
-BarBestial/
-
 *.class
 
 *.lck
