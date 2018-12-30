@@ -33,6 +33,7 @@ public class VentanaRanking extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
+        contentPane.setBackground(new Color(21, 26, 35));
 
         setContentPane(contentPane);
 
@@ -48,20 +49,25 @@ public class VentanaRanking extends JFrame {
         setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
 
         JPanel panelMenu = new JPanel();
+        panelMenu.setBackground(new Color(21, 26, 35));
+
         contentPane.add(panelMenu, BorderLayout.SOUTH);
 
 
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
-        //this.btnMejoresPartidas.setBackground(new Color (36, 47, 65));
+        this.btnMisMejoresPartidas.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnMisMejoresPartidas);
 
         this.btnMejorPuntuacionDia = new JButton("Puntuación día");
+        this.btnMejorPuntuacionDia.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnMejorPuntuacionDia);
 
         this.btnMejoresPartidas = new JButton("Mejores partidas");
+        this.btnMejoresPartidas.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnMejoresPartidas);
 
         this.btnMejorMedia = new JButton("Mejor media");
+        this.btnMejorMedia.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnMejorMedia);
 
 

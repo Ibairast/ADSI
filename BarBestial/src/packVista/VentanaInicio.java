@@ -28,6 +28,7 @@ public class VentanaInicio extends JFrame {
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
+        contentPane.setBackground(new Color(21, 26, 35));
         setContentPane(contentPane);
 
         /* Centrar */
@@ -42,25 +43,32 @@ public class VentanaInicio extends JFrame {
         setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
 
         JPanel panelMenu = new JPanel();
+        panelMenu.setBackground(new Color(21, 26, 35));
         contentPane.add(panelMenu, BorderLayout.SOUTH);
 
 
         this.btnNuevaPartida = new JButton("Nueva Partida");
+        this.btnNuevaPartida.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnNuevaPartida);
 
         this.btnCargarPartida = new JButton("Cargar Partida");
+        this.btnCargarPartida.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnCargarPartida);
 
         this.btnInstrucciones = new JButton("Instrucciones");
+        this.btnInstrucciones.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnInstrucciones);
 
         this.btnRanking = new JButton("Ranking");
+        this.btnRanking.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnRanking);
 
         this.btnPersonalizar = new JButton("Personalizar");
+        this.btnPersonalizar.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnPersonalizar);
 
         this.btnCambiarContraseña = new JButton("Cambiar contraseña");
+        this.btnCambiarContraseña.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnCambiarContraseña);
 
         JPanel panelImagenBar = new JPanel();
