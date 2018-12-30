@@ -1,5 +1,6 @@
 package packControlador;
 
+import org.json.JSONObject;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
@@ -223,7 +224,11 @@ public class Controlador {
 
     //RANKING
 
-    private void obtenerMisMejoresPartidas() {
+    public JSONObject obtenerMisMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+    }
+
+    private void mostrarMisMejoresPartidas(){
         this.ventanaRanking.obtenerMisMejoresPartidas();
     }
 
@@ -243,7 +248,7 @@ public class Controlador {
     class MisMejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            obtenerMisMejoresPartidas();
+            mostrarMisMejoresPartidas();
         }
     }
 

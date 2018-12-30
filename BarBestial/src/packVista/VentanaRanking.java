@@ -1,6 +1,7 @@
 package packVista;
 
 import org.json.JSONObject;
+import packControlador.Controlador;
 import packControlador.GestorRanking;
 
 import javax.swing.*;
@@ -112,7 +113,7 @@ public class VentanaRanking extends JFrame {
         Vector<String> puntuacion = new Vector<>();
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
-        JSONObject json = GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+        JSONObject json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
         Iterator<String> itr = json.keys();
         while (itr.hasNext()){
             String key = itr.next();
