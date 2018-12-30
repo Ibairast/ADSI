@@ -29,6 +29,7 @@ public class VentanaRanking extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(0, 0, 850, 620);
 
+
         //setBounds(100, 100, 800, 220);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,7 +52,7 @@ public class VentanaRanking extends JFrame {
         JPanel panelMenu = new JPanel();
         panelMenu.setBackground(new Color(21, 26, 35));
 
-        contentPane.add(panelMenu, BorderLayout.SOUTH);
+        contentPane.add(panelMenu, BorderLayout.PAGE_END);
 
 
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
@@ -69,6 +70,7 @@ public class VentanaRanking extends JFrame {
         this.btnMejorMedia = new JButton("Mejor media");
         this.btnMejorMedia.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnMejorMedia);
+
 
 
     }
@@ -106,6 +108,7 @@ public class VentanaRanking extends JFrame {
 
 
     public void obtenerMisMejoresPartidas(){
+        System.out.println("Hola");
         Vector<String> puntuacion = new Vector<>();
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
@@ -113,8 +116,10 @@ public class VentanaRanking extends JFrame {
         Iterator<String> itr = json.keys();
         while (itr.hasNext()){
             String key = itr.next();
-            String value = (String) json.get(key);
-            puntuacion.add(value);
+            int value = (int) json.get(key);
+            //System.out.println(value);
+
+            puntuacion.add(Integer.toString(value));
         }
 
         puntuaciones.add(puntuacion);
@@ -127,7 +132,6 @@ public class VentanaRanking extends JFrame {
 
     private void createTable(Vector<Vector<String>> pData, Vector<String> columnas){
         table = new JTable (pData, columnas);
-        contentPane.setLayout(new BorderLayout());
         contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
         contentPane.add(table, BorderLayout.CENTER);
         table.setFillsViewportHeight(true);
