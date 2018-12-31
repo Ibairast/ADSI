@@ -14,7 +14,7 @@ public class SGBD {
         if (!f.exists()) {
             this.crearBD();
             this.crearTablas();
-            this.pruebasRanking();
+            //this.pruebasRanking();
         }
     }
 
