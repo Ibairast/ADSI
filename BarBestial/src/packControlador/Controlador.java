@@ -234,12 +234,12 @@ public class Controlador {
         return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
     }
 
-    private void obtenerMejoresPartidas() {
-        this.ventanaRanking.obtenerMejoresPartidas();
+    public JSONArray obtenerMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
     }
 
-    private void obtenerMejorMedia() {
-        this.ventanaRanking.obtenerMejorMedia();
+    public JSONArray obtenerMejorMedia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
     }
 
 
@@ -263,7 +263,7 @@ public class Controlador {
     class MejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            //obtenerMejoresPartidas();
+            ventanaRanking.mostrarMejoresPartidas();
         }
     }
 
@@ -271,7 +271,7 @@ public class Controlador {
     class MejorMediaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            //obtenerMejorMedia();
+            ventanaRanking.mostrarMejorMedia();
 
         }
     }

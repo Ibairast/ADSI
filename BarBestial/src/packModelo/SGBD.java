@@ -56,7 +56,7 @@ public class SGBD {
                     "IdUsuario VARCHAR(100) NOT NULL, " +
                     "Puntuacion INT(11) NOT NULL, " +
                     "Fecha DATE NOT NULL, " +
-                    "Gana BOOLEAN NOT NULL, " +
+                    "Gana INT(1) NOT NULL, " +
 
                     "PRIMARY KEY(IdRanking), " +
                     "FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario))";
@@ -81,13 +81,13 @@ public class SGBD {
 
             s = c.createStatement();
             String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 'true')";
+                    "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 1)";
 
             String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 'true')";
+                    "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 1)";
 
             String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 'true')";
+                    "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 1)";
 
             s.executeUpdate(sql1);
             s.executeUpdate(sql2);
