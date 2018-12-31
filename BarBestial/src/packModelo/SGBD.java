@@ -81,13 +81,13 @@ public class SGBD {
 
             s = c.createStatement();
             String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(1, 'Andrea', 10, datetime('now'), 'true')";
+                    "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 'true')";
 
             String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(2, 'Andrea', 20, datetime('now'), 'true')";
+                    "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 'true')";
 
             String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(3, 'David', 5, datetime('now'), 'true')";
+                    "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 'true')";
 
             s.executeUpdate(sql1);
             s.executeUpdate(sql2);

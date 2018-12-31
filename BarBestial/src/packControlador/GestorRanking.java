@@ -4,8 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 public class GestorRanking {
     private static GestorRanking miGestorRanking;
@@ -64,27 +66,15 @@ public class GestorRanking {
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
 
-            String sql = "SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = 'datetime('now')' ORDER BY Puntuacion DESC LIMIT 1";
+            s = c.createStatement();
+            ResultSet rs = s.executeQuery("SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = strftime('%Y-%m-%d')  ORDER BY Puntuacion DESC LIMIT 1;");
 
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            LocalDateTime now = LocalDateTime.now();
-            String date = dtf.format(now);
-            System.out.println(dtf.format(now)); //2016/11/16
-
-            PreparedStatement pstmt = c.prepareStatement(sql);
-            pstmt.setString(1, date); //PONER LA FECHA ACTUAL*/
-
-            ResultSet rs = pstmt.executeQuery();
-
-
-            if (rs.next()) { //Solo se hace una vez
+            while (rs.next()) { //Solo se hace una vez
                 JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
                 int puntuacion = rs.getInt("Puntuacion");
-                System.out.println(usuario);
-                System.out.println(puntuacion);
-
+                //System.out.println(usuario);
+                //System.out.println(puntuacion);
 
                 js.put("IdUsuario", usuario);
                 js.put("Puntuacion", puntuacion);

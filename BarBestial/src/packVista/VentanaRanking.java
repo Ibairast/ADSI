@@ -149,7 +149,7 @@ public class VentanaRanking extends JFrame {
         table.setFillsViewportHeight(true);
     }
 
-    public void mostrarMejorPuntuacionDia(){ ////SIN TERMINAR
+    public void mostrarMejorPuntuacionDia(){ 
 
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
