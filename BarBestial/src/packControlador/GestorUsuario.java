@@ -25,7 +25,7 @@ public class GestorUsuario {
     }
 
 
-    public JSONArray obtenerMisMejoresPartidas() {
+    public JSONArray obtenerUsuarios() {
         JSONArray json = new JSONArray();
 
         try {

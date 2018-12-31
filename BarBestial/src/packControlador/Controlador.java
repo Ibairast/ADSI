@@ -247,6 +247,10 @@ public class Controlador {
         return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
     }
 
+    private JSONArray obtenerUsuarios(){
+        return GestorUsuario.getMiGestorUsuario().obtenerUsuarios();
+    }
+
     private void obtenerMejoresPartidas() {
         this.ventanaRanking.obtenerMejoresPartidas();
     }
@@ -254,6 +258,7 @@ public class Controlador {
     private void obtenerMejorMedia() {
         this.ventanaRanking.obtenerMejorMedia();
     }
+
 
 
 

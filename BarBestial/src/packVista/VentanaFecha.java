@@ -1,9 +1,14 @@
 package packVista;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import packControlador.Controlador;
+
 import javax.swing.*;
 import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class VentanaFecha extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -56,5 +61,28 @@ public static void main(String[] args) {
     }
     public void obtenerJugadores(){
      System.out.println("Hola");
+
+        Vector<Vector<String>> usuarios = new Vector<>();
+
+        JSONArray json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
+
+        for (int i = 0; i < json.length(); i++) {
+            Vector<String> usuario = new Vector<>();
+            JSONObject object = json.getJSONObject(i);
+            String clave = object.getString("IdUsuario");
+            //System.out.println("Puntuacion: " + clave);
+            usuario.add(clave);
+            //System.out.println("Size: " + puntuacion.size());
+            usuarios.add(usuario);
+
+        }
+
+        //System.out.println(puntuaciones.toString());
+
+        Vector<String> columnas = new Vector<>();
+        //System.out.println(columnas.toString());
+        columnas.add("IdUsuario");
+
+
     }
 }
