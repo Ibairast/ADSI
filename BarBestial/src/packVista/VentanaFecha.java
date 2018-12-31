@@ -3,6 +3,7 @@ package packVista;
 import javax.swing.*;
 import javax.swing.text.Document;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VentanaFecha extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -50,4 +51,10 @@ public static void main(String[] args) {
     });
 
 }
+    public void addobtenerJugadores(ActionListener listenForBtnEnviar){
+    btnenviar.addActionListener(listenForBtnEnviar);
+    }
+    public void obtenerJugadores(){
+     System.out.println("Hola");
+    }
 }
