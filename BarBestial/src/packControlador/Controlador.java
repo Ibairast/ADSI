@@ -48,6 +48,7 @@ public class Controlador {
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addCambiarContraseniaListener(new CambiarContraseniaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
+        this.ventanaInicio.addFechaListener(new FechaListener());
 
 
 
@@ -154,6 +155,12 @@ public class Controlador {
     private class PersonalizarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+    private class FechaListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
 
         }
     }
