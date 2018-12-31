@@ -115,6 +115,19 @@ public class Controlador {
 
     }
 
+    public int comprobarUsuario(String correo, String pass) {
+        int resul = GestorUsuario.getGestorUsuario().comprobarUsuario(correo,pass);
+        if (resul == -1){
+            this.mostrarVentanaInicio();
+            return -1;
+        }else if (resul == 1){
+            this.mostrarVentanafecha();
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
     private class FechaListener implements  ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){

@@ -3,13 +3,14 @@ package packControlador;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import packModelo.Usuario;
 
 import java.sql.*;
+import java.util.Calendar;
 
 public class GestorUsuario {
     private static GestorUsuario miGestorUsuario = new GestorUsuario();
 
-    private static final String SQL_INSERT = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(?, ?, ?, strftime('%Y-%m-%d') ,?)";
     private static final String SQL_FIND = "SELECT * FROM USUARIO WHERE IdUsuario = ?";
 
 
@@ -29,34 +30,20 @@ public class GestorUsuario {
 
     public boolean registrarUsuario(String txtCorreo, String txtPass) {
         if (buscarUsuario(txtCorreo)==null) {
-            PreparedStatement ps = null;
             try {
-
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
                 c.setAutoCommit(false);
-
                 s = c.createStatement();
-
                 String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
                         "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, strftime('%Y-%m-%d') ,0)";
-
                 s.executeUpdate(sql);
-
                 s.close();
                 c.commit();
                 c.close();
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (ps != null) {
-                        ps.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         }
         return false;
@@ -79,8 +66,6 @@ public class GestorUsuario {
                 jugador.put("Admin", rs.getInt("Admin"));
                 jugador.put("LogFecha", rs.getString("LogFecha"));
                 jugador.put("Ayuda", rs.getInt("Ayuda"));
-
-                System.out.println(rs.getString("IdUsuario"));
             }
             rs.close();
             c.close();
@@ -123,4 +108,46 @@ public class GestorUsuario {
         return json;
     }
 
+
+
+    public int comprobarUsuario(String correo, String pass) {
+        //FALTA UPDATE LOGFECHA
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+            c.setAutoCommit(false);
+
+            String sql = "SELECT * FROM USUARIO WHERE IdUsuario = ? AND Pass = ?;";
+
+            PreparedStatement pstmt = c.prepareStatement(sql);
+            pstmt.setString(1, correo);
+            pstmt.setString(2,pass);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                JSONObject js = new JSONObject();
+                int admin = rs.getInt("Admin");
+                if (admin==1){
+                    return 1;
+                }
+                js.put("IdUsuario",correo);
+                js.put("Pass", pass);
+                js.put("LogFecha",startDate.toString());
+                int ayuda = rs.getInt("Ayuda");
+                js.put("Ayuda",ayuda);
+
+                Usuario.getUsuario().cargarUsuario(js);
+                return -1;
+            }
+            rs.close();
+            c.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            return 0;
+        }
+        return 0;
+    }
 }

@@ -26,21 +26,24 @@ public class IU_SignUp {
 
 
     public void eventRegistrar(MouseEvent mouseEvent) {
-        if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")){
-
-            //Comprobar cb y que el usuario no esté vacío.
-            System.out.println("Paso1");
+        if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")){//Comprobar cb y que el usuario no esté vacío.
             if (comprobarContrasena()){
-                System.out.println("Paso2");
                 if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(),txtPass1.getText())){
-                    System.out.println("Paso3");
                     JOptionPane.showConfirmDialog(null,
                             "Usuario Registrado", "Éxito", JOptionPane.DEFAULT_OPTION);
                     eventOpenLogin(mouseEvent);
+                }else {
+                    JOptionPane.showConfirmDialog(null,
+                            "Error en el Registro", "Error", JOptionPane.DEFAULT_OPTION);
                 }
+            }else {
+                JOptionPane.showConfirmDialog(null,
+                        "Debes ACEPTAR!!!!", "Error", JOptionPane.DEFAULT_OPTION);
             }
+        }else {
+            JOptionPane.showConfirmDialog(null,
+                    "Error en el Registro", "Error", JOptionPane.DEFAULT_OPTION);
         }
-
     }
 
     public void eventOpenLogin(MouseEvent mouseEvent) {
