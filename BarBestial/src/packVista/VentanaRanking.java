@@ -115,24 +115,28 @@ public class VentanaRanking extends JFrame {
 
         JSONArray json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
 
-        for (int i = 0; i < json.length(); i++) {
-            Vector<String> puntuacion = new Vector<>();
-            JSONObject object = json.getJSONObject(i);
-            int clave = object.getInt("Puntuacion");
-            //System.out.println("Puntuacion: " + clave);
-            puntuacion.add(Integer.toString(clave));
-            //System.out.println("Size: " + puntuacion.size());
-            puntuaciones.add(puntuacion);
+        if (json.length() > 0) {
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                int clave = object.getInt("Puntuacion");
+                //System.out.println("Puntuacion: " + clave);
+                puntuacion.add(Integer.toString(clave));
+                //System.out.println("Size: " + puntuacion.size());
+                puntuaciones.add(puntuacion);
 
+            }
+        }else{
+            Vector<String> puntuacion = new Vector<>();
+            puntuacion.add("No hay datos");
+            puntuaciones.add(puntuacion);
         }
 
-        //System.out.println(puntuaciones.toString());
-
         Vector<String> columnas = new Vector<>();
-        //System.out.println(columnas.toString());
         columnas.add("Puntuacion");
 
         createTable(puntuaciones, columnas);
+
     }
 
     private void createTable(Vector<Vector<String>> pData, Vector<String> columnas){
@@ -154,24 +158,24 @@ public class VentanaRanking extends JFrame {
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
         JSONArray json = Controlador.getMiControlador().obtenerMejorPuntuacionDia();
+        if(json.length()>0) {
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                String id = object.getString("IdUsuario");
+                int punt = object.getInt("Puntuacion");
+                puntuacion.add(id);
+                puntuacion.add(Integer.toString(punt));
+                puntuaciones.add(puntuacion);
 
-        for (int i = 0; i < json.length(); i++) {
+            }
+        }else{
             Vector<String> puntuacion = new Vector<>();
-            JSONObject object = json.getJSONObject(i);
-            String id = object.getString("IdUsuario");
-            int punt = object.getInt("Puntuacion");
-            //System.out.println("Puntuacion: " + clave);
-            puntuacion.add(id);
-            puntuacion.add(Integer.toString(punt));
-            //System.out.println("Size: " + puntuacion.size());
+            puntuacion.add("No hay datos");
             puntuaciones.add(puntuacion);
-
         }
 
-        //System.out.println(puntuaciones.toString());
-
         Vector<String> columnas = new Vector<>();
-        //System.out.println(columnas.toString());
         columnas.add("IdUsuario");
         columnas.add("Puntuacion");
 
@@ -184,25 +188,28 @@ public class VentanaRanking extends JFrame {
 
         JSONArray json = Controlador.getMiControlador().obtenerMejoresPartidas();
 
-        for (int i = 0; i < json.length(); i++) {
-            Vector<String> puntuacion = new Vector<>();
-            JSONObject object = json.getJSONObject(i);
-            String id = object.getString("IdUsuario");
-            int punt = object.getInt("Puntuacion");
-            String fecha = object.getString("Fecha");
-            //System.out.println("Puntuacion: " + clave);
-            puntuacion.add(id);
-            puntuacion.add(Integer.toString(punt));
-            puntuacion.add(fecha);
-            //System.out.println("Size: " + puntuacion.size());
-            puntuaciones.add(puntuacion);
+        if(json.length()>0){
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                String id = object.getString("IdUsuario");
+                int punt = object.getInt("Puntuacion");
+                String fecha = object.getString("Fecha");
+                //System.out.println("Puntuacion: " + clave);
+                puntuacion.add(id);
+                puntuacion.add(Integer.toString(punt));
+                puntuacion.add(fecha);
+                //System.out.println("Size: " + puntuacion.size());
+                puntuaciones.add(puntuacion);
+            }
 
+        }else{
+            Vector<String> puntuacion = new Vector<>();
+            puntuacion.add("No hay datos");
+            puntuaciones.add(puntuacion);
         }
 
-        //System.out.println(puntuaciones.toString());
-
         Vector<String> columnas = new Vector<>();
-        //System.out.println(columnas.toString());
         columnas.add("IdUsuario");
         columnas.add("Puntuacion");
         columnas.add("Fecha");
@@ -211,29 +218,31 @@ public class VentanaRanking extends JFrame {
 
     }
 
-    public void mostrarMejorMedia(){ ////SIN TERMINAR
+    public void mostrarMejorMedia(){
 
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
         JSONArray json = Controlador.getMiControlador().obtenerMejorMedia();
 
-        for (int i = 0; i < json.length(); i++) {
-            Vector<String> puntuacion = new Vector<>();
-            JSONObject object = json.getJSONObject(i);
-            String id = object.getString("IdUsuario");
-            String media = object.getString("Media");
-            //System.out.println("Puntuacion: " + clave);
-            puntuacion.add(id);
-            puntuacion.add(media);
-            //System.out.println("Size: " + puntuacion.size());
-            puntuaciones.add(puntuacion);
+        if(json.length()>0){
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
 
+                JSONObject object = json.getJSONObject(i);
+                String id = object.getString("IdUsuario");
+                String media = object.getString("Media");
+
+                puntuacion.add(id);
+                puntuacion.add(media);
+                puntuaciones.add(puntuacion);
+            }
+        }else{
+            Vector<String> puntuacion = new Vector<>();
+            puntuacion.add("No hay datos");
+            puntuaciones.add(puntuacion);
         }
 
-        //System.out.println(puntuaciones.toString());
-
         Vector<String> columnas = new Vector<>();
-        //System.out.println(columnas.toString());
         columnas.add("IdUsuario");
         columnas.add("Media");
 

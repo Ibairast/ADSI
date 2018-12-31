@@ -8,12 +8,15 @@ import java.sql.*;
 public class GestorUsuario {
     private static GestorUsuario miGestorUsuario = new GestorUsuario();
 
-    private static final String SQL_INSERT = "INSERT INTO USUARIO (IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES (?, ?, ?, ? ,?)";
+    private static final String SQL_INSERT = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(?, ?, ?, strftime('%Y-%m-%d') ,?)";
     private static final String SQL_FIND = "SELECT * FROM USUARIO WHERE IdUsuario = ?";
 
 
     private Connection connection;
 
+
+    private Connection c;
+    private Statement s;
     public static GestorUsuario getGestorUsuario() {
         return miGestorUsuario;
     }
@@ -26,18 +29,20 @@ public class GestorUsuario {
         if (buscarUsuario(txtCorreo)==null) {
             PreparedStatement ps = null;
             try {
+
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-                connection.setAutoCommit(false);
-                ps = connection.prepareStatement(SQL_INSERT);
-                ps.setString(1,txtCorreo);
-                ps.setString(2,txtPass);
-                ps.setInt(3,0);
-                ps.setString(4, "strftime('%Y-%m-%d')");
-                ps.setInt(5,0);
-                if (ps.executeUpdate()>0){
-                    return true;
-                }
+                c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+                c.setAutoCommit(false);
+
+                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES("+
+                        "'" + txtCorreo + "' ," + "'" + txtPass  + "' , 0, strftime('%Y-%m-%d') ,0)";
+
+                s.executeUpdate(sql);
+
+                s.close();
+                c.commit();
+                c.close();
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -58,9 +63,9 @@ public class GestorUsuario {
         JSONObject jugador = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            connection.setAutoCommit(false);
-            PreparedStatement ps = connection.prepareStatement(SQL_FIND);
+            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+            c.setAutoCommit(false);
+            PreparedStatement ps = c.prepareStatement(SQL_FIND);
             ps.setString(1, j);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -70,13 +75,14 @@ public class GestorUsuario {
                 jugador.put("Admin", rs.getInt("Admin"));
                 jugador.put("LogFecha", rs.getString("LogFecha"));
                 jugador.put("Ayuda", rs.getInt("Ayuda"));
+
+                System.out.println(rs.getString("IdUsuario"));
             }
             rs.close();
-            connection.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return jugador;
     }
 }
