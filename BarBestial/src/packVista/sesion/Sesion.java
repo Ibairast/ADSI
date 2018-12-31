@@ -33,5 +33,9 @@ public class Sesion extends Application {
         stage.setScene(sceneIdentificacion);
         stage.show();
     }
+
+    public static void main (String... arg){
+        launch(arg);
+    }
 }
 

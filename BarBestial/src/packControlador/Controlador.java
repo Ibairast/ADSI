@@ -1,5 +1,7 @@
 package packControlador;
 
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import packModelo.Jugador;
@@ -10,6 +12,7 @@ import packVista.VentanaAyuda;
 import packVista.VentanaInicio;
 import packVista.VentanaJuego;
 import packVista.VentanaRanking;
+import packVista.sesion.Sesion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -78,7 +81,8 @@ public class Controlador {
     }
 
     public void iniciarAplicacion() {
-        this.mostrarVentanaInicio();
+        Sesion.main();
+        //this.mostrarVentanaInicio();
     }
 
     private void mostrarVentanaInicio() {
@@ -111,6 +115,7 @@ public class Controlador {
         tablero.addObserver(ventanaJuego);
         partida.addObserver(ventanaJuego);
     }
+
 
 
     class NuevaPartidaListener implements ActionListener {
@@ -218,6 +223,12 @@ public class Controlador {
             ventanaJuego.desactivarBotonJugarTurno();
             ventanaJuego.desactivarBotonSiguiente();
         }
+    }
+
+
+    //FUNC1
+    public boolean registrarUsuario(String txtCorreo, String txtPass1) {
+        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo,txtPass1);
     }
 
 
