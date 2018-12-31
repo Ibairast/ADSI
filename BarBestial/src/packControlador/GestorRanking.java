@@ -94,8 +94,8 @@ public class GestorRanking {
         return json;
     }
 
-    public JSONObject obtenerMejoresPartidas(){
-        JSONObject json3 = new JSONObject();
+    public JSONArray obtenerMejoresPartidas(){
+        JSONArray json = new JSONArray();
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -107,12 +107,15 @@ public class GestorRanking {
 
 
             while (rs.next()) {
+                JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
                 int puntuacion = rs.getInt("Puntuacion");
-                Date fecha = rs.getDate("Fecha");
-                json3.put("IdUsuario", usuario);
-                json3.put("Puntuacion", puntuacion);
-                json3.put("Fecha", fecha);
+                String fecha = rs.getString("Fecha");
+                js.put("IdUsuario", usuario);
+                js.put("Puntuacion", puntuacion);
+                js.put("Fecha", fecha);
+
+                json.put(js);
 
             }
 
@@ -126,28 +129,28 @@ public class GestorRanking {
             System.exit(0);
         }
         System.out.println("Consulta obtenerMejoresPartidas terminada");
-        return json3;
+        return json;
     }
 
-    public JSONObject obtenerMejorMedia() {
-        JSONObject json4 = new JSONObject();
+    public JSONArray obtenerMejorMedia() {
+        JSONArray json = new JSONArray();
 
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
 
-            String sql = "SELECT IdUsuario, AVG(PUntuacion) AS Media FROM RANKING WHERE Gana = ? ORDER BY Media DESC LIMIT 10";
-
-            PreparedStatement pstmt = c.prepareStatement(sql);
-            pstmt.setString(1, "True"); //PONER EL USUARIO ACTUAL
-            ResultSet rs = pstmt.executeQuery();
+            s = c.createStatement();
+            ResultSet rs = s.executeQuery("SELECT IdUsuario, AVG(Puntuacion) AS Media FROM RANKING WHERE Gana = 1 GROUP BY IdUsuario ORDER BY Media DESC LIMIT 10;");
 
             while (rs.next()) { //Solo se hace una vez
+                JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
                 float media = rs.getFloat("Media");
-                json4.put("IdUsuario", usuario);
-                json4.put("Media", media);
+                js.put("IdUsuario", usuario);
+                js.put("Media", Float.toString(media));
+
+                json.put(js);
             }
 
             rs.close();
@@ -160,7 +163,7 @@ public class GestorRanking {
             System.exit(0);
         }
         System.out.println("Consulta obtenerMejorMedia terminada");
-        return json4;
+        return json;
     }
 
 }

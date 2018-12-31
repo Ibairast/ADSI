@@ -149,7 +149,7 @@ public class VentanaRanking extends JFrame {
         table.setFillsViewportHeight(true);
     }
 
-    public void mostrarMejorPuntuacionDia(){ 
+    public void mostrarMejorPuntuacionDia(){
 
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
@@ -178,19 +178,67 @@ public class VentanaRanking extends JFrame {
         createTable(puntuaciones, columnas);
     }
 
-    public void obtenerMejoresPartidas(){ ////SIN TERMINAR
+    public void mostrarMejoresPartidas(){
+
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        JSONArray json = Controlador.getMiControlador().obtenerMejoresPartidas();
+
+        for (int i = 0; i < json.length(); i++) {
+            Vector<String> puntuacion = new Vector<>();
+            JSONObject object = json.getJSONObject(i);
+            String id = object.getString("IdUsuario");
+            int punt = object.getInt("Puntuacion");
+            String fecha = object.getString("Fecha");
+            //System.out.println("Puntuacion: " + clave);
+            puntuacion.add(id);
+            puntuacion.add(Integer.toString(punt));
+            puntuacion.add(fecha);
+            //System.out.println("Size: " + puntuacion.size());
+            puntuaciones.add(puntuacion);
+
+        }
+
+        //System.out.println(puntuaciones.toString());
+
         Vector<String> columnas = new Vector<>();
-        columnas.add("Usuario");
+        //System.out.println(columnas.toString());
+        columnas.add("IdUsuario");
         columnas.add("Puntuacion");
         columnas.add("Fecha");
 
+        createTable(puntuaciones, columnas);
 
     }
 
-    public void obtenerMejorMedia(){ ////SIN TERMINAR
+    public void mostrarMejorMedia(){ ////SIN TERMINAR
+
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        JSONArray json = Controlador.getMiControlador().obtenerMejorMedia();
+
+        for (int i = 0; i < json.length(); i++) {
+            Vector<String> puntuacion = new Vector<>();
+            JSONObject object = json.getJSONObject(i);
+            String id = object.getString("IdUsuario");
+            String media = object.getString("Media");
+            //System.out.println("Puntuacion: " + clave);
+            puntuacion.add(id);
+            puntuacion.add(media);
+            //System.out.println("Size: " + puntuacion.size());
+            puntuaciones.add(puntuacion);
+
+        }
+
+        //System.out.println(puntuaciones.toString());
+
         Vector<String> columnas = new Vector<>();
-        columnas.add("Usuario");
+        //System.out.println(columnas.toString());
+        columnas.add("IdUsuario");
         columnas.add("Media");
+
+        createTable(puntuaciones, columnas);
+
 
     }
 
