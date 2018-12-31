@@ -34,8 +34,10 @@ public class GestorUsuario {
                 c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
                 c.setAutoCommit(false);
 
-                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES("+
-                        "'" + txtCorreo + "' ," + "'" + txtPass  + "' , 0, strftime('%Y-%m-%d') ,0)";
+                s = c.createStatement();
+
+                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
+                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, strftime('%Y-%m-%d') ,0)";
 
                 s.executeUpdate(sql);
 
