@@ -15,7 +15,7 @@ public class VentanaFecha extends JFrame {
 
 
 
-    JLabel lblfecha= new JLabel("Introduce una fecha: ");
+    JLabel lblfecha= new JLabel("Introduce una fecha(aaaa-mm-dd): ");
 
     JTextField txtfecha= new JTextField();
 
@@ -27,10 +27,10 @@ public class VentanaFecha extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        btnenviar.setBounds(350,110,120,25);
+        btnenviar.setBounds(420,110,120,25);
         add(btnenviar);
 
-        txtfecha.setBounds(120,110,200,25);
+        txtfecha.setBounds(200,110,200,25);
         add(txtfecha);
 
         lblfecha.setBounds(20,35,70,25);
@@ -67,21 +67,11 @@ public static void main(String[] args) {
         if(fecha.matches(fechaPattern)){
             JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
             for (int i = 0; i < json.length(); i++) {
-                Vector<String> usuario = new Vector<>();
-                JSONObject object = json.getJSONObject(i);
-                String clave = object.getString("IdUsuario");
-                //System.out.println("Puntuacion: " + clave);
-                usuario.add(clave);
-                //System.out.println("Size: " + puntuacion.size());
-                usuarios.add(usuario);
+                System.out.println( json.get(i));
+
 
             }
 
-            //System.out.println(puntuaciones.toString());
-
-            Vector<String> columnas = new Vector<>();
-            //System.out.println(columnas.toString());
-            columnas.add("IdUsuario");
         }else{
             System.out.println("La pantallita de error");
         }
