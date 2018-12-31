@@ -120,6 +120,10 @@ public class VentanaInicio extends JFrame {
         btnNuevaPartida.addActionListener(listenForBtnPersonalizar);
     }
 
+    public void addFechaListener(ActionListener listenForBtnFecha){
+        btnFecha.addActionListener(listenForBtnFecha);
+    }
+
 
     public void showNombreErrorMessage() {
         JOptionPane.showMessageDialog(this,
