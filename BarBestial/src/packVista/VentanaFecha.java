@@ -62,27 +62,32 @@ public static void main(String[] args) {
     public void obtenerJugadores(){
 
      String fecha = txtfecha.getText();
+     String fechaPattern = "\\d{4}-\\d{1,2}-\\d{1,2}";
+     Vector<Vector<String>> usuarios = new Vector<>();
+        if(fecha.matches(fechaPattern)){
+            JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> usuario = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                String clave = object.getString("IdUsuario");
+                //System.out.println("Puntuacion: " + clave);
+                usuario.add(clave);
+                //System.out.println("Size: " + puntuacion.size());
+                usuarios.add(usuario);
 
-        Vector<Vector<String>> usuarios = new Vector<>();
+            }
 
-        JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
+            //System.out.println(puntuaciones.toString());
 
-        for (int i = 0; i < json.length(); i++) {
-            Vector<String> usuario = new Vector<>();
-            JSONObject object = json.getJSONObject(i);
-            String clave = object.getString("IdUsuario");
-            //System.out.println("Puntuacion: " + clave);
-            usuario.add(clave);
-            //System.out.println("Size: " + puntuacion.size());
-            usuarios.add(usuario);
-
+            Vector<String> columnas = new Vector<>();
+            //System.out.println(columnas.toString());
+            columnas.add("IdUsuario");
+        }else{
+            System.out.println("La pantallita de error");
         }
 
-        //System.out.println(puntuaciones.toString());
 
-        Vector<String> columnas = new Vector<>();
-        //System.out.println(columnas.toString());
-        columnas.add("IdUsuario");
+
 
 
     }
