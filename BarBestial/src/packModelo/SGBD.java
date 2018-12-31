@@ -45,7 +45,7 @@ public class SGBD {
             String usuario = "CREATE TABLE USUARIO" +
                     "(IdUsuario VARCHAR(100) NOT NULL, " +
                     "Pass VARCHAR(100) NOT NULL, " +
-                    "Admin BOOLEAN NOT NULL, " +
+                    "Admin INT(1) NOT NULL, " +
                     "LogFecha DATE NOT NULL, " +
                     "Ayuda INT(11) NOT NULL, " +
 

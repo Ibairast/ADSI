@@ -23,7 +23,6 @@ public class GestorRanking {
         return miGestorRanking;
     }
 
-
     public JSONArray obtenerMisMejoresPartidas(){
         JSONArray json = new JSONArray();
 
@@ -67,7 +66,7 @@ public class GestorRanking {
             c.setAutoCommit(false);
 
             s = c.createStatement();
-            ResultSet rs = s.executeQuery("SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = strftime('%Y-%m-%d')  ORDER BY Puntuacion DESC LIMIT 1;");
+            ResultSet rs = s.executeQuery("SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = strftime('%Y-%m-%d') ORDER BY Puntuacion DESC LIMIT 1;");
 
             while (rs.next()) { //Solo se hace una vez
                 JSONObject js = new JSONObject();

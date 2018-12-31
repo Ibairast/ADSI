@@ -67,6 +67,8 @@ public class VentanaJuego extends JFrame implements Observer {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+        contentPane.setBackground(new Color(21, 26, 35));
+
 
         panelJugadorReal = new JPanel();
         contentPane.add(panelJugadorReal, BorderLayout.SOUTH);
@@ -108,27 +110,33 @@ public class VentanaJuego extends JFrame implements Observer {
 
         btnElegirCarta1 = new JButton("Elegir");
         btnElegirCarta1.setPreferredSize(new Dimension(160, 25));
+        btnElegirCarta1.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnElegirCarta1);
 
 
         btnElegirCarta2 = new JButton("Elegir");
         btnElegirCarta2.setPreferredSize(new Dimension(160, 25));
+        btnElegirCarta2.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnElegirCarta2);
 
         btnElegirCarta3 = new JButton("Elegir");
         btnElegirCarta3.setPreferredSize(new Dimension(160, 25));
+        btnElegirCarta3.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnElegirCarta3);
 
         btnElegirCarta4 = new JButton("Elegir");
         btnElegirCarta4.setPreferredSize(new Dimension(160, 25));
+        btnElegirCarta4.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnElegirCarta4);
 
         btnJugarTurno = new JButton("Jugar turno");
         btnJugarTurno.setPreferredSize(new Dimension(120, 25));
+        btnJugarTurno.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnJugarTurno);
 
         btnSiguiente = new JButton("Siguiente");
         btnSiguiente.setPreferredSize(new Dimension(120, 25));
+        btnSiguiente.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnSiguiente);
 
 //        btnGuardar = new JButton("Guardar");
