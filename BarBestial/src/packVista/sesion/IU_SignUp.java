@@ -8,6 +8,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import packControlador.Controlador;
+
+import javax.swing.*;
 
 public class IU_SignUp {
 
@@ -23,9 +26,18 @@ public class IU_SignUp {
 
 
     public void eventRegistrar(MouseEvent mouseEvent) {
-        if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")){ //Comprobar cb y que el usuario no esté vacío.
+        if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")){
+
+            //Comprobar cb y que el usuario no esté vacío.
+            System.out.println("Paso1");
             if (comprobarContrasena()){
-                //REGISTAR
+                System.out.println("Paso2");
+                if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(),txtPass1.getText())){
+                    System.out.println("Paso3");
+                    JOptionPane.showConfirmDialog(null,
+                            "Usuario Registrado", "Éxito", JOptionPane.DEFAULT_OPTION);
+                    eventOpenLogin(mouseEvent);
+                }
             }
         }
 

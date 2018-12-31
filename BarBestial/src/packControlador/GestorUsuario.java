@@ -1,61 +1,82 @@
 package packControlador;
 
-import org.json.JSONArray;
+
 import org.json.JSONObject;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 public class GestorUsuario {
-    private static GestorUsuario miGestorUsuario;
-    private Connection c;
-    private Statement s;
+    private static GestorUsuario miGestorUsuario = new GestorUsuario();
+
+    private static final String SQL_INSERT = "INSERT INTO USUARIO (IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES (?, ?, ?, ? ,?)";
+    private static final String SQL_FIND = "SELECT * FROM USUARIO WHERE IdUsuario = ?";
+
+
+    private Connection connection;
+
+    public static GestorUsuario getGestorUsuario() {
+        return miGestorUsuario;
+    }
 
     private GestorUsuario() {
     }
 
-    public static GestorUsuario getMiGestorUsuario() {
-        if (miGestorUsuario == null) {
-            miGestorUsuario = new GestorUsuario();
+
+    public boolean registrarUsuario(String txtCorreo, String txtPass) {
+        if (buscarUsuario(txtCorreo)==null) {
+            PreparedStatement ps = null;
+            try {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+                connection.setAutoCommit(false);
+                ps = connection.prepareStatement(SQL_INSERT);
+                ps.setString(1,txtCorreo);
+                ps.setString(2,txtPass);
+                ps.setInt(3,0);
+                ps.setString(4, "strftime('%Y-%m-%d')");
+                ps.setInt(5,0);
+                if (ps.executeUpdate()>0){
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null) {
+                        ps.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return miGestorUsuario;
+        return false;
     }
 
 
-    public JSONArray obtenerUsuarios(String fecha) {
-        JSONArray json = new JSONArray();
-
+    public JSONObject buscarUsuario(String j) {
+        JSONObject jugador = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
-
-            String sql = "SELECT IdUsuario from USUARIO where LogFecha<?;";
-
-            PreparedStatement pstmt = c.prepareStatement(sql);
-           pstmt.setString(1, fecha);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                JSONObject js = new JSONObject();
-                String usu = rs.getString("IdUsuario");
-                System.out.println(usu);
-                js.put("IdUsuario", usu);
-                json.put(js);
-           }
-
+            connection = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+            connection.setAutoCommit(false);
+            PreparedStatement ps = connection.prepareStatement(SQL_FIND);
+            ps.setString(1, j);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                jugador = new JSONObject();
+                jugador.put("IdUsuario",rs.getString("IdUsuario"));
+                jugador.put("Pass", rs.getString("Pass"));
+                jugador.put("Admin", rs.getInt("Admin"));
+                jugador.put("LogFecha", rs.getString("LogFecha"));
+                jugador.put("Ayuda", rs.getInt("Ayuda"));
+            }
             rs.close();
-            c.close();
-
-
+            connection.close();
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            e.printStackTrace();
         }
-        System.out.println("Consulta obtenerusuarios");
-        return json;
+
+        return jugador;
     }
 }

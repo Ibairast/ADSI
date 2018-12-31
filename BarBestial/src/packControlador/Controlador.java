@@ -1,12 +1,18 @@
 package packControlador;
 
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
 import packModelo.Tablero;
-import packVista.*;
+import packVista.VentanaAyuda;
+import packVista.VentanaInicio;
+import packVista.VentanaJuego;
+import packVista.VentanaRanking;
+import packVista.sesion.Sesion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +31,6 @@ public class Controlador {
     private VentanaJuego ventanaJuego;
     private VentanaAyuda ventanaAyuda;
     private VentanaRanking ventanaRanking;
-    private VentanaFecha ventanaFecha;
     //private IU_Carga ventanaCarga;
 
     public Controlador() {
@@ -37,7 +42,6 @@ public class Controlador {
         this.ventanaJuego = new VentanaJuego();
         this.ventanaAyuda = new VentanaAyuda();
         this.ventanaRanking = new VentanaRanking();
-        this.ventanaFecha = new VentanaFecha();
 
 
         /* Listeners VentanaInicio */
@@ -47,7 +51,6 @@ public class Controlador {
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addCambiarContraseniaListener(new CambiarContraseniaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
-        this.ventanaInicio.addFechaListener(new FechaListener());
 
 
 
@@ -68,8 +71,6 @@ public class Controlador {
         this.ventanaRanking.addMejoresPartidas(new MejoresPartidasListener());
         this.ventanaRanking.addMejorMedia(new MejorMediaListener());
 
-        /* Listeners VentanaFecha */
-        this.ventanaFecha.addobtenerJugadores(new MisJugadores());
     }
 
     public static Controlador getMiControlador() {
@@ -80,7 +81,8 @@ public class Controlador {
     }
 
     public void iniciarAplicacion() {
-        this.mostrarVentanaInicio();
+        Sesion.main();
+        //this.mostrarVentanaInicio();
     }
 
     private void mostrarVentanaInicio() {
@@ -98,11 +100,6 @@ public class Controlador {
     private void mostrarVentanaRanking() {
         this.ventanaRanking.setVisible(true);
     }
-    private void mostrarVentanafecha(){
-        this.ventanaFecha.setVisible(true);
-        this.ventanaInicio.setVisible(false);
-
-    }
 
     //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
 
@@ -118,6 +115,7 @@ public class Controlador {
         tablero.addObserver(ventanaJuego);
         partida.addObserver(ventanaJuego);
     }
+
 
 
     class NuevaPartidaListener implements ActionListener {
@@ -161,13 +159,7 @@ public class Controlador {
     private class PersonalizarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            mostrarVentanafecha();
-        }
-    }
-    private class FechaListener implements  ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            mostrarVentanafecha();
+
         }
     }
 
@@ -234,10 +226,13 @@ public class Controlador {
     }
 
 
-    //Fecha
-    public JSONArray obtenerUsuarios(String fecha){
-        return GestorUsuario.getMiGestorUsuario().obtenerUsuarios(fecha);
+    //FUNC1
+    public boolean registrarUsuario(String txtCorreo, String txtPass1) {
+        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo,txtPass1);
     }
+
+
+
     //RANKING
 
 
@@ -289,13 +284,6 @@ public class Controlador {
         public void actionPerformed(ActionEvent e){
             ventanaRanking.mostrarMejorMedia();
 
-        }
-    }
-    class MisJugadores implements  ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-
-            ventanaFecha.obtenerJugadores();
         }
     }
 
