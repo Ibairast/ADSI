@@ -60,7 +60,7 @@ public static void main(String[] args) {
     btnenviar.addActionListener(listenForBtnEnviar);
     }
     public void obtenerJugadores(){
-     System.out.println("Hola");
+
      String fecha = txtfecha.getText();
 
         Vector<Vector<String>> usuarios = new Vector<>();
