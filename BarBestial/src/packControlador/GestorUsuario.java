@@ -42,10 +42,10 @@ public class GestorUsuario {
             while (rs.next()) {
                 JSONObject js = new JSONObject();
                 String usu = rs.getString("IdUsuario");
-                //System.out.println(puntuacion);
+                System.out.println(usu);
                 js.put("IdUsuario", usu);
                 json.put(js);
-            }
+           }
 
             rs.close();
             c.close();
