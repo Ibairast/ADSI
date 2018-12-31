@@ -11,12 +11,12 @@ public class Sesion extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlRegistro = new FXMLLoader(getClass().getResource("guiSesionFxml/Registro.fxml"));
+        FXMLLoader fxmlRegistro = new FXMLLoader(getClass().getResource("Registro.fxml"));
         Parent panelRegistro = fxmlRegistro.load();
         Scene sceneRegistro = new Scene(panelRegistro);
 
 
-        FXMLLoader fxmlIdentificacion = new FXMLLoader(getClass().getResource("guiSesionFxml/Identificacion.fxml"));
+        FXMLLoader fxmlIdentificacion = new FXMLLoader(getClass().getResource("Identificacion.fxml"));
         Parent panelIdentificacion = fxmlIdentificacion.load();
         Scene sceneIdentificacion = new Scene(panelIdentificacion);
 
@@ -29,7 +29,6 @@ public class Sesion extends Application {
         identificacionController.setRegistroScene(sceneRegistro);
 
         stage.setTitle("Sesión");
-        stage.setResizable(false);
         stage.setScene(sceneIdentificacion);
         stage.show();
     }
