@@ -61,10 +61,11 @@ public static void main(String[] args) {
     }
     public void obtenerJugadores(){
      System.out.println("Hola");
+     String fecha = txtfecha.getText();
 
         Vector<Vector<String>> usuarios = new Vector<>();
 
-        JSONArray json = Controlador.getMiControlador().obtenerUsuarios();
+        JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
 
         for (int i = 0; i < json.length(); i++) {
             Vector<String> usuario = new Vector<>();

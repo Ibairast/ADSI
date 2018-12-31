@@ -6,10 +6,7 @@ import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
 import packModelo.Tablero;
-import packVista.VentanaAyuda;
-import packVista.VentanaInicio;
-import packVista.VentanaJuego;
-import packVista.VentanaRanking;
+import packVista.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +25,7 @@ public class Controlador {
     private VentanaJuego ventanaJuego;
     private VentanaAyuda ventanaAyuda;
     private VentanaRanking ventanaRanking;
+    private VentanaFecha ventanaFecha;
     //private IU_Carga ventanaCarga;
 
     public Controlador() {
@@ -39,6 +37,7 @@ public class Controlador {
         this.ventanaJuego = new VentanaJuego();
         this.ventanaAyuda = new VentanaAyuda();
         this.ventanaRanking = new VentanaRanking();
+        this.ventanaFecha = new VentanaFecha();
 
 
         /* Listeners VentanaInicio */
@@ -48,6 +47,7 @@ public class Controlador {
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addCambiarContraseniaListener(new CambiarContraseniaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
+        this.ventanaInicio.addFechaListener(new FechaListener());
 
 
 
@@ -95,6 +95,9 @@ public class Controlador {
 
     private void mostrarVentanaRanking() {
         this.ventanaRanking.setVisible(true);
+    }
+    private void mostrarVentanafecha(){
+        this.ventanaFecha.setVisible(true);
     }
 
     //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
@@ -154,6 +157,12 @@ public class Controlador {
     private class PersonalizarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            mostrarVentanafecha();
+        }
+    }
+    private class FechaListener implements  ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
 
         }
     }
