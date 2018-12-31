@@ -1,5 +1,6 @@
 package packVista;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import packControlador.Controlador;
 import packControlador.GestorRanking;
@@ -53,12 +54,13 @@ public class VentanaRanking extends JFrame {
         JPanel panelMenu = new JPanel();
         panelMenu.setBackground(new Color(21, 26, 35));
 
-        contentPane.add(panelMenu, BorderLayout.PAGE_END);
+        contentPane.add(panelMenu, BorderLayout.SOUTH);
 
 
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
         this.btnMisMejoresPartidas.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnMisMejoresPartidas);
+
 
         this.btnMejorPuntuacionDia = new JButton("Puntuación día");
         this.btnMejorPuntuacionDia.setBackground(new Color (51, 204, 204));
@@ -108,52 +110,72 @@ public class VentanaRanking extends JFrame {
     }
 
 
-    public void obtenerMisMejoresPartidas(){
-        System.out.println("Hola");
-        Vector<String> puntuacion = new Vector<>();
+    public void mostrarMisMejoresPartidas(){
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
-        JSONObject json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
-        Iterator<String> itr = json.keys();
-        while (itr.hasNext()){
-            String key = itr.next();
-            int value = (int) json.get(key);
-            //System.out.println(value);
+        JSONArray json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
 
-            puntuacion.add(Integer.toString(value));
+        for (int i = 0; i < json.length(); i++) {
+            Vector<String> puntuacion = new Vector<>();
+            JSONObject object = json.getJSONObject(i);
+            int clave = object.getInt("Puntuacion");
+            //System.out.println("Puntuacion: " + clave);
+            puntuacion.add(Integer.toString(clave));
+            //System.out.println("Size: " + puntuacion.size());
+            puntuaciones.add(puntuacion);
+
         }
 
-        puntuaciones.add(puntuacion);
-
+        //System.out.println(puntuaciones.toString());
 
         Vector<String> columnas = new Vector<>();
+        //System.out.println(columnas.toString());
         columnas.add("Puntuacion");
+
         createTable(puntuaciones, columnas);
     }
 
     private void createTable(Vector<Vector<String>> pData, Vector<String> columnas){
         table = new JTable (pData, columnas);
-        contentPane.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        //Table design
+        table.getTableHeader().setBackground(new Color (51, 204, 204));
+        table.getTableHeader().setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
+        table.setFont(new Font("SansSerif", Font.ROMAN_BASELINE,  15));
+        table.setBackground(new Color(21, 26, 35));
+        table.setForeground(new Color(255, 255, 255));
+        table.setRowHeight(30);
+        contentPane.add(table.getTableHeader(), BorderLayout.NORTH);
         contentPane.add(table, BorderLayout.CENTER);
         table.setFillsViewportHeight(true);
     }
 
-    public void obtenerMejorPuntuacionDia(){ ////SIN TERMINAR
+    public void mostrarMejorPuntuacionDia(){ ////SIN TERMINAR
 
-        Vector<String> puntuacion = new Vector<>();
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
-        JSONObject json = GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
-        Iterator<String> itr = json.keys();
+        JSONArray json = Controlador.getMiControlador().obtenerMejorPuntuacionDia();
 
-        puntuaciones.add(puntuacion);
+        for (int i = 0; i < json.length(); i++) {
+            Vector<String> puntuacion = new Vector<>();
+            JSONObject object = json.getJSONObject(i);
+            String id = object.getString("IdUsuario");
+            int punt = object.getInt("Puntuacion");
+            //System.out.println("Puntuacion: " + clave);
+            puntuacion.add(id);
+            puntuacion.add(Integer.toString(punt));
+            //System.out.println("Size: " + puntuacion.size());
+            puntuaciones.add(puntuacion);
 
+        }
+
+        //System.out.println(puntuaciones.toString());
 
         Vector<String> columnas = new Vector<>();
-        columnas.add("Usuario");
+        //System.out.println(columnas.toString());
+        columnas.add("IdUsuario");
         columnas.add("Puntuacion");
-        createTable(puntuaciones, columnas);
 
+        createTable(puntuaciones, columnas);
     }
 
     public void obtenerMejoresPartidas(){ ////SIN TERMINAR

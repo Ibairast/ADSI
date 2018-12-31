@@ -83,34 +83,19 @@ public class SGBD {
             String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
                     "VALUES(1, 'Andrea', 10, datetime('now'), 'true')";
 
+            String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(2, 'Andrea', 20, datetime('now'), 'true')";
+
+            String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(3, 'David', 5, datetime('now'), 'true')";
 
             s.executeUpdate(sql1);
+            s.executeUpdate(sql2);
+            s.executeUpdate(sql3);
 
             s.close();
             c.commit();
             c.close();
-
-/*            PreparedStatement pstmt1 = c.prepareStatement(sql1);
-            pstmt1.setInt(1, 1);
-            pstmt1.setString(2, "Andrea");
-            pstmt1.setInt(3, 10);
-            pstmt1.setString(4, "2018/12/28");
-            //pstmt1.setDate(4, Date.valueOf("2018/12/28"));
-            pstmt1.setBoolean(5, true);
-
-            pstmt1.executeUpdate();
-
-            String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES (?, ?, ?, ?, ?)";
-
-            PreparedStatement pstmt2 = c.prepareStatement(sql2);
-            pstmt2.setString(1, "Andrea");
-            pstmt2.setString(2, "0710");
-            pstmt2.setBoolean(3, false);
-            pstmt2.setString(4, "2018/12/28");
-            //pstmt2.setDate(4, Date.valueOf("2018/12/28"));
-            pstmt2.setInt(5, 2);
-
-            pstmt2.executeUpdate();*/
 
 
         } catch (Exception e) {

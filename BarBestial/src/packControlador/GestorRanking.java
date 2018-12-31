@@ -1,5 +1,6 @@
 package packControlador;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.*;
@@ -21,8 +22,8 @@ public class GestorRanking {
     }
 
 
-    public JSONObject obtenerMisMejoresPartidas(){
-        JSONObject json1 = new JSONObject();
+    public JSONArray obtenerMisMejoresPartidas(){
+        JSONArray json = new JSONArray();
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -36,9 +37,11 @@ public class GestorRanking {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                JSONObject js = new JSONObject();
                 int puntuacion = rs.getInt("Puntuacion");
                 //System.out.println(puntuacion);
-                json1.put("Puntuacion", puntuacion);
+                js.put("Puntuacion", puntuacion);
+                json.put(js);
             }
 
             rs.close();
@@ -50,18 +53,18 @@ public class GestorRanking {
             System.exit(0);
         }
         System.out.println("Consulta obtenerMisMejoresPartidas terminada");
-        return json1;
+        return json;
     }
 
-    public JSONObject obtenerMejorPuntuacionDia(){
-        JSONObject json2 = new JSONObject();
+    public JSONArray obtenerMejorPuntuacionDia(){
+        JSONArray json = new JSONArray();
 
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
 
-            String sql = "SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = ? ORDER BY Puntuacion DESC LIMIT 1";
+            String sql = "SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = 'datetime('now')' ORDER BY Puntuacion DESC LIMIT 1";
 
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -70,15 +73,22 @@ public class GestorRanking {
             System.out.println(dtf.format(now)); //2016/11/16
 
             PreparedStatement pstmt = c.prepareStatement(sql);
-            pstmt.setString(1, date); //PONER LA FECHA ACTUAL
+            pstmt.setString(1, date); //PONER LA FECHA ACTUAL*/
+
             ResultSet rs = pstmt.executeQuery();
 
 
             if (rs.next()) { //Solo se hace una vez
+                JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
                 int puntuacion = rs.getInt("Puntuacion");
-                json2.put("IdUsuario", usuario);
-                json2.put("Puntuacion", puntuacion);
+                System.out.println(usuario);
+                System.out.println(puntuacion);
+
+
+                js.put("IdUsuario", usuario);
+                js.put("Puntuacion", puntuacion);
+                json.put(js);
             }
 
             rs.close();
@@ -91,7 +101,7 @@ public class GestorRanking {
             System.exit(0);
         }
         System.out.println("Consulta obtenerMejorPuntuacionDia terminada");
-        return json2;
+        return json;
     }
 
     public JSONObject obtenerMejoresPartidas(){

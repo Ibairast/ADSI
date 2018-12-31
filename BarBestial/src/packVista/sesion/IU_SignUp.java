@@ -1,3 +1,4 @@
+
 package packVista.sesion;
 
 import javafx.scene.Node;
@@ -42,3 +43,4 @@ public class IU_SignUp {
         return false;
     }
 }
+

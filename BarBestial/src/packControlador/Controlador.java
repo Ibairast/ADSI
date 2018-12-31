@@ -1,5 +1,6 @@
 package packControlador;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import packModelo.Jugador;
 import packModelo.Partida;
@@ -139,7 +140,6 @@ public class Controlador {
     class RankingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //actualizarRanking();
             mostrarVentanaRanking();
         }
     }
@@ -224,16 +224,14 @@ public class Controlador {
 
     //RANKING
 
-    public JSONObject obtenerMisMejoresPartidas() {
+
+    public JSONArray obtenerMisMejoresPartidas() {
         return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
     }
 
-    private void mostrarMisMejoresPartidas(){
-        this.ventanaRanking.obtenerMisMejoresPartidas();
-    }
 
-    private void obtenerMejorPuntuacionDia() {
-        this.ventanaRanking.obtenerMejorPuntuacionDia();
+    public JSONArray obtenerMejorPuntuacionDia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
     }
 
     private void obtenerMejoresPartidas() {
@@ -245,10 +243,11 @@ public class Controlador {
     }
 
 
+
     class MisMejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            mostrarMisMejoresPartidas();
+            ventanaRanking.mostrarMisMejoresPartidas();
         }
     }
 
@@ -256,7 +255,7 @@ public class Controlador {
     class MejorPuntuacionDiaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            obtenerMejorPuntuacionDia();
+            ventanaRanking.mostrarMejorPuntuacionDia();
         }
     }
 
@@ -264,7 +263,7 @@ public class Controlador {
     class MejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            obtenerMejoresPartidas();
+            //obtenerMejoresPartidas();
         }
     }
 
@@ -272,7 +271,7 @@ public class Controlador {
     class MejorMediaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            obtenerMejorMedia();
+            //obtenerMejorMedia();
 
         }
     }

@@ -1,3 +1,4 @@
+
 package packVista.sesion;
 
 import javafx.application.Application;
@@ -33,3 +34,4 @@ public class Sesion extends Application {
         stage.show();
     }
 }
+
