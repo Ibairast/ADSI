@@ -221,7 +221,10 @@ public class Controlador {
     }
 
 
-
+    //Fecha
+    public JSONArray obtenerUsuarios(String fecha){
+        return GestorUsuario.getMiGestorUsuario().obtenerUsuarios(fecha);
+    }
     //RANKING
 
 

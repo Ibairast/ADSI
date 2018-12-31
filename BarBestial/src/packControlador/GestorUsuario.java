@@ -25,7 +25,7 @@ public class GestorUsuario {
     }
 
 
-    public JSONArray obtenerUsuarios() {
+    public JSONArray obtenerUsuarios(String fecha) {
         JSONArray json = new JSONArray();
 
         try {
@@ -33,10 +33,10 @@ public class GestorUsuario {
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
 
-            String sql = "SELECT IdUsuario from USUARIO;";
+            String sql = "SELECT IdUsuario from USUARIO where LogFecha<?;";
 
             PreparedStatement pstmt = c.prepareStatement(sql);
-          //  pstmt.setString(1, "Andrea");
+           pstmt.setString(1, fecha);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
