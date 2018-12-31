@@ -247,7 +247,7 @@ public class Controlador {
         return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
     }
 
-    private JSONArray obtenerUsuarios(){
+    public JSONArray obtenerUsuarios(){
         return GestorUsuario.getMiGestorUsuario().obtenerUsuarios();
     }
 

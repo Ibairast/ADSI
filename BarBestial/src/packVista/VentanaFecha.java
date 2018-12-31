@@ -64,7 +64,7 @@ public static void main(String[] args) {
 
         Vector<Vector<String>> usuarios = new Vector<>();
 
-        JSONArray json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
+        JSONArray json = Controlador.getMiControlador().obtenerUsuarios();
 
         for (int i = 0; i < json.length(); i++) {
             Vector<String> usuario = new Vector<>();

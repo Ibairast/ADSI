@@ -15,6 +15,7 @@ public class SGBD {
             this.crearBD();
             this.crearTablas();
             this.pruebasRanking();
+            this.pruebasUsuarios();
         }
     }
 

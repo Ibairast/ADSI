@@ -33,7 +33,7 @@ public class GestorUsuario {
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
 
-            String sql = "SELECT IdUsuario from USUARIOS;";
+            String sql = "SELECT IdUsuario from USUARIO;";
 
             PreparedStatement pstmt = c.prepareStatement(sql);
           //  pstmt.setString(1, "Andrea");
