@@ -105,5 +105,38 @@ public class SGBD {
         System.out.println("Insertados datos ranking");
 
     }
+    private void pruebasUsuarios() {
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+            c.setAutoCommit(false);
+
+            s = c.createStatement();
+            String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    "VALUES('Josu', 'Josu','true','1995-10-10',1)";
+
+            String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    "VALUES('Usoj', 'Usoj','false','1995-10-10',1)";
+
+            String sql3 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    "VALUES('Pedro', 'Pedro','false','1995-10-10',1)";
+
+            s.executeUpdate(sql1);
+            s.executeUpdate(sql2);
+            s.executeUpdate(sql3);
+
+            s.close();
+            c.commit();
+            c.close();
+
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Insertados datos en usuario");
+
+    }
 }
 
