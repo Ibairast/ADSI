@@ -8,10 +8,7 @@ import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
 import packModelo.Tablero;
-import packVista.VentanaAyuda;
-import packVista.VentanaInicio;
-import packVista.VentanaJuego;
-import packVista.VentanaRanking;
+import packVista.*;
 import packVista.sesion.Sesion;
 
 import java.awt.event.ActionEvent;
@@ -31,6 +28,8 @@ public class Controlador {
     private VentanaJuego ventanaJuego;
     private VentanaAyuda ventanaAyuda;
     private VentanaRanking ventanaRanking;
+    private VentanaFecha ventanaFecha;
+
     //private IU_Carga ventanaCarga;
 
     public Controlador() {
@@ -42,6 +41,8 @@ public class Controlador {
         this.ventanaJuego = new VentanaJuego();
         this.ventanaAyuda = new VentanaAyuda();
         this.ventanaRanking = new VentanaRanking();
+        this.ventanaFecha = new VentanaFecha();
+
 
 
         /* Listeners VentanaInicio */
@@ -51,6 +52,8 @@ public class Controlador {
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addCambiarContraseniaListener(new CambiarContraseniaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
+        this.ventanaInicio.addFechaListener(new FechaListener());
+
 
 
 
@@ -71,7 +74,12 @@ public class Controlador {
         this.ventanaRanking.addMejoresPartidas(new MejoresPartidasListener());
         this.ventanaRanking.addMejorMedia(new MejorMediaListener());
 
+        /* Listeners VentanFecha */
+        this.ventanaFecha.addobtenerJugadores(new MisJugadores());
+
     }
+
+
 
     public static Controlador getMiControlador() {
         if (miControlador == null) {
@@ -99,6 +107,19 @@ public class Controlador {
 
     private void mostrarVentanaRanking() {
         this.ventanaRanking.setVisible(true);
+    }
+
+    private void mostrarVentanafecha(){
+        this.ventanaFecha.setVisible(true);
+        this.ventanaInicio.setVisible(false);
+
+    }
+
+    private class FechaListener implements  ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            mostrarVentanafecha();
+        }
     }
 
     //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
@@ -225,6 +246,10 @@ public class Controlador {
         }
     }
 
+    //Fecha
+    public JSONArray obtenerUsuarios(String fecha){
+        return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
+    }
 
     //FUNC1
     public boolean registrarUsuario(String txtCorreo, String txtPass1) {
@@ -284,6 +309,13 @@ public class Controlador {
         public void actionPerformed(ActionEvent e){
             ventanaRanking.mostrarMejorMedia();
 
+        }
+    }
+    class MisJugadores implements  ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+            ventanaFecha.obtenerJugadores();
         }
     }
 

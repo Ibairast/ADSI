@@ -1,6 +1,7 @@
 package packControlador;
 
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.*;
@@ -18,6 +19,7 @@ public class GestorUsuario {
     private Connection c;
     private Statement s;
     public static GestorUsuario getGestorUsuario() {
+
         return miGestorUsuario;
     }
 
@@ -87,4 +89,38 @@ public class GestorUsuario {
         }
         return jugador;
     }
+
+    public JSONArray obtenerUsuarios(String fecha){
+        JSONArray json = new JSONArray();
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+            c.setAutoCommit(false);
+
+            String sql = "SELECT IdUsuario from USUARIO where LogFecha<?;";
+
+            PreparedStatement pstmt = c.prepareStatement(sql);
+            pstmt.setString(1, fecha);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                JSONObject js = new JSONObject();
+                String usu = rs.getString("IdUsuario");
+                js.put("IdUsuario", usu);
+                json.put(js);
+            }
+
+            rs.close();
+            c.close();
+
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Consulta obtenerUsuarios");
+        return json;
+    }
+
 }
