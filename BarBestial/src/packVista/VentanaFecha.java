@@ -15,11 +15,11 @@ public class VentanaFecha extends JFrame {
 
 
 
-    JLabel lblfecha= new JLabel("Introduce una fecha(aaaa-mm-dd): ");
+    private JLabel lblfecha= new JLabel("Introduce una fecha(aaaa-mm-dd): ");
 
-    JTextField txtfecha= new JTextField();
+    private JTextField txtfecha= new JTextField();
 
-    JButton btnenviar = new JButton("Ver Jugadores");
+    private JButton btnenviar = new JButton("Ver Jugadores");
 
     public VentanaFecha() {
         setSize(600, 285);

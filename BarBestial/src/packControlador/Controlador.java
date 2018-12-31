@@ -101,6 +101,7 @@ public class Controlador {
     private void mostrarVentanafecha(){
         this.ventanaFecha.setVisible(true);
         this.ventanaInicio.setVisible(false);
+
     }
 
     //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
