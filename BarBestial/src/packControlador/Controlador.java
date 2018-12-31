@@ -68,6 +68,8 @@ public class Controlador {
         this.ventanaRanking.addMejoresPartidas(new MejoresPartidasListener());
         this.ventanaRanking.addMejorMedia(new MejorMediaListener());
 
+        /* Listeners VentanaFecha */
+        this.ventanaFecha.addobtenerJugadores(new MisJugadores());
     }
 
     public static Controlador getMiControlador() {
@@ -163,7 +165,7 @@ public class Controlador {
     private class FechaListener implements  ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-
+            mostrarVentanafecha();
         }
     }
 
@@ -285,6 +287,12 @@ public class Controlador {
         public void actionPerformed(ActionEvent e){
             ventanaRanking.mostrarMejorMedia();
 
+        }
+    }
+    class MisJugadores implements  ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            ventanaFecha.obtenerJugadores();
         }
     }
 
