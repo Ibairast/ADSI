@@ -100,6 +100,7 @@ public class Controlador {
     }
     private void mostrarVentanafecha(){
         this.ventanaFecha.setVisible(true);
+        this.ventanaInicio.setVisible(false);
     }
 
     //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
@@ -292,6 +293,7 @@ public class Controlador {
     class MisJugadores implements  ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+
             ventanaFecha.obtenerJugadores();
         }
     }
