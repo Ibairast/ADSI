@@ -1,4 +1,3 @@
-
 package packVista.sesion;
 
 import javafx.application.Application;
@@ -9,6 +8,10 @@ import javafx.stage.Stage;
 
 public class Sesion extends Application {
 
+
+    public static void main(String... arg) {
+        launch(arg);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -22,7 +25,7 @@ public class Sesion extends Application {
         Scene sceneIdentificacion = new Scene(panelIdentificacion);
 
         // cambio de registro a identificacion
-        IU_SignUp registroController =  fxmlRegistro.getController();
+        IU_SignUp registroController = fxmlRegistro.getController();
         registroController.setIdentificacionScene(sceneIdentificacion);
 
         // cambio de identificacion a registro
@@ -32,10 +35,6 @@ public class Sesion extends Application {
         stage.setTitle("Sesión");
         stage.setScene(sceneIdentificacion);
         stage.show();
-    }
-
-    public static void main (String... arg){
-        launch(arg);
     }
 }
 

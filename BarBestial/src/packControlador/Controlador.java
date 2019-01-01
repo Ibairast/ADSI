@@ -1,9 +1,6 @@
 package packControlador;
 
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
@@ -80,7 +77,6 @@ public class Controlador {
     }
 
 
-
     public static Controlador getMiControlador() {
         if (miControlador == null) {
             miControlador = new Controlador();
@@ -109,33 +105,11 @@ public class Controlador {
         this.ventanaRanking.setVisible(true);
     }
 
-    private void mostrarVentanafecha(){
+    private void mostrarVentanafecha() {
         this.ventanaFecha.setVisible(true);
         this.ventanaInicio.setVisible(false);
 
     }
-
-    public int comprobarUsuario(String correo, String pass) {
-        int resul = GestorUsuario.getGestorUsuario().comprobarUsuario(correo,pass);
-        if (resul == -1){
-            this.mostrarVentanaInicio();
-            return -1;
-        }else if (resul == 1){
-            this.mostrarVentanafecha();
-            return 1;
-        }else {
-            return 0;
-        }
-    }
-
-    private class FechaListener implements  ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            mostrarVentanafecha();
-        }
-    }
-
-    //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
 
     private void setUpObservers() {
         ArrayList<Jugador> jugadores = this.partida.obtenerJugadores();
@@ -150,7 +124,53 @@ public class Controlador {
         partida.addObserver(ventanaJuego);
     }
 
+    //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
 
+    //Fecha
+    public JSONArray obtenerUsuarios(String fecha) {
+        return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
+    }
+
+    public JSONArray obtenerMisMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+    }
+
+    public JSONArray obtenerMejorPuntuacionDia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
+    }
+
+    public JSONArray obtenerMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
+    }
+
+    public JSONArray obtenerMejorMedia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
+    }
+
+    //FUNCIONALIDAD 1
+    public boolean registrarUsuario(String txtCorreo, String txtPass1) {
+        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo, txtPass1);
+    }
+
+    public int comprobarUsuario(String correo, String pass) {
+        int resul = GestorUsuario.getGestorUsuario().comprobarUsuario(correo, pass);
+        if (resul == -1) {
+            this.mostrarVentanaInicio();
+            return -1;
+        } else if (resul == 1) {
+            this.mostrarVentanafecha();
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private class FechaListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mostrarVentanafecha();
+        }
+    }
 
     class NuevaPartidaListener implements ActionListener {
         @Override
@@ -169,7 +189,7 @@ public class Controlador {
         }
     }
 
-    class InstruccionesListener  implements ActionListener {
+    class InstruccionesListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             mostrarVentanaAyuda();
@@ -196,6 +216,9 @@ public class Controlador {
 
         }
     }
+
+
+    //RANKING
 
     class ElegirCarta1Listener implements ActionListener {
         @Override
@@ -259,78 +282,40 @@ public class Controlador {
         }
     }
 
-    //Fecha
-    public JSONArray obtenerUsuarios(String fecha){
-        return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
-    }
-
-    //FUNC1
-    public boolean registrarUsuario(String txtCorreo, String txtPass1) {
-        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo,txtPass1);
-    }
-
-
-
-    //RANKING
-
-
-    public JSONArray obtenerMisMejoresPartidas() {
-        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
-    }
-
-
-    public JSONArray obtenerMejorPuntuacionDia() {
-        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
-    }
-
-    public JSONArray obtenerMejoresPartidas() {
-        return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
-    }
-
-    public JSONArray obtenerMejorMedia() {
-        return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
-    }
-
-
-
     class MisMejoresPartidasListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             ventanaRanking.mostrarMisMejoresPartidas();
         }
     }
 
-
     class MejorPuntuacionDiaListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             ventanaRanking.mostrarMejorPuntuacionDia();
         }
     }
 
-
     class MejoresPartidasListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             ventanaRanking.mostrarMejoresPartidas();
         }
     }
 
-
     class MejorMediaListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             ventanaRanking.mostrarMejorMedia();
 
         }
     }
-    class MisJugadores implements  ActionListener{
+
+    class MisJugadores implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
 
             ventanaFecha.obtenerJugadores();
         }
     }
-
-
 }

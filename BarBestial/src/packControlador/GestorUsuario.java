@@ -6,37 +6,34 @@ import org.json.JSONObject;
 import packModelo.Usuario;
 
 import java.sql.*;
-import java.util.Calendar;
+
+import static java.time.LocalDate.now;
 
 public class GestorUsuario {
-    private static GestorUsuario miGestorUsuario = new GestorUsuario();
-
     private static final String SQL_FIND = "SELECT * FROM USUARIO WHERE IdUsuario = ?";
-
-
-    private Connection connection;
-
-
+    private static GestorUsuario miGestorUsuario = new GestorUsuario();
     private Connection c;
     private Statement s;
+
+    private GestorUsuario() {
+    }
+
     public static GestorUsuario getGestorUsuario() {
 
         return miGestorUsuario;
     }
 
-    private GestorUsuario() {
-    }
-
-
     public boolean registrarUsuario(String txtCorreo, String txtPass) {
-        if (buscarUsuario(txtCorreo)==null) {
+
+        if (buscarUsuario(txtCorreo) == null) {
             try {
+
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
                 c.setAutoCommit(false);
                 s = c.createStatement();
                 String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
-                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, strftime('%Y-%m-%d') ,0)";
+                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
                 s.executeUpdate(sql);
                 s.close();
                 c.commit();
@@ -61,7 +58,7 @@ public class GestorUsuario {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 jugador = new JSONObject();
-                jugador.put("IdUsuario",rs.getString("IdUsuario"));
+                jugador.put("IdUsuario", rs.getString("IdUsuario"));
                 jugador.put("Pass", rs.getString("Pass"));
                 jugador.put("Admin", rs.getInt("Admin"));
                 jugador.put("LogFecha", rs.getString("LogFecha"));
@@ -75,7 +72,7 @@ public class GestorUsuario {
         return jugador;
     }
 
-    public JSONArray obtenerUsuarios(String fecha){
+    public JSONArray obtenerUsuarios(String fecha) {
         JSONArray json = new JSONArray();
 
         try {
@@ -109,11 +106,9 @@ public class GestorUsuario {
     }
 
 
-
     public int comprobarUsuario(String correo, String pass) {
         //FALTA UPDATE LOGFECHA
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
@@ -123,21 +118,28 @@ public class GestorUsuario {
 
             PreparedStatement pstmt = c.prepareStatement(sql);
             pstmt.setString(1, correo);
-            pstmt.setString(2,pass);
+            pstmt.setString(2, pass);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 JSONObject js = new JSONObject();
                 int admin = rs.getInt("Admin");
-                if (admin==1){
+                if (admin == 1) {
                     return 1;
                 }
-                js.put("IdUsuario",correo);
-                js.put("Pass", pass);
-                js.put("LogFecha",startDate.toString());
-                int ayuda = rs.getInt("Ayuda");
-                js.put("Ayuda",ayuda);
 
+                js.put("IdUsuario", correo);
+                js.put("Pass", pass);
+                js.put("LogFecha", now().toString());
+                int ayuda = rs.getInt("Ayuda");
+                js.put("Ayuda", ayuda);
+
+                s = c.createStatement();
+                String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "';";
+
+                s.executeUpdate(sqlUpdate);
+                s.close();
+                c.commit();
                 Usuario.getUsuario().cargarUsuario(js);
                 return -1;
             }
