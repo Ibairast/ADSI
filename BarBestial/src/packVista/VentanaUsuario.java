@@ -14,28 +14,19 @@ import java.util.Vector;
 public class VentanaUsuario extends JFrame {
     private static final long serialVersionUID = 1L;
 
-        private JButton btnenviar =new JButton("Enviar");;
+        private JButton btneliminar =new JButton("Eliminar");;
         private JCheckBox check = new JCheckBox();
+        private JPanel panel=new JPanel(new GridLayout(0, 1));;
 
     public VentanaUsuario() {
-        JFrame frame = new JFrame("Bar Bestial - Usuario");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel panel = new JPanel(new GridLayout(0, 1));
 
-      /*  check = new JCheckBox("Garlic");
-        panel.add(check);
-        check = new JCheckBox("Onions");
-        panel.add(check);
-        check = new JCheckBox("Pepperoni");
-        panel.add(check);
-        check = new JCheckBox("Spinach");
-        panel.add(check);
-        Container contentPane = frame.getContentPane();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container contentPane =getContentPane();
         contentPane.add(panel, BorderLayout.CENTER);
-        contentPane.add(btnenviar, BorderLayout.SOUTH);
-        frame.setSize(300, 200);
-        frame.setVisible(true);
-        setLocationRelativeTo(null);*/
+        contentPane.add(btneliminar, BorderLayout.SOUTH);
+        setSize(300, 200);
+        setTitle("Hiola");
+        setLocationRelativeTo(null);
 
 
     }
@@ -55,10 +46,6 @@ public class VentanaUsuario extends JFrame {
 
     }
 
-  //  public void addobtenerJugadores(ActionListener listenForBtnEnviar) {
-    //    btnenviar.addActionListener(listenForBtnEnviar);
-    //}
-
     public void cargarUsuarios(JSONArray json){
         for(int i=0;i<json.length();i++){
             System.out.println(json.get(i));
@@ -66,8 +53,16 @@ public class VentanaUsuario extends JFrame {
             String id = objeto.getString("IdUsuario");
             check = new JCheckBox(id);
             System.out.println(id);
+            panel.add(check);
         }
     }
 
+      public void addEliminar(ActionListener listenForBtnEliminar) {
+        btneliminar.addActionListener(listenForBtnEliminar);
+    }
+    public boolean algunoPulsado(){
+
+        return true;
+    }
 
     }

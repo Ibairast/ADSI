@@ -77,6 +77,8 @@ public class Controlador {
 
         /* Listeners VentanFecha */
         this.ventanaFecha.addobtenerJugadores(new MisJugadores());
+        /* Listeners VentanaUsuario */
+        this.ventanaUsuario.addEliminar(new EliminarJugadores());
 
     }
 
@@ -328,9 +330,20 @@ public class Controlador {
 
            }else{
                JOptionPane.showConfirmDialog(null,
-                       "Error,el formato de la fecha no es correcto", "Login", JOptionPane.DEFAULT_OPTION);
+                       "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);
            }
 
+        }
+    }
+    class EliminarJugadores implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(ventanaUsuario.algunoPulsado()){
+
+            }else {
+                JOptionPane.showConfirmDialog(null,
+                        "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
+            }
         }
     }
 }
