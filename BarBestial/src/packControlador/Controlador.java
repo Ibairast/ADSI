@@ -182,6 +182,11 @@ public class Controlador {
         }
     }
 
+    public boolean recuperarContrasena(String correo) {
+
+        return GestorUsuario.getGestorUsuario().recuperarContrasena(correo);
+    }
+
     private class FechaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
