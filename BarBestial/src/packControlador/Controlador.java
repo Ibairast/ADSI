@@ -323,7 +323,7 @@ public class Controlador {
            if(ventanaFecha.comprobarFecha()){
                JSONArray json =ventanaFecha.obtenerJugadores();
                 ventanaUsuario.setVisible(true);
-                ventanaFecha.setVisible(false);
+
 
            }else{
                JOptionPane.showConfirmDialog(null,
