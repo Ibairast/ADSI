@@ -61,8 +61,29 @@ public class VentanaUsuario extends JFrame {
         btneliminar.addActionListener(listenForBtnEliminar);
     }
     public boolean algunoPulsado(){
+      boolean pulsado=false;
+      int i=0;
+        while(i<panel.getComponentCount() && !pulsado){
+            JCheckBox check = (JCheckBox) panel.getComponent(i);
+            if(check.isSelected()){
+                pulsado=true;
+            }
+            i++;
+        }
+        return pulsado;
+    }
+    public JSONArray eliminarUsuarios(){
+        JSONArray json = new JSONArray();
 
-        return true;
+        for(int i=0;i<panel.getComponentCount();i++){
+            JCheckBox check = (JCheckBox) panel.getComponent(i);
+            if(check.isSelected()){
+                JSONObject js = new JSONObject();
+                js.put("IdUsuario",  check.getText());
+                json.put(js);
+            }
+        }
+        return json;
     }
 
     }

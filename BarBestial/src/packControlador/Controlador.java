@@ -339,7 +339,9 @@ public class Controlador {
         @Override
         public void actionPerformed(ActionEvent e){
             if(ventanaUsuario.algunoPulsado()){
-
+                System.out.println("Se ha pulsado uno");
+                JSONArray json=ventanaUsuario.eliminarUsuarios();
+                System.out.println(json);
             }else {
                 JOptionPane.showConfirmDialog(null,
                         "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
