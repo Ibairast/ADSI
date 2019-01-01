@@ -6,7 +6,6 @@ module BarBestial {
     requires org.json;
     requires java.sql;
     requires java.mail;
-    requires java.activation;
 
     opens packVista.sesion;
 }
