@@ -131,6 +131,8 @@ public class Controlador {
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
 
+
+    //Ranking
     public JSONArray obtenerMisMejoresPartidas() {
         return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
     }
@@ -217,9 +219,6 @@ public class Controlador {
         }
     }
 
-
-    //RANKING
-
     class ElegirCarta1Listener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -260,6 +259,7 @@ public class Controlador {
         }
     }
 
+
     class JugarTurnoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -282,6 +282,7 @@ public class Controlador {
         }
     }
 
+    //RANKING
     class MisMejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -311,6 +312,7 @@ public class Controlador {
         }
     }
 
+    //Fecha
     class MisJugadores implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

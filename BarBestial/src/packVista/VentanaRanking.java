@@ -3,25 +3,22 @@ package packVista;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import packControlador.Controlador;
-import packControlador.GestorRanking;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.Vector;
 
 public class VentanaRanking extends JFrame {
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
     private JTable table;
 
     private JButton btnMisMejoresPartidas;
     private JButton btnMejorPuntuacionDia;
     private JButton btnMejoresPartidas;
     private JButton btnMejorMedia;
-
 
 
     /**
@@ -58,22 +55,21 @@ public class VentanaRanking extends JFrame {
 
 
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
-        this.btnMisMejoresPartidas.setBackground(new Color (51, 204, 204));
+        this.btnMisMejoresPartidas.setBackground(new Color(51, 204, 204));
         panelMenu.add(btnMisMejoresPartidas);
 
 
         this.btnMejorPuntuacionDia = new JButton("Puntuación día");
-        this.btnMejorPuntuacionDia.setBackground(new Color (51, 204, 204));
+        this.btnMejorPuntuacionDia.setBackground(new Color(51, 204, 204));
         panelMenu.add(btnMejorPuntuacionDia);
 
         this.btnMejoresPartidas = new JButton("Mejores partidas");
-        this.btnMejoresPartidas.setBackground(new Color (51, 204, 204));
+        this.btnMejoresPartidas.setBackground(new Color(51, 204, 204));
         panelMenu.add(btnMejoresPartidas);
 
         this.btnMejorMedia = new JButton("Mejor media");
-        this.btnMejorMedia.setBackground(new Color (51, 204, 204));
+        this.btnMejorMedia.setBackground(new Color(51, 204, 204));
         panelMenu.add(btnMejorMedia);
-
 
 
     }
@@ -110,7 +106,7 @@ public class VentanaRanking extends JFrame {
     }
 
 
-    public void mostrarMisMejoresPartidas(){
+    public void mostrarMisMejoresPartidas() {
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
         JSONArray json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
@@ -126,7 +122,7 @@ public class VentanaRanking extends JFrame {
                 puntuaciones.add(puntuacion);
 
             }
-        }else{
+        } else {
             Vector<String> puntuacion = new Vector<>();
             puntuacion.add("No hay datos");
             puntuaciones.add(puntuacion);
@@ -139,12 +135,12 @@ public class VentanaRanking extends JFrame {
 
     }
 
-    private void createTable(Vector<Vector<String>> pData, Vector<String> columnas){
-        table = new JTable (pData, columnas);
+    private void createTable(Vector<Vector<String>> pData, Vector<String> columnas) {
+        table = new JTable(pData, columnas);
         //Table design
-        table.getTableHeader().setBackground(new Color (51, 204, 204));
+        table.getTableHeader().setBackground(new Color(51, 204, 204));
         table.getTableHeader().setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
-        table.setFont(new Font("SansSerif", Font.ROMAN_BASELINE,  15));
+        table.setFont(new Font("SansSerif", Font.ROMAN_BASELINE, 15));
         table.setBackground(new Color(21, 26, 35));
         table.setForeground(new Color(255, 255, 255));
         table.setRowHeight(30);
@@ -153,12 +149,12 @@ public class VentanaRanking extends JFrame {
         table.setFillsViewportHeight(true);
     }
 
-    public void mostrarMejorPuntuacionDia(){
+    public void mostrarMejorPuntuacionDia() {
 
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
         JSONArray json = Controlador.getMiControlador().obtenerMejorPuntuacionDia();
-        if(json.length()>0) {
+        if (json.length() > 0) {
             for (int i = 0; i < json.length(); i++) {
                 Vector<String> puntuacion = new Vector<>();
                 JSONObject object = json.getJSONObject(i);
@@ -169,7 +165,7 @@ public class VentanaRanking extends JFrame {
                 puntuaciones.add(puntuacion);
 
             }
-        }else{
+        } else {
             Vector<String> puntuacion = new Vector<>();
             puntuacion.add("No hay datos");
             puntuaciones.add(puntuacion);
@@ -182,13 +178,13 @@ public class VentanaRanking extends JFrame {
         createTable(puntuaciones, columnas);
     }
 
-    public void mostrarMejoresPartidas(){
+    public void mostrarMejoresPartidas() {
 
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
         JSONArray json = Controlador.getMiControlador().obtenerMejoresPartidas();
 
-        if(json.length()>0){
+        if (json.length() > 0) {
             for (int i = 0; i < json.length(); i++) {
                 Vector<String> puntuacion = new Vector<>();
                 JSONObject object = json.getJSONObject(i);
@@ -203,7 +199,7 @@ public class VentanaRanking extends JFrame {
                 puntuaciones.add(puntuacion);
             }
 
-        }else{
+        } else {
             Vector<String> puntuacion = new Vector<>();
             puntuacion.add("No hay datos");
             puntuaciones.add(puntuacion);
@@ -218,13 +214,13 @@ public class VentanaRanking extends JFrame {
 
     }
 
-    public void mostrarMejorMedia(){
+    public void mostrarMejorMedia() {
 
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
         JSONArray json = Controlador.getMiControlador().obtenerMejorMedia();
 
-        if(json.length()>0){
+        if (json.length() > 0) {
             for (int i = 0; i < json.length(); i++) {
                 Vector<String> puntuacion = new Vector<>();
 
@@ -236,7 +232,7 @@ public class VentanaRanking extends JFrame {
                 puntuacion.add(media);
                 puntuaciones.add(puntuacion);
             }
-        }else{
+        } else {
             Vector<String> puntuacion = new Vector<>();
             puntuacion.add("No hay datos");
             puntuaciones.add(puntuacion);
@@ -250,7 +246,6 @@ public class VentanaRanking extends JFrame {
 
 
     }
-
 
 
 }
