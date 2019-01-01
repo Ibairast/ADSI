@@ -1,6 +1,7 @@
 package packControlador;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
@@ -139,9 +140,12 @@ public class Controlador {
 
     //Fecha
     public JSONArray obtenerUsuarios(String fecha) {
+
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
-
+    public void eliminarUsuarios(String id){
+        GestorUsuario.getGestorUsuario().eliminarUsuarios(id);
+    }
 
     //Ranking
     public JSONArray obtenerMisMejoresPartidas() {
@@ -346,9 +350,15 @@ public class Controlador {
         @Override
         public void actionPerformed(ActionEvent e){
             if(ventanaUsuario.algunoPulsado()){
-                System.out.println("Se ha pulsado uno");
+               // System.out.println("Se ha pulsado uno");
                 JSONArray json=ventanaUsuario.eliminarUsuarios();
-                System.out.println(json);
+                for(int i=0;i<json.length();i++){
+                    JSONObject objeto = json.getJSONObject(i);
+                    String id = objeto.getString("IdUsuario");
+                    eliminarUsuarios(id);
+                }
+
+
             }else {
                 JOptionPane.showConfirmDialog(null,
                         "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);

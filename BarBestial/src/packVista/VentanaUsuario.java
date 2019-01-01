@@ -48,7 +48,7 @@ public class VentanaUsuario extends JFrame {
 
     public void cargarUsuarios(JSONArray json){
         for(int i=0;i<json.length();i++){
-            System.out.println(json.get(i));
+           // System.out.println(json.get(i));
             JSONObject objeto = json.getJSONObject(i);
             String id = objeto.getString("IdUsuario");
             check = new JCheckBox(id);
@@ -79,7 +79,7 @@ public class VentanaUsuario extends JFrame {
             JCheckBox check = (JCheckBox) panel.getComponent(i);
             if(check.isSelected()){
                 JSONObject js = new JSONObject();
-                js.put("IdUsuario",  check.getText());
+                js.put("IdUsuario",check.getText());
                 json.put(js);
             }
         }
