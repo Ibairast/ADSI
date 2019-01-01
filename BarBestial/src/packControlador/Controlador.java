@@ -8,6 +8,7 @@ import packModelo.Tablero;
 import packVista.*;
 import packVista.sesion.Sesion;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -316,8 +317,13 @@ public class Controlador {
     class MisJugadores implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+           if(ventanaFecha.comprobarFecha()){
+               ventanaFecha.obtenerJugadores();
+           }else{
+               JOptionPane.showConfirmDialog(null,
+                       "Error,el formato de la fecha no es correcto", "Login", JOptionPane.DEFAULT_OPTION);
+           }
 
-            ventanaFecha.obtenerJugadores();
         }
     }
 }
