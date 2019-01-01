@@ -14,7 +14,7 @@ public class SGBD {
         if (!f.exists()) {
             this.crearBD();
             this.crearTablas();
-            this.pruebasRanking();
+            //this.pruebasRanking();
         }
     }
 
@@ -45,7 +45,7 @@ public class SGBD {
             String usuario = "CREATE TABLE USUARIO" +
                     "(IdUsuario VARCHAR(100) NOT NULL, " +
                     "Pass VARCHAR(100) NOT NULL, " +
-                    "Admin BOOLEAN NOT NULL, " +
+                    "Admin INT(1) NOT NULL, " +
                     "LogFecha DATE NOT NULL, " +
                     "Ayuda INT(11) NOT NULL, " +
 
@@ -56,7 +56,7 @@ public class SGBD {
                     "IdUsuario VARCHAR(100) NOT NULL, " +
                     "Puntuacion INT(11) NOT NULL, " +
                     "Fecha DATE NOT NULL, " +
-                    "Gana BOOLEAN NOT NULL, " +
+                    "Gana INT(1) NOT NULL, " +
 
                     "PRIMARY KEY(IdRanking), " +
                     "FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario))";
@@ -81,36 +81,21 @@ public class SGBD {
 
             s = c.createStatement();
             String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(1, 'Andrea', 10, datetime('now'), 'true')";
+                    "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 1)";
 
+            String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 1)";
+
+            String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 1)";
 
             s.executeUpdate(sql1);
+            s.executeUpdate(sql2);
+            s.executeUpdate(sql3);
 
             s.close();
             c.commit();
             c.close();
-
-/*            PreparedStatement pstmt1 = c.prepareStatement(sql1);
-            pstmt1.setInt(1, 1);
-            pstmt1.setString(2, "Andrea");
-            pstmt1.setInt(3, 10);
-            pstmt1.setString(4, "2018/12/28");
-            //pstmt1.setDate(4, Date.valueOf("2018/12/28"));
-            pstmt1.setBoolean(5, true);
-
-            pstmt1.executeUpdate();
-
-            String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES (?, ?, ?, ?, ?)";
-
-            PreparedStatement pstmt2 = c.prepareStatement(sql2);
-            pstmt2.setString(1, "Andrea");
-            pstmt2.setString(2, "0710");
-            pstmt2.setBoolean(3, false);
-            pstmt2.setString(4, "2018/12/28");
-            //pstmt2.setDate(4, Date.valueOf("2018/12/28"));
-            pstmt2.setInt(5, 2);
-
-            pstmt2.executeUpdate();*/
 
 
         } catch (Exception e) {
@@ -118,6 +103,39 @@ public class SGBD {
             System.exit(0);
         }
         System.out.println("Insertados datos ranking");
+
+    }
+    private void pruebasUsuarios() {
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+            c.setAutoCommit(false);
+
+            s = c.createStatement();
+            String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    "VALUES('Josu', 'Josu','true','1995-10-10',1)";
+
+            String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    "VALUES('Usoj', 'Usoj','false','1995-10-10',1)";
+
+            String sql3 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    "VALUES('Pedro', 'Pedro','false','1995-10-10',1)";
+
+            s.executeUpdate(sql1);
+            s.executeUpdate(sql2);
+            s.executeUpdate(sql3);
+
+            s.close();
+            c.commit();
+            c.close();
+
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Insertados datos en usuario");
 
     }
 }

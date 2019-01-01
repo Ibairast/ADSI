@@ -1,14 +1,12 @@
 package packControlador;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 import packModelo.Jugador;
 import packModelo.Partida;
 import packModelo.SGBD;
 import packModelo.Tablero;
-import packVista.VentanaAyuda;
-import packVista.VentanaInicio;
-import packVista.VentanaJuego;
-import packVista.VentanaRanking;
+import packVista.*;
+import packVista.sesion.Sesion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +25,8 @@ public class Controlador {
     private VentanaJuego ventanaJuego;
     private VentanaAyuda ventanaAyuda;
     private VentanaRanking ventanaRanking;
+    private VentanaFecha ventanaFecha;
+
     //private IU_Carga ventanaCarga;
 
     public Controlador() {
@@ -38,6 +38,8 @@ public class Controlador {
         this.ventanaJuego = new VentanaJuego();
         this.ventanaAyuda = new VentanaAyuda();
         this.ventanaRanking = new VentanaRanking();
+        this.ventanaFecha = new VentanaFecha();
+
 
 
         /* Listeners VentanaInicio */
@@ -47,6 +49,8 @@ public class Controlador {
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addCambiarContraseniaListener(new CambiarContraseniaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
+        this.ventanaInicio.addFechaListener(new FechaListener());
+
 
 
 
@@ -67,7 +71,11 @@ public class Controlador {
         this.ventanaRanking.addMejoresPartidas(new MejoresPartidasListener());
         this.ventanaRanking.addMejorMedia(new MejorMediaListener());
 
+        /* Listeners VentanFecha */
+        this.ventanaFecha.addobtenerJugadores(new MisJugadores());
+
     }
+
 
     public static Controlador getMiControlador() {
         if (miControlador == null) {
@@ -77,7 +85,8 @@ public class Controlador {
     }
 
     public void iniciarAplicacion() {
-        this.mostrarVentanaInicio();
+        Sesion.main();
+        //this.mostrarVentanaInicio();
     }
 
     private void mostrarVentanaInicio() {
@@ -96,7 +105,11 @@ public class Controlador {
         this.ventanaRanking.setVisible(true);
     }
 
-    //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
+    private void mostrarVentanafecha() {
+        this.ventanaFecha.setVisible(true);
+        this.ventanaInicio.setVisible(false);
+
+    }
 
     private void setUpObservers() {
         ArrayList<Jugador> jugadores = this.partida.obtenerJugadores();
@@ -111,6 +124,55 @@ public class Controlador {
         partida.addObserver(ventanaJuego);
     }
 
+    //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
+
+    //Fecha
+    public JSONArray obtenerUsuarios(String fecha) {
+        return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
+    }
+
+
+    //Ranking
+    public JSONArray obtenerMisMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+    }
+
+    public JSONArray obtenerMejorPuntuacionDia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
+    }
+
+    public JSONArray obtenerMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
+    }
+
+    public JSONArray obtenerMejorMedia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
+    }
+
+    //FUNCIONALIDAD 1
+    public boolean registrarUsuario(String txtCorreo, String txtPass1) {
+        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo, txtPass1);
+    }
+
+    public int comprobarUsuario(String correo, String pass) {
+        int resul = GestorUsuario.getGestorUsuario().comprobarUsuario(correo, pass);
+        if (resul == -1) {
+            this.mostrarVentanaInicio();
+            return -1;
+        } else if (resul == 1) {
+            this.mostrarVentanafecha();
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private class FechaListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mostrarVentanafecha();
+        }
+    }
 
     class NuevaPartidaListener implements ActionListener {
         @Override
@@ -129,7 +191,7 @@ public class Controlador {
         }
     }
 
-    class InstruccionesListener  implements ActionListener {
+    class InstruccionesListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             mostrarVentanaAyuda();
@@ -139,7 +201,6 @@ public class Controlador {
     class RankingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //actualizarRanking();
             mostrarVentanaRanking();
         }
     }
@@ -198,6 +259,7 @@ public class Controlador {
         }
     }
 
+
     class JugarTurnoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -220,62 +282,42 @@ public class Controlador {
         }
     }
 
-
-
     //RANKING
-
-    public JSONObject obtenerMisMejoresPartidas() {
-        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
-    }
-
-    private void mostrarMisMejoresPartidas(){
-        this.ventanaRanking.obtenerMisMejoresPartidas();
-    }
-
-    private void obtenerMejorPuntuacionDia() {
-        this.ventanaRanking.obtenerMejorPuntuacionDia();
-    }
-
-    private void obtenerMejoresPartidas() {
-        this.ventanaRanking.obtenerMejoresPartidas();
-    }
-
-    private void obtenerMejorMedia() {
-        this.ventanaRanking.obtenerMejorMedia();
-    }
-
-
     class MisMejoresPartidasListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
-            mostrarMisMejoresPartidas();
+        public void actionPerformed(ActionEvent e) {
+            ventanaRanking.mostrarMisMejoresPartidas();
         }
     }
-
 
     class MejorPuntuacionDiaListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
-            obtenerMejorPuntuacionDia();
+        public void actionPerformed(ActionEvent e) {
+            ventanaRanking.mostrarMejorPuntuacionDia();
         }
     }
-
 
     class MejoresPartidasListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
-            obtenerMejoresPartidas();
+        public void actionPerformed(ActionEvent e) {
+            ventanaRanking.mostrarMejoresPartidas();
         }
     }
-
 
     class MejorMediaListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
-            obtenerMejorMedia();
+        public void actionPerformed(ActionEvent e) {
+            ventanaRanking.mostrarMejorMedia();
 
         }
     }
 
+    //Fecha
+    class MisJugadores implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
+            ventanaFecha.obtenerJugadores();
+        }
+    }
 }

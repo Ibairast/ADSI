@@ -17,6 +17,7 @@ public class VentanaInicio extends JFrame {
     private JButton btnCargarPartida;
     private JButton btnCambiarContraseña;
     private JButton btnPersonalizar;
+    private JButton btnFecha;
 
 
     /**
@@ -71,6 +72,10 @@ public class VentanaInicio extends JFrame {
         this.btnCambiarContraseña.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnCambiarContraseña);
 
+        this.btnFecha = new JButton("PruebaFecha");
+        this.btnFecha.setBackground(new Color (51, 204, 204));
+        panelMenu.add(btnFecha);
+
         JPanel panelImagenBar = new JPanel();
         contentPane.add(panelImagenBar, BorderLayout.CENTER);
 
@@ -113,6 +118,10 @@ public class VentanaInicio extends JFrame {
     }
     public void addPersonalizarListener(ActionListener listenForBtnPersonalizar) {
         btnNuevaPartida.addActionListener(listenForBtnPersonalizar);
+    }
+
+    public void addFechaListener(ActionListener listenForBtnFecha){
+        btnFecha.addActionListener(listenForBtnFecha);
     }
 
 
