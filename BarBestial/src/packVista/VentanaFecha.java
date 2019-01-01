@@ -76,5 +76,9 @@ public static void main(String[] args) {
             return false;
         }
     }
+    public void cerrarVentana() {
+        setVisible(false);
+        dispose();
+    }
 
 }

@@ -55,6 +55,7 @@ public class VentanaUsuario extends JFrame {
             System.out.println(id);
             panel.add(check);
         }
+
     }
 
       public void addEliminar(ActionListener listenForBtnEliminar) {
@@ -84,6 +85,10 @@ public class VentanaUsuario extends JFrame {
             }
         }
         return json;
+    }
+    public void cerrarVentana() {
+        setVisible(false);
+        dispose();
     }
 
     }

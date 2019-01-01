@@ -337,6 +337,7 @@ public class Controlador {
                JSONArray json =ventanaFecha.obtenerJugadores();
                 ventanaUsuario.setVisible(true);
                 ventanaFecha.setVisible(false);
+                ventanaFecha.cerrarVentana();
                 ventanaUsuario.cargarUsuarios(json);
 
            }else{
@@ -357,6 +358,7 @@ public class Controlador {
                     String id = objeto.getString("IdUsuario");
                     eliminarUsuarios(id);
                 }
+                ventanaUsuario.cerrarVentana();
 
 
             }else {
