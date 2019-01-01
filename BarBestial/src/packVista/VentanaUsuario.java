@@ -59,5 +59,15 @@ public class VentanaUsuario extends JFrame {
     //    btnenviar.addActionListener(listenForBtnEnviar);
     //}
 
+    public void cargarUsuarios(JSONArray json){
+        for(int i=0;i<json.length();i++){
+            System.out.println(json.get(i));
+            JSONObject objeto = json.getJSONObject(i);
+            String id = objeto.getString("IdUsuario");
+            check = new JCheckBox(id);
+            System.out.println(id);
+        }
+    }
+
 
     }

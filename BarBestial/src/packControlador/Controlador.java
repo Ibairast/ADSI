@@ -324,6 +324,7 @@ public class Controlador {
                JSONArray json =ventanaFecha.obtenerJugadores();
                 ventanaUsuario.setVisible(true);
                 ventanaFecha.setVisible(false);
+                ventanaUsuario.cargarUsuarios(json);
 
            }else{
                JOptionPane.showConfirmDialog(null,
