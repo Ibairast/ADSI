@@ -9,6 +9,7 @@ import packVista.*;
 import packVista.sesion.Sesion;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ public class Controlador {
     private VentanaRanking ventanaRanking;
     private VentanaFecha ventanaFecha;
     private VentanaUsuario ventanaUsuario;
-
-    //private IU_Carga ventanaCarga;
+    private IU_Carga ventanaCarga;
 
     public Controlador() {
         this.partida = Partida.getMiPartida();
@@ -42,6 +42,7 @@ public class Controlador {
         this.ventanaRanking = new VentanaRanking();
         this.ventanaFecha = new VentanaFecha();
         this.ventanaUsuario=new VentanaUsuario();
+        this.ventanaCarga=new IU_Carga();
 
 
 
@@ -101,6 +102,10 @@ public class Controlador {
 
     private void mostrarVentanaJuego() {
         this.ventanaJuego.setVisible(true);
+    }
+
+    private void mostrarVentanaCarga() {
+        this.ventanaCarga.setVisible(true);
     }
 
     private void mostrarVentanaAyuda() {
@@ -193,7 +198,9 @@ public class Controlador {
     private class CargarPartidaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            //TODO mostrar ventana carga
+            mostrarVentanaCarga();
+            setUpObservers();
         }
     }
 
