@@ -24,13 +24,25 @@ public class Sesion extends Application {
         Parent panelIdentificacion = fxmlIdentificacion.load();
         Scene sceneIdentificacion = new Scene(panelIdentificacion);
 
-        // cambio de registro a identificacion
-        IU_SignUp registroController = fxmlRegistro.getController();
-        registroController.setIdentificacionScene(sceneIdentificacion);
+        FXMLLoader fxmlRContrasena = new FXMLLoader(getClass().getResource("RPassword.fxml"));
+        Parent panelRContrasena = fxmlRContrasena.load();
+        Scene sceneRContrasena = new Scene(panelRContrasena);
 
-        // cambio de identificacion a registro
+        // cambio a identificacion
+        IU_SignUp registroController = fxmlRegistro.getController();
+        // cambio a registro
         IU_Login identificacionController = fxmlIdentificacion.getController();
-        identificacionController.setRegistroScene(sceneRegistro);
+        // cambio a rec contraseña
+        IU_RPass rPassController = fxmlRContrasena.getController();
+
+
+        registroController.setSceneIdentificacion(sceneIdentificacion);
+
+        identificacionController.setSceneRegistro(sceneRegistro);
+        identificacionController.setSceneRPassword(sceneRContrasena);
+
+        rPassController.setSceneIdentificacion(sceneIdentificacion);
+
 
         stage.setTitle("Sesión");
         stage.setScene(sceneIdentificacion);

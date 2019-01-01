@@ -1,5 +1,6 @@
 package packVista.sesion;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -12,19 +13,31 @@ import javax.swing.*;
 
 public class IU_Login {
 
-    public TextField txtCorreo;
-    public PasswordField txtPass;
-    private Scene firstScene;
+    @FXML
+    private TextField txtCorreo;
 
-    public void setRegistroScene(Scene scene) {
-        firstScene = scene;
+    @FXML
+    private PasswordField txtPass;
+
+    private Scene sceneRegistro;
+
+    private Scene sceneRPassword;
+
+
+    protected void setSceneRegistro(Scene sceneRegistro) {
+        this.sceneRegistro = sceneRegistro;
     }
 
+    protected void setSceneRPassword(Scene sceneLogin) {
+        this.sceneRPassword = sceneLogin;
+    }
 
-    public void eventOpenRegistro(MouseEvent mouseEvent) {
+    @FXML
+    protected void eventOpenRegistro(MouseEvent mouseEvent) {
         Stage primaryStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(firstScene);
+        primaryStage.setScene(sceneRegistro);
     }
+
 
     public void eventIdentificar(MouseEvent mouseEvent) {
         if (!txtCorreo.getText().equals("") && !txtPass.getText().equals("")) {
@@ -41,6 +54,12 @@ public class IU_Login {
             }
         }
 
+    }
+
+    @FXML
+    protected void eventOpenRPassword(MouseEvent mouseEvent) {
+        Stage primaryStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(sceneRPassword);
     }
 
 
