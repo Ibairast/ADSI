@@ -22,7 +22,7 @@ public class VentanaUsuario extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel(new GridLayout(0, 1));
 
-        check = new JCheckBox("Garlic");
+      /*  check = new JCheckBox("Garlic");
         panel.add(check);
         check = new JCheckBox("Onions");
         panel.add(check);
@@ -35,7 +35,7 @@ public class VentanaUsuario extends JFrame {
         contentPane.add(btnenviar, BorderLayout.SOUTH);
         frame.setSize(300, 200);
         frame.setVisible(true);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);*/
 
 
     }
@@ -47,6 +47,7 @@ public class VentanaUsuario extends JFrame {
         EventQueue.invokeLater(() -> {
             try {
                 VentanaUsuario frame = new VentanaUsuario();
+                frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -54,9 +55,9 @@ public class VentanaUsuario extends JFrame {
 
     }
 
-    public void addobtenerJugadores(ActionListener listenForBtnEnviar) {
-        btnenviar.addActionListener(listenForBtnEnviar);
-    }
+  //  public void addobtenerJugadores(ActionListener listenForBtnEnviar) {
+    //    btnenviar.addActionListener(listenForBtnEnviar);
+    //}
 
 
     }

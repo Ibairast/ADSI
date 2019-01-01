@@ -59,10 +59,10 @@ public static void main(String[] args) {
     public void addobtenerJugadores(ActionListener listenForBtnEnviar){
     btnenviar.addActionListener(listenForBtnEnviar);
     }
-    public void obtenerJugadores() {
+    public JSONArray obtenerJugadores() {
         String fecha = txtfecha.getText();
         JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
-
+        return json;
 
 
     }

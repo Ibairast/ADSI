@@ -27,6 +27,7 @@ public class Controlador {
     private VentanaAyuda ventanaAyuda;
     private VentanaRanking ventanaRanking;
     private VentanaFecha ventanaFecha;
+    private VentanaUsuario ventanaUsuario;
 
     //private IU_Carga ventanaCarga;
 
@@ -40,6 +41,8 @@ public class Controlador {
         this.ventanaAyuda = new VentanaAyuda();
         this.ventanaRanking = new VentanaRanking();
         this.ventanaFecha = new VentanaFecha();
+        this.ventanaUsuario=new VentanaUsuario();
+
 
 
 
@@ -318,7 +321,10 @@ public class Controlador {
         @Override
         public void actionPerformed(ActionEvent e) {
            if(ventanaFecha.comprobarFecha()){
-               ventanaFecha.obtenerJugadores();
+               JSONArray json =ventanaFecha.obtenerJugadores();
+                ventanaUsuario.setVisible(true);
+                ventanaFecha.setVisible(false);
+
            }else{
                JOptionPane.showConfirmDialog(null,
                        "Error,el formato de la fecha no es correcto", "Login", JOptionPane.DEFAULT_OPTION);
