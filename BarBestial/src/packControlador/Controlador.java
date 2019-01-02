@@ -2,10 +2,7 @@ package packControlador;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import packModelo.Jugador;
-import packModelo.Partida;
-import packModelo.SGBD;
-import packModelo.Tablero;
+import packModelo.*;
 import packVista.*;
 import packVista.sesion.Sesion;
 
@@ -13,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 
 public class Controlador {
     private static Controlador miControlador;
@@ -31,6 +29,8 @@ public class Controlador {
     private VentanaUsuario ventanaUsuario;
     private IU_Carga ventanaCarga;
 
+    private IU_Contrasena ventanaContrasena;
+
     public Controlador() {
         this.partida = Partida.getMiPartida();
         this.tablero = Tablero.getMiTablero();
@@ -44,6 +44,8 @@ public class Controlador {
         this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
 
+        this.ventanaContrasena = new IU_Contrasena();
+
 
 
 
@@ -52,9 +54,9 @@ public class Controlador {
         this.ventanaInicio.addInstrucionesListener(new InstruccionesListener());
         this.ventanaInicio.addRankingListener(new RankingListener());
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
-        this.ventanaInicio.addCambiarContraseniaListener(new CambiarContraseniaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
         this.ventanaInicio.addFechaListener(new FechaListener());
+        this.ventanaInicio.addCambiarContraseniaListener(new OpenCambiarContraseniaListener());
 
 
 
@@ -78,9 +80,13 @@ public class Controlador {
 
         /* Listeners VentanFecha */
         this.ventanaFecha.addobtenerJugadores(new MisJugadores());
+
         /* Listeners VentanaUsuario */
         this.ventanaUsuario.addEliminar(new EliminarJugadores());
 
+
+        /* Listeners IU_CONTRASENA */
+        this.ventanaContrasena.addCambiarContrasena(new CambiarContrasena());
     }
 
 
@@ -93,7 +99,11 @@ public class Controlador {
 
     public void iniciarAplicacion() {
         Sesion.main();
-        //this.mostrarVentanaInicio();
+    }
+
+    private void mostrarIU_Contra() {
+        this.ventanaContrasena.setVisible(true);
+
     }
 
     private void mostrarVentanaInicio() {
@@ -187,6 +197,10 @@ public class Controlador {
         return GestorUsuario.getGestorUsuario().recuperarContrasena(correo);
     }
 
+    public void cambiarContrasena(String text) {
+        GestorUsuario.getGestorUsuario().cambiarContrasena(Usuario.getUsuario().getIdUsuario(), text);
+    }
+
     private class FechaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -227,10 +241,10 @@ public class Controlador {
         }
     }
 
-    private class CambiarContraseniaListener implements ActionListener {
+    private class OpenCambiarContraseniaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            mostrarIU_Contra();
         }
     }
 
@@ -371,6 +385,15 @@ public class Controlador {
                 JOptionPane.showConfirmDialog(null,
                         "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
             }
+        }
+    }
+
+
+    class CambiarContrasena implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            ventanaContrasena.cambiarContrasena();
         }
     }
 }

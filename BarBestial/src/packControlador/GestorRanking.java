@@ -4,17 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 public class GestorRanking {
     private static GestorRanking miGestorRanking;
     private Connection c;
     private Statement s;
 
-    private GestorRanking(){}
+    private GestorRanking() {
+    }
 
     public static GestorRanking getMiGestorRanking() {
         if (miGestorRanking == null) {
@@ -23,7 +20,7 @@ public class GestorRanking {
         return miGestorRanking;
     }
 
-    public JSONArray obtenerMisMejoresPartidas(){
+    public JSONArray obtenerMisMejoresPartidas() {
         JSONArray json = new JSONArray();
 
         try {
@@ -57,7 +54,7 @@ public class GestorRanking {
         return json;
     }
 
-    public JSONArray obtenerMejorPuntuacionDia(){
+    public JSONArray obtenerMejorPuntuacionDia() {
         JSONArray json = new JSONArray();
 
         try {
@@ -93,7 +90,7 @@ public class GestorRanking {
         return json;
     }
 
-    public JSONArray obtenerMejoresPartidas(){
+    public JSONArray obtenerMejoresPartidas() {
         JSONArray json = new JSONArray();
 
         try {

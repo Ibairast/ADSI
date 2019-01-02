@@ -19,7 +19,7 @@ public class Canguro extends Animal {
 
         /* Salta. */
         int ultimaPosicion = tablero.obtenerNumeroDeCartas() - 1;
-        
+
         if (ultimaPosicion - saltos >= 0) {
             tablero.moverCartaAPosicion(ultimaPosicion - saltos, carta);
         } else {

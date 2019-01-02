@@ -6,15 +6,15 @@ public abstract class Animal {
 
     protected abstract void hacerAnimalada();
 
-    public int getFuerza(){
+    public int getFuerza() {
         return this.fuerza;
     }
 
-    public String getEspecie(){
+    public String getEspecie() {
         return this.especie;
     }
 
-    protected int obtenerMiPosicion() {    	
+    protected int obtenerMiPosicion() {
         Tablero tablero = Tablero.getMiTablero();
         return tablero.obtenerPosicionAnimal(this);
     }

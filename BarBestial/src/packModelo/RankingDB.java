@@ -60,7 +60,7 @@ public class RankingDB {
         }
         System.out.println("Tabla creada");
     }
-    
+
     public void insertarPuntuacion(String pNombre, int pNCartas, int pFuerza) {
         try {
             Class.forName("org.sqlite.JDBC");

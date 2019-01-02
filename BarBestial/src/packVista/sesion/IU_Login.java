@@ -1,5 +1,6 @@
 package packVista.sesion;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -23,8 +24,6 @@ public class IU_Login {
 
     private Scene sceneRPassword;
 
-    private Scene scene;
-
     protected void setSceneRegistro(Scene sceneRegistro) {
         this.sceneRegistro = sceneRegistro;
     }
@@ -33,10 +32,6 @@ public class IU_Login {
         this.sceneRPassword = sceneLogin;
     }
 
-
-    protected void setScene(Scene sceneIdentificacion) {
-        this.scene = sceneIdentificacion;
-    }
 
     @FXML
     protected void eventOpenRegistro(MouseEvent mouseEvent) {
@@ -52,16 +47,16 @@ public class IU_Login {
                 JOptionPane.showConfirmDialog(null,
                         "Bienvenido", "Login", JOptionPane.DEFAULT_OPTION);
                 Controlador.getMiControlador().mostarVentanaInicio();
+                Platform.exit();
             } else if (resul == 1) {//admin
                 JOptionPane.showConfirmDialog(null,
                         "ADMIN", "Login", JOptionPane.DEFAULT_OPTION);
                 Controlador.getMiControlador().mostrarVentanaFecha();
+                Platform.exit();
             } else {
                 JOptionPane.showConfirmDialog(null,
                         "Error en la Identificación", "Error", JOptionPane.DEFAULT_OPTION);
             }
-            Stage stage = (Stage) this.scene.getWindow();
-            stage.close();
         }
     }
 
