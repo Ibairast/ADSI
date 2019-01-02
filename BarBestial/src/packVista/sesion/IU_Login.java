@@ -23,6 +23,7 @@ public class IU_Login {
 
     private Scene sceneRPassword;
 
+    private Scene scene;
 
     protected void setSceneRegistro(Scene sceneRegistro) {
         this.sceneRegistro = sceneRegistro;
@@ -30,6 +31,11 @@ public class IU_Login {
 
     protected void setSceneRPassword(Scene sceneLogin) {
         this.sceneRPassword = sceneLogin;
+    }
+
+
+    protected void setScene(Scene sceneIdentificacion) {
+        this.scene = sceneIdentificacion;
     }
 
     @FXML
@@ -45,15 +51,18 @@ public class IU_Login {
             if (resul == -1) {//noadmin
                 JOptionPane.showConfirmDialog(null,
                         "Bienvenido", "Login", JOptionPane.DEFAULT_OPTION);
+                Controlador.getMiControlador().mostarVentanaInicio();
             } else if (resul == 1) {//admin
                 JOptionPane.showConfirmDialog(null,
                         "ADMIN", "Login", JOptionPane.DEFAULT_OPTION);
+                Controlador.getMiControlador().mostrarVentanaFecha();
             } else {
                 JOptionPane.showConfirmDialog(null,
                         "Error en la Identificación", "Error", JOptionPane.DEFAULT_OPTION);
             }
+            Stage stage = (Stage) this.scene.getWindow();
+            stage.close();
         }
-
     }
 
     @FXML

@@ -3,8 +3,8 @@ package packControlador;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import packModelo.EmailUtil;
 import packModelo.Usuario;
-
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
@@ -59,7 +59,7 @@ public class GestorUsuario {
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
             s = c.createStatement();
-            String sql = "SELECT * FROM USUARIO WHERE IdUsuario = '"+ usuario + "'";
+            String sql = "SELECT * FROM USUARIO WHERE IdUsuario = '" + usuario + "'";
             ResultSet rs = s.executeQuery(sql);
             while (rs.next()) {
                 jugador = new JSONObject();
@@ -69,6 +69,8 @@ public class GestorUsuario {
                 jugador.put("LogFecha", rs.getString("LogFecha"));
                 jugador.put("Ayuda", rs.getInt("Ayuda"));
             }
+            s.close();
+            c.commit();
             rs.close();
             c.close();
         } catch (Exception e) {
@@ -98,7 +100,6 @@ public class GestorUsuario {
                 js.put("IdUsuario", usu);
                 json.put(js);
             }
-
             rs.close();
             c.close();
 
@@ -113,7 +114,6 @@ public class GestorUsuario {
 
 
     public int comprobarUsuario(String correo, String pass) {
-        //FALTA UPDATE LOGFECHA
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -139,10 +139,8 @@ public class GestorUsuario {
                 js.put("LogFecha", now().toString());
                 int ayuda = rs.getInt("Ayuda");
                 js.put("Ayuda", ayuda);
-
                 s = c.createStatement();
-                String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "';";
-
+                String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
                 s.executeUpdate(sqlUpdate);
                 s.close();
                 c.commit();
@@ -164,6 +162,7 @@ public class GestorUsuario {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
+
             s = c.createStatement();
             String sql = "DELETE from USUARIO where IdUsuario='" + id + "';";
             s.executeUpdate(sql);
@@ -172,26 +171,32 @@ public class GestorUsuario {
             c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
+
             System.exit(0);
         }
+
         System.out.println("Eliminados");
     }
 
 
-
+    /**
+     * Método obtenido de la web:
+     * <p>
+     * https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
+     * <p>
+     * Autor: About Pankaj
+     *
+     * @param correo Correo introducido por el usuario en IU_RPass.
+     * @return TRUE si se ha enviado la contraseña, FALSE si ha habido algún error.
+     */
     public boolean recuperarContrasena(String correo) {
 
-        //barbesADSI2018
-        //ADSIbarbes2018
 
         JSONObject usuario = buscarUsuario(correo);
 
-        if (usuario!=null){
-
-
+        if (usuario != null) {
             final String fromEmail = "barbesadsi2018@gmail.com"; //requires valid gmail id
             final String password = "ADSIbarbes2018"; // correct password for gmail id
-            final String toEmail = correo; // can be any email id
 
             System.out.println("TLSEmail Start");
             Properties props = new Properties();
@@ -209,11 +214,8 @@ public class GestorUsuario {
             };
             Session session = Session.getInstance(props, auth);
 
-            EmailUtil.sendEmail(session, toEmail,"TLSEmail Testing Subject", "TLSEmail Testing Body");
-            return true;
+            return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
         }
-
         return false;
-
     }
 }

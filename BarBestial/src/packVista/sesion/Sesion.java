@@ -40,6 +40,7 @@ public class Sesion extends Application {
 
         identificacionController.setSceneRegistro(sceneRegistro);
         identificacionController.setSceneRPassword(sceneRContrasena);
+        identificacionController.setScene(sceneIdentificacion);
 
         rPassController.setSceneIdentificacion(sceneIdentificacion);
 

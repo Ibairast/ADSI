@@ -10,7 +10,6 @@ import packVista.*;
 import packVista.sesion.Sesion;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,8 +41,8 @@ public class Controlador {
         this.ventanaAyuda = new VentanaAyuda();
         this.ventanaRanking = new VentanaRanking();
         this.ventanaFecha = new VentanaFecha();
-        this.ventanaUsuario=new VentanaUsuario();
-        this.ventanaCarga=new IU_Carga();
+        this.ventanaUsuario = new VentanaUsuario();
+        this.ventanaCarga = new IU_Carga();
 
 
 
@@ -143,7 +142,8 @@ public class Controlador {
 
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
-    public void eliminarUsuarios(String id){
+
+    public void eliminarUsuarios(String id) {
         GestorUsuario.getGestorUsuario().eliminarUsuarios(id);
     }
 
@@ -170,16 +170,16 @@ public class Controlador {
     }
 
     public int comprobarUsuario(String correo, String pass) {
-        int resul = GestorUsuario.getGestorUsuario().comprobarUsuario(correo, pass);
-        if (resul == -1) {
-            this.mostrarVentanaInicio();
-            return -1;
-        } else if (resul == 1) {
-            this.mostrarVentanafecha();
-            return 1;
-        } else {
-            return 0;
-        }
+        return GestorUsuario.getGestorUsuario().comprobarUsuario(correo, pass);
+
+    }
+
+    public void mostarVentanaInicio() {
+        this.mostrarVentanaInicio();
+    }
+
+    public void mostrarVentanaFecha() {
+        this.mostrarVentanafecha();
     }
 
     public boolean recuperarContrasena(String correo) {
@@ -338,27 +338,28 @@ public class Controlador {
     class MisJugadores implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-           if(ventanaFecha.comprobarFecha()){
-               JSONArray json =ventanaFecha.obtenerJugadores();
+            if (ventanaFecha.comprobarFecha()) {
+                JSONArray json = ventanaFecha.obtenerJugadores();
                 ventanaUsuario.setVisible(true);
                 ventanaFecha.setVisible(false);
                 ventanaFecha.cerrarVentana();
                 ventanaUsuario.cargarUsuarios(json);
 
-           }else{
-               JOptionPane.showConfirmDialog(null,
-                       "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);
-           }
+            } else {
+                JOptionPane.showConfirmDialog(null,
+                        "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);
+            }
 
         }
     }
-    class EliminarJugadores implements ActionListener{
+
+    class EliminarJugadores implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e){
-            if(ventanaUsuario.algunoPulsado()){
-               // System.out.println("Se ha pulsado uno");
-                JSONArray json=ventanaUsuario.eliminarUsuarios();
-                for(int i=0;i<json.length();i++){
+        public void actionPerformed(ActionEvent e) {
+            if (ventanaUsuario.algunoPulsado()) {
+                // System.out.println("Se ha pulsado uno");
+                JSONArray json = ventanaUsuario.eliminarUsuarios();
+                for (int i = 0; i < json.length(); i++) {
                     JSONObject objeto = json.getJSONObject(i);
                     String id = objeto.getString("IdUsuario");
                     eliminarUsuarios(id);
@@ -366,7 +367,7 @@ public class Controlador {
                 ventanaUsuario.cerrarVentana();
 
 
-            }else {
+            } else {
                 JOptionPane.showConfirmDialog(null,
                         "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
             }

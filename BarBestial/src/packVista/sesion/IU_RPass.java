@@ -3,7 +3,6 @@ package packVista.sesion;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -28,13 +27,13 @@ public class IU_RPass {
     }
 
     public void eventEnviarContrasena(MouseEvent mouseEvent) {
-       if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())){
-           JOptionPane.showConfirmDialog(null,
-                   "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
-       }else {
-           JOptionPane.showConfirmDialog(null,
-                   "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
-       }
+        if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
+            JOptionPane.showConfirmDialog(null,
+                    "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
+        } else {
+            JOptionPane.showConfirmDialog(null,
+                    "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
+        }
     }
 
 
