@@ -1,5 +1,6 @@
 package packVista.sesion;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -12,17 +13,23 @@ import packControlador.Controlador;
 import javax.swing.*;
 
 public class IU_SignUp {
+    @FXML
+    private TextField txtCorreo;
 
-    public TextField txtCorreo;
-    public PasswordField txtPass1;
-    public PasswordField txtPass2;
-    public CheckBox cbTerminos;
-    private Scene secondScene;
+    @FXML
+    private PasswordField txtPass1;
 
-    public void setIdentificacionScene(Scene scene) {
-        secondScene = scene;
+    @FXML
+    private PasswordField txtPass2;
+
+    @FXML
+    private CheckBox cbTerminos;
+    private Scene sceneIdentificacion;
+
+
+    protected void setSceneIdentificacion(Scene sceneIdentificacion) {
+        this.sceneIdentificacion = sceneIdentificacion;
     }
-
 
     public void eventRegistrar(MouseEvent mouseEvent) {
         if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")) {//Comprobar cb y que el usuario no esté vacío.
@@ -45,9 +52,10 @@ public class IU_SignUp {
         }
     }
 
-    public void eventOpenLogin(MouseEvent mouseEvent) {
+    @FXML
+    protected void eventOpenLogin(MouseEvent mouseEvent) {
         Stage primaryStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(secondScene);
+        primaryStage.setScene(sceneIdentificacion);
     }
 
     private boolean comprobarContrasena() {
@@ -56,5 +64,6 @@ public class IU_SignUp {
         }
         return false;
     }
+
 }
 

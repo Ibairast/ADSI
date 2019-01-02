@@ -15,6 +15,7 @@ public class SGBD {
             this.crearBD();
             this.crearTablas();
             //this.pruebasRanking();
+            this.pruebasUsuarios();
         }
     }
 
@@ -114,7 +115,7 @@ public class SGBD {
 
             s = c.createStatement();
             String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('Josu', 'Josu','true','1995-10-10',1)";
+                    "VALUES('josu', 'josu','true','1995-10-10',1)";
 
             String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     "VALUES('Usoj', 'Usoj','false','1995-10-10',1)";

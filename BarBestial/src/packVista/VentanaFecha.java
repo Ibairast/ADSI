@@ -59,25 +59,26 @@ public static void main(String[] args) {
     public void addobtenerJugadores(ActionListener listenForBtnEnviar){
     btnenviar.addActionListener(listenForBtnEnviar);
     }
-    public void obtenerJugadores() {
+    public JSONArray obtenerJugadores() {
+        String fecha = txtfecha.getText();
+        JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
+        return json;
 
+
+    }
+    public boolean comprobarFecha(){
         String fecha = txtfecha.getText();
         String fechaPattern = "\\d{4}-\\d{1,2}-\\d{1,2}";
-        Vector<Vector<String>> usuarios = new Vector<>();
+
         if (fecha.matches(fechaPattern)) {
-            JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
-            for (int i = 0; i < json.length(); i++) {
-                System.out.println(json.get(i));
-                JSONObject objeto = json.getJSONObject(i);
-                String id = objeto.getString("IdUsuario");
-                System.out.println(id);
-            }
-
-        } else {
-            System.out.println("La pantallita de error");
+            return true;
+        }else{
+            return false;
         }
-
-
+    }
+    public void cerrarVentana() {
+        setVisible(false);
+        dispose();
     }
 
 }
