@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 public class Sesion extends Application {
 
 
@@ -18,7 +17,6 @@ public class Sesion extends Application {
         FXMLLoader fxmlRegistro = new FXMLLoader(getClass().getResource("Registro.fxml"));
         Parent panelRegistro = fxmlRegistro.load();
         Scene sceneRegistro = new Scene(panelRegistro);
-
 
         FXMLLoader fxmlIdentificacion = new FXMLLoader(getClass().getResource("Identificacion.fxml"));
         Parent panelIdentificacion = fxmlIdentificacion.load();
@@ -40,12 +38,13 @@ public class Sesion extends Application {
 
         identificacionController.setSceneRegistro(sceneRegistro);
         identificacionController.setSceneRPassword(sceneRContrasena);
-        identificacionController.setScene(sceneIdentificacion);
 
         rPassController.setSceneIdentificacion(sceneIdentificacion);
 
 
         stage.setTitle("Sesión");
+        //stage.setResizable(false);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(sceneIdentificacion);
         stage.show();
     }

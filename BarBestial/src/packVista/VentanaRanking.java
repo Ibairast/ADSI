@@ -132,7 +132,6 @@ public class VentanaRanking extends JFrame {
         columnas.add("Puntuacion");
 
         createTable(puntuaciones, columnas);
-
     }
 
     private void createTable(Vector<Vector<String>> pData, Vector<String> columnas) {

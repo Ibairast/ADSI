@@ -34,10 +34,10 @@ public class Tablero extends Observable {
 
     public void sacarDeLaCola(Carta pCarta) {
         this.cola.sacarCarta(pCarta);
-        
+
         EsLoQueHay e = EsLoQueHay.getMiEsLoQueHay();
         e.anadirCarta(pCarta);
-        
+
         this.notificar(this.obtenerInformacionCartas());
     }
 

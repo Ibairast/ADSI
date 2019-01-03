@@ -3,10 +3,11 @@ package packModelo;
 public class AnimalFactory {
     private static AnimalFactory miAnimalFactory = null;
 
-    private AnimalFactory(){}
+    private AnimalFactory() {
+    }
 
     public static AnimalFactory getMiAnimalFactory() {
-        if(miAnimalFactory == null){
+        if (miAnimalFactory == null) {
             miAnimalFactory = new AnimalFactory();
         }
         return miAnimalFactory;

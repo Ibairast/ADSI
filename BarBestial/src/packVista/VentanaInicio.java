@@ -15,7 +15,7 @@ public class VentanaInicio extends JFrame {
     private JButton btnInstrucciones;
     private JButton btnRanking;
     private JButton btnCargarPartida;
-    private JButton btnCambiarContraseña;
+    private JButton btnCambiarContrasena;
     private JButton btnPersonalizar;
     private JButton btnFecha;
 
@@ -68,9 +68,9 @@ public class VentanaInicio extends JFrame {
         this.btnPersonalizar.setBackground(new Color (51, 204, 204));
         panelMenu.add(btnPersonalizar);
 
-        this.btnCambiarContraseña = new JButton("Cambiar contraseña");
-        this.btnCambiarContraseña.setBackground(new Color (51, 204, 204));
-        panelMenu.add(btnCambiarContraseña);
+        this.btnCambiarContrasena = new JButton("Cambiar contraseña");
+        this.btnCambiarContrasena.setBackground(new Color (51, 204, 204));
+        panelMenu.add(btnCambiarContrasena);
 
         this.btnFecha = new JButton("PruebaFecha");
         this.btnFecha.setBackground(new Color (51, 204, 204));
@@ -114,10 +114,10 @@ public class VentanaInicio extends JFrame {
         btnCargarPartida.addActionListener(listenForBtnCargarPartida);
     }
     public void addCambiarContraseniaListener(ActionListener listenForBtnCambiarContrasenia) {
-        btnNuevaPartida.addActionListener(listenForBtnCambiarContrasenia);
+        btnCambiarContrasena.addActionListener(listenForBtnCambiarContrasenia);
     }
     public void addPersonalizarListener(ActionListener listenForBtnPersonalizar) {
-        btnNuevaPartida.addActionListener(listenForBtnPersonalizar);
+        btnPersonalizar.addActionListener(listenForBtnPersonalizar);
     }
 
     public void addFechaListener(ActionListener listenForBtnFecha){

@@ -1,7 +1,9 @@
 package packModelo;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class SGBD {
 
@@ -9,7 +11,7 @@ public class SGBD {
     private Connection c;
     private Statement s;
 
-    private SGBD(){
+    private SGBD() {
         File f = new File("barbes.db");
         if (!f.exists()) {
             this.crearBD();
@@ -106,6 +108,7 @@ public class SGBD {
         System.out.println("Insertados datos ranking");
 
     }
+
     private void pruebasUsuarios() {
 
         try {

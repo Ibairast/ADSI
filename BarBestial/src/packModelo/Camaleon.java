@@ -15,7 +15,7 @@ public class Camaleon extends Animal {
             /* Se elige un animal de la cola. */
             jugador.elegirEspecieCola();
             String especieElegida = jugador.obtenerEspecieElegidaCola();
-            
+
             /* Se guarda el camaleon para luego volver a ponerlo. */
             Carta camaleon = tablero.obtenerUltimaCarta();
 

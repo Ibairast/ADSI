@@ -15,7 +15,7 @@ import java.util.Properties;
 import static java.time.LocalDate.now;
 
 public class GestorUsuario {
-    private static final String SQL_FIND = ";";
+
     private static GestorUsuario miGestorUsuario = new GestorUsuario();
     private Connection c;
     private Statement s;
@@ -28,21 +28,25 @@ public class GestorUsuario {
         return miGestorUsuario;
     }
 
+    private Connection connect() {
+        String url = "jdbc:sqlite:barbes.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
     public boolean registrarUsuario(String txtCorreo, String txtPass) {
-
         if (buscarUsuario(txtCorreo) == null) {
-            try {
+            String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
+                    "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
 
-                Class.forName("org.sqlite.JDBC");
-                c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-                c.setAutoCommit(false);
-                s = c.createStatement();
-                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
-                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
-                s.executeUpdate(sql);
-                s.close();
-                c.commit();
-                c.close();
+            try (Connection conn = this.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.executeUpdate();
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -54,13 +58,10 @@ public class GestorUsuario {
 
     public JSONObject buscarUsuario(String usuario) {
         JSONObject jugador = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
-            s = c.createStatement();
-            String sql = "SELECT * FROM USUARIO WHERE IdUsuario = '" + usuario + "'";
-            ResultSet rs = s.executeQuery(sql);
+        String sql = "SELECT * FROM USUARIO WHERE IdUsuario = '" + usuario + "'";
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 jugador = new JSONObject();
                 jugador.put("IdUsuario", rs.getString("IdUsuario"));
@@ -69,10 +70,6 @@ public class GestorUsuario {
                 jugador.put("LogFecha", rs.getString("LogFecha"));
                 jugador.put("Ayuda", rs.getInt("Ayuda"));
             }
-            s.close();
-            c.commit();
-            rs.close();
-            c.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,18 +78,11 @@ public class GestorUsuario {
 
     public JSONArray obtenerUsuarios(String fecha) {
         JSONArray json = new JSONArray();
+        String sql = "SELECT IdUsuario from USUARIO where LogFecha< '" + fecha + "'";
 
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
-
-            String sql = "SELECT IdUsuario from USUARIO where LogFecha<?;";
-
-            PreparedStatement pstmt = c.prepareStatement(sql);
-            pstmt.setString(1, fecha);
-            ResultSet rs = pstmt.executeQuery();
-
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 JSONObject js = new JSONObject();
                 String usu = rs.getString("IdUsuario");
@@ -100,9 +90,6 @@ public class GestorUsuario {
                 js.put("IdUsuario", usu);
                 json.put(js);
             }
-            rs.close();
-            c.close();
-
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -114,18 +101,11 @@ public class GestorUsuario {
 
 
     public int comprobarUsuario(String correo, String pass) {
+        String sql = "SELECT * FROM USUARIO WHERE IdUsuario ='" + correo + "' AND Pass = '" + pass + "'";
 
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
-
-            String sql = "SELECT * FROM USUARIO WHERE IdUsuario = ? AND Pass = ?;";
-
-            PreparedStatement pstmt = c.prepareStatement(sql);
-            pstmt.setString(1, correo);
-            pstmt.setString(2, pass);
-            ResultSet rs = pstmt.executeQuery();
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             if (rs.next()) {
                 JSONObject js = new JSONObject();
@@ -133,22 +113,20 @@ public class GestorUsuario {
                 if (admin == 1) {
                     return 1;
                 }
-
                 js.put("IdUsuario", correo);
                 js.put("Pass", pass);
                 js.put("LogFecha", now().toString());
                 int ayuda = rs.getInt("Ayuda");
                 js.put("Ayuda", ayuda);
-                s = c.createStatement();
+
                 String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
-                s.executeUpdate(sqlUpdate);
-                s.close();
-                c.commit();
+                PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
+                pstmt.executeUpdate();
+
                 Usuario.getUsuario().cargarUsuario(js);
                 return -1;
             }
-            rs.close();
-            c.close();
+
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -158,20 +136,15 @@ public class GestorUsuario {
     }
 
     public void eliminarUsuarios(String id) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
 
-            s = c.createStatement();
-            String sql = "DELETE from USUARIO where IdUsuario='" + id + "';";
-            s.executeUpdate(sql);
-            s.close();
-            c.commit();
-            c.close();
+
+        String sql = "DELETE from USUARIO where IdUsuario= ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-
             System.exit(0);
         }
 
@@ -217,5 +190,19 @@ public class GestorUsuario {
             return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
         }
         return false;
+    }
+
+    public void cambiarContrasena(String usuario, String pass) {
+        String sqlUpdate = "UPDATE USUARIO SET Pass= ? WHERE IdUsuario= ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
+            pstmt.setString(1, pass);
+            pstmt.setString(2, usuario);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

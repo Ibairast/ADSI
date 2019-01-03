@@ -6,5 +6,6 @@ public class Cebra extends Animal implements IRecurrente {
         super.especie = "Cebra";
     }
 
-    public void hacerAnimalada() { }
+    public void hacerAnimalada() {
+    }
 }
