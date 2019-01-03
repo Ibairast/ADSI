@@ -375,6 +375,7 @@ public class Controlador {
                 JSONArray json = ventanaUsuario.eliminarUsuarios();
                 eliminarUsuarios(json);
                 ventanaUsuario.cerrarVentana();
+                ventanaUsuario.limpiarVentana();
                 ventanaFecha.setVisible(true);
 
 

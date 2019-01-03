@@ -91,4 +91,10 @@ public class VentanaUsuario extends JFrame {
         dispose();
     }
 
+    public void limpiarVentana(){
+        for(int i=0;i<panel.getComponentCount();i++){
+           // panel.remove(i);
+        }
+    }
+
     }
