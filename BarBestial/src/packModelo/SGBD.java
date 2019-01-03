@@ -39,7 +39,7 @@ public class SGBD {
         }
     }
 
-    private Connection conectarBD() {
+    public Connection conectarBD() {
         String url = "jdbc:sqlite:barbes.db";
         Connection conn = null;
         try {

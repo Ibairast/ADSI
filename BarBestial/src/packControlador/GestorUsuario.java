@@ -4,12 +4,16 @@ package packControlador;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import packModelo.EmailUtil;
+import packModelo.SGBD;
 import packModelo.Usuario;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Properties;
 
 import static java.time.LocalDate.now;
@@ -17,8 +21,7 @@ import static java.time.LocalDate.now;
 public class GestorUsuario {
 
     private static GestorUsuario miGestorUsuario = new GestorUsuario();
-    private Connection c;
-    private Statement s;
+
 
     private GestorUsuario() {
     }
@@ -28,23 +31,13 @@ public class GestorUsuario {
         return miGestorUsuario;
     }
 
-    private Connection connect() {
-        String url = "jdbc:sqlite:barbes.db";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
 
     public boolean registrarUsuario(String txtCorreo, String txtPass) {
         if (buscarUsuario(txtCorreo) == null) {
             String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
                     "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
 
-            try (Connection conn = this.connect();
+            try (Connection conn = SGBD.getMiSGBD().conectarBD();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.executeUpdate();
                 return true;
@@ -59,7 +52,7 @@ public class GestorUsuario {
     public JSONObject buscarUsuario(String usuario) {
         JSONObject jugador = null;
         String sql = "SELECT * FROM USUARIO WHERE IdUsuario = '" + usuario + "'";
-        try (Connection conn = this.connect();
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             if (rs.next()) {
@@ -80,7 +73,7 @@ public class GestorUsuario {
         JSONArray json = new JSONArray();
         String sql = "SELECT IdUsuario from USUARIO where LogFecha< '" + fecha + "'";
 
-        try (Connection conn = this.connect();
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -103,7 +96,7 @@ public class GestorUsuario {
     public int comprobarUsuario(String correo, String pass) {
         String sql = "SELECT * FROM USUARIO WHERE IdUsuario ='" + correo + "' AND Pass = '" + pass + "'";
 
-        try (Connection conn = this.connect();
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -140,17 +133,32 @@ public class GestorUsuario {
             JSONObject objeto = json.getJSONObject(i);
             String id = objeto.getString("IdUsuario");
 
-        String sql = "DELETE from USUARIO where IdUsuario= ? and Admin=0";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, id);
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            String sql = "DELETE from USUARIO where IdUsuario= ? and Admin=0";
+            try (Connection conn = SGBD.getMiSGBD().conectarBD();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, id);
+                pstmt.executeUpdate();
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
         }
-    }
         System.out.println("Eliminados");
+    }
+
+
+    public void cambiarContrasena(String usuario, String pass) {
+        String sqlUpdate = "UPDATE USUARIO SET Pass= ? WHERE IdUsuario= ?";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
+            pstmt.setString(1, pass);
+            pstmt.setString(2, usuario);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -192,19 +200,5 @@ public class GestorUsuario {
             return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
         }
         return false;
-    }
-
-    public void cambiarContrasena(String usuario, String pass) {
-        String sqlUpdate = "UPDATE USUARIO SET Pass= ? WHERE IdUsuario= ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
-            pstmt.setString(1, pass);
-            pstmt.setString(2, usuario);
-            pstmt.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 }
