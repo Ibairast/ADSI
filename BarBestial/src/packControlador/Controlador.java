@@ -55,7 +55,6 @@ public class Controlador {
         this.ventanaInicio.addRankingListener(new RankingListener());
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
-        this.ventanaInicio.addFechaListener(new FechaListener());
         this.ventanaInicio.addCambiarContraseniaListener(new OpenCambiarContraseniaListener());
 
 
