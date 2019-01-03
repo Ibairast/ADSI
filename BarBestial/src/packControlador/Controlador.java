@@ -28,7 +28,8 @@ public class Controlador {
     private VentanaFecha ventanaFecha;
     private VentanaUsuario ventanaUsuario;
     private IU_Carga ventanaCarga;
-
+    private VentanaPersonalizar ventanaPersonalizar;
+    
     private IU_Contrasena ventanaContrasena;
 
     public Controlador() {
@@ -43,6 +44,7 @@ public class Controlador {
         this.ventanaFecha = new VentanaFecha();
         this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
+        private VentanaPersonalizar ventanaPersonalizar;
 
         this.ventanaContrasena = new IU_Contrasena();
 
@@ -126,6 +128,10 @@ public class Controlador {
         this.ventanaRanking.setVisible(true);
     }
 
+    private void mostrarVentanaPersonalizar() {
+        this.ventanaPersonalizar.setVisible(true);
+    }
+    
     private void mostrarVentanafecha() {
         this.ventanaFecha.setVisible(true);
         this.ventanaInicio.setVisible(false);
@@ -156,7 +162,12 @@ public class Controlador {
     public void eliminarUsuarios(JSONArray json) {
         GestorUsuario.getGestorUsuario().eliminarUsuarios(json);
     }
-
+    
+    //PERSONALIZAR
+        public JSONArray llenar_combo(){
+        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
+        }
+    
     //Ranking
     public JSONArray obtenerMisMejoresPartidas() {
         return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
@@ -251,7 +262,7 @@ public class Controlador {
     private class PersonalizarListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            mostrarVentanaPersonalizar();
         }
     }
 
