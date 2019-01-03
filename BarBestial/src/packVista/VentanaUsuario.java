@@ -25,8 +25,9 @@ public class VentanaUsuario extends JFrame {
         contentPane.add(panel, BorderLayout.CENTER);
         contentPane.add(btneliminar, BorderLayout.SOUTH);
         setSize(300, 200);
-        setTitle("Hiola");
+        setTitle("Bar Bestial - Usuarios");
         setLocationRelativeTo(null);
+
 
 
     }
@@ -92,9 +93,11 @@ public class VentanaUsuario extends JFrame {
     }
 
     public void limpiarVentana(){
-        for(int i=0;i<panel.getComponentCount();i++){
-           // panel.remove(i);
-        }
+       int i= panel.getComponentCount();
+       int j=0;
+       while(j<i){
+          panel.remove(panel.getComponent(0));
+          j++;
+      }
     }
-
     }

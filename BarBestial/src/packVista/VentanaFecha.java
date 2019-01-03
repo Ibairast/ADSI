@@ -36,10 +36,6 @@ public class VentanaFecha extends JFrame {
         lblfecha.setBounds(20,35,70,25);
         add(lblfecha);
 
-
-
-
-
     }
 
 /**

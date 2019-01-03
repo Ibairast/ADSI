@@ -373,9 +373,9 @@ public class Controlador {
         public void actionPerformed(ActionEvent e) {
             if (ventanaUsuario.algunoPulsado()) {
                 JSONArray json = ventanaUsuario.eliminarUsuarios();
+                ventanaUsuario.limpiarVentana();
                 eliminarUsuarios(json);
                 ventanaUsuario.cerrarVentana();
-                ventanaUsuario.limpiarVentana();
                 ventanaFecha.setVisible(true);
 
 

@@ -126,9 +126,12 @@ public class SGBD {
             String sql3 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     "VALUES('Pedro', 'Pedro','false','1995-10-10',1)";
 
+
+
             s.executeUpdate(sql1);
             s.executeUpdate(sql2);
             s.executeUpdate(sql3);
+
 
             s.close();
             c.commit();
