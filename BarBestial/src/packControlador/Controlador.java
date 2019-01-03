@@ -83,6 +83,7 @@ public class Controlador {
 
         /* Listeners VentanaUsuario */
         this.ventanaUsuario.addEliminar(new EliminarJugadores());
+        this.ventanaUsuario.addVolver(new VolverFecha());
 
 
         /* Listeners IU_CONTRASENA */
@@ -383,6 +384,14 @@ public class Controlador {
                 JOptionPane.showConfirmDialog(null,
                         "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
             }
+        }
+    }
+    class VolverFecha implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            ventanaUsuario.limpiarVentana();
+            ventanaUsuario.cerrarVentana();
+            ventanaFecha.setVisible(true);
         }
     }
 

@@ -15,15 +15,17 @@ public class VentanaUsuario extends JFrame {
     private static final long serialVersionUID = 1L;
 
         private JButton btneliminar =new JButton("Eliminar");;
+        private JButton btnvolver =new JButton("Volver");;
         private JCheckBox check = new JCheckBox();
-        private JPanel panel=new JPanel(new GridLayout(0, 1));;
+        private JPanel panel=new JPanel(new GridLayout(0, 1));
 
     public VentanaUsuario() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPane =getContentPane();
         contentPane.add(panel, BorderLayout.CENTER);
-        contentPane.add(btneliminar, BorderLayout.SOUTH);
+        contentPane.add(btneliminar, BorderLayout.PAGE_END);
+        contentPane.add(btnvolver, BorderLayout.NORTH);
         setSize(300, 200);
         setTitle("Bar Bestial - Usuarios");
         setLocationRelativeTo(null);
@@ -49,7 +51,6 @@ public class VentanaUsuario extends JFrame {
 
     public void cargarUsuarios(JSONArray json){
         for(int i=0;i<json.length();i++){
-           // System.out.println(json.get(i));
             JSONObject objeto = json.getJSONObject(i);
             String id = objeto.getString("IdUsuario");
             check = new JCheckBox(id);
@@ -61,6 +62,9 @@ public class VentanaUsuario extends JFrame {
 
       public void addEliminar(ActionListener listenForBtnEliminar) {
         btneliminar.addActionListener(listenForBtnEliminar);
+    }
+    public void addVolver(ActionListener listenForBtnVolver){
+        btnvolver.addActionListener(listenForBtnVolver);
     }
     public boolean algunoPulsado(){
       boolean pulsado=false;
