@@ -14,6 +14,8 @@ import javax.swing.*;
 
 public class IU_SignUp {
     @FXML
+    private TextField txtUsuario;
+    @FXML
     private TextField txtCorreo;
 
     @FXML
