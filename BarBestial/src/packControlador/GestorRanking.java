@@ -2,6 +2,8 @@ package packControlador;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import packModelo.SGBD;
+import packModelo.Usuario;
 
 import java.sql.*;
 
@@ -20,24 +22,24 @@ public class GestorRanking {
         return miGestorRanking;
     }
 
+
     public JSONArray obtenerMisMejoresPartidas() {
         JSONArray json = new JSONArray();
+        String sql = "SELECT Puntuacion FROM RANKING WHERE IdUsuario = '" + Usuario.getUsuario().getIdUsuario() +
+        "' ORDER BY Puntuacion DESC LIMIT 10;";
 
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
             c.setAutoCommit(false);
 
-            String sql = "SELECT Puntuacion FROM RANKING WHERE IdUsuario = ? ORDER BY Puntuacion DESC LIMIT 10;";
 
             PreparedStatement pstmt = c.prepareStatement(sql);
-            pstmt.setString(1, "Andrea"); //PONER EL USUARIO ACTUAL
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 JSONObject js = new JSONObject();
                 int puntuacion = rs.getInt("Puntuacion");
-                //System.out.println(puntuacion);
                 js.put("Puntuacion", puntuacion);
                 json.put(js);
             }
@@ -69,8 +71,6 @@ public class GestorRanking {
                 JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
                 int puntuacion = rs.getInt("Puntuacion");
-                //System.out.println(usuario);
-                //System.out.println(puntuacion);
 
                 js.put("IdUsuario", usuario);
                 js.put("Puntuacion", puntuacion);
