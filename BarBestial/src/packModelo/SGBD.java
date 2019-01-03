@@ -3,20 +3,19 @@ package packModelo;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SGBD {
 
     private static SGBD miSGBD;
-    private Connection c;
-    private Statement s;
 
     private SGBD() {
         File f = new File("barbes.db");
         if (!f.exists()) {
             this.crearBD();
             this.crearTablas();
-            //this.pruebasRanking();
+            this.pruebasRanking();
             this.pruebasUsuarios();
         }
     }
@@ -28,46 +27,54 @@ public class SGBD {
         return miSGBD;
     }
 
+
     private void crearBD() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+        try (Connection con =
+                     DriverManager.getConnection("jdbc:sqlite:barbes.db")) {
+            if (con != null) {
+                System.out.println("La bd ha sido creada.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println("Base de datos creada");
+    }
+
+    private Connection conectarBD() {
+        String url = "jdbc:sqlite:barbes.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
     }
 
     private void crearTablas() { // AÑADIR TABLAS QUE FALTAN //
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
+        String usuario = "CREATE TABLE USUARIO" +
+                "(IdUsuario VARCHAR(100) NOT NULL, " +
+                "Pass VARCHAR(100) NOT NULL, " +
+                "Admin INT(1) NOT NULL, " +
+                "LogFecha DATE NOT NULL, " +
+                "Ayuda INT(11) NOT NULL, " +
 
-            s = c.createStatement();
-            String usuario = "CREATE TABLE USUARIO" +
-                    "(IdUsuario VARCHAR(100) NOT NULL, " +
-                    "Pass VARCHAR(100) NOT NULL, " +
-                    "Admin INT(1) NOT NULL, " +
-                    "LogFecha DATE NOT NULL, " +
-                    "Ayuda INT(11) NOT NULL, " +
+                "PRIMARY KEY(IdUsuario))";
 
-                    "PRIMARY KEY(IdUsuario))";
+        String ranking = "CREATE TABLE RANKING" +
+                "(IdRanking INT(11) NOT NULL, " +
+                "IdUsuario VARCHAR(100) NOT NULL, " +
+                "Puntuacion INT(11) NOT NULL, " +
+                "Fecha DATE NOT NULL, " +
+                "Gana INT(1) NOT NULL, " +
 
-            String ranking = "CREATE TABLE RANKING" +
-                    "(IdRanking INT(11) NOT NULL, " +
-                    "IdUsuario VARCHAR(100) NOT NULL, " +
-                    "Puntuacion INT(11) NOT NULL, " +
-                    "Fecha DATE NOT NULL, " +
-                    "Gana INT(1) NOT NULL, " +
+                "PRIMARY KEY(IdRanking), " +
+                "FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario))";
 
-                    "PRIMARY KEY(IdRanking), " +
-                    "FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario))";
+        try (Connection con = this.conectarBD();
+             Statement stmt = con.createStatement()) {
+            stmt.execute(usuario);
+            stmt.execute(ranking);
 
-            s.executeUpdate(usuario);
-            s.executeUpdate(ranking);
-            s.close();
-            c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -76,31 +83,21 @@ public class SGBD {
     }
 
     private void pruebasRanking() {
+        String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 1)";
 
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
+        String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 1)";
 
-            s = c.createStatement();
-            String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 1)";
-
-            String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 1)";
-
-            String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                    "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 1)";
-
-            s.executeUpdate(sql1);
-            s.executeUpdate(sql2);
-            s.executeUpdate(sql3);
-
-            s.close();
-            c.commit();
-            c.close();
+        String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 1)";
 
 
+        try (Connection con = this.conectarBD();
+             Statement stmt = con.createStatement()) {
+            stmt.executeUpdate(sql1);
+            stmt.executeUpdate(sql2);
+            stmt.executeUpdate(sql3);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -111,32 +108,20 @@ public class SGBD {
 
     private void pruebasUsuarios() {
 
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:barbes.db");
-            c.setAutoCommit(false);
+        String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                "VALUES('josu', 'josu',1,'1995-10-10',1)";
 
-            s = c.createStatement();
-            String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('josu', 'josu',1,'1995-10-10',1)";
+        String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                "VALUES('Usoj', 'Usoj',0,'1995-10-10',1)";
 
-            String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('Usoj', 'Usoj',0,'1995-10-10',1)";
+        String sql3 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                "VALUES('Pedro', 'Pedro',0,'1995-10-10',1)";
 
-            String sql3 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('Pedro', 'Pedro',0,'1995-10-10',1)";
-
-
-
-            s.executeUpdate(sql1);
-            s.executeUpdate(sql2);
-            s.executeUpdate(sql3);
-
-
-            s.close();
-            c.commit();
-            c.close();
-
+        try (Connection con = this.conectarBD();
+             Statement stmt = con.createStatement()) {
+            stmt.executeUpdate(sql1);
+            stmt.executeUpdate(sql2);
+            stmt.executeUpdate(sql3);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -145,5 +130,7 @@ public class SGBD {
         System.out.println("Insertados datos en usuario");
 
     }
+
+
 }
 

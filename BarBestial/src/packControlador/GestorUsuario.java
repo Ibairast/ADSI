@@ -62,7 +62,7 @@ public class GestorUsuario {
         try (Connection conn = this.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
+            if (rs.next()) {
                 jugador = new JSONObject();
                 jugador.put("IdUsuario", rs.getString("IdUsuario"));
                 jugador.put("Pass", rs.getString("Pass"));

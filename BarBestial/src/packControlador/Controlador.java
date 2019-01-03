@@ -44,7 +44,7 @@ public class Controlador {
         this.ventanaFecha = new VentanaFecha();
         this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
-        private VentanaPersonalizar ventanaPersonalizar;
+        //private VentanaPersonalizar ventanaPersonalizar;
 
         this.ventanaContrasena = new IU_Contrasena();
 
