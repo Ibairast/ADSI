@@ -118,13 +118,13 @@ public class SGBD {
 
             s = c.createStatement();
             String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('josu', 'josu','true','1995-10-10',1)";
+                    "VALUES('josu', 'josu',1,'1995-10-10',1)";
 
             String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('Usoj', 'Usoj','false','1995-10-10',1)";
+                    "VALUES('Usoj', 'Usoj',0,'1995-10-10',1)";
 
             String sql3 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    "VALUES('Pedro', 'Pedro','false','1995-10-10',1)";
+                    "VALUES('Pedro', 'Pedro',0,'1995-10-10',1)";
 
 
 

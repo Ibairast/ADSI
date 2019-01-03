@@ -140,7 +140,7 @@ public class GestorUsuario {
             JSONObject objeto = json.getJSONObject(i);
             String id = objeto.getString("IdUsuario");
 
-        String sql = "DELETE from USUARIO where IdUsuario= ?";
+        String sql = "DELETE from USUARIO where IdUsuario= ? and Admin=0";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
