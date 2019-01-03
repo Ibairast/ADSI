@@ -153,8 +153,8 @@ public class Controlador {
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
 
-    public void eliminarUsuarios(String id) {
-        GestorUsuario.getGestorUsuario().eliminarUsuarios(id);
+    public void eliminarUsuarios(JSONArray json) {
+        GestorUsuario.getGestorUsuario().eliminarUsuarios(json);
     }
 
     //Ranking
@@ -371,13 +371,8 @@ public class Controlador {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (ventanaUsuario.algunoPulsado()) {
-                // System.out.println("Se ha pulsado uno");
                 JSONArray json = ventanaUsuario.eliminarUsuarios();
-                for (int i = 0; i < json.length(); i++) {
-                    JSONObject objeto = json.getJSONObject(i);
-                    String id = objeto.getString("IdUsuario");
-                    eliminarUsuarios(id);
-                }
+                eliminarUsuarios(json);
                 ventanaUsuario.cerrarVentana();
 
 

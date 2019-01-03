@@ -135,8 +135,10 @@ public class GestorUsuario {
         return 0;
     }
 
-    public void eliminarUsuarios(String id) {
-
+    public void eliminarUsuarios(JSONArray json) {
+        for (int i = 0; i < json.length(); i++) {
+            JSONObject objeto = json.getJSONObject(i);
+            String id = objeto.getString("IdUsuario");
 
         String sql = "DELETE from USUARIO where IdUsuario= ?";
         try (Connection conn = this.connect();
@@ -147,7 +149,7 @@ public class GestorUsuario {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-
+    }
         System.out.println("Eliminados");
     }
 
