@@ -357,6 +357,7 @@ public class Controlador {
                 ventanaUsuario.setVisible(true);
                 ventanaFecha.setVisible(false);
                 ventanaFecha.cerrarVentana();
+                ventanaFecha.limpiarVentana();
                 ventanaUsuario.cargarUsuarios(json);
 
             } else {
@@ -374,6 +375,7 @@ public class Controlador {
                 JSONArray json = ventanaUsuario.eliminarUsuarios();
                 eliminarUsuarios(json);
                 ventanaUsuario.cerrarVentana();
+                ventanaFecha.setVisible(true);
 
 
             } else {

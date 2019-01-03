@@ -81,4 +81,8 @@ public static void main(String[] args) {
         dispose();
     }
 
+    public void limpiarVentana(){
+    txtfecha.setText("");
+    }
+
 }
