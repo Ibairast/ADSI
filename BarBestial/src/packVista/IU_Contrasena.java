@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 public class IU_Contrasena extends JFrame {
     private static final long serialVersionUID = 1L;
+    private final JLabel lblTittle;
     private JPanel contentPane;
 
     private JButton btnCambiarContraseña;
@@ -25,7 +26,7 @@ public class IU_Contrasena extends JFrame {
      */
     public IU_Contrasena() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(0, 0, 280, 310);
+        setBounds(0, 0, 350, 118);
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,16 +49,23 @@ public class IU_Contrasena extends JFrame {
 
 
         lblPass1 = new JLabel("Nueva contraseña");
+        lblPass1.setForeground(Color.WHITE);
+
+        lblTittle = new JLabel("Cambiar Contraseña");
+        lblTittle.setForeground(Color.WHITE);
+        lblTittle.setFont(new Font("Arial", Font.BOLD, 18));
 
         lblPass2 = new JLabel("Confirmar contraseña");
+        lblPass2.setForeground(Color.WHITE);
 
-        txtPass1 = new JTextField();
-        txtPass2 = new JTextField();
+        txtPass1 = new JPasswordField();
+        txtPass2 = new JPasswordField();
 
         this.btnCambiarContraseña = new JButton("Aceptar");
         this.btnCambiarContraseña.setBackground(new Color(51, 204, 204));
 
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).
+                addComponent(lblTittle)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(lblPass1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtPass1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -68,6 +76,7 @@ public class IU_Contrasena extends JFrame {
 
 
         layout.setVerticalGroup(layout.createSequentialGroup()
+                .addComponent(lblTittle)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(lblPass1).addComponent(txtPass1))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
