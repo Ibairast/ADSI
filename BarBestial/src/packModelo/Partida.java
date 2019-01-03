@@ -88,7 +88,7 @@ public class Partida extends Observable {
     private void finalizar() {
         String infoGanador = this.obtenerInformacionGanador();
         /* Guardar ganador en la base de datos */
-        this.anadirGanadorDatabase(infoGanador);
+
 
         /* Notificar a la interfaz */
         this.notificar("fin-" + infoGanador);
@@ -141,14 +141,7 @@ public class Partida extends Observable {
         return Bar.getMiBar().obtenerFuerzaColor(pColor);
     }
 
-    private void anadirGanadorDatabase(String pInformacionGanador) {
-        RankingDB r = RankingDB.getRankingDB();
-        String nombre = pInformacionGanador.split(" ")[0];
-        int nCartas = Integer.parseInt(pInformacionGanador.split(" ")[1]);
-        int fuerza = Integer.parseInt(pInformacionGanador.split(" ")[2]);
 
-        r.insertarPuntuacion(nombre, nCartas, fuerza);
-    }
     
     private void notificar(String pInformacion) {
         super.setChanged();
