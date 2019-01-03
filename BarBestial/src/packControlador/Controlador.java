@@ -1,7 +1,6 @@
 package packControlador;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 import packModelo.*;
 import packVista.*;
 import packVista.sesion.Sesion;
@@ -24,7 +23,7 @@ public class Controlador {
     private VentanaInicio ventanaInicio;
     private VentanaJuego ventanaJuego;
     private VentanaAyuda ventanaAyuda;
-    private VentanaRanking ventanaRanking;
+    private I_Ranking iRanking;
     private VentanaFecha ventanaFecha;
     private VentanaUsuario ventanaUsuario;
     private IU_Carga ventanaCarga;
@@ -40,7 +39,7 @@ public class Controlador {
         this.ventanaInicio = new VentanaInicio();
         this.ventanaJuego = new VentanaJuego();
         this.ventanaAyuda = new VentanaAyuda();
-        this.ventanaRanking = new VentanaRanking();
+        this.iRanking = new I_Ranking();
         this.ventanaFecha = new VentanaFecha();
         this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
@@ -73,11 +72,11 @@ public class Controlador {
         this.ventanaJuego.desactivarBotonJugarTurno();
         this.ventanaJuego.desactivarBotonSiguiente();
 
-        /* Listeners VentanaRanking */
-        this.ventanaRanking.addMisMejoresPartidas(new MisMejoresPartidasListener());
-        this.ventanaRanking.addMejorPuntuacionDia(new MejorPuntuacionDiaListener());
-        this.ventanaRanking.addMejoresPartidas(new MejoresPartidasListener());
-        this.ventanaRanking.addMejorMedia(new MejorMediaListener());
+        /* Listeners I_Ranking */
+        this.iRanking.addMisMejoresPartidas(new MisMejoresPartidasListener());
+        this.iRanking.addMejorPuntuacionDia(new MejorPuntuacionDiaListener());
+        this.iRanking.addMejoresPartidas(new MejoresPartidasListener());
+        this.iRanking.addMejorMedia(new MejorMediaListener());
 
         /* Listeners VentanFecha */
         this.ventanaFecha.addobtenerJugadores(new MisJugadores());
@@ -125,7 +124,7 @@ public class Controlador {
     }
 
     private void mostrarVentanaRanking() {
-        this.ventanaRanking.setVisible(true);
+        this.iRanking.setVisible(true);
     }
 
     private void mostrarVentanaPersonalizar() {
@@ -333,28 +332,28 @@ public class Controlador {
     class MisMejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ventanaRanking.mostrarMisMejoresPartidas();
+            iRanking.mostrarMisMejoresPartidas();
         }
     }
 
     class MejorPuntuacionDiaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ventanaRanking.mostrarMejorPuntuacionDia();
+            iRanking.mostrarMejorPuntuacionDia();
         }
     }
 
     class MejoresPartidasListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ventanaRanking.mostrarMejoresPartidas();
+            iRanking.mostrarMejoresPartidas();
         }
     }
 
     class MejorMediaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ventanaRanking.mostrarMejorMedia();
+            iRanking.mostrarMejorMedia();
 
         }
     }

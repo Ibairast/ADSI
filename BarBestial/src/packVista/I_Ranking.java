@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class VentanaRanking extends JFrame {
+public class I_Ranking extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTable table;
@@ -24,7 +24,7 @@ public class VentanaRanking extends JFrame {
     /**
      * Create the frame.
      */
-    public VentanaRanking() {
+    public I_Ranking() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(0, 0, 850, 620);
 
@@ -80,7 +80,7 @@ public class VentanaRanking extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                VentanaRanking frame = new VentanaRanking();
+                I_Ranking frame = new I_Ranking();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
