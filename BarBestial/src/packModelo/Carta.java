@@ -1,5 +1,8 @@
 package packModelo;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 public class Carta implements Comparable<Carta> {
     private Animal animal;
     private EnumColor color;
@@ -42,8 +45,14 @@ public class Carta implements Comparable<Carta> {
         }
     }
 
-    public void guardarCarta(String nombreP) {
-        //TODO Sentencia sql en SGBD
-        //TODO Ver si hace falta guardar la posición
+    public void guardarCarta(String nombreP,String grupo) {
+
+        String sql = "INSERT INTO Cartas VALUES('"+nombreP+"','"+grupo+"','"+this.color.toString()+"','"+this.animal.toString()+"')";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 }

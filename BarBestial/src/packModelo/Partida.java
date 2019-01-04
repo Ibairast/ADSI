@@ -1,11 +1,19 @@
 package packModelo;
 
+import packControlador.GestorCarga;
+
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 
 public class Partida extends Observable {
     private static Partida miPartida;
+    private String user;
+    private String mazoP;
+    private int NAyudas;
 
     /* El turno se representa como un numero
      * que indica la posicion de la lista de jugadores
@@ -148,15 +156,37 @@ public class Partida extends Observable {
         super.notifyObservers(pInformacion);
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setMazoP(String mazoP) {
+        this.mazoP = mazoP;
+    }
+
+    public void setNAyudas(int NAyudas) {
+        this.NAyudas = NAyudas;
+    }
+
     /**
      * Función principal para guardar la partida
      * @param nombreP: String con el id de la partida de la bd
      */
     public void guardarPartida(String nombreP) {
+        //Guardar datos partida
+        String sql= "INSERT INTO Partida VALUES('"+nombreP+"','"+ this.user +"','"+mazoP+"','"+NAyudas+"')";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Guardar Listas
         Bar.getMiBar().guardarCielo(nombreP);
         Tablero.getMiTablero().guardarCola(nombreP);
         for (Jugador j:this.listaJugadores) {
             j.guardarMazos(nombreP);
         }
+        JOptionPane.showMessageDialog(null, "Partida guardada correctamente", "Partida Guardada", JOptionPane.INFORMATION_MESSAGE);
     }
 }
