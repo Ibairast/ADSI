@@ -13,6 +13,7 @@ import java.util.Vector;
 
 public class VentanaUsuario extends JFrame {
     private static final long serialVersionUID = 1L;
+    private VentanaFecha ventanaFecha;
 
         private JButton btneliminar =new JButton("Eliminar");;
         private JButton btnvolver =new JButton("Volver");;
@@ -33,7 +34,8 @@ public class VentanaUsuario extends JFrame {
                     JOptionPane.showConfirmDialog(null,
                             "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                     cerrarVentana();
-                    Controlador.getMiControlador().cambiarVetanaFecha();
+                    ventanaFecha= new VentanaFecha();
+                    ventanaFecha.setVisible(true);
                 } else {
                     JOptionPane.showConfirmDialog(null,
                             "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
@@ -45,6 +47,8 @@ public class VentanaUsuario extends JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 limpiarVentana();
                 cerrarVentana();
+                ventanaFecha= new VentanaFecha();
+                ventanaFecha.setVisible(true);
             }
         });
         contentPane.add(btnvolver, BorderLayout.NORTH);

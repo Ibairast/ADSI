@@ -12,7 +12,7 @@ import java.util.Vector;
 
 public class VentanaFecha extends JFrame {
     private static final long serialVersionUID = 1L;
-
+    private VentanaUsuario ventanaUsuario;
 
 
     private JLabel lblfecha= new JLabel("Introduce una fecha(aaaa-mm-dd): ");
@@ -35,7 +35,9 @@ public class VentanaFecha extends JFrame {
                     setVisible(false);
                     cerrarVentana();
                     limpiarVentana();
-                    Controlador.getMiControlador().cambiarVentanaUsuario(json);
+                    ventanaUsuario = new VentanaUsuario();
+                    ventanaUsuario.setVisible(true);
+                    ventanaUsuario.cargarUsuarios(json);
                 } else {
                     JOptionPane.showConfirmDialog(null,
                             "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);

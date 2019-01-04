@@ -24,7 +24,7 @@ public class Controlador {
     private VentanaAyuda ventanaAyuda;
     private I_Ranking iRanking;
     private VentanaFecha ventanaFecha;
-    private VentanaUsuario ventanaUsuario;
+
     private IU_Carga ventanaCarga;
     private VentanaPersonalizar ventanaPersonalizar;
     
@@ -40,7 +40,7 @@ public class Controlador {
         this.ventanaAyuda = new VentanaAyuda();
         this.iRanking = new I_Ranking();
         this.ventanaFecha = new VentanaFecha();
-        this.ventanaUsuario = new VentanaUsuario();
+       // this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
         this.ventanaPersonalizar = new VentanaPersonalizar();
 
@@ -73,7 +73,7 @@ public class Controlador {
 
 
         /* Listeners VentanaUsuario */
-        this.ventanaUsuario.addVolver(new VolverFecha());
+      //  this.ventanaUsuario.addVolver(new VolverFecha());
 
 
 
@@ -197,20 +197,7 @@ public class Controlador {
     public void cambiarContrasena(String text) {
         GestorUsuario.getGestorUsuario().cambiarContrasena(Usuario.getUsuario().getIdUsuario(), text);
     }
-    public void cambiarVentanaUsuario(JSONArray json){
-        ventanaUsuario.setVisible(true);
-        ventanaUsuario.cargarUsuarios(json);
-    }
-    public void cambiarVetanaFecha(){
-        ventanaFecha.setVisible(true);
-    }
 
-   /* private class FechaListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mostrarVentanafecha();
-        }
-    }*/
 
     class NuevaPartidaListener implements ActionListener {
         @Override
@@ -320,15 +307,8 @@ public class Controlador {
             ventanaJuego.desactivarBotonSiguiente();
         }
     }
-    
 
-    //Fecha
-    class VolverFecha implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            ventanaFecha.setVisible(true);
-        }
-    }
+
 
 
 }
