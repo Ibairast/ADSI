@@ -72,11 +72,6 @@ public class Controlador {
         this.ventanaJuego.desactivarBotonJugarTurno();
         this.ventanaJuego.desactivarBotonSiguiente();
 
-        /* Listeners I_Ranking */
-        //this.iRanking.addMisMejoresPartidas(new MisMejoresPartidasListener());
-        this.iRanking.addMejorPuntuacionDia(new MejorPuntuacionDiaListener());
-        this.iRanking.addMejoresPartidas(new MejoresPartidasListener());
-        this.iRanking.addMejorMedia(new MejorMediaListener());
 
         /* Listeners VentanFecha */
         this.ventanaFecha.addobtenerJugadores(new MisJugadores());
@@ -164,23 +159,7 @@ public class Controlador {
         public JSONArray llenar_combo(){
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
         }
-    
-    //Ranking
-    public JSONArray obtenerMisMejoresPartidas() {
-        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
-    }
 
-    public JSONArray obtenerMejorPuntuacionDia() {
-        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
-    }
-
-    public JSONArray obtenerMejoresPartidas() {
-        return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
-    }
-
-    public JSONArray obtenerMejorMedia() {
-        return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
-    }
 
     //FUNCIONALIDAD 1
     public boolean registrarUsuario(String txtCorreo, String txtPass1) {
@@ -322,36 +301,6 @@ public class Controlador {
             ventanaJuego.activarBotonesElegir();
             ventanaJuego.desactivarBotonJugarTurno();
             ventanaJuego.desactivarBotonSiguiente();
-        }
-    }
-
-    //RANKING
-//    class MisMejoresPartidasListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            iRanking.mostrarMisMejoresPartidas();
-//        }
-//    }
-
-    class MejorPuntuacionDiaListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            iRanking.mostrarMejorPuntuacionDia();
-        }
-    }
-
-    class MejoresPartidasListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            iRanking.mostrarMejoresPartidas();
-        }
-    }
-
-    class MejorMediaListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            iRanking.mostrarMejorMedia();
-
         }
     }
 

@@ -66,14 +66,29 @@ public class I_Ranking extends JFrame {
 
         this.btnMejorPuntuacionDia = new JButton("Puntuación día");
         this.btnMejorPuntuacionDia.setBackground(new Color(51, 204, 204));
+        this.btnMejorPuntuacionDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarMejorPuntuacionDia();
+            }
+        });
         panelMenu.add(btnMejorPuntuacionDia);
 
         this.btnMejoresPartidas = new JButton("Mejores partidas");
         this.btnMejoresPartidas.setBackground(new Color(51, 204, 204));
+        this.btnMejoresPartidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarMejoresPartidas();
+            }
+        });
         panelMenu.add(btnMejoresPartidas);
 
         this.btnMejorMedia = new JButton("Mejor media");
         this.btnMejorMedia.setBackground(new Color(51, 204, 204));
+        this.btnMejorMedia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarMejorMedia();
+            }
+        });
         panelMenu.add(btnMejorMedia);
 
 
@@ -91,24 +106,6 @@ public class I_Ranking extends JFrame {
                 e.printStackTrace();
             }
         });
-    }
-
-
-//        public void addMisMejoresPartidas(ActionListener listenForBtnMisMejoresPartidas) {
-//            mostrarMisMejoresPartidas();
-//            //btnMisMejoresPartidas.addActionListener(listenForBtnMisMejoresPartidas);
-//        }
-
-    public void addMejorPuntuacionDia(ActionListener listenForBtnMejorPuntuacionDia) {
-        btnMejorPuntuacionDia.addActionListener(listenForBtnMejorPuntuacionDia);
-    }
-
-    public void addMejoresPartidas(ActionListener listenForBtnMejoresPartidas) {
-        btnMejoresPartidas.addActionListener(listenForBtnMejoresPartidas);
-    }
-
-    public void addMejorMedia(ActionListener listenForBtnMejorMedia) {
-        btnMejorMedia.addActionListener(listenForBtnMejorMedia);
     }
 
 
