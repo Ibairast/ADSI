@@ -17,7 +17,6 @@ public class Controlador {
     /* Modelo */
     private Partida partida;
     private Tablero tablero;
-    private SGBD database;
 
     /* Vista */
     private VentanaInicio ventanaInicio;
@@ -34,7 +33,7 @@ public class Controlador {
     public Controlador() {
         this.partida = Partida.getMiPartida();
         this.tablero = Tablero.getMiTablero();
-        this.database = SGBD.getMiSGBD();
+        SGBD.getMiSGBD();
 
         this.ventanaInicio = new VentanaInicio();
         this.ventanaJuego = new VentanaJuego();
@@ -81,8 +80,7 @@ public class Controlador {
         this.ventanaUsuario.addVolver(new VolverFecha());
 
 
-        /* Listeners IU_CONTRASENA */
-        this.ventanaContrasena.addCambiarContrasena(new CambiarContrasena());
+
     }
 
 
@@ -370,11 +368,4 @@ public class Controlador {
     }
 
 
-    class CambiarContrasena implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            ventanaContrasena.cambiarContrasena();
-        }
-    }
 }

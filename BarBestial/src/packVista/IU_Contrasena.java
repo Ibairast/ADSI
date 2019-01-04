@@ -6,7 +6,6 @@ import packControlador.Controlador;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class IU_Contrasena extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -63,6 +62,11 @@ public class IU_Contrasena extends JFrame {
 
         this.btnCambiarContraseña = new JButton("Aceptar");
         this.btnCambiarContraseña.setBackground(new Color(51, 204, 204));
+        this.btnCambiarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cambiarContrasena();
+            }
+        });
 
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).
                 addComponent(lblTittle)
@@ -98,11 +102,6 @@ public class IU_Contrasena extends JFrame {
                 e.printStackTrace();
             }
         });
-    }
-
-
-    public void addCambiarContrasena(ActionListener listenForBtnMisMejoresPartidas) {
-        btnCambiarContraseña.addActionListener(listenForBtnMisMejoresPartidas);
     }
 
     public void cambiarContrasena() {
