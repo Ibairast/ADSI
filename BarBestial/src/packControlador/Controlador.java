@@ -72,8 +72,6 @@ public class Controlador {
         this.ventanaJuego.desactivarBotonSiguiente();
 
 
-        /* Listeners VentanFecha */
-      //  this.ventanaFecha.addobtenerJugadores(new MisJugadores());
 
         /* Listeners VentanaUsuario */
         this.ventanaUsuario.addEliminar(new EliminarJugadores());
@@ -324,49 +322,17 @@ public class Controlador {
     
 
     //Fecha
-   /* class MisJugadores implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (ventanaFecha.comprobarFecha()) {
-                JSONArray json = ventanaFecha.obtenerJugadores();
-                ventanaUsuario.setVisible(true);
-                ventanaFecha.setVisible(false);
-                ventanaFecha.cerrarVentana();
-                ventanaFecha.limpiarVentana();
-                ventanaUsuario.cargarUsuarios(json);
 
-            } else {
-                JOptionPane.showConfirmDialog(null,
-                        "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);
-            }
-
-        }
-    }*/
 
     class EliminarJugadores implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (ventanaUsuario.algunoPulsado()) {
-                JSONArray json = ventanaUsuario.eliminarUsuarios();
-                ventanaUsuario.limpiarVentana();
-                eliminarUsuarios(json);
-                JOptionPane.showConfirmDialog(null,
-                        "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
-                ventanaUsuario.cerrarVentana();
-                ventanaFecha.setVisible(true);
-
-
-            } else {
-                JOptionPane.showConfirmDialog(null,
-                        "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
-            }
+            ventanaFecha.setVisible(true);
         }
     }
     class VolverFecha implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            ventanaUsuario.limpiarVentana();
-            ventanaUsuario.cerrarVentana();
             ventanaFecha.setVisible(true);
         }
     }

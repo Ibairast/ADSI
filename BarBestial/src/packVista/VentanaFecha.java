@@ -31,13 +31,11 @@ public class VentanaFecha extends JFrame {
         btnenviar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (comprobarFecha()) {
-
                     JSONArray json = obtenerJugadores();
                     setVisible(false);
                     cerrarVentana();
                     limpiarVentana();
                     Controlador.getMiControlador().cambiarVentanaUsuario(json);
-
                 } else {
                     JOptionPane.showConfirmDialog(null,
                             "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);

@@ -24,8 +24,33 @@ public class VentanaUsuario extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPane =getContentPane();
         contentPane.add(panel, BorderLayout.CENTER);
+        btneliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (algunoPulsado()) {
+                    JSONArray json = eliminarUsuarios();
+                    limpiarVentana();
+                    Controlador.getMiControlador().eliminarUsuarios(json);
+                    JOptionPane.showConfirmDialog(null,
+                            "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
+                    cerrarVentana();
+                   // ventanaFecha.setVisible(true);
+
+
+                } else {
+                    JOptionPane.showConfirmDialog(null,
+                            "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
         contentPane.add(btneliminar, BorderLayout.PAGE_END);
+        btnvolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                limpiarVentana();
+                cerrarVentana();
+            }
+        });
         contentPane.add(btnvolver, BorderLayout.NORTH);
+
         setSize(300, 200);
         setTitle("Bar Bestial - Usuarios");
         setLocationRelativeTo(null);
