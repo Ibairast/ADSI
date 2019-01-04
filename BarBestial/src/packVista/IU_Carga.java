@@ -67,9 +67,14 @@ public class IU_Carga extends JFrame{
 		});
 		btnCargar.setBounds(326, 103, 94, 25);
 		frame.getContentPane().add(btnCargar);
-		
+
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(326, 162, 94, 25);
 		frame.getContentPane().add(btnEliminar);
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		this.frame.setVisible(b);
 	}
 }

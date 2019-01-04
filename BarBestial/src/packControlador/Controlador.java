@@ -115,9 +115,7 @@ public class Controlador {
         this.ventanaJuego.setVisible(true);
     }
 
-    private void mostrarVentanaCarga() {
-        this.ventanaCarga.setVisible(true);
-    }
+    private void mostrarVentanaCarga() { this.ventanaCarga.setVisible(true); }
 
     private void mostrarVentanaAyuda() {
         this.ventanaAyuda.setVisible(true);
@@ -233,7 +231,6 @@ public class Controlador {
         public void actionPerformed(ActionEvent e) {
             //TODO mostrar ventana carga
             mostrarVentanaCarga();
-            setUpObservers();
         }
     }
 
