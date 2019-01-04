@@ -160,6 +160,22 @@ public class Controlador {
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
         }
 
+    //Ranking
+    public JSONArray obtenerMisMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+    }
+
+    public JSONArray obtenerMejorPuntuacionDia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
+    }
+
+    public JSONArray obtenerMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
+    }
+
+    public JSONArray obtenerMejorMedia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
+    }
 
     //FUNCIONALIDAD 1
     public boolean registrarUsuario(String txtCorreo, String txtPass1) {
@@ -303,6 +319,7 @@ public class Controlador {
             ventanaJuego.desactivarBotonSiguiente();
         }
     }
+    
 
     //Fecha
     class MisJugadores implements ActionListener {
