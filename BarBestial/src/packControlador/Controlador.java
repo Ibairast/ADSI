@@ -72,9 +72,7 @@ public class Controlador {
         this.ventanaJuego.desactivarBotonSiguiente();
 
 
-
         /* Listeners VentanaUsuario */
-        this.ventanaUsuario.addEliminar(new EliminarJugadores());
         this.ventanaUsuario.addVolver(new VolverFecha());
 
 
@@ -203,6 +201,9 @@ public class Controlador {
         ventanaUsuario.setVisible(true);
         ventanaUsuario.cargarUsuarios(json);
     }
+    public void cambiarVetanaFecha(){
+        ventanaFecha.setVisible(true);
+    }
 
    /* private class FechaListener implements ActionListener {
         @Override
@@ -322,14 +323,6 @@ public class Controlador {
     
 
     //Fecha
-
-
-    class EliminarJugadores implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            ventanaFecha.setVisible(true);
-        }
-    }
     class VolverFecha implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){

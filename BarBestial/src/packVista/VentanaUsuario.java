@@ -33,9 +33,7 @@ public class VentanaUsuario extends JFrame {
                     JOptionPane.showConfirmDialog(null,
                             "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                     cerrarVentana();
-                   // ventanaFecha.setVisible(true);
-
-
+                    Controlador.getMiControlador().cambiarVetanaFecha();
                 } else {
                     JOptionPane.showConfirmDialog(null,
                             "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
