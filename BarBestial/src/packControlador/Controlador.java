@@ -115,9 +115,7 @@ public class Controlador {
         this.ventanaJuego.setVisible(true);
     }
 
-    private void mostrarVentanaCarga() {
-        this.ventanaCarga.setVisible(true);
-    }
+    private void mostrarVentanaCarga() { this.ventanaCarga.setVisible(true); }
 
     private void mostrarVentanaAyuda() {
         this.ventanaAyuda.setVisible(true);
@@ -233,7 +231,6 @@ public class Controlador {
         public void actionPerformed(ActionEvent e) {
             //TODO mostrar ventana carga
             mostrarVentanaCarga();
-            setUpObservers();
         }
     }
 
@@ -385,6 +382,8 @@ public class Controlador {
                 JSONArray json = ventanaUsuario.eliminarUsuarios();
                 ventanaUsuario.limpiarVentana();
                 eliminarUsuarios(json);
+                JOptionPane.showConfirmDialog(null,
+                        "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                 ventanaUsuario.cerrarVentana();
                 ventanaFecha.setVisible(true);
 

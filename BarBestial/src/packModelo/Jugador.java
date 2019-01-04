@@ -159,7 +159,20 @@ public abstract class Jugador extends Observable {
     }
 
     public void guardarMazos(String nombreP){
-        this.mano.guardarLista(nombreP);
-        this.mazo.guardarLista(nombreP);
+        if (this instanceof JugadorReal) {
+            this.mano.guardarLista(nombreP, "ManoJ");
+            this.mazo.guardarLista(nombreP, "MazoJ");
+        }else{
+            this.mano.guardarLista(nombreP, "ManoIA");
+            this.mazo.guardarLista(nombreP, "MazoIA");
+        }
+    }
+
+    public void setMazo(ListaCartas mazo) {
+        this.mazo = mazo;
+    }
+
+    public void setMano(ListaCartas mano) {
+        this.mano = mano;
     }
 }

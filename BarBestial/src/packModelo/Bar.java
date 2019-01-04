@@ -48,6 +48,10 @@ public class Bar {
     }
 
     public void guardarCielo(String nombreP) {
-        this.lista.guardarLista(nombreP);
+        this.lista.guardarLista(nombreP,"Cielo");
+    }
+
+    public void setCielo(ListaCartas lista) {
+        this.lista = lista;
     }
 }

@@ -292,9 +292,14 @@ public class ListaCartas {
         return i;
     }
 
-    public void guardarLista(String nombreP) {
+    /**
+     *
+     * @param nombreP
+     * @param grupo
+     */
+    public void guardarLista(String nombreP,String grupo) {
         for (Carta carta:this.lista) {
-            carta.guardarCarta(nombreP);
+            carta.guardarCarta(nombreP,grupo);
         }
     }
 }

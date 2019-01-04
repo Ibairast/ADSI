@@ -71,7 +71,7 @@ public class GestorUsuario {
 
     public JSONArray obtenerUsuarios(String fecha) {
         JSONArray json = new JSONArray();
-        String sql = "SELECT IdUsuario from USUARIO where LogFecha< '" + fecha + "'";
+        String sql = "SELECT IdUsuario from USUARIO where LogFecha< '" + fecha + "' and Admin=0";
 
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
@@ -133,7 +133,7 @@ public class GestorUsuario {
             JSONObject objeto = json.getJSONObject(i);
             String id = objeto.getString("IdUsuario");
 
-            String sql = "DELETE from USUARIO where IdUsuario= ? and Admin=0";
+            String sql = "DELETE from USUARIO where IdUsuario= ?";
             try (Connection conn = SGBD.getMiSGBD().conectarBD();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, id);

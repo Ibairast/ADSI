@@ -1,0 +1,6 @@
+
+
+
+Funcionalidad 3:
+-Se ha quitado la posición de la bd. Las cartas se meten en orden y se sacan en orden.  No necesitan numeración
+-Si hay una partida con en mismo nombre se sobreescribe.

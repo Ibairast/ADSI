@@ -67,10 +67,15 @@ public class SGBD {
                 "PRIMARY KEY(IdRanking), " +
                 "FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario))";
 
+        String partida ="CREATE TABLE `Partida` ( `IdPartida` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `IdMazoP` TEXT, `NAyudas` INTEGER, PRIMARY KEY(`IdPartida`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `USUARIO`(`IdUsuario`) )";
+        String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, FOREIGN KEY(`IdCartas`) REFERENCES `Partida`(`IdPartida`), PRIMARY KEY(`IdCartas`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `USUARIO`(`IdUsuario`) )";
+
         try (Connection con = this.conectarBD();
              Statement stmt = con.createStatement()) {
             stmt.execute(usuario);
             stmt.execute(ranking);
+            stmt.execute(partida);
+            stmt.execute(cartas);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
