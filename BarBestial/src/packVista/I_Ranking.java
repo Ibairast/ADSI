@@ -7,7 +7,6 @@ import packControlador.Controlador;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class I_Ranking extends JFrame {
@@ -119,9 +118,7 @@ public class I_Ranking extends JFrame {
                 Vector<String> puntuacion = new Vector<>();
                 JSONObject object = json.getJSONObject(i);
                 int clave = object.getInt("Puntuacion");
-                //System.out.println("Puntuacion: " + clave);
                 puntuacion.add(Integer.toString(clave));
-                //System.out.println("Size: " + puntuacion.size());
                 puntuaciones.add(puntuacion);
 
             }

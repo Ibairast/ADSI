@@ -104,7 +104,7 @@ public class IU_Contrasena extends JFrame {
         });
     }
 
-    public void cambiarContrasena() {
+    private void cambiarContrasena() {
         if (txtPass1.getText().equals(txtPass2.getText()) && !txtPass1.getText().equals("")) {
             Controlador.getMiControlador().cambiarContrasena(txtPass1.getText());
             JOptionPane.showConfirmDialog(null,
