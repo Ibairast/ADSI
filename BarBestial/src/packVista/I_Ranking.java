@@ -56,6 +56,11 @@ public class I_Ranking extends JFrame {
 
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
         this.btnMisMejoresPartidas.setBackground(new Color(51, 204, 204));
+        this.btnMisMejoresPartidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarMisMejoresPartidas();
+            }
+        });
         panelMenu.add(btnMisMejoresPartidas);
 
 
@@ -89,9 +94,10 @@ public class I_Ranking extends JFrame {
     }
 
 
-    public void addMisMejoresPartidas(ActionListener listenForBtnMisMejoresPartidas) {
-        btnMisMejoresPartidas.addActionListener(listenForBtnMisMejoresPartidas);
-    }
+//        public void addMisMejoresPartidas(ActionListener listenForBtnMisMejoresPartidas) {
+//            mostrarMisMejoresPartidas();
+//            //btnMisMejoresPartidas.addActionListener(listenForBtnMisMejoresPartidas);
+//        }
 
     public void addMejorPuntuacionDia(ActionListener listenForBtnMejorPuntuacionDia) {
         btnMejorPuntuacionDia.addActionListener(listenForBtnMejorPuntuacionDia);

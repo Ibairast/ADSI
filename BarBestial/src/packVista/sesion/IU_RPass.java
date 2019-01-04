@@ -3,12 +3,12 @@ package packVista.sesion;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import packControlador.Controlador;
-
-import javax.swing.*;
 
 public class IU_RPass {
 
@@ -28,12 +28,14 @@ public class IU_RPass {
 
     public void eventEnviarContrasena(MouseEvent mouseEvent) {
         if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
-            JOptionPane.showConfirmDialog(null,
-                    "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
+            mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneIdentificacion.getWindow(), "Éxito", "Su contraseña ha sido enviada");
         } else {
-            JOptionPane.showConfirmDialog(null,
-                    "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
+            mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "Error en el envío de contraseña");
         }
+    }
+
+    private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {
+        Sesion.mensaje(alertType, owner, title, message);
     }
 
 

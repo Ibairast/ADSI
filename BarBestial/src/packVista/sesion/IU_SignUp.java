@@ -3,14 +3,14 @@ package packVista.sesion;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import packControlador.Controlador;
-
-import javax.swing.*;
 
 public class IU_SignUp {
     @FXML
@@ -35,23 +35,25 @@ public class IU_SignUp {
 
     public void eventRegistrar(MouseEvent mouseEvent) {
         if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")) {//Comprobar cb y que el usuario no esté vacío.
+
             if (comprobarContrasena()) {
                 if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText())) {
-                    JOptionPane.showConfirmDialog(null,
-                            "Usuario Registrado", "Éxito", JOptionPane.DEFAULT_OPTION);
+                    mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneIdentificacion.getWindow(), "Éxito", "Usuario registrado");
                     eventOpenLogin(mouseEvent);
                 } else {
-                    JOptionPane.showConfirmDialog(null,
-                            "Error en el Registro", "Error", JOptionPane.DEFAULT_OPTION);
+                    mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "No se ha podido registrar");
                 }
             } else {
-                JOptionPane.showConfirmDialog(null,
-                        "Debes ACEPTAR!!!!", "Error", JOptionPane.DEFAULT_OPTION);
+                mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "Fallo en la introducción de datos");
             }
         } else {
-            JOptionPane.showConfirmDialog(null,
-                    "Error en el Registro", "Error", JOptionPane.DEFAULT_OPTION);
+            mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "Fallo en la introducción de datos");
+
         }
+    }
+
+    private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {
+        Sesion.mensaje(alertType, owner, title, message);
     }
 
     @FXML

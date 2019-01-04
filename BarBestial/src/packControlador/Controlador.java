@@ -73,7 +73,7 @@ public class Controlador {
         this.ventanaJuego.desactivarBotonSiguiente();
 
         /* Listeners I_Ranking */
-        this.iRanking.addMisMejoresPartidas(new MisMejoresPartidasListener());
+        //this.iRanking.addMisMejoresPartidas(new MisMejoresPartidasListener());
         this.iRanking.addMejorPuntuacionDia(new MejorPuntuacionDiaListener());
         this.iRanking.addMejoresPartidas(new MejoresPartidasListener());
         this.iRanking.addMejorMedia(new MejorMediaListener());
@@ -329,12 +329,12 @@ public class Controlador {
     }
 
     //RANKING
-    class MisMejoresPartidasListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            iRanking.mostrarMisMejoresPartidas();
-        }
-    }
+//    class MisMejoresPartidasListener implements ActionListener {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            iRanking.mostrarMisMejoresPartidas();
+//        }
+//    }
 
     class MejorPuntuacionDiaListener implements ActionListener {
         @Override
