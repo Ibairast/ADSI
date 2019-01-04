@@ -385,6 +385,8 @@ public class Controlador {
                 JSONArray json = ventanaUsuario.eliminarUsuarios();
                 ventanaUsuario.limpiarVentana();
                 eliminarUsuarios(json);
+                JOptionPane.showConfirmDialog(null,
+                        "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                 ventanaUsuario.cerrarVentana();
                 ventanaFecha.setVisible(true);
 
