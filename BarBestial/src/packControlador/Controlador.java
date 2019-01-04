@@ -73,7 +73,7 @@ public class Controlador {
 
 
         /* Listeners VentanFecha */
-        this.ventanaFecha.addobtenerJugadores(new MisJugadores());
+      //  this.ventanaFecha.addobtenerJugadores(new MisJugadores());
 
         /* Listeners VentanaUsuario */
         this.ventanaUsuario.addEliminar(new EliminarJugadores());
@@ -201,13 +201,17 @@ public class Controlador {
     public void cambiarContrasena(String text) {
         GestorUsuario.getGestorUsuario().cambiarContrasena(Usuario.getUsuario().getIdUsuario(), text);
     }
+    public void cambiarVentanaUsuario(JSONArray json){
+        ventanaUsuario.setVisible(true);
+        ventanaUsuario.cargarUsuarios(json);
+    }
 
-    private class FechaListener implements ActionListener {
+   /* private class FechaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             mostrarVentanafecha();
         }
-    }
+    }*/
 
     class NuevaPartidaListener implements ActionListener {
         @Override
@@ -320,7 +324,7 @@ public class Controlador {
     
 
     //Fecha
-    class MisJugadores implements ActionListener {
+   /* class MisJugadores implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (ventanaFecha.comprobarFecha()) {
@@ -337,7 +341,7 @@ public class Controlador {
             }
 
         }
-    }
+    }*/
 
     class EliminarJugadores implements ActionListener {
         @Override

@@ -28,6 +28,22 @@ public class VentanaFecha extends JFrame {
         setResizable(false);
 
         btnenviar.setBounds(420,110,120,25);
+        btnenviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (comprobarFecha()) {
+
+                    JSONArray json = obtenerJugadores();
+                    setVisible(false);
+                    cerrarVentana();
+                    limpiarVentana();
+                    Controlador.getMiControlador().cambiarVentanaUsuario(json);
+
+                } else {
+                    JOptionPane.showConfirmDialog(null,
+                            "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
         add(btnenviar);
 
         txtfecha.setBounds(200,110,200,25);
