@@ -2,7 +2,9 @@ package packVista.sesion;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -12,8 +14,10 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import packControlador.Controlador;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Paths;
 
 public class IU_Login {
 
@@ -44,29 +48,21 @@ public class IU_Login {
 
 
     public void eventIdentificar(MouseEvent mouseEvent) {
-//        if (!txtCorreo.getText().equals("") && !txtPass.getText().equals("")) {
-//            int resul = Controlador.getMiControlador().comprobarUsuario(txtCorreo.getText(), txtPass.getText());
-//            if (resul == -1) {//noadmin
-//
-//                mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneRegistro.getWindow(), "Identificación", "Bienvenido");
-//                Controlador.getMiControlador().mostarVentanaInicio();
-//                Platform.exit();
-//            } else if (resul == 1) {//admin
-//                mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneRegistro.getWindow(), "Identificación", "ADMIN");
-//                Controlador.getMiControlador().mostrarVentanaFecha();
-//                Platform.exit();
-//            } else {
-//                mostrarAlerta(Alert.AlertType.ERROR, sceneRegistro.getWindow(), "Error", "Error en la Identificación");
-//            }
-//        }
+        if (!txtCorreo.getText().equals("") && !txtPass.getText().equals("")) {
+            int resul = Controlador.getMiControlador().comprobarUsuario(txtCorreo.getText(), txtPass.getText());
+            if (resul == -1) {//noadmin
 
-        // Run a java app in a separate system process
-        try {
-            Runtime.getRuntime().exec("java -jar /home/paul/Documentos/UNI/Tercero/ADSI/BarBestial/src/packVista/sesion/exe.jar");
-        } catch (IOException e) {
-            e.printStackTrace();
+                mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneRegistro.getWindow(), "Identificación", "Bienvenido");
+                Controlador.getMiControlador().mostarVentanaInicio();
+                Platform.exit();
+            } else if (resul == 1) {//admin
+                mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneRegistro.getWindow(), "Identificación", "ADMIN");
+                Controlador.getMiControlador().mostrarVentanaFecha();
+                Platform.exit();
+            } else {
+                mostrarAlerta(Alert.AlertType.ERROR, sceneRegistro.getWindow(), "Error", "Error en la Identificación");
+            }
         }
-
 
     }
 
@@ -81,5 +77,20 @@ public class IU_Login {
     }
 
 
+
+    public void eventOpenRRSS(MouseEvent mouseEvent) {
+
+        try{
+            FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("IdentificacionRRSS.fxml"));
+            Parent panelIdentificacionRRSS = fxmlIdentificacionRRSS.load();
+            Scene sceneIdentificacionRRSS = new Scene(panelIdentificacionRRSS);
+            Stage stage = new Stage();
+            stage.setTitle("dfd");
+            stage.setScene(sceneIdentificacionRRSS);
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 

@@ -8,6 +8,7 @@ module BarBestial {
     requires java.mail;
 
     requires java.activation;
+    requires javafx.web;
 
     opens packVista.sesion;
     opens packVista;

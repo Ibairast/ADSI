@@ -13,3 +13,9 @@
 *.lck
 
 BarBestial/out/test/BarBestial/packModelo/AnimalFactoryTest\.java
+
+BarBestial/\.extract/logs/
+
+BarBestial/\.extract/
+
+*.kotlin_module

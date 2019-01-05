@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packVista.sesion.IU_Login">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packVista.sesion.IU_Login">
     <VBox maxHeight="420.0" maxWidth="345.0" minHeight="420.0" minWidth="345.0" prefHeight="420.0" prefWidth="345.0">
         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="345.0" style="-fx-background-color: #151a23;" HBox.hgrow="ALWAYS">
@@ -39,7 +39,7 @@
                 </TextField>
                 <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="263.0" />
                 <PasswordField fx:id="txtPass" promptText="contraseña" style="-fx-background-color: transparent; -fx-text-fill: white;" />
-                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="305.0">
+                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="305.0">
                     <Line endX="270.0" endY="-1.0" layoutX="29.0" layoutY="1.0" startX="-29.0" startY="-1.0" stroke="WHITE" strokeLineCap="BUTT" strokeWidth="2.0">
                         <fill>
                             <LinearGradient endX="0.004761904761904745">
@@ -57,7 +57,13 @@
                             <Font name="System Bold" size="14.0" />
                         </font>
                     </Button>
-                    <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="305.0" />
+                    <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="305.0" />
+               <Button mnemonicParsing="false" onMouseClicked="#eventOpenRRSS" prefHeight="25.0" prefWidth="305.0" style="-fx-background-color: #33cccc;" text="Google">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Button>
+               <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="305.0" />
                 </VBox>
                 <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="305.0">
                     <columnConstraints>
