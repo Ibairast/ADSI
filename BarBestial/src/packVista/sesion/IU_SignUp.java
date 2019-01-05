@@ -3,16 +3,14 @@ package packVista.sesion;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import packControlador.Controlador;
 
 public class IU_SignUp {
+    public Button btnRegistro;
     @FXML
     private TextField txtUsuario;
     @FXML
@@ -34,22 +32,27 @@ public class IU_SignUp {
     }
 
     public void eventRegistrar(MouseEvent mouseEvent) {
-        if (cbTerminos.isSelected() && !txtCorreo.getText().equals("")) {//Comprobar cb y que el usuario no esté vacío.
+        if (Sesion.isValid(txtCorreo.getText())) {
+            if (cbTerminos.isSelected()) {//Comprobar cb y que el usuario no esté vacío.
 
-            if (comprobarContrasena()) {
-                if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText())) {
-                    mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneIdentificacion.getWindow(), "Éxito", "Usuario registrado");
-                    eventOpenLogin(mouseEvent);
+                if (comprobarContrasena()) {
+                    if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText())) {
+                        mostrarAlerta(Alert.AlertType.CONFIRMATION, btnRegistro.getScene().getWindow(), "Éxito", "Usuario registrado");
+                        eventOpenLogin(mouseEvent);
+                    } else {
+                        mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "No se ha podido registrar");
+                    }
                 } else {
-                    mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "No se ha podido registrar");
+                    mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "Fallo en la introducción de datos");
                 }
             } else {
-                mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "Fallo en la introducción de datos");
+                mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "Fallo en la introducción de datos");
+
             }
         } else {
-            mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "Fallo en la introducción de datos");
-
+            mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "Fallo en la introducción de datos");
         }
+
     }
 
     private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {

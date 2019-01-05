@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -12,6 +13,7 @@ import packControlador.Controlador;
 
 public class IU_RPass {
 
+    public Button btnRPass;
     @FXML
     private TextField txtCorreo;
     private Scene sceneIdentificacion;
@@ -27,11 +29,17 @@ public class IU_RPass {
     }
 
     public void eventEnviarContrasena(MouseEvent mouseEvent) {
-        if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
-            mostrarAlerta(Alert.AlertType.CONFIRMATION, sceneIdentificacion.getWindow(), "Éxito", "Su contraseña ha sido enviada");
+        if (Sesion.isValid(txtCorreo.getText())) {
+            if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
+                mostrarAlerta(Alert.AlertType.CONFIRMATION, btnRPass.getScene().getWindow(), "Éxito", "Su contraseña ha sido enviada");
+            } else {
+                mostrarAlerta(Alert.AlertType.ERROR, btnRPass.getScene().getWindow(), "Error", "Error en el envío de contraseña");
+            }
         } else {
-            mostrarAlerta(Alert.AlertType.ERROR, sceneIdentificacion.getWindow(), "Error", "Error en el envío de contraseña");
+            mostrarAlerta(Alert.AlertType.ERROR, btnRPass.getScene().getWindow(), "Error", "Error en el envío de contraseña");
         }
+
+
     }
 
     private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {

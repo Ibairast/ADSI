@@ -209,7 +209,7 @@ public class GestorUsuario {
             JSONObject usuario = buscarUsuario(correo);
             comprobarUsuario(correo, usuario.getString("Pass"));
             return true;
-        }else { //Si no tiene cuenta
+        } else { //Si no tiene cuenta
             comprobarUsuario(correo, pass);
             return false;
         }
