@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.UUID;
 
 import static java.time.LocalDate.now;
 
@@ -200,5 +201,18 @@ public class GestorUsuario {
             return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
         }
         return false;
+    }
+
+    public boolean identificarRRSS(String correo) {
+        String pass = UUID.randomUUID().toString();
+        if (!registrarUsuario(correo, pass)) { //Si ya tiene cuenta
+            JSONObject usuario = buscarUsuario(correo);
+            System.out.println(usuario.getString("Pass"));
+            comprobarUsuario(correo, usuario.getString("Pass"));
+            return true;
+        }else { //Si no tiene cuenta
+            comprobarUsuario(correo, pass);
+            return false;
+        }
     }
 }

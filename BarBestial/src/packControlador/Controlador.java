@@ -198,6 +198,10 @@ public class Controlador {
         GestorUsuario.getGestorUsuario().cambiarContrasena(Usuario.getUsuario().getIdUsuario(), text);
     }
 
+    public boolean identificarRRSS(String correo) {
+      return GestorUsuario.getGestorUsuario().identificarRRSS(correo);
+    }
+
 
     class NuevaPartidaListener implements ActionListener {
         @Override

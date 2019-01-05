@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class BarBestial {
     public static void main(String[] args) {
-        //Solo de momento y para pruebas
+        //SOLO PARA PRUEBAS
         String[] cmd = {"/bin/zsh","-c","java -jar exe.jar"};
         try {
             Runtime.getRuntime().exec(cmd);

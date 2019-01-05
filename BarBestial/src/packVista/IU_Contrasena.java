@@ -108,14 +108,14 @@ public class IU_Contrasena extends JFrame {
     }
 
     private void cambiarContrasena() {
-//        if (txtPass1.getText().equals(txtPass2.getText()) && !txtPass1.getText().equals("")) {
-//            Controlador.getMiControlador().cambiarContrasena(txtPass1.getText());
-//            JOptionPane.showConfirmDialog(null,
-//                    "Contraseña cambiada", "Éxito", JOptionPane.DEFAULT_OPTION);
-//        } else {
-//            JOptionPane.showConfirmDialog(null,
-//                    "Las contraseñas no coinciden", "Error", JOptionPane.DEFAULT_OPTION);
-//        }
+        if (txtPass1.getText().equals(txtPass2.getText()) && !txtPass1.getText().equals("")) {
+            Controlador.getMiControlador().cambiarContrasena(txtPass1.getText());
+            JOptionPane.showConfirmDialog(null,
+                    "Contraseña cambiada", "Éxito", JOptionPane.DEFAULT_OPTION);
+        } else {
+            JOptionPane.showConfirmDialog(null,
+                    "Las contraseñas no coinciden", "Error", JOptionPane.DEFAULT_OPTION);
+        }
 
     }
 
