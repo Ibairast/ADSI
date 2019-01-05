@@ -34,7 +34,6 @@ public class IU_LoginRRSS implements Initializable {
     public void eventSalir(MouseEvent mouseEvent) {
 
         String[] url = engine.getLocation().split("=");
-        System.out.println(url[1]);
        if (Controlador.getMiControlador().identificarRRSS(url[1])){
            JOptionPane.showConfirmDialog(null,
                    "Bienvenido", "Éxito", JOptionPane.DEFAULT_OPTION);

@@ -207,7 +207,6 @@ public class GestorUsuario {
         String pass = UUID.randomUUID().toString();
         if (!registrarUsuario(correo, pass)) { //Si ya tiene cuenta
             JSONObject usuario = buscarUsuario(correo);
-            System.out.println(usuario.getString("Pass"));
             comprobarUsuario(correo, usuario.getString("Pass"));
             return true;
         }else { //Si no tiene cuenta
