@@ -39,12 +39,14 @@ public class IU_LoginRRSS implements Initializable {
            JOptionPane.showConfirmDialog(null,
                    "Bienvenido", "Éxito", JOptionPane.DEFAULT_OPTION);
            Controlador.getMiControlador().mostarVentanaInicio();
+
+           Platform.exit();
        }else {
 
            JOptionPane.showConfirmDialog(null,
                    "Por favor, cambie su contraseña", "Éxito", JOptionPane.DEFAULT_OPTION);
            Controlador.getMiControlador().mostarVentanaInicio();
+           Platform.exit();
        }
-        Platform.exit();
     }
 }
