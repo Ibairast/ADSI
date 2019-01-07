@@ -28,11 +28,18 @@ public class VentanaUsuario extends JFrame {
         btneliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (algunoPulsado()) {
+                    int cont= contadorPulsado();
                     JSONArray json = eliminarUsuarios();
                     limpiarVentana();
                     Controlador.getMiControlador().eliminarUsuarios(json);
-                    JOptionPane.showConfirmDialog(null,
-                            "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
+                    if(cont>1){
+                        JOptionPane.showConfirmDialog(null,
+                                "Usuarios eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
+                    }else{
+                        JOptionPane.showConfirmDialog(null,
+                                "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
+                    }
+
                     cerrarVentana();
                     ventanaFecha= new VentanaFecha();
                     ventanaFecha.setVisible(true);
@@ -90,9 +97,6 @@ public class VentanaUsuario extends JFrame {
       public void addEliminar(ActionListener listenForBtnEliminar) {
         btneliminar.addActionListener(listenForBtnEliminar);
     }
-    public void addVolver(ActionListener listenForBtnVolver){
-        btnvolver.addActionListener(listenForBtnVolver);
-    }
     public boolean algunoPulsado(){
       boolean pulsado=false;
       int i=0;
@@ -130,5 +134,17 @@ public class VentanaUsuario extends JFrame {
           panel.remove(panel.getComponent(0));
           j++;
       }
+    }
+    public int contadorPulsado(){
+        int cont=0;
+        int i=0;
+        while(i<panel.getComponentCount()){
+            JCheckBox check = (JCheckBox) panel.getComponent(i);
+            if(check.isSelected()){
+                cont++;
+            }
+            i++;
+        }
+        return cont;
     }
     }
