@@ -48,7 +48,7 @@ public class SGBD {
     }
 
     private void crearTablas() { // AÑADIR TABLAS QUE FALTAN //
-        String usuario = "CREATE TABLE USUARIO" +
+        String usuario = "CREATE TABLE Usuario" +
                 "(IdUsuario VARCHAR(100) NOT NULL, " +
                 "Pass VARCHAR(100) NOT NULL, " +
                 "Admin INT(1) NOT NULL, " +
@@ -57,7 +57,7 @@ public class SGBD {
 
                 "PRIMARY KEY(IdUsuario))";
 
-        String ranking = "CREATE TABLE RANKING" +
+        String ranking = "CREATE TABLE Ranking" +
                 "(IdRanking INT(11) NOT NULL, " +
                 "IdUsuario VARCHAR(100) NOT NULL, " +
                 "Puntuacion INT(11) NOT NULL, " +

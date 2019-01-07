@@ -24,6 +24,9 @@ public class GestorUsuario {
     private static GestorUsuario miGestorUsuario = new GestorUsuario();
 
 
+
+
+
     private GestorUsuario() {
     }
 

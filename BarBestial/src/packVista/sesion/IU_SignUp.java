@@ -32,7 +32,7 @@ public class IU_SignUp {
     }
 
     public void eventRegistrar(MouseEvent mouseEvent) {
-        if (Sesion.isValid(txtCorreo.getText())) {
+        if (Sesion.validarFormatoEmail(txtCorreo.getText())) {
             if (cbTerminos.isSelected()) {//Comprobar cb y que el usuario no esté vacío.
 
                 if (comprobarContrasena()) {
@@ -71,6 +71,7 @@ public class IU_SignUp {
         }
         return false;
     }
+
 
 }
 

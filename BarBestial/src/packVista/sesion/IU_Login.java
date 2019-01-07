@@ -45,7 +45,7 @@ public class IU_Login {
 
 
     public void eventIdentificar(MouseEvent mouseEvent) {
-        if (Sesion.isValid(txtCorreo.getText())) {
+        if (Sesion.validarFormatoEmail(txtCorreo.getText())) {
             if (!txtPass.getText().equals("")) {
                 int resul = Controlador.getMiControlador().comprobarUsuario(txtCorreo.getText(), txtPass.getText());
                 if (resul == -1) {//noadmin
