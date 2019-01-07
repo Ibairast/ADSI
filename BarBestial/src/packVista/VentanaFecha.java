@@ -30,18 +30,19 @@ public class VentanaFecha extends JFrame {
         btnenviar.setBounds(420,110,120,25);
         btnenviar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (comprobarFecha()) {
-                    JSONArray json = obtenerJugadores();
+                String fechaPattern = "\\d{4}-\\d{1,2}-\\d{1,2}";
+                if (txtfecha.getText().matches(fechaPattern)) {
+                    JSONArray json = Controlador.getMiControlador().obtenerUsuarios(txtfecha.getText());
                     setVisible(false);
-                    cerrarVentana();
-                    limpiarVentana();
+                    dispose();
+                    txtfecha.setText("");
                     ventanaUsuario = new VentanaUsuario();
                     ventanaUsuario.setVisible(true);
                     ventanaUsuario.cargarUsuarios(json);
                 } else {
                     JOptionPane.showConfirmDialog(null,
                             "Error,el formato de la fecha no es correcto", "Fecha", JOptionPane.DEFAULT_OPTION);
-                    txtfecha.setText("");
+
                     txtfecha.requestFocus();
                 }
             }
@@ -70,33 +71,5 @@ public static void main(String[] args) {
     });
 
 }
-    public void addobtenerJugadores(ActionListener listenForBtnEnviar){
-    btnenviar.addActionListener(listenForBtnEnviar);
-    }
-    public JSONArray obtenerJugadores() {
-        String fecha = txtfecha.getText();
-        JSONArray json = Controlador.getMiControlador().obtenerUsuarios(fecha);
-        return json;
-
-
-    }
-    public boolean comprobarFecha(){
-        String fecha = txtfecha.getText();
-        String fechaPattern = "\\d{4}-\\d{1,2}-\\d{1,2}";
-
-        if (fecha.matches(fechaPattern)) {
-            return true;
-        }else{
-            return false;
-        }
-    }
-    public void cerrarVentana() {
-        setVisible(false);
-        dispose();
-    }
-
-    public void limpiarVentana(){
-    txtfecha.setText("");
-    }
 
 }
