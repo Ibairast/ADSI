@@ -29,7 +29,7 @@ public class IU_RPass {
     }
 
     public void eventEnviarContrasena(MouseEvent mouseEvent) {
-        if (Sesion.isValid(txtCorreo.getText())) {
+        if (Sesion.validarFormatoEmail(txtCorreo.getText())) {
             if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
                 mostrarAlerta(Alert.AlertType.CONFIRMATION, btnRPass.getScene().getWindow(), "Éxito", "Su contraseña ha sido enviada");
             } else {

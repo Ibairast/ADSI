@@ -26,7 +26,7 @@ public class Sesion extends Application {
         alert.show();
     }
 
-    static boolean isValid(String email) {
+     public static boolean validarFormatoEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
