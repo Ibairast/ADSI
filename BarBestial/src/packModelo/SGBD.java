@@ -111,7 +111,7 @@ public class SGBD {
     private void pruebasUsuarios() {
 
         String sql1 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                "VALUES('josu', 'josu',1,'1995-10-10',1)";
+                "VALUES('josu@gmail.com','josu',1,'1995-10-10',1)";
 
         String sql2 = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                 "VALUES('Usoj', 'Usoj',0,'1995-10-10',1)";
