@@ -182,6 +182,10 @@ public class FuncionalidadTest1 {
 
     }
 
+    /**
+     * Correo correcto
+     */
+
     @Test
     public void recuperarContraPrueba02() {
         String correo = "pguerrerolinares@gmail.com";
@@ -195,14 +199,33 @@ public class FuncionalidadTest1 {
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contra + "', 0 ,'2019-01-01', 0)");
 
-            assertFalse(GestorUsuario.getGestorUsuario().recuperarContrasena(correo));
+            assertTrue(GestorUsuario.getGestorUsuario().recuperarContrasena(correo));
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Correo no registrado.
+     */
+
+    @Test
+    public void recuperarContraPrueba03() {
+        String correoNoRegistrado = "123@gmail.com";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             Statement stmt = conn.createStatement()) {
+
+            //Limpieza inicial
+            stmt.executeUpdate("DELETE FROM Usuario");
+
+            assertFalse(GestorUsuario.getGestorUsuario().recuperarContrasena(correoNoRegistrado));
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
