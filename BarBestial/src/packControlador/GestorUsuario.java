@@ -74,7 +74,10 @@ public class GestorUsuario {
     }
 
     public JSONArray obtenerUsuarios(String fecha) {
+        //Creamos un json
         JSONArray json = new JSONArray();
+        //Hacemos la select donde sacaremos los usuarios que no se han logeado desde la fecha pasada como
+        //parametro y que no sean administradores
         String sql = "SELECT IdUsuario from USUARIO where LogFecha< '" + fecha + "' and Admin=0";
 
         try (Connection conn = SGBD.getMiSGBD().conectarBD();

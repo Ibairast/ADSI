@@ -140,8 +140,8 @@ public class Controlador {
     //private void mostrarVentanaCarga() {this.ventanaCarga.setVisible(true); }
 
     //Fecha
+    //Llamamos al metodo del GestorUsuario pasandole la fecha que hemos recibido de la interfaz.
     public JSONArray obtenerUsuarios(String fecha) {
-
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
 
