@@ -144,7 +144,7 @@ public class Controlador {
     public JSONArray obtenerUsuarios(String fecha) {
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
-
+   // Llamamos al metodo del GestorUsuario pasandole el json que hemos recibido de la interfaz.
     public void eliminarUsuarios(JSONArray json) {
         GestorUsuario.getGestorUsuario().eliminarUsuarios(json);
     }
