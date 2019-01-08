@@ -42,10 +42,7 @@ public class Controlador {
         // this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
         this.ventanaPersonalizar = new VentanaPersonalizar();
-
         this.ventanaContrasena = new IU_Contrasena();
-
-
 
 
         /* Listeners VentanaInicio */
@@ -55,8 +52,6 @@ public class Controlador {
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
         this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
         this.ventanaInicio.addCambiarContraseniaListener(new OpenCambiarContraseniaListener());
-
-
 
 
         /* Listeners VentanaJuego */
@@ -155,6 +150,10 @@ public class Controlador {
     }
 
     //Ranking
+    public void mostarVentanaRanking() {
+        this.mostrarVentanaRanking();
+    }
+
     public JSONArray obtenerMisMejoresPartidas() {
         return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
     }
@@ -311,6 +310,8 @@ public class Controlador {
             ventanaJuego.desactivarBotonSiguiente();
         }
     }
+
+
 
 
 }

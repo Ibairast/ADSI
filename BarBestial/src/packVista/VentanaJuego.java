@@ -550,6 +550,7 @@ public class VentanaJuego extends JFrame implements Observer {
                     "No quedan más cartas, el ganador es: " + ganador
                             + " con un total de " + numeroDeCartasGanador + " cartas"
                             + " y " + fuerzaGanador + " puntos de fuerza.");
+            Controlador.getMiControlador().mostarVentanaRanking();
         }
 
     }

@@ -13,7 +13,7 @@ public class SGBD {
             this.crearBD();
             this.crearTablas();
             this.pruebasRanking();
-            this.pruebasUsuarios();
+            //this.pruebasUsuarios();
         }
     }
 
@@ -85,21 +85,59 @@ public class SGBD {
     }
 
     private void pruebasRanking() {
-        String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+/*        String sql1 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
                 "VALUES(1, 'Andrea', 10, strftime('%Y-%m-%d'), 1)";
 
         String sql2 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
                 "VALUES(2, 'Andrea', 20, strftime('%Y-%m-%d'), 1)";
 
         String sql3 = "INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
-                "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 1)";
+                "VALUES(3, 'David', 5, strftime('%Y-%m-%d'), 1)";*/
 
 
         try (Connection con = this.conectarBD();
              Statement stmt = con.createStatement()) {
-            stmt.executeUpdate(sql1);
+/*            stmt.executeUpdate(sql1);
             stmt.executeUpdate(sql2);
-            stmt.executeUpdate(sql3);
+            stmt.executeUpdate(sql3);*/
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('andrea@gmail.com', 'a', 0, '2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('paul@gmail.com', 'b', 0, '2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('ibai@gmail.com', 'c', 0, '2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('josu@gmail.com', 'd', 0, '2019-01-01', 0)");
+
+            //Añadir info
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(1, 'andrea@gmail.com', 10, strftime('%Y-%m-%d'), 0)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(2, 'ibai@gmail.com', 80, strftime('%Y-%m-%d'), 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(3, 'paul@gmail.com', 100, strftime('%Y-%m-%d'), 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(4, 'ibai@gmail.com', 20, '2019-01-07', 0)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(5, 'andrea@gmail.com', 70, strftime('%Y-%m-%d'), 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(6, 'paul@gmail.com', 70, '2019-01-13', 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(7, 'andrea@gmail.com', 100, '2019-01-14', 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(8, 'andrea@gmail.com', 60, '2019-01-14', 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(9, 'andrea@gmail.com', 30, '2019-01-14', 0)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(10, 'andrea@gmail.com', 20, '2019-01-14', 0)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(11, 'andrea@gmail.com', 50, '2019-01-14', 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(12, 'andrea@gmail.com', 90, '2019-01-14', 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(13, 'andrea@gmail.com', 55, '2019-01-14', 1)");
+            stmt.executeUpdate("INSERT INTO RANKING(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                    "VALUES(14, 'andrea@gmail.com', 36, '2019-01-14', 0)");
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
