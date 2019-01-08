@@ -79,14 +79,15 @@ public class GestorUsuario {
         //Hacemos la select donde sacaremos los usuarios que no se han logeado desde la fecha pasada como
         //parametro y que no sean administradores
         String sql = "SELECT IdUsuario from USUARIO where LogFecha< '" + fecha + "' and Admin=0";
-
+        //Establecemos la conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
+            //Por cada elemento que hemos sacado de la base de datos, cogemos su IdUsuario
+            //y lo guardamos en nuestro json.Que sera lo que devolvemos.
             while (rs.next()) {
                 JSONObject js = new JSONObject();
                 String usu = rs.getString("IdUsuario");
-                System.out.println(usu);
                 js.put("IdUsuario", usu);
                 json.put(js);
             }
@@ -95,7 +96,6 @@ public class GestorUsuario {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Consulta obtenerUsuarios");
         return json;
     }
 
