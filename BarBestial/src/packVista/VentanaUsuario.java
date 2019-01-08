@@ -40,7 +40,8 @@ public class VentanaUsuario extends JFrame {
                                 "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                     }
 
-                    cerrarVentana();
+                    setVisible(false);
+                    dispose();
                     ventanaFecha= new VentanaFecha();
                     ventanaFecha.setVisible(true);
                 } else {
@@ -53,7 +54,8 @@ public class VentanaUsuario extends JFrame {
         btnvolver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 limpiarVentana();
-                cerrarVentana();
+                setVisible(false);
+                dispose();
                 ventanaFecha= new VentanaFecha();
                 ventanaFecha.setVisible(true);
             }
@@ -121,10 +123,6 @@ public class VentanaUsuario extends JFrame {
             }
         }
         return json;
-    }
-    public void cerrarVentana() {
-        setVisible(false);
-        dispose();
     }
 
     public void limpiarVentana(){
