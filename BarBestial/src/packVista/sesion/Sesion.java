@@ -4,38 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.util.regex.Pattern;
 
 public class Sesion extends Application {
 
 
     public static void main(String... arg) {
         launch(arg);
-    }
-
-    static void mensaje(Alert.AlertType alertType, Window owner, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.initOwner(owner);
-        alert.show();
-    }
-
-     public static boolean validarFormatoEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
-
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
-        return pat.matcher(email).matches();
     }
 
     @Override
@@ -66,7 +42,6 @@ public class Sesion extends Application {
         identificacionController.setSceneRPassword(sceneRContrasena);
 
         rPassController.setSceneIdentificacion(sceneIdentificacion);
-
 
         stage.setTitle("Sesión");
         stage.setScene(sceneIdentificacion);

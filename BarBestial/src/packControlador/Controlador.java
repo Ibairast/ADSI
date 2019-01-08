@@ -5,7 +5,6 @@ import packModelo.*;
 import packVista.*;
 import packVista.sesion.Sesion;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class Controlador {
 
     private IU_Carga ventanaCarga;
     private VentanaPersonalizar ventanaPersonalizar;
-    
+
     private IU_Contrasena ventanaContrasena;
 
     public Controlador() {
@@ -40,7 +39,7 @@ public class Controlador {
         this.ventanaAyuda = new VentanaAyuda();
         this.iRanking = new I_Ranking();
         this.ventanaFecha = new VentanaFecha();
-       // this.ventanaUsuario = new VentanaUsuario();
+        // this.ventanaUsuario = new VentanaUsuario();
         this.ventanaCarga = new IU_Carga();
         this.ventanaPersonalizar = new VentanaPersonalizar();
 
@@ -73,8 +72,7 @@ public class Controlador {
 
 
         /* Listeners VentanaUsuario */
-      //  this.ventanaUsuario.addVolver(new VolverFecha());
-
+        //  this.ventanaUsuario.addVolver(new VolverFecha());
 
 
     }
@@ -104,7 +102,9 @@ public class Controlador {
         this.ventanaJuego.setVisible(true);
     }
 
-    private void mostrarVentanaCarga() { this.ventanaCarga.setVisible(true); }
+    private void mostrarVentanaCarga() {
+        this.ventanaCarga.setVisible(true);
+    }
 
     private void mostrarVentanaAyuda() {
         this.ventanaAyuda.setVisible(true);
@@ -117,7 +117,7 @@ public class Controlador {
     private void mostrarVentanaPersonalizar() {
         this.ventanaPersonalizar.setVisible(true);
     }
-    
+
     private void mostrarVentanafecha() {
         this.ventanaFecha.setVisible(true);
         this.ventanaInicio.setVisible(false);
@@ -148,11 +148,11 @@ public class Controlador {
     public void eliminarUsuarios(JSONArray json) {
         GestorUsuario.getGestorUsuario().eliminarUsuarios(json);
     }
-    
+
     //PERSONALIZAR
-        public JSONArray llenar_combo(){
+    public JSONArray llenar_combo() {
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
-        }
+    }
 
     //Ranking
     public JSONArray obtenerMisMejoresPartidas() {
@@ -172,12 +172,12 @@ public class Controlador {
     }
 
     //FUNCIONALIDAD 1
-    public boolean registrarUsuario(String txtCorreo, String txtPass1) {
-        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo, txtPass1);
+    public boolean registrarUsuario(String txtCorreo, String txtPass1, String txtPass2) {
+        return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo, txtPass1, txtPass2);
     }
 
-    public int comprobarUsuario(String correo, String pass) {
-        return GestorUsuario.getGestorUsuario().comprobarUsuario(correo, pass);
+    public int identificarCorreo(String correo, String pass) {
+        return GestorUsuario.getGestorUsuario().identificarCorreo(correo, pass);
 
     }
 
@@ -199,7 +199,7 @@ public class Controlador {
     }
 
     public boolean identificarRRSS(String correo) {
-      return GestorUsuario.getGestorUsuario().identificarRRSS(correo);
+        return GestorUsuario.getGestorUsuario().identificarRRSS(correo);
     }
 
 
@@ -311,8 +311,6 @@ public class Controlador {
             ventanaJuego.desactivarBotonSiguiente();
         }
     }
-
-
 
 
 }

@@ -1,6 +1,5 @@
 package packControlador;
 
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import packModelo.EmailUtil;
@@ -16,16 +15,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import static java.time.LocalDate.now;
 
 public class GestorUsuario {
 
     private static GestorUsuario miGestorUsuario = new GestorUsuario();
-
-
-
-
 
     private GestorUsuario() {
     }
@@ -35,24 +31,53 @@ public class GestorUsuario {
         return miGestorUsuario;
     }
 
+    /**
+     * @param txtCorreo Correo utilizado por el usuario en su registrarse.
+     * @param txtPass   Contraseña utilizada, en el primer campo, por el usuario en su registro.
+     * @param txtPass2 Contraseña utilizada, en el segundo campo, por el usuario en su registro.
+     * @return Verdadero o falso, dependiendo si el registro se ha realizado correctamente.
+     * @precondicion El correo sigue un formato válido.
+     */
+    public boolean registrarUsuario(String txtCorreo, String txtPass, String txtPass2) {
 
-    public boolean registrarUsuario(String txtCorreo, String txtPass) {
-        if (buscarUsuario(txtCorreo) == null) {
-            String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
-                    "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
+        if (validarFormatoEmail(txtCorreo) && contrasenaValida(txtPass, txtPass2)) {
+            if (buscarUsuario(txtCorreo) == null) {
+                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
+                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
 
-            try (Connection conn = SGBD.getMiSGBD().conectarBD();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.executeUpdate();
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
+                try (Connection conn = SGBD.getMiSGBD().conectarBD();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    pstmt.executeUpdate();
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            return false;
         }
         return false;
     }
 
+    public boolean contrasenaValida(String txtPass, String txtPass2) {
+        return (txtPass.equals(txtPass2));
+    }
 
+    public boolean validarFormatoEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
+    /**
+     * @param usuario Correo de usuario.
+     * @return JSON con todos los datos del correo, obtenidos de la base de datos.
+     */
     public JSONObject buscarUsuario(String usuario) {
         JSONObject jugador = null;
         String sql = "SELECT * FROM USUARIO WHERE IdUsuario = '" + usuario + "'";
@@ -100,36 +125,34 @@ public class GestorUsuario {
     }
 
 
-    public int comprobarUsuario(String correo, String pass) {
+    public int identificarCorreo(String correo, String pass) {
         String sql = "SELECT * FROM USUARIO WHERE IdUsuario ='" + correo + "' AND Pass = '" + pass + "'";
+        if (validarFormatoEmail(correo)){
+            try (Connection conn = SGBD.getMiSGBD().conectarBD();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
+                if (rs.next()) {
+                    JSONObject js = new JSONObject();
+                    int admin = rs.getInt("Admin");
+                    if (admin == 1) {
+                        return 1;
+                    }
+                    js.put("IdUsuario", correo);
+                    js.put("Pass", pass);
+                    js.put("LogFecha", now().toString());
+                    int ayuda = rs.getInt("Ayuda");
+                    js.put("Ayuda", ayuda);
+                    String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
+                    PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
+                    pstmt.executeUpdate();
 
-        try (Connection conn = SGBD.getMiSGBD().conectarBD();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            if (rs.next()) {
-                JSONObject js = new JSONObject();
-                int admin = rs.getInt("Admin");
-                if (admin == 1) {
-                    return 1;
+                    Usuario.getUsuario().cargarUsuario(js);
+                    return -1;
                 }
-                js.put("IdUsuario", correo);
-                js.put("Pass", pass);
-                js.put("LogFecha", now().toString());
-                int ayuda = rs.getInt("Ayuda");
-                js.put("Ayuda", ayuda);
-
-                String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
-                PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
-                pstmt.executeUpdate();
-
-                Usuario.getUsuario().cargarUsuario(js);
-                return -1;
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                return 0;
             }
-
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             return 0;
         }
         return 0;
@@ -180,21 +203,16 @@ public class GestorUsuario {
      * @return TRUE si se ha enviado la contraseña, FALSE si ha habido algún error.
      */
     public boolean recuperarContrasena(String correo) {
-
-
         JSONObject usuario = buscarUsuario(correo);
-
         if (usuario != null) {
             final String fromEmail = "barbesadsi2018@gmail.com"; //requires valid gmail id
             final String password = "ADSIbarbes2018"; // correct password for gmail id
-
             System.out.println("TLSEmail Start");
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
             props.put("mail.smtp.port", "587"); //TLS Port
             props.put("mail.smtp.auth", "true"); //enable authentication
             props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
-
             //create Authenticator object to pass in Session.getInstance argument
             Authenticator auth = new Authenticator() {
                 //override the getPasswordAuthentication method
@@ -203,7 +221,6 @@ public class GestorUsuario {
                 }
             };
             Session session = Session.getInstance(props, auth);
-
             return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
         }
         return false;
@@ -211,12 +228,12 @@ public class GestorUsuario {
 
     public boolean identificarRRSS(String correo) {
         String pass = UUID.randomUUID().toString();
-        if (!registrarUsuario(correo, pass)) { //Si ya tiene cuenta
+        if (!registrarUsuario(correo, pass, pass)) { //Si ya tiene cuenta
             JSONObject usuario = buscarUsuario(correo);
-            comprobarUsuario(correo, usuario.getString("Pass"));
+            identificarCorreo(correo, usuario.getString("Pass"));
             return true;
         } else { //Si no tiene cuenta
-            comprobarUsuario(correo, pass);
+            identificarCorreo(correo, pass);
             return false;
         }
     }

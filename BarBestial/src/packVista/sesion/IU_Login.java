@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import packControlador.Controlador;
 
+import javax.swing.*;
+
 public class IU_Login {
 
     public Button btnLogin;
@@ -45,42 +47,31 @@ public class IU_Login {
 
 
     public void eventIdentificar(MouseEvent mouseEvent) {
-        if (Sesion.validarFormatoEmail(txtCorreo.getText())) {
-            if (!txtPass.getText().equals("")) {
-                int resul = Controlador.getMiControlador().comprobarUsuario(txtCorreo.getText(), txtPass.getText());
-                if (resul == -1) {//noadmin
-                    mostrarAlerta(Alert.AlertType.CONFIRMATION, btnLogin.getScene().getWindow(), "Identificación", "Bienvenido");
-                    Controlador.getMiControlador().mostarVentanaInicio();
-                    Platform.exit();
-                } else if (resul == 1) {//admin
-                    mostrarAlerta(Alert.AlertType.CONFIRMATION, btnLogin.getScene().getWindow(), "Identificación", "ADMIN");
-                    Controlador.getMiControlador().mostrarVentanaFecha();
-                    Platform.exit();
-                } else {
-                    mostrarAlerta(Alert.AlertType.ERROR, btnLogin.getScene().getWindow(), "Error", "Error en la Identificación");
-                }
+        if (!txtPass.getText().equals("")) {
+            int resul = Controlador.getMiControlador().identificarCorreo(txtCorreo.getText(), txtPass.getText());
+            if (resul == -1) {//noadmin
+                JOptionPane.showConfirmDialog(null,
+                        "Bienvenido", "Identificación", JOptionPane.DEFAULT_OPTION);
+                Controlador.getMiControlador().mostarVentanaInicio();
+                Platform.exit();
+            } else if (resul == 1) {//admin
+                JOptionPane.showConfirmDialog(null,
+                        "ADMIN", "Identificación", JOptionPane.DEFAULT_OPTION);
+                Controlador.getMiControlador().mostrarVentanaFecha();
+                Platform.exit();
+            } else {
+                JOptionPane.showConfirmDialog(null,
+                        "Error en la Identificación", "Error", JOptionPane.DEFAULT_OPTION);
             }
-
-        } else {
-            mostrarAlerta(Alert.AlertType.ERROR, sceneRegistro.getWindow(), "Error", "Error en la Identificación");
         }
-
-
     }
-
     @FXML
     protected void eventOpenRPassword(MouseEvent mouseEvent) {
         Stage primaryStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(sceneRPassword);
     }
 
-    private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {
-        Sesion.mensaje(alertType, owner, title, message);
-    }
-
-
     public void eventOpenRRSS(MouseEvent mouseEvent) {
-
         try {
             FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("IdentificacionRRSS.fxml"));
             Parent panelIdentificacionRRSS = fxmlIdentificacionRRSS.load();

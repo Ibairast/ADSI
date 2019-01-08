@@ -6,8 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import packControlador.Controlador;
+
+import javax.swing.*;
 
 public class IU_SignUp {
     public Button btnRegistro;
@@ -32,44 +33,26 @@ public class IU_SignUp {
     }
 
     public void eventRegistrar(MouseEvent mouseEvent) {
-        if (Sesion.validarFormatoEmail(txtCorreo.getText())) {
-            if (cbTerminos.isSelected()) {//Comprobar cb y que el usuario no esté vacío.
-
-                if (comprobarContrasena()) {
-                    if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText())) {
-                        mostrarAlerta(Alert.AlertType.CONFIRMATION, btnRegistro.getScene().getWindow(), "Éxito", "Usuario registrado");
-                        eventOpenLogin(mouseEvent);
-                    } else {
-                        mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "No se ha podido registrar");
-                    }
-                } else {
-                    mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "Fallo en la introducción de datos");
-                }
+        if (cbTerminos.isSelected()) {//Comprobar cb y que el usuario no esté vacío.
+            if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText(),txtPass2.getText())) {
+                JOptionPane.showConfirmDialog(null,
+                        "Usuario registrado", "Éxito", JOptionPane.DEFAULT_OPTION);
+                eventOpenLogin(mouseEvent);
             } else {
-                mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "Fallo en la introducción de datos");
-
+                JOptionPane.showConfirmDialog(null,
+                        "No se ha podido registrar", "Error", JOptionPane.DEFAULT_OPTION);
             }
         } else {
-            mostrarAlerta(Alert.AlertType.ERROR, btnRegistro.getScene().getWindow(), "Error", "Fallo en la introducción de datos");
+            JOptionPane.showConfirmDialog(null,
+                    "Fallo en la introducción de datos", "Error", JOptionPane.DEFAULT_OPTION);
         }
-
     }
 
-    private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {
-        Sesion.mensaje(alertType, owner, title, message);
-    }
 
     @FXML
     protected void eventOpenLogin(MouseEvent mouseEvent) {
         Stage primaryStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(sceneIdentificacion);
-    }
-
-    private boolean comprobarContrasena() {
-        if (txtPass1.getText().equals(txtPass2.getText())) {
-            return !txtPass1.getText().equals("");
-        }
-        return false;
     }
 
 

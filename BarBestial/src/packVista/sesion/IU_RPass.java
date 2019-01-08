@@ -3,13 +3,13 @@ package packVista.sesion;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import packControlador.Controlador;
+
+import javax.swing.*;
 
 public class IU_RPass {
 
@@ -29,21 +29,13 @@ public class IU_RPass {
     }
 
     public void eventEnviarContrasena(MouseEvent mouseEvent) {
-        if (Sesion.validarFormatoEmail(txtCorreo.getText())) {
-            if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
-                mostrarAlerta(Alert.AlertType.CONFIRMATION, btnRPass.getScene().getWindow(), "Éxito", "Su contraseña ha sido enviada");
-            } else {
-                mostrarAlerta(Alert.AlertType.ERROR, btnRPass.getScene().getWindow(), "Error", "Error en el envío de contraseña");
-            }
+        if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
+            JOptionPane.showConfirmDialog(null,
+                    "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
         } else {
-            mostrarAlerta(Alert.AlertType.ERROR, btnRPass.getScene().getWindow(), "Error", "Error en el envío de contraseña");
+            JOptionPane.showConfirmDialog(null,
+                    "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
         }
-
-
-    }
-
-    private void mostrarAlerta(Alert.AlertType alertType, Window owner, String title, String message) {
-        Sesion.mensaje(alertType, owner, title, message);
     }
 
 

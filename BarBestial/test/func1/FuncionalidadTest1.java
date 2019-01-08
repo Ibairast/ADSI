@@ -3,7 +3,6 @@ package func1;
 import org.junit.Test;
 import packControlador.GestorUsuario;
 import packModelo.SGBD;
-import packVista.sesion.Sesion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,7 +26,7 @@ public class FuncionalidadTest1 {
 
 
             String correo = "pguerrerolinares@gmail.com";
-            GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123");
+            GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123", "123");
 
             ResultSet rs = stmt.executeQuery("SELECT IdUsuario FROM Usuario");
             assertTrue(rs.next());
@@ -60,12 +59,12 @@ public class FuncionalidadTest1 {
         String emailIncorrecto02 = "123..@gmail.com";
         String emailIncorrecto03 = "123@gmail";
         String emailVacio = "";
-        assertTrue(Sesion.validarFormatoEmail(emailCorrecto));
+        assertTrue(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailCorrecto));
 
-        assertFalse(Sesion.validarFormatoEmail(emailIncorrecto01));
-        assertFalse(Sesion.validarFormatoEmail(emailIncorrecto02));
-        assertFalse(Sesion.validarFormatoEmail(emailIncorrecto03));
-        assertFalse(Sesion.validarFormatoEmail(emailVacio));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailIncorrecto01));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailIncorrecto02));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailIncorrecto03));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailVacio));
     }
 
     /**
@@ -94,7 +93,7 @@ public class FuncionalidadTest1 {
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
 
-            assertEquals(GestorUsuario.getGestorUsuario().comprobarUsuario(correo, contraBuena), -1);
+            assertEquals(GestorUsuario.getGestorUsuario().identificarCorreo(correo, contraBuena), -1);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +119,7 @@ public class FuncionalidadTest1 {
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
 
-            assertEquals(GestorUsuario.getGestorUsuario().comprobarUsuario(correo, contraBuena), 1);
+            assertEquals(GestorUsuario.getGestorUsuario().identificarCorreo(correo, contraBuena), 1);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +144,7 @@ public class FuncionalidadTest1 {
                     " VALUES('" + correo + "','" + contraBuena + "', 0 ,'2019-01-01', 0)");
 
 
-            assertEquals(GestorUsuario.getGestorUsuario().comprobarUsuario(correo, contraErreonea), 0);
+            assertEquals(GestorUsuario.getGestorUsuario().identificarCorreo(correo, contraErreonea), 0);
 
 
         } catch (Exception e) {
