@@ -14,7 +14,7 @@ import java.util.Vector;
 public class VentanaUsuario extends JFrame {
     private static final long serialVersionUID = 1L;
     private VentanaFecha ventanaFecha;
-
+         //Creacion de los elementos de la ventana
         private JButton btneliminar =new JButton("Eliminar");;
         private JButton btnvolver =new JButton("Volver");;
         private JCheckBox check = new JCheckBox();
@@ -28,23 +28,29 @@ public class VentanaUsuario extends JFrame {
         btneliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (algunoPulsado()) {
+                    //Si algun chechBox ha sido seleccionado
                     int cont= contadorPulsado();
                     JSONArray json = eliminarUsuarios();
                     limpiarVentana();
+                    //Llamamos al metodo del controlador pasandole el json obtenido antes
                     Controlador.getMiControlador().eliminarUsuarios(json);
                     if(cont>1){
+                        //Si hemos seleccionado mas de un usuario
                         JOptionPane.showConfirmDialog(null,
                                 "Usuarios eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                     }else{
+                        //Si solo hemos seleccionado un usuario
                         JOptionPane.showConfirmDialog(null,
                                 "Usuario eliminado", "Usuario", JOptionPane.DEFAULT_OPTION);
                     }
-
+                    //Ponemos el visible a false para que no se vea la ventana y la cerramos
                     setVisible(false);
                     dispose();
+                    //Volvemos ala ventana fecha
                     ventanaFecha= new VentanaFecha();
                     ventanaFecha.setVisible(true);
                 } else {
+                    //Si ningun chechBox ha sido seleccionado
                     JOptionPane.showConfirmDialog(null,
                             "Error,debes seleccionar al menos un usuario", "Usuario", JOptionPane.DEFAULT_OPTION);
                 }
@@ -54,8 +60,10 @@ public class VentanaUsuario extends JFrame {
         btnvolver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 limpiarVentana();
+                //Ponemos el visible a false para que no se vea la ventana y la cerramos
                 setVisible(false);
                 dispose();
+                //Volvemos ala ventana fecha
                 ventanaFecha= new VentanaFecha();
                 ventanaFecha.setVisible(true);
             }
@@ -84,7 +92,8 @@ public class VentanaUsuario extends JFrame {
         });
 
     }
-
+    //Recibimos un json con todos los usuarios que no se han logeado desde una fecha
+    //y los cargamos en la pantalla como checkBox
     public void cargarUsuarios(JSONArray json){
         for(int i=0;i<json.length();i++){
             JSONObject objeto = json.getJSONObject(i);
@@ -96,9 +105,7 @@ public class VentanaUsuario extends JFrame {
 
     }
 
-      public void addEliminar(ActionListener listenForBtnEliminar) {
-        btneliminar.addActionListener(listenForBtnEliminar);
-    }
+    //Miramos si algun checkBox ha sido seleccionado
     public boolean algunoPulsado(){
       boolean pulsado=false;
       int i=0;
@@ -111,9 +118,10 @@ public class VentanaUsuario extends JFrame {
         }
         return pulsado;
     }
+    //Recorremos todos los chechBox que tenemos y vamos mirando si estan seleccionados.
+    //Si lo esta cogemos su texto y lo añadimos al json
     public JSONArray eliminarUsuarios(){
         JSONArray json = new JSONArray();
-
         for(int i=0;i<panel.getComponentCount();i++){
             JCheckBox check = (JCheckBox) panel.getComponent(i);
             if(check.isSelected()){
@@ -124,7 +132,7 @@ public class VentanaUsuario extends JFrame {
         }
         return json;
     }
-
+    //Limpiamos la ventana, para que cuando se vuelva a abrir este vacia
     public void limpiarVentana(){
        int i= panel.getComponentCount();
        int j=0;
@@ -133,6 +141,7 @@ public class VentanaUsuario extends JFrame {
           j++;
       }
     }
+    //Miramos haber cuantos checkBox han sido seleccionados
     public int contadorPulsado(){
         int cont=0;
         int i=0;
