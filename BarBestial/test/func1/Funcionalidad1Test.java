@@ -48,14 +48,13 @@ public class Funcionalidad1Test {
             //Limpieza inicial
             stmt.executeUpdate("DELETE FROM Usuario");
             String correo = "pguerrerolinares@gmail.com";
+            String contraBuena = "123";
+            int admin = 0;
             boolean test;
-            
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
             test =  GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123", "123");
-            assertTrue(test);
-            ResultSet rs = stmt.executeQuery("SELECT IdUsuario FROM Usuario");
-            assertTrue(rs.next());
-            assertEquals(correo, rs.getString("IdUsuario"));
-            assertFalse(rs.next());
+            assertFalse(test);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,11 +105,11 @@ public class Funcionalidad1Test {
      * Usuario RRSS, depende de la API de GOOGLE.
      */
     @Test
-    public void registroPrueba05() {
+    public void registroPrueba05_06() {
     }
 
     /**
-     * Correo usuario y contraseña correcto
+     * Correo usuario y contraseña correcto.
      */
     @Test
     public void identificacionPrueba01() {
@@ -131,7 +130,7 @@ public class Funcionalidad1Test {
     }
 
     /**
-     * Correo admin y contraseña correcto
+     * Correo admin y contraseña correcto.
      */
     @Test
     public void identificacionPrueba02() {
@@ -171,27 +170,44 @@ public class Funcionalidad1Test {
         }
     }
 
+    /**
+     * Ambas contraseñas coinciden.
+     */
     @Test
     public void cambiarContraPrueba01() {
         String correo = "pguerrerolinares@gmail.com";
-        String contra = "123";
-        String nuevaContra = "321";
+        String contraActual = "123";
+        String nuevaContra1 = "321";
+
+        String nuevaContra2 = "321";
+        assertTrue(GestorUsuario.getGestorUsuario().contrasenaValida(nuevaContra1,nuevaContra2));
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
             //Limpieza inicial
             stmt.executeUpdate("DELETE FROM Usuario");
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    " VALUES('" + correo + "','" + contra + "', 0 ,'2019-01-01', 0)");
-            GestorUsuario.getGestorUsuario().cambiarContrasena(correo, nuevaContra);
+                    " VALUES('" + correo + "','" + contraActual + "', 0 ,'2019-01-01', 0)");
+            GestorUsuario.getGestorUsuario().cambiarContrasena(correo, nuevaContra1);
             ResultSet rs = stmt.executeQuery("SELECT Pass FROM Usuario");
-            assertEquals(rs.getString("Pass"), nuevaContra);
+            assertEquals(rs.getString("Pass"), nuevaContra1);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Correo correcto
+     * Las contraseñas no coinciden.
+     */
+    @Test
+    public void cambiarContraPrueba02() {
+        String nuevaContra1 = "123";
+        String nuevaContra2 = "321";
+        assertFalse(GestorUsuario.getGestorUsuario().contrasenaValida(nuevaContra1,nuevaContra2));
+
+    }
+
+    /**
+     * Correo correcto (registrado)
      */
 
     @Test
@@ -211,7 +227,7 @@ public class Funcionalidad1Test {
     }
 
     /**
-     * Correo no registrado.
+     * Correo incorrecto (no registrado).
      */
 
     @Test
