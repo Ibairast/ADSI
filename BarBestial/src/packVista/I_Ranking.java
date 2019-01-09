@@ -27,8 +27,6 @@ public class I_Ranking extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(0, 0, 850, 620);
 
-
-        //setBounds(100, 100, 800, 220);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
@@ -52,7 +50,7 @@ public class I_Ranking extends JFrame {
 
         contentPane.add(panelMenu, BorderLayout.SOUTH);
 
-
+        /* Botones */
         this.btnMisMejoresPartidas = new JButton("Mis Mejores Partidas");
         this.btnMisMejoresPartidas.setBackground(new Color(51, 204, 204));
         this.btnMisMejoresPartidas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,35 +106,165 @@ public class I_Ranking extends JFrame {
     }
 
 
+    /**
+     * Muestra una tabla con las mejores partidas del usuario
+     */
     public void mostrarMisMejoresPartidas() {
+        // Vector en el que se almacenará los datos y campos de la tabla
         Vector<Vector<String>> puntuaciones = new Vector<>();
 
+        // Llamada al gestor que conecta con la base de datos
         JSONArray json = Controlador.getMiControlador().obtenerMisMejoresPartidas();
 
-        if (json.length() > 0) {
+        // Guarda los datos del json en Vector<String> y a su vez se va añadinedo al Vector<Vector<String>>
+
+        if (json.length() > 0) { // En caso de que haya datos en la base de datos
             for (int i = 0; i < json.length(); i++) {
                 Vector<String> puntuacion = new Vector<>();
                 JSONObject object = json.getJSONObject(i);
                 int clave = object.getInt("Puntuacion");
                 puntuacion.add(Integer.toString(clave));
                 puntuaciones.add(puntuacion);
-
             }
-        } else {
+        } else { // En caso de que no haya datos almacenados en la base de datos
             Vector<String> puntuacion = new Vector<>();
             puntuacion.add("No hay datos");
             puntuaciones.add(puntuacion);
         }
 
+
+        // Se crean los campos de la tabla
         Vector<String> columnas = new Vector<>();
         columnas.add("Puntuacion");
 
-        createTable(puntuaciones, columnas);
+        // Se crea la tabla
+        crearTabla(puntuaciones, columnas);
     }
 
-    private void createTable(Vector<Vector<String>> pData, Vector<String> columnas) {
+    /**
+     * Muestra una tabla con la mejor puntuación del día
+     */
+    public void mostrarMejorPuntuacionDia() {
+        // Vector en el que se almacenará los datos y campos de la tabla
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        // Llamada al gestor que conecta con la base de datos
+        JSONArray json = Controlador.getMiControlador().obtenerMejorPuntuacionDia();
+
+        // Guarda los datos del json en Vector<String> y a su vez se va añadinedo al Vector<Vector<String>>
+
+        if (json.length() > 0) { // En caso de que haya datos en la base de datos
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                String id = object.getString("IdUsuario");
+                int punt = object.getInt("Puntuacion");
+                puntuacion.add(id);
+                puntuacion.add(Integer.toString(punt));
+                puntuaciones.add(puntuacion);
+
+            }
+        } else { // En caso de que no haya datos almacenados en la base de datos
+            Vector<String> puntuacion = new Vector<>();
+            puntuacion.add("No hay datos");
+            puntuaciones.add(puntuacion);
+        }
+
+        // Se crean los campos de la tabla
+        Vector<String> columnas = new Vector<>();
+        columnas.add("IdUsuario");
+        columnas.add("Puntuacion");
+
+        // Se crea la tabla
+        crearTabla(puntuaciones, columnas);
+    }
+
+    /**
+     * Muestra una tabla con las mejores partidas
+     */
+    public void mostrarMejoresPartidas() {
+        // Vector en el que se almacenará los datos y campos de la tabla
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        // Llamada al gestor que conecta con la base de datos
+        JSONArray json = Controlador.getMiControlador().obtenerMejoresPartidas();
+
+        // Guarda los datos del json en Vector<String> y a su vez se va añadinedo al Vector<Vector<String>>
+
+        if (json.length() > 0) { // En caso de que haya datos en la base de datos
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                String id = object.getString("IdUsuario");
+                int punt = object.getInt("Puntuacion");
+                String fecha = object.getString("Fecha");
+                puntuacion.add(id);
+                puntuacion.add(Integer.toString(punt));
+                puntuacion.add(fecha);
+                puntuaciones.add(puntuacion);
+            }
+
+        } else { // En caso de que no haya datos almacenados en la base de datos
+            Vector<String> puntuacion = new Vector<>();
+            puntuacion.add("No hay datos");
+            puntuaciones.add(puntuacion);
+        }
+
+        // Se crean los campos de la tabla
+        Vector<String> columnas = new Vector<>();
+        columnas.add("IdUsuario");
+        columnas.add("Puntuacion");
+        columnas.add("Fecha");
+
+        // Se crea la tabla
+        crearTabla(puntuaciones, columnas);
+
+    }
+
+    /**
+     * Muestra una tabla con las mejores medias
+     */
+    public void mostrarMejorMedia() {
+        // Vector en el que se almacenará los datos y campos de la tabla
+        Vector<Vector<String>> puntuaciones = new Vector<>();
+
+        // Llamada al gestor que conecta con la base de datos
+        JSONArray json = Controlador.getMiControlador().obtenerMejorMedia();
+
+        // Guarda los datos del json en Vector<String> y a su vez se va añadinedo al Vector<Vector<String>>
+
+        if (json.length() > 0) { // En caso de que haya datos en la base de datos
+            for (int i = 0; i < json.length(); i++) {
+                Vector<String> puntuacion = new Vector<>();
+                JSONObject object = json.getJSONObject(i);
+                String id = object.getString("IdUsuario");
+                String media = object.getString("Media");
+                puntuacion.add(id);
+                puntuacion.add(media);
+                puntuaciones.add(puntuacion);
+            }
+        } else { // En caso de que no haya datos almacenados en la base de datos
+            Vector<String> puntuacion = new Vector<>();
+            puntuacion.add("No hay datos");
+            puntuaciones.add(puntuacion);
+        }
+
+        // Se crean los campos de la tabla
+        Vector<String> columnas = new Vector<>();
+        columnas.add("IdUsuario");
+        columnas.add("Media");
+
+        // Se crea la tabla
+        crearTabla(puntuaciones, columnas);
+    }
+
+    /**
+     * Crea el JTable y su diseño
+     */
+    private void crearTabla(Vector<Vector<String>> pData, Vector<String> columnas) {
+        //Se crea la JTable con los datos correspondientes
         table = new JTable(pData, columnas);
-        //Table design
+        //Diseño de la tabla
         table.getTableHeader().setBackground(new Color(51, 204, 204));
         table.getTableHeader().setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
         table.setFont(new Font("SansSerif", Font.ROMAN_BASELINE, 15));
@@ -147,105 +275,6 @@ public class I_Ranking extends JFrame {
         contentPane.add(table, BorderLayout.CENTER);
         table.setFillsViewportHeight(true);
     }
-
-    public void mostrarMejorPuntuacionDia() {
-
-        Vector<Vector<String>> puntuaciones = new Vector<>();
-
-        JSONArray json = Controlador.getMiControlador().obtenerMejorPuntuacionDia();
-        if (json.length() > 0) {
-            for (int i = 0; i < json.length(); i++) {
-                Vector<String> puntuacion = new Vector<>();
-                JSONObject object = json.getJSONObject(i);
-                String id = object.getString("IdUsuario");
-                int punt = object.getInt("Puntuacion");
-                puntuacion.add(id);
-                puntuacion.add(Integer.toString(punt));
-                puntuaciones.add(puntuacion);
-
-            }
-        } else {
-            Vector<String> puntuacion = new Vector<>();
-            puntuacion.add("No hay datos");
-            puntuaciones.add(puntuacion);
-        }
-
-        Vector<String> columnas = new Vector<>();
-        columnas.add("IdUsuario");
-        columnas.add("Puntuacion");
-
-        createTable(puntuaciones, columnas);
-    }
-
-    public void mostrarMejoresPartidas() {
-
-        Vector<Vector<String>> puntuaciones = new Vector<>();
-
-        JSONArray json = Controlador.getMiControlador().obtenerMejoresPartidas();
-
-        if (json.length() > 0) {
-            for (int i = 0; i < json.length(); i++) {
-                Vector<String> puntuacion = new Vector<>();
-                JSONObject object = json.getJSONObject(i);
-                String id = object.getString("IdUsuario");
-                int punt = object.getInt("Puntuacion");
-                String fecha = object.getString("Fecha");
-                //System.out.println("Puntuacion: " + clave);
-                puntuacion.add(id);
-                puntuacion.add(Integer.toString(punt));
-                puntuacion.add(fecha);
-                //System.out.println("Size: " + puntuacion.size());
-                puntuaciones.add(puntuacion);
-            }
-
-        } else {
-            Vector<String> puntuacion = new Vector<>();
-            puntuacion.add("No hay datos");
-            puntuaciones.add(puntuacion);
-        }
-
-        Vector<String> columnas = new Vector<>();
-        columnas.add("IdUsuario");
-        columnas.add("Puntuacion");
-        columnas.add("Fecha");
-
-        createTable(puntuaciones, columnas);
-
-    }
-
-    public void mostrarMejorMedia() {
-
-        Vector<Vector<String>> puntuaciones = new Vector<>();
-
-        JSONArray json = Controlador.getMiControlador().obtenerMejorMedia();
-
-        if (json.length() > 0) {
-            for (int i = 0; i < json.length(); i++) {
-                Vector<String> puntuacion = new Vector<>();
-
-                JSONObject object = json.getJSONObject(i);
-                String id = object.getString("IdUsuario");
-                String media = object.getString("Media");
-
-                puntuacion.add(id);
-                puntuacion.add(media);
-                puntuaciones.add(puntuacion);
-            }
-        } else {
-            Vector<String> puntuacion = new Vector<>();
-            puntuacion.add("No hay datos");
-            puntuaciones.add(puntuacion);
-        }
-
-        Vector<String> columnas = new Vector<>();
-        columnas.add("IdUsuario");
-        columnas.add("Media");
-
-        createTable(puntuaciones, columnas);
-
-
-    }
-
 
 }
 

@@ -21,15 +21,26 @@ public class GestorRanking {
     }
 
 
+    /**
+     * Obtiene de la base de datos las mejores 10 puntuaciones ordenadas
+     * en orden descendiente del usuario logueado
+     * @return JSONArray -> {[{Puntuacion:int},...]}
+     */
+
     public JSONArray obtenerMisMejoresPartidas() {
+        // Array de json en el que se irán almacenando los  objetos json
         JSONArray json = new JSONArray();
+
+        // Sentencia sql que obtiene las mejores puntuaciones
         String sql = "SELECT Puntuacion FROM RANKING WHERE IdUsuario = '" + Usuario.getUsuario().getIdUsuario() +
         "' ORDER BY Puntuacion DESC LIMIT 10;";
 
+        // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
+            // Se crean los objetos json con los datos recogidos del select
             while (rs.next()) {
                 JSONObject js = new JSONObject();
                 int puntuacion = rs.getInt("Puntuacion");
@@ -45,16 +56,25 @@ public class GestorRanking {
         return json;
     }
 
+
+    /**
+     * Obtiene de la base de datos la mejor puntuación del día
+     * @return JSONArray -> {[{idUsuario: String, Puntuacion: int},...]}
+     */
     public JSONArray obtenerMejorPuntuacionDia() {
+        // Array de json en el que se irán almacenando los  objetos json
         JSONArray json = new JSONArray();
 
+        // Sentencia sql que obtiene la mejor puntuación del día
         String sql = "SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = strftime('%Y-%m-%d') ORDER BY Puntuacion DESC LIMIT 1;";
 
+        // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            while (rs.next()) { //Solo se hace una vez
+            // Se crean los objetos json con los datos recogidos del select
+            while (rs.next()) {
                 JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
                 int puntuacion = rs.getInt("Puntuacion");
@@ -72,15 +92,24 @@ public class GestorRanking {
         return json;
     }
 
+    /**
+     * Obtiene de la base de datos las 10 mejores partidas
+     * ordenadas en orden descendiente
+     * @return JSONArray -> {[{idUsuario: String, Puntuacion: int, Fecha: Date},...]}
+     */
     public JSONArray obtenerMejoresPartidas() {
+        // Array de json en el que se irán almacenando los  objetos json
         JSONArray json = new JSONArray();
+
+        // Sentencia sql que obtiene las mejores partidas
         String sql = "SELECT IdUsuario, Puntuacion, Fecha FROM RANKING ORDER BY Puntuacion DESC LIMIT 10;";
 
+        // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-
+            // Se crean los objetos json con los datos recogidos del select
             while (rs.next()) {
                 JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
@@ -103,15 +132,25 @@ public class GestorRanking {
         return json;
     }
 
+
+    /**
+     * Obtiene de la base de datos las 10 mejores medias
+     * ordenadas en orden descendiente de las partidas ganadas
+     * @return JSONArray -> {[{idUsuario: String, Media: Float},...]}
+     */
     public JSONArray obtenerMejorMedia() {
+        // Array de json en el que se irán almacenando los  objetos json
         JSONArray json = new JSONArray();
+
+        // Sentencia sql que obtiene las mejores medias
         String sql = "SELECT IdUsuario, AVG(Puntuacion) AS Media FROM RANKING WHERE Gana = 1 GROUP BY IdUsuario ORDER BY Media DESC LIMIT 10;";
 
+        // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-
+            // Se crean los objetos json con los datos recogidos del select
             while (rs.next()) { //Solo se hace una vez
                 JSONObject js = new JSONObject();
                 String usuario = rs.getString("IdUsuario");
