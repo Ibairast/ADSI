@@ -17,7 +17,6 @@ public class FuncionalidadTest2 {
     /**
      * No hay datos en la tabla ranking de la base de datos
      */
-
     @Test
     public void sinDatos() {
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
@@ -47,6 +46,131 @@ public class FuncionalidadTest2 {
         }
     }
 
+    /**
+     * Mis Mejores Partidas
+     */
+    @Test
+    public void misMejoresPartidas() {
+        cargarDatos();
+        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+
+        JSONObject object = json.getJSONObject(0);
+        int clave = object.getInt("Puntuacion");
+        assertTrue(clave == 100);
+
+        JSONObject object1 = json.getJSONObject(1);
+        int clave1 = object1.getInt("Puntuacion");
+        assertTrue(clave1 == 90);
+
+        JSONObject object2 = json.getJSONObject(2);
+        int clave2 = object2.getInt("Puntuacion");
+        assertTrue(clave2 == 70);
+
+        JSONObject object3 = json.getJSONObject(3);
+        int clave3 = object3.getInt("Puntuacion");
+        assertTrue(clave3 == 60);
+
+        JSONObject object4 = json.getJSONObject(4);
+        int clave4 = object4.getInt("Puntuacion");
+        assertTrue(clave4 == 55);
+
+        JSONObject object5 = json.getJSONObject(5);
+        int clave5 = object5.getInt("Puntuacion");
+        assertTrue(clave5 == 50);
+
+        JSONObject object6 = json.getJSONObject(6);
+        int clave6 = object6.getInt("Puntuacion");
+        assertTrue(clave6 == 36);
+
+        JSONObject object7 = json.getJSONObject(7);
+        int clave7 = object7.getInt("Puntuacion");
+        assertTrue(clave7 == 30);
+
+        JSONObject object8 = json.getJSONObject(8);
+        int clave8 = object8.getInt("Puntuacion");
+        assertTrue(clave8 == 20);
+
+        JSONObject object9 = json.getJSONObject(9);
+        int clave9 = object9.getInt("Puntuacion");
+        assertTrue(clave9 == 10);
+    }
+
+    /**
+     * Mejor Puntuacion Dia
+     */
+    @Test
+    public void mejorPuntuacionDia() {
+
+        cargarDatos();
+
+        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
+
+        JSONObject object = json.getJSONObject(0);
+        String id = object.getString("IdUsuario");
+        int punt = object.getInt("Puntuacion");
+        assertTrue(id.equals("paul@gmail.com"));
+        assertTrue(punt == 100);
+    }
+
+    /**
+     * Mejores Partidas
+     */
+    @Test
+    public void mejoresPartidas() {
+
+        cargarDatos();
+
+        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
+
+        JSONObject object = json.getJSONObject(0);
+        String id = object.getString("IdUsuario");
+        int punt = object.getInt("Puntuacion");
+        String fecha = object.getString("Fecha");
+        assertTrue(id.equals("paul@gmail.com"));
+        assertTrue(punt == 100);
+        assertTrue(fecha.equals(now().toString()));
+
+        JSONObject object1 = json.getJSONObject(9);
+        String id1 = object1.getString("IdUsuario");
+        int punt1 = object1.getInt("Puntuacion");
+        String fecha1 = object1.getString("Fecha");
+        assertTrue(id1.equals("andrea@gmail.com"));
+        assertTrue(punt1 == 36);
+        assertTrue(fecha1.equals("2019-01-14"));
+    }
+
+    /**
+     * Mejor Media
+     */
+    @Test
+    public void mejoresMedias() {
+
+        cargarDatos();
+
+        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMejorMedia();
+
+        JSONObject object = json.getJSONObject(0);
+        String id = object.getString("IdUsuario");
+        String media = object.getString("Media");
+        assertTrue(id.equals("paul@gmail.com"));
+        assertTrue(media.equals("85.0"));
+
+        JSONObject object1 = json.getJSONObject(1);
+        String id1 = object1.getString("IdUsuario");
+        String media1 = object1.getString("Media");
+        assertTrue(id1.equals("ibai@gmail.com"));
+        assertTrue(media1.equals("80.0"));
+
+        JSONObject object2 = json.getJSONObject(2);
+        String id2 = object2.getString("IdUsuario");
+        String media2 = object2.getString("Media");
+        assertTrue(id2.equals("andrea@gmail.com"));
+        assertTrue(media2.equals("70.833336"));
+    }
+
+    /**
+     * Método para cargar los datos en la base de datos para las pruebas
+     */
     private void cargarDatos(){
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
@@ -106,134 +230,5 @@ public class FuncionalidadTest2 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-
-    /**
-     * Mis Mejores Partidas
-     */
-    @Test
-    public void misMejoresPartidas() {
-        cargarDatos();
-        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
-
-        JSONObject object = json.getJSONObject(0);
-        int clave = object.getInt("Puntuacion");
-        assertTrue(clave == 100);
-
-        JSONObject object1 = json.getJSONObject(1);
-        int clave1 = object1.getInt("Puntuacion");
-        assertTrue(clave1 == 90);
-
-        JSONObject object2 = json.getJSONObject(2);
-        int clave2 = object2.getInt("Puntuacion");
-        assertTrue(clave2 == 70);
-
-        JSONObject object3 = json.getJSONObject(3);
-        int clave3 = object3.getInt("Puntuacion");
-        assertTrue(clave3 == 60);
-
-        JSONObject object4 = json.getJSONObject(4);
-        int clave4 = object4.getInt("Puntuacion");
-        assertTrue(clave4 == 55);
-
-        JSONObject object5 = json.getJSONObject(5);
-        int clave5 = object5.getInt("Puntuacion");
-        assertTrue(clave5 == 50);
-
-        JSONObject object6 = json.getJSONObject(6);
-        int clave6 = object6.getInt("Puntuacion");
-        assertTrue(clave6 == 36);
-
-        JSONObject object7 = json.getJSONObject(7);
-        int clave7 = object7.getInt("Puntuacion");
-        assertTrue(clave7 == 30);
-
-        JSONObject object8 = json.getJSONObject(8);
-        int clave8 = object8.getInt("Puntuacion");
-        assertTrue(clave8 == 20);
-
-        JSONObject object9 = json.getJSONObject(9);
-        int clave9 = object9.getInt("Puntuacion");
-        assertTrue(clave9 == 10);
-
-    }
-
-    /**
-     * Mejor Puntuacion Dia
-     */
-    @Test
-    public void mejorPuntuacionDia() {
-
-        cargarDatos();
-
-        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
-
-        JSONObject object = json.getJSONObject(0);
-        String id = object.getString("IdUsuario");
-        int punt = object.getInt("Puntuacion");
-        assertTrue(id.equals("paul@gmail.com"));
-        assertTrue(punt == 100);
-    }
-
-    /**
-     * Mejores Partidas
-     */
-    @Test
-    public void mejoresPartidas() {
-
-        cargarDatos();
-
-        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
-
-        JSONObject object = json.getJSONObject(0);
-        String id = object.getString("IdUsuario");
-        int punt = object.getInt("Puntuacion");
-        String fecha = object.getString("Fecha");
-        assertTrue(id.equals("paul@gmail.com"));
-        assertTrue(punt == 100);
-        assertTrue(fecha.equals(now().toString()));
-
-        JSONObject object1 = json.getJSONObject(9);
-        String id1 = object1.getString("IdUsuario");
-        int punt1 = object1.getInt("Puntuacion");
-        String fecha1 = object1.getString("Fecha");
-        assertTrue(id1.equals("andrea@gmail.com"));
-        assertTrue(punt1 == 36);
-        assertTrue(fecha1.equals("2019-01-14"));
-
-
-    }
-
-    /**
-     * Mejor Media
-     */
-    @Test
-    public void mejoresMedias() {
-
-        cargarDatos();
-
-        JSONArray json = GestorRanking.getMiGestorRanking().obtenerMejorMedia();
-
-        JSONObject object = json.getJSONObject(0);
-        String id = object.getString("IdUsuario");
-        String media = object.getString("Media");
-        assertTrue(id.equals("paul@gmail.com"));
-        assertTrue(media.equals("85.0"));
-
-        JSONObject object1 = json.getJSONObject(1);
-        String id1 = object1.getString("IdUsuario");
-        String media1 = object1.getString("Media");
-        assertTrue(id1.equals("ibai@gmail.com"));
-        assertTrue(media1.equals("80.0"));
-
-        JSONObject object2 = json.getJSONObject(2);
-        String id2 = object2.getString("IdUsuario");
-        String media2 = object2.getString("Media");
-        assertTrue(id2.equals("andrea@gmail.com"));
-        assertTrue(media2.equals("70.833336"));
-
-
-
     }
 }
