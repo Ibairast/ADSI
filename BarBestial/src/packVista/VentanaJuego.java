@@ -1,6 +1,7 @@
 package packVista;
 
 import packControlador.Controlador;
+import packControlador.GestorCarga;
 import packModelo.JugadorReal;
 import packModelo.Partida;
 
@@ -8,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -139,10 +141,16 @@ public class VentanaJuego extends JFrame implements Observer {
         btnSiguiente.setBackground(new Color (51, 204, 204));
         panelElegirCartas.add(btnSiguiente);
 
-//        btnGuardar = new JButton("Guardar");
-//        btnGuardar.setPreferredSize(new Dimension(120, 25));
-//        panelElegirCartas.add(btnGuardar);
-//
+        btnGuardar = new JButton("Guardar");
+        btnGuardar.setPreferredSize(new Dimension(120, 25));
+        panelElegirCartas.add(btnGuardar);
+        btnGuardar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                String nombreP = JOptionPane.showInputDialog("Nombre de Partida?");
+                Partida.getMiPartida().guardarPartida(nombreP);
+            }
+        });
+
 //        btnAyuda = new JButton("Ayuda");
 //        btnAyuda.setPreferredSize(new Dimension(120, 25));
 //        panelElegirCartas.add(btnAyuda);

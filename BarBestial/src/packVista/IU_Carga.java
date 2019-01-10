@@ -1,5 +1,7 @@
 package packVista;
 
+import packControlador.GestorCarga;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,6 +18,8 @@ import java.awt.event.ActionEvent;
 public class IU_Carga extends JFrame{
 
 	private JFrame frame;
+	String[] partidas;
+	JList<String> list = new JList<String>(partidas);
 
 	/**
 	 * Launch the application.
@@ -38,6 +42,7 @@ public class IU_Carga extends JFrame{
 	 */
 	public IU_Carga() {
 		initialize();
+		cargar();
 	}
 
 	/**
@@ -55,22 +60,31 @@ public class IU_Carga extends JFrame{
 		JLabel lblCargarPartida = new JLabel("Cargar Partida");
 		lblCargarPartida.setBounds(12, 0, 111, 35);
 		frame.getContentPane().add(lblCargarPartida);
-		
-		JList list = new JList();
+
 		list.setBounds(22, 38, 290, 208);
 		frame.getContentPane().add(list);
 		
 		JButton btnCargar = new JButton("Cargar");
 		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cargar();
 			}
 		});
 		btnCargar.setBounds(326, 103, 94, 25);
 		frame.getContentPane().add(btnCargar);
 
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cargar();
+			}
+		});
 		btnEliminar.setBounds(326, 162, 94, 25);
 		frame.getContentPane().add(btnEliminar);
+	}
+
+	public void cargar(){
+		GestorCarga.getGestor().getPartidas();
 	}
 
 	@Override

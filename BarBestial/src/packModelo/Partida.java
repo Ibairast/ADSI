@@ -11,9 +11,9 @@ import java.util.Observable;
 
 public class Partida extends Observable {
     private static Partida miPartida;
-    private String user;
-    private String mazoP;
-    private int NAyudas;
+    private String user=Usuario.getUsuario().getIdUsuario();
+    private String mazoP=Usuario.getUsuario().getMazoP();
+    private int NAyudas=Usuario.getUsuario().getAyuda();
 
     /* El turno se representa como un numero
      * que indica la posicion de la lista de jugadores
@@ -177,9 +177,9 @@ public class Partida extends Observable {
         String sql= "INSERT INTO Partida VALUES('"+nombreP+"','"+ this.user +"','"+mazoP+"','"+NAyudas+"')";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
+             pstmt.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+             e.printStackTrace();
         }
         //Guardar Listas
         Bar.getMiBar().guardarCielo(nombreP);

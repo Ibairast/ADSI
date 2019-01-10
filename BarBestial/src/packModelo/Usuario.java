@@ -48,4 +48,12 @@ public class Usuario {
     public void setAyuda(int ayuda) {
         Ayuda = ayuda;
     }
+
+    public String getMazoP() {
+        /**
+
+         Alain Please ;)
+
+         **/
+    }
 }

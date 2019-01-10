@@ -129,7 +129,15 @@ public class GestorCarga {
     }
 
     public void getPartidas() {
-        // TODO - implement GestorCarga.getPartidas
-        throw new UnsupportedOperationException();
+        String sql="Select IdPartida From Partida Where IdUsuario = '"+this.user+"'";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                rs.getString("IdUsuario");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
