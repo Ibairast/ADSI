@@ -1,5 +1,7 @@
 package func6;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
 import packControlador.Controlador;
 import packControlador.GestorUsuario;
@@ -15,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class Funcionalidad6Test {
     @Test
-    public void prueba1(){
+    public void obtenerUsuariosPorFecha(){
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
 
@@ -35,20 +37,40 @@ public class Funcionalidad6Test {
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo2 + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
 
-            assertEquals(Controlador.getMiControlador().obtenerUsuarios(fecha).length(),0);
+            assertEquals(Controlador.getMiControlador().obtenerUsuarios(fecha).length(),3);
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     @Test
-    public void prueba2(){
+    public void eliminarUsuariosConJson(){
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
-
+            JSONArray json= new JSONArray();
             stmt.executeUpdate("DELETE FROM Usuario");
 
+            String correo = "p@gmail.com";
+            String correo1 = "pg@gmail.com";
+            String correo2 = "pgu@gmail.com";
+            String contraBuena = "123";
+
             String fecha="2019-02-02";
+
+
+            int admin = 0;
+
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('" + correo1 + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+                    " VALUES('" + correo2 + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
+
+
+            assertEquals(Controlador.getMiControlador().obtenerUsuarios(fecha).length(),0);
+            Controlador.getMiControlador().eliminarUsuarios(Controlador.getMiControlador().obtenerUsuarios(fecha));
             assertEquals(Controlador.getMiControlador().obtenerUsuarios(fecha).length(),0);
 
         } catch (Exception e) {

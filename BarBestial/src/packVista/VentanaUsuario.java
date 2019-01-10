@@ -102,7 +102,6 @@ public class VentanaUsuario extends JFrame {
             System.out.println(id);
             panel.add(check);
         }
-
     }
 
     //Miramos si algun checkBox ha sido seleccionado
