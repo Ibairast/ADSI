@@ -1,4 +1,4 @@
-﻿package packControlador;
+package packControlador;
 
 import org.json.JSONArray;
 import packModelo.*;
@@ -163,12 +163,12 @@ public class Controlador {
         GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion(mazo);
     }
 
-    public boolean eliminarPersonalizacion(String mazo){
-        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo);
+    public void eliminarPersonalizacion(String mazo){
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo);
     }
 
-    public boolean anadirPersonalizacion(String nombre, String path){
-        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path);
+    public void anadirPersonalizacion(String nombre, String path){
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path);
     }
 
     //Ranking
