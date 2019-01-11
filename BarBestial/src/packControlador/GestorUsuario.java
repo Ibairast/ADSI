@@ -52,8 +52,8 @@ public class GestorUsuario {
 
         if (validarFormatoCorreo(txtCorreo) && contrasenaValida(txtPass, txtPass2)) {
             if (buscarCorreo(txtCorreo) == null) {
-                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda) VALUES(" +
-                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0)";
+                String sql = "INSERT INTO USUARIO(IdUsuario, Pass, Admin, LogFecha, Ayuda, IDMazo) VALUES(" +
+                        "'" + txtCorreo + "' ," + "'" + txtPass + "' , 0, '" + now().toString() + "' ,0,'defecto')";
 
                 try (Connection conn = SGBD.getMiSGBD().conectarBD();
                      PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -125,6 +125,7 @@ public class GestorUsuario {
                 jugador.put("Admin", rs.getInt("Admin"));
                 jugador.put("LogFecha", rs.getString("LogFecha"));
                 jugador.put("Ayuda", rs.getInt("Ayuda"));
+                jugador.put("IDMazo", rs.getString("IDMazo"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,6 +168,9 @@ public class GestorUsuario {
                     usuario.put("LogFecha", now().toString());
                     int ayuda = rs.getInt("Ayuda");
                     usuario.put("Ayuda", ayuda);
+                    String idmazo = rs.getString("IDMazo");
+                    js.put("IDMazo",idmazo);
+                    
                     String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
                     PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
                     pstmt.executeUpdate();
