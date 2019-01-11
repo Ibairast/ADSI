@@ -54,6 +54,7 @@ public class SGBD {
                 "Admin INT(1) NOT NULL, " +
                 "LogFecha DATE NOT NULL, " +
                 "Ayuda INT(11) NOT NULL, " +
+                "IDMazo VARCHAR(100), " +
 
                 "PRIMARY KEY(IdUsuario))";
 
