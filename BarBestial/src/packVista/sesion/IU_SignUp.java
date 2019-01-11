@@ -16,8 +16,6 @@ import javax.swing.*;
 public class IU_SignUp {
     public Button btnRegistro;
     @FXML
-    private TextField txtUsuario;
-    @FXML
     private TextField txtCorreo;
 
     @FXML
@@ -30,18 +28,23 @@ public class IU_SignUp {
     private CheckBox cbTerminos;
     private Scene sceneIdentificacion;
 
-
+    /**
+     * @param sceneIdentificacion Escena perteneciente a la interfaz "IU_Login".
+     */
     protected void setSceneIdentificacion(Scene sceneIdentificacion) {
         this.sceneIdentificacion = sceneIdentificacion;
     }
 
     /**
-     * Evento ejecutado al presionar el botón "Registrar".
+     * @param mouseEvent Evento generado al pulsar sobre el botón identificado como "btnRegistro".
+     * @precondicion Ninguna.
+     * @postcondicion Registra al usuario con los datos introducidos, mostrando un pop up de Éxito. En caso contrario
+     * se muestra un pop up Error.
      * <p>
-     * Se comprueba si el checkbox, identificado como "cbTerminos", está seleccionado.
-     * Si es así, se llama al método "registrarUsuario" del Singleton "Controlador", comprobando si esté nos devuelve TRUE ó FALSE.
-     * En caso contrario se muestra un pop up de error.
-     * Si "registrarUsuario" es TRUE se muestra un pop up de éxito, de no ser así se muestra un pop up de error.
+     * Comprueba si el checkbox, identificado como "cbTerminos", está seleccionado.
+     * Si es así, llama al método "registrarUsuario" del Singleton "Controlador", comprobando si esté nos devuelve TRUE ó FALSE.
+     * En caso contrario muestra un pop up de error.
+     * Si "registrarUsuario" es TRUE  muestra un pop up de Éxito, de no ser así se muestra un pop up de Error.
      */
     public void eventRegistrar(MouseEvent mouseEvent) {
         if (cbTerminos.isSelected()) {
@@ -59,7 +62,13 @@ public class IU_SignUp {
         }
     }
 
-
+    /**
+     * @param mouseEvent Evento generado al usar sobre el texto "¿Ya tienes cuenta?".
+     * @precondicion Ninguna.
+     * @postcondicion Cambiar de escena a la interfaz "IU_Login".
+     * Obtiene la escena actual mediante el MouseEvent y se actualiza por la escena perteneciente a la
+     * la interfaz "IU_Login".
+     */
     @FXML
     protected void eventOpenLogin(MouseEvent mouseEvent) {
         Stage primaryStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();

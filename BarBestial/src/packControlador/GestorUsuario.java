@@ -41,7 +41,7 @@ public class GestorUsuario {
      * @param txtPass2  Contraseña utilizada, en el segundo campo, por el usuario en su registro.
      * @precondicion El correo sigue un formato válido.
      * @postcondicion TRUE o FALSE, dependiendo si el registro se ha realizado correctamente.
-     * <p>
+     * <p>Funcionamiento</p>
      * Utiliza los métodos "validarFormatoCorreo" y "contrasenaValida" para comprobar la correcta introducción de datos.
      * Utiliza el método "buscarCorreo" para comprobar si ya alguien registrado con ese correo.
      * Si no hay nadie aún se conecta a "barbes.bd"(base de datos), ejecuta la sentencia SQL(INSERT...) y devuelve TRUE.
@@ -74,7 +74,7 @@ public class GestorUsuario {
      * @param txtPass2 Contraseña dos a validar.
      * @precondicion Ninguna.
      * @postcondicion TRUE o FALSE, dependiendo si la contraseña es válida o no.
-     * <p>
+     * <p>Funcionamiento</p>
      * Comprueba que ambas contraseñas sean iguales y que no estén vacias.
      */
     public boolean contrasenaValida(String txtPass, String txtPass2) {
@@ -85,7 +85,7 @@ public class GestorUsuario {
      * @param correo Correo a validar.
      * @precondicion Ninguna.
      * @postcondicion TRUE o FALSE, dependiendo si el correo es válido o no.
-     * <p>
+     * <p>Funcionamiento</p>
      * Comprueba si el correo es vacío y utilizando el método "validate" de la API "javax.mail" se comprueba si el
      * correo analizado es válido.
      */
@@ -107,7 +107,7 @@ public class GestorUsuario {
      * @param correo Correo a buscar.
      * @precondicion Ninguna.
      * @postcondicion JSONObject cargado con los datos obtenidos con la ejecución del método.
-     * <p>
+     * <p>Funcionamiento</p>
      * Se conecta a "barbes.bd"(base de datos), ejecuta la sentencia SQL (SELECT...) y se carga todos los datos obtenidos
      * de la sentencia SQL en el JSONObject "jugador".
      * Finalmente, se devuelve el JSONObject "jugador".
@@ -141,17 +141,18 @@ public class GestorUsuario {
      * -1 si el correo identificado pertenece a un usuario.
      * 0 en caso que se produzca algún error con la conexión a "barbes.bd"(base de datos) o con la sentencia SQL(SELECT...)
      * o el si el formato del correo es inválido.
-     * <p>
-     * Comprueba si el correo es válido con el método "validarFormatoCorreo", si es válido se conecta a "barbes.bd"(base de datos)
+     * <p>Funcionamiento</p>
+     * Comprueba si el correo y la contraseña son válidos con los métodos "validarFormatoCorreo" y "contrasenaValida"
+     * correspondientemente si son válidos se conecta a "barbes.bd"(base de datos)
      * y se ejecuta la sentencia SQL (SELECT...). Comprueba si el usuario obtenido es administrador, sino lo es, carga
      * todos los datos obtenidos en la anterior sentencia SQL en el JSONObject "usuario", ejecuta una nueva sentencia
      * SQL(UPDATE...) y finalmente carga ejecuta el método "cargarUsuario" del Singleton "Usuario" pasando como parámetro
      * el JSONObject "usuario".
      * Dependiendo las condiciones por donde se haya ejecutado o los errores que haya tenido, devolverá 0,1 ó -1.
      */
-    public int identificarCorreo(String correo, String pass) {
+    public int identificarUsuario(String correo, String pass) {
         String sql = "SELECT * FROM USUARIO WHERE IdUsuario ='" + correo + "' AND Pass = '" + pass + "'";
-        if (validarFormatoCorreo(correo)) {
+        if (validarFormatoCorreo(correo) && contrasenaValida(pass, pass)) {
             try (Connection conn = SGBD.getMiSGBD().conectarBD();
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery(sql)) {
@@ -186,7 +187,7 @@ public class GestorUsuario {
      * @param pass   Nueva contraseña.
      * @precondicion El correo tiene que estar en "barbes.bd"(base de datos).
      * @postcondicion Cambia la contraseña actual, del correo introducido, por la nueva contraseña introducida.
-     * <p>
+     * <p>Funcionamiento</p>
      * Se conecta a "barbes.bd"(base de datos) y se ejecuta la sentencia SQL(UPDATE...).
      */
     public void cambiarContrasena(String correo, String pass) {
@@ -207,7 +208,7 @@ public class GestorUsuario {
      * @param correo Correo utilizado en la identificación con RRSS.
      * @precondicion Tener un correo registrado con Google.
      * @postcondicion Se identifica en el Bar Bestial.
-     * <p>
+     * <p>Funcionamiento</p>
      * Utiliza el método "buscarCorreo" para comprobar si ya existe una cuenta en "barbes.bd"(base de datos) con
      * el correo recibido.
      * Si se obtiene null en el JSONObject "usuario" se registra el correo y se identifica.
@@ -215,47 +216,48 @@ public class GestorUsuario {
      */
     public void identificarRRSS(String correo) {
         String contrasena = UUID.randomUUID().toString();
-        //Si no tiene tiene cuenta
         JSONObject usuario = buscarCorreo(correo);
         if (usuario == null) {
             registrarUsuario(correo, contrasena, contrasena);
-            identificarCorreo(correo, contrasena);
+            identificarUsuario(correo, contrasena);
         } else {
-            //Si ya tiene cuenta
-            identificarCorreo(correo, usuario.getString("Pass"));
+            identificarUsuario(correo, usuario.getString("Pass"));
         }
     }
 
     /**
      * Método obtenido de la web:
-     * <p>
+     * <p>Funcionamiento</p>
      * https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
-     * <p>
+     * <p>Funcionamiento</p>
      * Autor: About Pankaj
      *
      * @param correo Correo introducido en la interfaz "IU_RPass".
      * @return TRUE o FALSE, dependiendo si se envía la contraseña o se genera un error en el proceso de envío.
      */
     public boolean recuperarContrasena(String correo) {
-        JSONObject usuario = buscarCorreo(correo);
-        if (usuario != null) {
-            final String fromEmail = "barbesadsi2018@gmail.com"; //requires valid gmail id
-            final String password = "ADSIbarbes2018"; // correct password for gmail id
-            System.out.println("TLSEmail Start");
-            Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-            props.put("mail.smtp.port", "587"); //TLS Port
-            props.put("mail.smtp.auth", "true"); //enable authentication
-            props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
-            //create Authenticator object to pass in Session.getInstance argument
-            Authenticator auth = new Authenticator() {
-                //override the getPasswordAuthentication method
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(fromEmail, password);
-                }
-            };
-            Session session = Session.getInstance(props, auth);
-            return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
+        if (validarFormatoCorreo(correo)) {
+            JSONObject usuario = buscarCorreo(correo);
+            if (usuario != null) {
+                final String fromEmail = "barbesadsi2018@gmail.com"; //requires valid gmail id
+                final String password = "ADSIbarbes2018"; // correct password for gmail id
+                System.out.println("TLSEmail Start");
+                Properties props = new Properties();
+                props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+                props.put("mail.smtp.port", "587"); //TLS Port
+                props.put("mail.smtp.auth", "true"); //enable authentication
+                props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+                //create Authenticator object to pass in Session.getInstance argument
+                Authenticator auth = new Authenticator() {
+                    //override the getPasswordAuthentication method
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(fromEmail, password);
+                    }
+                };
+                Session session = Session.getInstance(props, auth);
+                return EmailUtil.sendEmail(session, correo, "BarBestial", usuario.getString("Pass"));
+            }
+            return false;
         }
         return false;
     }

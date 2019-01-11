@@ -123,7 +123,7 @@ public class Funcionalidad1Test {
             int admin = 0;
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
-            assertEquals(GestorUsuario.getGestorUsuario().identificarCorreo(correo, contraBuena), -1);
+            assertEquals(GestorUsuario.getGestorUsuario().identificarUsuario(correo, contraBuena), -1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,7 +144,7 @@ public class Funcionalidad1Test {
             int admin = 1;
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
-            assertEquals(GestorUsuario.getGestorUsuario().identificarCorreo(correo, contraBuena), 1);
+            assertEquals(GestorUsuario.getGestorUsuario().identificarUsuario(correo, contraBuena), 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class Funcionalidad1Test {
             String contraErreonea = "321";
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contraBuena + "', 0 ,'2019-01-01', 0)");
-            assertEquals(GestorUsuario.getGestorUsuario().identificarCorreo(correo, contraErreonea), 0);
+            assertEquals(GestorUsuario.getGestorUsuario().identificarUsuario(correo, contraErreonea), 0);
         } catch (Exception e) {
             e.printStackTrace();
         }

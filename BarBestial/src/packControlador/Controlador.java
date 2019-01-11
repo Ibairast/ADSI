@@ -175,8 +175,8 @@ public class Controlador {
         return GestorUsuario.getGestorUsuario().registrarUsuario(txtCorreo, txtPass1, txtPass2);
     }
 
-    public int identificarCorreo(String correo, String pass) {
-        return GestorUsuario.getGestorUsuario().identificarCorreo(correo, pass);
+    public int identificarUsuario(String correo, String pass) {
+        return GestorUsuario.getGestorUsuario().identificarUsuario(correo, pass);
 
     }
 
