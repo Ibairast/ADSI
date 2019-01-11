@@ -5,9 +5,11 @@ import packModelo.*;
 import packVista.*;
 import packVista.sesion.Sesion;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
 
 public class Controlador {
@@ -41,7 +43,7 @@ public class Controlador {
         this.ventanaFecha = new VentanaFecha();
         // this.ventanaUsuario = new VentanaUsuario();
         //this.ventanaCarga = new IU_Carga();
-        this.ventanaPersonalizar;
+        //this.ventanaPersonalizar = new VentanaPersonalizar();
         this.ventanaContrasena = new IU_Contrasena();
 
 

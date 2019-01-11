@@ -169,7 +169,7 @@ public class GestorUsuario {
                     int ayuda = rs.getInt("Ayuda");
                     usuario.put("Ayuda", ayuda);
                     String idmazo = rs.getString("IDMazo");
-                    js.put("IDMazo",idmazo);
+                    usuario.put("IDMazo",idmazo);
                     
                     String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
                     PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);

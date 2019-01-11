@@ -32,7 +32,7 @@ public class Usuario {
         Pass = usuario.getString("Pass");
         LogFecha = usuario.getString("LogFecha");
         Ayuda = usuario.getInt("Ayuda");
-        IDMazo = js.getString("IDMazo");
+        IDMazo = usuario.getString("IDMazo");
     }
 
     /* ****************************************************************************************************************/
