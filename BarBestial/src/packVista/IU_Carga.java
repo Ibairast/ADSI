@@ -14,12 +14,13 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class IU_Carga extends JFrame{
 
 	private JFrame frame;
 	String[] partidas;
-	JList<String> list = new JList<String>(partidas);
+	JList<String> list;
 
 	/**
 	 * Launch the application.
@@ -41,8 +42,8 @@ public class IU_Carga extends JFrame{
 	 * Create the application.
 	 */
 	public IU_Carga() {
-		initialize();
 		cargar();
+		initialize();
 	}
 
 	/**
@@ -84,7 +85,10 @@ public class IU_Carga extends JFrame{
 	}
 
 	public void cargar(){
-		GestorCarga.getGestor().getPartidas();
+		ArrayList<String> temp =GestorCarga.getGestor().getPartidas();
+		this.partidas = new String[temp.size()];
+		this.partidas= (String[]) temp.toArray();
+		this.list = new JList<String>(partidas);
 	}
 
 	@Override
