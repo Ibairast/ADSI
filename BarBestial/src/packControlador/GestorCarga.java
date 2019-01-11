@@ -133,9 +133,9 @@ public class GestorCarga {
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                rs.getString("IdUsuario");
-            }
+//            while (rs.next()) {
+//                rs.getString("IdUsuario");
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

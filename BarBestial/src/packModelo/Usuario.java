@@ -3,19 +3,18 @@ package packModelo;
 import org.json.JSONObject;
 
 
-
 public class Usuario {
     private static Usuario miUsuario = new Usuario();
     private String IdUsuario, Pass;
     private String LogFecha;
-    private int  Ayuda;
-    public static Usuario getUsuario() {
-        return miUsuario;
-    }
+    private int Ayuda;
 
     private Usuario() {
     }
 
+    public static Usuario getUsuario() {
+        return miUsuario;
+    }
 
     public void cargarUsuario(JSONObject js) {
         IdUsuario = js.getString("IdUsuario");
@@ -53,7 +52,7 @@ public class Usuario {
         /**
 
          Alain Please ;)
-
          **/
+        return null;
     }
 }

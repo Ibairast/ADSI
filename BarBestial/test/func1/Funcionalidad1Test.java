@@ -94,11 +94,11 @@ public class Funcionalidad1Test {
         String emailIncorrecto02 = "123..@gmail.com";
         String emailIncorrecto03 = "123@gmail";
         String emailVacio = "";
-        assertTrue(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailCorrecto));
-        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailIncorrecto01));
-        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailIncorrecto02));
-        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailIncorrecto03));
-        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoEmail(emailVacio));
+        assertTrue(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailCorrecto));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailIncorrecto01));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailIncorrecto02));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailIncorrecto03));
+        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailVacio));
     }
 
     /**

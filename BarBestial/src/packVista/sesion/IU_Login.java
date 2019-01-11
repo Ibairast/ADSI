@@ -6,13 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import packControlador.Controlador;
 
 import javax.swing.*;
@@ -73,11 +71,11 @@ public class IU_Login {
 
     public void eventOpenRRSS(MouseEvent mouseEvent) {
         try {
-            FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("IdentificacionRRSS.fxml"));
+            FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("LoginRRSS.fxml"));
             Parent panelIdentificacionRRSS = fxmlIdentificacionRRSS.load();
             Scene sceneIdentificacionRRSS = new Scene(panelIdentificacionRRSS);
             Stage stage = new Stage();
-            stage.setTitle("dfd");
+            stage.setTitle("Identificación Google");
             stage.setScene(sceneIdentificacionRRSS);
             stage.show();
         } catch (Exception e) {

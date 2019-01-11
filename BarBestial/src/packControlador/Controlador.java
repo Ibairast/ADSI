@@ -197,8 +197,8 @@ public class Controlador {
         GestorUsuario.getGestorUsuario().cambiarContrasena(Usuario.getUsuario().getIdUsuario(), text);
     }
 
-    public boolean identificarRRSS(String correo) {
-        return GestorUsuario.getGestorUsuario().identificarRRSS(correo);
+    public void identificarRRSS(String correo) {
+         GestorUsuario.getGestorUsuario().identificarRRSS(correo);
     }
 
 

@@ -3,7 +3,10 @@ package packVista.sesion;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import packControlador.Controlador;
@@ -32,9 +35,17 @@ public class IU_SignUp {
         this.sceneIdentificacion = sceneIdentificacion;
     }
 
+    /**
+     * Evento ejecutado al presionar el botón "Registrar".
+     * <p>
+     * Se comprueba si el checkbox, identificado como "cbTerminos", está seleccionado.
+     * Si es así, se llama al método "registrarUsuario" del Singleton "Controlador", comprobando si esté nos devuelve TRUE ó FALSE.
+     * En caso contrario se muestra un pop up de error.
+     * Si "registrarUsuario" es TRUE se muestra un pop up de éxito, de no ser así se muestra un pop up de error.
+     */
     public void eventRegistrar(MouseEvent mouseEvent) {
-        if (cbTerminos.isSelected()) {//Comprobar cb y que el usuario no esté vacío.
-            if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText(),txtPass2.getText())) {
+        if (cbTerminos.isSelected()) {
+            if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText(), txtPass2.getText())) {
                 JOptionPane.showConfirmDialog(null,
                         "Usuario registrado", "Éxito", JOptionPane.DEFAULT_OPTION);
                 eventOpenLogin(mouseEvent);
