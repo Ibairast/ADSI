@@ -70,12 +70,49 @@ public class SGBD {
         String partida ="CREATE TABLE `Partida` ( `IdPartida` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `IdMazoP` TEXT, `NAyudas` INTEGER, PRIMARY KEY(`IdPartida`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
         String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, PRIMARY KEY(`IdCartas`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
 
+        String personalizar = "CREATE TABLE MAZOP"+
+                "(IdMazoP VARCHAR(100) NOT NULL,"+
+                "IdUsuario VARCHAR(100) NOT NULL,"+
+                "CamaleonAzul BLOB,"+
+                "CamaleonVerde BLOB,"+
+                "CanguroAzul BLOB,"+
+                "CanguroVerde BLOB,"+
+                "CebraAzul BLOB,"+
+                "CebraVerde BLOB,"+
+                "CocodriloAzul BLOB,"+
+                "CocodriloVerde BLOB,"+
+                "FocaAzul BLOB,"+
+                "FocaVerde BLOB,"+
+                "HipoAzul BLOB,"+
+                "HipoVerde BLOB,"+
+                "JiraAzul BLOB,"+
+                "JiraVerde BLOB,"+
+                "LeonAzul BLOB,"+
+                "LeonVerde BLOB,"+
+                "LoroAzul BLOB,"+
+                "LoroVerde BLOB,"+
+                "MofetaAzul BLOB,"+
+                "MofetaVerde BLOB,"+
+                "MonoAzul BLOB,"+
+                "MonoVerde BLOB,"+
+                "SerpienteAzul BLOB,"+
+                "SerpienteVerde BLOB,"+
+                "Patada BLOB,"+
+                "PuertaCielo BLOB,"+
+                "Reverso BLOB,"+
+                "Vacio BLOB,"+
+
+
+                "PRIMARY KEY(IdMazoP,IdUsuario),"+
+                "FOREIGN KEY(IdUsuario) REFERENCES USUARIO(IdUsuario))";
+
         try (Connection con = this.conectarBD();
              Statement stmt = con.createStatement()) {
             stmt.execute(usuario);
             stmt.execute(ranking);
             stmt.execute(partida);
             stmt.execute(cartas);
+            stmt.execute(personalizar);
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
