@@ -173,7 +173,28 @@ public class Controlador {
 
     //Ranking
     public void mostarVentanaRanking() {
+        this.iRanking.accesoJuego();
         this.mostrarVentanaRanking();
+    }
+
+
+    /**
+     * Si se accede al ranking desde el menú principal cuando se pulsa
+     * cancelar se ejecuta este método que cierra la ventana iRanking
+     */
+    public void cerrarVentanaRankingMenu(){
+        this.iRanking.setVisible(false);
+    }
+
+    /**
+     * Si se accede al ranking al finalizar la partida cuando se pulsa
+     * cancelar se ejecuta este método que cierra la ventana iRanking
+     * y abre la ventana publicaciones
+     */
+    public void cerrarVentanaRankingJuego(){
+        this.iRanking.setVisible(false);
+        //Abrir ventana publicaciones
+
     }
 
     public JSONArray obtenerMisMejoresPartidas() {

@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 
 public class FuncionalidadTest2 {
 
-
     /**
      * No hay datos en la tabla ranking de la base de datos
      */
@@ -185,16 +184,17 @@ public class FuncionalidadTest2 {
             js.put("Pass", "a");
             js.put("LogFecha", "2019-01-01");
             js.put("Ayuda", "0");
+            js.put("IDMazo", "");
             Usuario.getUsuario().cargarUsuario(js);
 
             //Crear usuarios bd
-            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda, IDMazo)" +
                     " VALUES('andrea@gmail.com', 'a', 0, '2019-01-01', 0, '')");
-            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda, IDMazo)" +
                     " VALUES('paul@gmail.com', 'b', 0, '2019-01-01', 0, '')");
-            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda, IDMazo)" +
                     " VALUES('ibai@gmail.com', 'c', 0, '2019-01-01', 0, '')");
-            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda, IDMazo)" +
                     " VALUES('josu@gmail.com', 'd', 0, '2019-01-01', 0, '')");
 
             //Añadir info

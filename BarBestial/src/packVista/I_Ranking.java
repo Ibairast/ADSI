@@ -18,6 +18,9 @@ public class I_Ranking extends JFrame {
     private JButton btnMejorPuntuacionDia;
     private JButton btnMejoresPartidas;
     private JButton btnMejorMedia;
+    private JButton btnCancelar;
+
+    private boolean accesoJuego;
 
 
     /**
@@ -88,7 +91,24 @@ public class I_Ranking extends JFrame {
         });
         panelMenu.add(btnMejorMedia);
 
+        this.btnCancelar = new JButton("Cancelar");
+        this.btnCancelar.setBackground(new Color(217, 30, 17));
+        this.btnCancelar.setForeground(new Color(255, 255, 255));
 
+        this.btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (accesoJuego == true){
+                    Controlador.getMiControlador().cerrarVentanaRankingJuego();
+                    accesoJuego = false;
+                } else{
+                    Controlador.getMiControlador().cerrarVentanaRankingMenu();
+                }
+            }
+        });
+        panelMenu.add(btnCancelar);
+
+
+        accesoJuego = false;
     }
 
     /**
@@ -275,6 +295,11 @@ public class I_Ranking extends JFrame {
         contentPane.add(table, BorderLayout.CENTER);
         table.setFillsViewportHeight(true);
     }
+
+    public void accesoJuego(){
+        accesoJuego = true;
+    }
+
 
 }
 
