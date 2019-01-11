@@ -19,13 +19,22 @@ public class Usuario {
         }
         return miUsuario;
     }
+    /* ************************************************* FUNCIONALIDAD 1 **********************************************/
 
-    public void cargarUsuario(JSONObject js) {
-        IdUsuario = js.getString("IdUsuario");
-        Pass = js.getString("Pass");
-        LogFecha = js.getString("LogFecha");
-        Ayuda = js.getInt("Ayuda");
+    /**
+     * @param usuario Datos del usuario
+     * @precondicion Ninguna.
+     * @postcondicion Carga los atributos del Singleton "Usuario"
+     */
+    public void cargarUsuario(JSONObject usuario) {
+        IdUsuario = usuario.getString("IdUsuario");
+        Pass = usuario.getString("Pass");
+        LogFecha = usuario.getString("LogFecha");
+        Ayuda = usuario.getInt("Ayuda");
     }
+
+    /* ****************************************************************************************************************/
+
 
     public String getIdUsuario() {
         return IdUsuario;

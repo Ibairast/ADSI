@@ -18,9 +18,9 @@ public class Sesion extends Application {
 
     /**
      * Inicializador de las interfaces "IU_SignUp", "IU_Login" y "IU_RPass".
-     * Se carga todos los archivos fxml correspondiendes a las interfaces anteriormente mencionadas y se crea una escena con cada uno.
-     * Obtenemos el controlador de cada interfaz y se le pasa las interfaces que puede acceder.
-     * Finalmente indicamos a "IU_Login" como interfaz inicial y la mostramos.
+     * Carga todos los archivos fxml correspondiendes a las interfaces anteriormente mencionadas y se crea una escena con cada uno.
+     * Obtiene el controlador de cada interfaz y se le pasa las interfaces que puede acceder.
+     * Finalmente indica a "IU_Login" como interfaz inicial y la muestra.
      */
     @Override
     public void start(Stage stage) throws Exception {
