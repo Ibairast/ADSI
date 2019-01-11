@@ -4,15 +4,19 @@ import org.json.JSONObject;
 
 
 public class Usuario {
-    private static Usuario miUsuario = new Usuario();
+    private static Usuario miUsuario = null;
     private String IdUsuario, Pass;
     private String LogFecha;
     private int Ayuda;
 
     private Usuario() {
+
     }
 
     public static Usuario getUsuario() {
+        if (miUsuario == null) {
+            miUsuario=new Usuario();
+        }
         return miUsuario;
     }
 

@@ -68,7 +68,7 @@ public class SGBD {
                 "FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario))";
 
         String partida ="CREATE TABLE `Partida` ( `IdPartida` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `IdMazoP` TEXT, `NAyudas` INTEGER, PRIMARY KEY(`IdPartida`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
-        String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, FOREIGN KEY(`IdCartas`) REFERENCES `Partida`(`IdPartida`), PRIMARY KEY(`IdCartas`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
+        String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, PRIMARY KEY(`IdCartas`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
 
         try (Connection con = this.conectarBD();
              Statement stmt = con.createStatement()) {

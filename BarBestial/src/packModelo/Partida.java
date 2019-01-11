@@ -12,7 +12,7 @@ import java.util.Observable;
 public class Partida extends Observable {
     private static Partida miPartida;
     private String user=Usuario.getUsuario().getIdUsuario();
-    private String mazoP=Usuario.getUsuario().getMazoP();
+    private String mazoP="defecto";//Usuario.getUsuario().getMazoP();
     private int NAyudas=Usuario.getUsuario().getAyuda();
 
     /* El turno se representa como un numero
@@ -180,6 +180,7 @@ public class Partida extends Observable {
              pstmt.executeUpdate();
         } catch (Exception e) {
              e.printStackTrace();
+             JOptionPane.showMessageDialog(null,"Error al guardar la partida","Error",JOptionPane.INFORMATION_MESSAGE);
         }
         //Guardar Listas
         Bar.getMiBar().guardarCielo(nombreP);

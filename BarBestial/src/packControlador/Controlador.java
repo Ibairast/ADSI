@@ -40,7 +40,7 @@ public class Controlador {
         this.iRanking = new I_Ranking();
         this.ventanaFecha = new VentanaFecha();
         // this.ventanaUsuario = new VentanaUsuario();
-        this.ventanaCarga = new IU_Carga();
+        //this.ventanaCarga = new IU_Carga();
         this.ventanaPersonalizar = new VentanaPersonalizar();
         this.ventanaContrasena = new IU_Contrasena();
 
@@ -98,6 +98,7 @@ public class Controlador {
     }
 
     private void mostrarVentanaCarga() {
+        this.ventanaCarga=new IU_Carga();
         this.ventanaCarga.setVisible(true);
     }
 

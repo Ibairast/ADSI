@@ -5,6 +5,7 @@ import packModelo.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class GestorCarga {
     private static GestorCarga mGestor=null;
@@ -128,16 +129,20 @@ public class GestorCarga {
         throw new UnsupportedOperationException();
     }
 
-    public void getPartidas() {
+    public ArrayList<String> getPartidas() {
+        ArrayList<String> partidas = new ArrayList<>();
+        System.out.println(this.user);
         String sql="Select IdPartida From Partida Where IdUsuario = '"+this.user+"'";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-//            while (rs.next()) {
-//                rs.getString("IdUsuario");
-//            }
+            while (rs.next()) {
+                partidas.add(rs.getString("IdUsuario"));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return partidas;
     }
 }
