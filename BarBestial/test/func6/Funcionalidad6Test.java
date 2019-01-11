@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
 
 public class Funcionalidad6Test {
     @Test
+    //En esta prueba lo que mira es que dada una fecha nos devuelva los usuarios que hay en la base de datos anterior
+    //a esa fecha
     public void obtenerUsuariosPorFecha(){
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
@@ -46,6 +48,9 @@ public class Funcionalidad6Test {
     }
     @Test
     public void eliminarUsuariosConJson(){
+        //En esta prueba lo que mira es que dado un json de usuarios se eliminen
+        //lo que se hace es buscar esos usuarios desde esa fecha, miramos su longitud
+        //pasamos esos usuarios al metodo eliminar y despues volvemos a hacer el primer paso de mirar.
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
             JSONArray json= new JSONArray();

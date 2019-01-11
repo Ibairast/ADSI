@@ -99,7 +99,6 @@ public class VentanaUsuario extends JFrame {
             JSONObject objeto = json.getJSONObject(i);
             String id = objeto.getString("IdUsuario");
             check = new JCheckBox(id);
-            System.out.println(id);
             panel.add(check);
         }
     }
