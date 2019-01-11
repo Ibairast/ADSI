@@ -1,3 +1,5 @@
+Funcionalidad 2:
+- Del plan de pruebas se ha quitado la opción "Hay pocas lineas" y también se ha quitado la opción de hacer scroll de la prueba "hay muchas lineas" ya que todos los datos entran en las dimensiones de la interfaz.
 
 Funcionalidad 3:
 -Se ha quitado la posición de la bd. Las cartas se meten en orden y se sacan en orden.  No necesitan numeración
