@@ -41,7 +41,7 @@ public class Controlador {
         this.ventanaFecha = new VentanaFecha();
         // this.ventanaUsuario = new VentanaUsuario();
         //this.ventanaCarga = new IU_Carga();
-        this.ventanaPersonalizar = new VentanaPersonalizar();
+        this.ventanaPersonalizar;
         this.ventanaContrasena = new IU_Contrasena();
 
 
@@ -50,7 +50,6 @@ public class Controlador {
         this.ventanaInicio.addInstrucionesListener(new InstruccionesListener());
         this.ventanaInicio.addRankingListener(new RankingListener());
         this.ventanaInicio.addCargarPartidaListener(new CargarPartidaListener());
-        this.ventanaInicio.addPersonalizarListener(new PersonalizarListener());
         this.ventanaInicio.addCambiarContraseniaListener(new OpenCambiarContraseniaListener());
 
 
@@ -146,8 +145,28 @@ public class Controlador {
     }
 
     //PERSONALIZAR
-    public JSONArray llenar_combo() {
+    public void inicializarVentanaPersonalizar(){
+        this.ventanaPersonalizar = new VentanaPersonalizar();
+        mostrarVentanaPersonalizar();
+    }
+    public Vector<String> llenar_combo(){
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
+    }
+
+    public ImageIcon seleccionarImagenCarta(String pInformacionCarta) {
+        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarImagenCarta(pInformacionCarta);
+    }
+
+    public void seleccionarPersonalizacion(String mazo){
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion(mazo);
+    }
+
+    public void eliminarPersonalizacion(String mazo){
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo);
+    }
+
+    public void anadirPersonalizacion(String nombre, String path){
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path);
     }
 
     //Ranking
@@ -239,13 +258,6 @@ public class Controlador {
         @Override
         public void actionPerformed(ActionEvent e) {
             mostrarIU_Contra();
-        }
-    }
-
-    private class PersonalizarListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mostrarVentanaPersonalizar();
         }
     }
 
