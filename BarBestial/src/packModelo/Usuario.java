@@ -8,6 +8,7 @@ public class Usuario {
     private String IdUsuario, Pass;
     private String LogFecha;
     private int Ayuda;
+    private String IDMazo;
 
     private Usuario() {
 
@@ -31,6 +32,7 @@ public class Usuario {
         Pass = usuario.getString("Pass");
         LogFecha = usuario.getString("LogFecha");
         Ayuda = usuario.getInt("Ayuda");
+        IDMazo = js.getString("IDMazo");
     }
 
     /* ****************************************************************************************************************/
