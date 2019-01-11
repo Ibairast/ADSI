@@ -133,18 +133,19 @@ public class VentanaPersonalizar extends JFrame {
     public void eliminarPersonalizacion(){
         Object eleccion = this.combobox.getSelectedItem();
         String mazo = String.valueOf(eleccion);
-        Controlador.getMiControlador().eliminarPersonalizacion(mazo);
+        Boolean bol = Controlador.getMiControlador().eliminarPersonalizacion(mazo);
+        if (bol==true){this.dispose();}
     } //Cerrar y abrir ventana para refrescar
 
     public void anadirPersonalizacion(){//Cerrar y abrir ventana para refrescar
         String nombre = this.nombremazo.getText();
         String path=this.path.getText();
-        Controlador.getMiControlador().anadirPersonalizacion(nombre, path);
+        Boolean bol = Controlador.getMiControlador().anadirPersonalizacion(nombre, path);
+        if (bol==true){this.dispose();}
     }
 
 }
 
 
 
-//TODO : REFRESCAR JCOMBOBOX
-// TODO : AÑADIR PERSONALIZACION: ERROR EN UPDATE SET ....
+//TODO : ARREGLAR AÑADIRPERSO
