@@ -13,6 +13,7 @@ public class SGBD {
             this.crearBD();
             this.crearTablas();
             //this.pruebasRanking();
+            this.pruebasPersonalizar();
             this.pruebasUsuarios();
         }
     }
@@ -207,6 +208,25 @@ public class SGBD {
         }
         System.out.println("Insertados datos en usuario");
 
+    }
+    private void pruebasPersonalizar(){
+        String sql1 = "INSERT INTO MAZOP(IdMazoP,IdUsuario)"+
+                "VALUES ('defecto','alain')";
+
+        String sql2 = "INSERT INTO MAZOP(IdMazoP,IdUsuario)"+
+                "VALUES ('mazoPrueba2','alain')";
+
+
+        try (Connection con = this.conectarBD();
+             Statement stmt = con.createStatement()) {
+            stmt.executeUpdate(sql1);
+            stmt.executeUpdate(sql2);
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Insertados datos en MAZOP");
     }
 
 
