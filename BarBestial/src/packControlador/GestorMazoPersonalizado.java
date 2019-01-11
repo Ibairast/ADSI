@@ -2,22 +2,17 @@ package packControlador;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import packModelo.Partida;
 import packModelo.SGBD;
 import packModelo.Usuario;
-import packVista.VentanaPersonalizar;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -73,9 +68,8 @@ public class GestorMazoPersonalizado {
         }
     }
 
-    public boolean eliminarPersonalizacion(String mazo){
+    public void eliminarPersonalizacion(String mazo){
         String iduser= Usuario.getUsuario().getIdUsuario();
-        Boolean bol = false;
         String sql = "SELECT IDMazo FROM USUARIO WHERE IdUsuario='" + iduser +"'";
         String sql2 = "UPDATE USUARIO SET IDMazo = 'defecto' WHERE IdUsuario='" + iduser +"'";
         String sql3 = "DELETE FROM MAZOP WHERE IdMazoP='" + mazo + "'"; //borrarMazo
@@ -94,19 +88,16 @@ public class GestorMazoPersonalizado {
                 }
                 stmt.executeUpdate(sql3);
                 JOptionPane.showConfirmDialog(null,"Se ha eliminado el mazo "+ mazo +"","Exito", JOptionPane.DEFAULT_OPTION);
-                bol=true;
             }
         }
         catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return bol;
     }
 
-    public boolean anadirPersonalizacion(String nombre, String path){ //Parametros nombre mazo y path
+    public void anadirPersonalizacion(String nombre, String path){ //Parametros nombre mazo y path
         String iduser= Usuario.getUsuario().getIdUsuario();
-        Boolean bol = false;
         String sql="INSERT INTO MAZOP (IdMazoP,IdUsuario) VALUES ('"+ nombre + "','"+ iduser +"')";
         String [] nombrecartas = new String[] {"CamaleonAzul","CamaleonVerde","CanguroAzul","CanguroVerde","CebraAzul","CebraVerde", "CocodriloAzul", "CocodriloVerde", "FocaAzul", "FocaVerde", "HipoAzul", "HipoVerde", "JiraAzul", "JiraVerde", "LeonAzul", "LeonVerde", "LoroAzul", "LoroVerde", "MofetaAzul", "MofetaVerde", "MonoAzul", "MonoVerde", "SerpienteAzul", "SerpienteVerde", "Patada", "PuertaCielo", "Reverso", "Vacio"};
         if (nombre.isEmpty()==false && path.isEmpty()==false){
@@ -122,8 +113,7 @@ public class GestorMazoPersonalizado {
                     for (int i=0; i<nombrecartas.length; i++){//loop de cambiarImagen por todas las cartas posibles
                         System.out.println("Dentro del loop");
                         cambiarImagenBD(nombre,path,nombrecartas[i],iduser);}
-                    JOptionPane.showConfirmDialog(null,"Mazo añadido","Exito", JOptionPane.DEFAULT_OPTION);
-                    bol =true;}
+                    JOptionPane.showConfirmDialog(null,"Mazo añadido","Exito", JOptionPane.DEFAULT_OPTION);}
 
                 else{
                     JOptionPane.showConfirmDialog(null,"Ya tienes un mazo con ese nombre","Error", JOptionPane.DEFAULT_OPTION);
@@ -139,7 +129,6 @@ public class GestorMazoPersonalizado {
         else{
             JOptionPane.showConfirmDialog(null,"Introduce el campo nombre y/o path","Error", JOptionPane.DEFAULT_OPTION);
         }
-        return bol;
     }
 
     public String nombreMazoEnBD(String nombre, String iduser){
@@ -172,24 +161,21 @@ public class GestorMazoPersonalizado {
                 case "CamaleonAzul":
                     try { File f = new File (path +"/"+ carta + ".jpg"); //if (f==null)
                         //Carta personalizada
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
-                        System.out.println(byt.length);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CamaleonAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(3,byt);
+                        ps.setBinaryStream(3,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                     //else{
                         //Cargar por defecto
-                        System.out.println("Entra en catch");
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f = new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET CamaleonAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         System.out.println("Antes del Stream");
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(3,byt);
+                        ps.setBinaryStream(3,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -197,20 +183,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CamaleonVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(4,byt);
+                        ps.setBinaryStream(4,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f = new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CamaleonVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(4,byt);
+                        ps.setBinaryStream(4,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -218,20 +203,19 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CanguroAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(5,byt);
+                        ps.setBinaryStream(5,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f = new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CanguroAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(5,byt);
+                        ps.setBinaryStream(5,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -239,20 +223,19 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CanguroVerde= ?WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(6,byt);
+                        ps.setBinaryStream(6,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET CanguroVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(6,byt);
+                        ps.setBinaryStream(6,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -260,20 +243,19 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CebraAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(7,byt);
+                        ps.setBinaryStream(7,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta personalizada
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CebraAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(7,byt);
+                        ps.setBinaryStream(7,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -281,20 +263,19 @@ public class GestorMazoPersonalizado {
                     try {
                         File f = new File (path +"/"+ carta + ".jpg");
                         //Carta personalizada
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CebraVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(8,byt);
+                        ps.setBinaryStream(8,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET CebraVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(8,byt);
+                        ps.setBinaryStream(8,fis);
                         ps.executeUpdate();
 
                     }
@@ -303,20 +284,19 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CocodriloAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(9,byt);
+                        ps.setBinaryStream(9,fis);
                         ps.executeUpdate();
                     }
                    catch (FileNotFoundException e){
                         //Cargar por defecto
-                       BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                       byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET CocodriloAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(9,byt);
+                        ps.setBinaryStream(9,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -324,20 +304,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET CocodriloVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(10,byt);
+                        ps.setBinaryStream(10,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET CocodriloVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(10,byt);
+                        ps.setBinaryStream(10,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -345,20 +324,19 @@ public class GestorMazoPersonalizado {
                     try{
                         File f = new File (path +"/"+ carta + ".jpg");
                         //Carta personalizada
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET FocaAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(11,byt);
+                        ps.setBinaryStream(11,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET FocaAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(11,byt);
+                        ps.setBinaryStream(11,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -366,21 +344,20 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET FocaVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(12,byt);
+                        ps.setBinaryStream(12,fis);
                         ps.executeUpdate();
 
                     }
                     catch (FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET FocaVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(12,byt);
+                        ps.setBinaryStream(12,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -388,21 +365,20 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET HipoAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(13,byt);
+                        ps.setBinaryStream(13,fis);
                         ps.executeUpdate();
 
                     }
                     catch (FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET HipoAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(13,byt);
+                        ps.setBinaryStream(13,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -410,20 +386,19 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET HipoVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(14,byt);
+                        ps.setBinaryStream(14,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET HipoVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(14,byt);
+                        ps.setBinaryStream(14,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -431,20 +406,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET JiraAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(15,byt);
+                        ps.setBinaryStream(15,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Cargar por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql = "UPDATE MAZOP SET JiraAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(15,byt);
+                        ps.setBinaryStream(15,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -452,20 +426,19 @@ public class GestorMazoPersonalizado {
                     try {
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql2= "UPDATE MAZOP SET JiraVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(16,byt);
+                        ps.setBinaryStream(16,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET JiraVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(16,byt);
+                        ps.setBinaryStream(16,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -473,20 +446,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET LeonAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(17,byt);
+                        ps.setBinaryStream(17,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET LeonAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(17,byt);
+                        ps.setBinaryStream(17,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -494,20 +466,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET LeonVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(18,byt);
+                        ps.setBinaryStream(18,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET LeonVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(18,byt);
+                        ps.setBinaryStream(18,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -515,20 +486,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET LoroAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(19,byt);
+                        ps.setBinaryStream(19,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET LoroAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(19,byt);
+                        ps.setBinaryStream(19,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -536,20 +506,19 @@ public class GestorMazoPersonalizado {
                      try {
                          //Carta personalizada
                          File f = new File (path +"/"+ carta + ".jpg");
-                         BufferedImage imagen = ImageIO.read(f);
-                         byte[] byt = imageIconABytes(imagen);
-                         String sql = "UPDATE MAZOP SET LoroVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
+                         FileInputStream fis = new FileInputStream(f);
+                        String sql = "UPDATE MAZOP SET LoroVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(20,byt);
+                        ps.setBinaryStream(20,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET LoroVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(20,byt);
+                        ps.setBinaryStream(20,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -557,20 +526,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET MofetaAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(21,byt);
+                        ps.setBinaryStream(21,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET MofetaAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(21,byt);
+                        ps.setBinaryStream(21,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -578,20 +546,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET MofetaVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(22,byt);
+                        ps.setBinaryStream(22,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET MofetaVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(22,byt);
+                        ps.setBinaryStream(22,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -599,20 +566,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET MonoAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(23,byt);
+                        ps.setBinaryStream(23,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET MonoAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(23,byt);
+                        ps.setBinaryStream(23,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -620,20 +586,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET MonoVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(24,byt);
+                        ps.setBinaryStream(24,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET MonoVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(24,byt);
+                        ps.setBinaryStream(24,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -641,20 +606,19 @@ public class GestorMazoPersonalizado {
                      try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                         BufferedImage imagen = ImageIO.read(f);
-                         byte[] byt = imageIconABytes(imagen);
-                         String sql = "UPDATE MAZOP SET SerpienteAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
+                        FileInputStream fis = new FileInputStream(f);
+                        String sql = "UPDATE MAZOP SET SerpienteAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(25,byt);
+                        ps.setBinaryStream(25,fis);
                         ps.executeUpdate();
                     }
                     catch (FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET SerpienteAzul= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(25,byt);
+                        ps.setBinaryStream(25,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -662,20 +626,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET SerpienteVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(26,byt);
+                        ps.setBinaryStream(26,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET SerpienteVerde= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(26,byt);
+                        ps.setBinaryStream(26,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -683,20 +646,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET PuertaCielo= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(28,byt);
+                        ps.setBinaryStream(28,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET PuertaCielo= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(28,byt);
+                        ps.setBinaryStream(28,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -704,20 +666,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET Patada= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(27,byt);
+                        ps.setBinaryStream(27,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET Patada= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(27,byt);
+                        ps.setBinaryStream(27,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -725,20 +686,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET Reverso= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(29,byt);
+                        ps.setBinaryStream(29,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET Reverso= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(29,byt);
+                        ps.setBinaryStream(29,fis);
                         ps.executeUpdate();
                     }
                     break;
@@ -746,20 +706,19 @@ public class GestorMazoPersonalizado {
                     try{
                         //Carta personalizada
                         File f = new File (path +"/"+ carta + ".jpg");
-                        BufferedImage imagen = ImageIO.read(f);
-                        byte[] byt = imageIconABytes(imagen);
+                        FileInputStream fis = new FileInputStream(f);
                         String sql = "UPDATE MAZOP SET Vacio= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'";
                         PreparedStatement ps = conn.prepareStatement(sql);
-                        ps.setBytes(30,byt);
+                        ps.setBinaryStream(30,fis);
                         ps.executeUpdate();
                     }
                     catch(FileNotFoundException e){
                         //Carta por defecto
-                        BufferedImage imagen = ImageIO.read(getClass().getResource("/images/"+carta+".jpg"));
-                        byte[] byt = imageIconABytes(imagen);
+                        File f2=new File("/images/" + carta + ".jpg");
+                        FileInputStream fis = new FileInputStream(f2);
                         String sql2= "UPDATE MAZOP SET Vacio= ? WHERE IdUsuario='"+ user+"' AND IdMazoP='"+mazo+"'"; //Meter una Image en BLOB ¿Problemas?
                         PreparedStatement ps = conn.prepareStatement(sql2);
-                        ps.setBytes(30,byt);
+                        ps.setBinaryStream(30,fis);
                         ps.executeUpdate();                    }
                     break;
             }
@@ -774,7 +733,7 @@ public class GestorMazoPersonalizado {
 
     public ImageIcon seleccionarImagenCarta(String pInformacionCarta) {
         ImageIcon foto= null;
-        String mazo= Partida.getMiPartida().getMazo();
+        String mazo=null;
         String iduser= Usuario.getUsuario().getIdUsuario();
         String sql="SELECT "+ pInformacionCarta + " FROM MAZOP WHERE IdUsuario='"+ iduser+"' AND IdMazoP='"+ mazo +"'";
         //Coger nombreMazo que se esta usando desde Partida y meterlo en el WHERE
@@ -783,7 +742,7 @@ public class GestorMazoPersonalizado {
             Statement stmt = conn.createStatement();
             ResultSet rs= stmt.executeQuery(sql); //Como coger resultado rs y convertirlo en Imagen desde blob para "foto"
             Blob blob = rs.getBlob(pInformacionCarta);
-            foto = new ImageIcon( blob.getBytes( 1, (int) blob.length() ) );
+            foto = new ImageIcon( blob.getBytes( 1L, (int) blob.length() ) ); //1 o 1L?
             foto = resizeImageIcon(foto);
         }
         catch (Exception e) {
@@ -791,12 +750,6 @@ public class GestorMazoPersonalizado {
             System.exit(0);
         }
         return foto;
-    }
-
-    public byte[] imageIconABytes (BufferedImage image) throws IOException{
-        WritableRaster raster = image.getRaster();
-        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-        return (data.getData());
     }
 
     public ImageIcon resizeImageIcon(ImageIcon imagen){
