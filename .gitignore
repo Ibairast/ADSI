@@ -19,3 +19,5 @@ BarBestial/\.extract/logs/
 BarBestial/\.extract/
 
 *.kotlin_module
+
+BarBestial/barbes\.db
