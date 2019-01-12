@@ -45,8 +45,7 @@ public class IU_Login {
     /**
      * @param mouseEvent Evento generado al pulsar sobre el botón identificado como "btnLogin".
      * @precondicion Ninguna.
-     * @postcondicion Identifica al usuario, mostrando un pop up indicando si es Administrador o dando la Bienvenida si
-     * no lo es. En caso que no se pueda identificar, se le mostrará un pop up de Error.
+     * @postcondicion Identifica al usuario.
      * <p>Funcionamiento</p>
      * Ejecuta  el método "identificarUsuario" del Singleton "Controlador" y dependiendo del resultado de éste
      * mostraremos un determinado pop up.
@@ -54,18 +53,14 @@ public class IU_Login {
     public void eventIdentificar(MouseEvent mouseEvent) {
         int resul = Controlador.getMiControlador().identificarUsuario(txtCorreo.getText(), txtPass.getText());
         if (resul == -1) {//noadmin
-            JOptionPane.showConfirmDialog(null,
-                    "Bienvenido", "Identificación", JOptionPane.DEFAULT_OPTION);
             Controlador.getMiControlador().mostarVentanaInicio();
             Platform.exit();
         } else if (resul == 1) {//admin
-            JOptionPane.showConfirmDialog(null,
-                    "ADMIN", "Identificación", JOptionPane.DEFAULT_OPTION);
             Controlador.getMiControlador().mostrarVentanaFecha();
             Platform.exit();
         } else {
             JOptionPane.showConfirmDialog(null,
-                    "Error en la Identificación", "Error", JOptionPane.DEFAULT_OPTION);
+                    "Identificación fallida", "Error", JOptionPane.DEFAULT_OPTION);
         }
 
     }
@@ -73,10 +68,10 @@ public class IU_Login {
     /**
      * @param mouseEvent Evento generado al pulsar sobre el texto "Recuperar Contraseña".
      * @precondicion Ninguna.
-     * @postcondicion Cambiar de escena a la interfaz "IU_RPass".
+     * @postcondicion Cambiar de escena a la interfaz "IU_RContra".
      * <p>Funcionamiento</p>
      * Obtiene la escena actual mediante el MouseEvent y se actualiza por la escena perteneciente a la
-     * la interfaz "IU_RPass".
+     * la interfaz "IU_RContra".
      */
     @FXML
     protected void eventOpenRPassword(MouseEvent mouseEvent) {
@@ -106,7 +101,7 @@ public class IU_Login {
      * Carga el archivo "LoginRRSS.fxml", crea una escena a partir de éste y muestra la interfaz.
      */
     public void eventOpenRRSS(MouseEvent mouseEvent) {
-        if (Controlador.getMiControlador().comprobarInternet()){
+        if (Controlador.getMiControlador().comprobarInternet()) {
             try {
                 FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("LoginRRSS.fxml"));
                 Parent panelIdentificacionRRSS = fxmlIdentificacionRRSS.load();
@@ -118,9 +113,9 @@ public class IU_Login {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             JOptionPane.showConfirmDialog(null,
-                    "No tienes acceso a Internet", "Error", JOptionPane.DEFAULT_OPTION);
+                    "Error de conexión", "Error", JOptionPane.DEFAULT_OPTION);
         }
 
     }

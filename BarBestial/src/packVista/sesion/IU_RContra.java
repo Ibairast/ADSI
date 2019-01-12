@@ -11,7 +11,7 @@ import packControlador.Controlador;
 
 import javax.swing.*;
 
-public class IU_RPass {
+public class IU_RContra {
 
     public Button btnRPass;
     @FXML
@@ -38,14 +38,14 @@ public class IU_RPass {
         if (Controlador.getMiControlador().comprobarInternet()){
             if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
                 JOptionPane.showConfirmDialog(null,
-                        "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
+                        "Contraseña enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
             } else {
                 JOptionPane.showConfirmDialog(null,
-                        "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
+                        "Contraseña no enviada", "Error", JOptionPane.DEFAULT_OPTION);
             }
         }else {
             JOptionPane.showConfirmDialog(null,
-                    "No tienes acceso a Internet", "Error", JOptionPane.DEFAULT_OPTION);
+                    "Error de conexión", "Error", JOptionPane.DEFAULT_OPTION);
         }
 
     }

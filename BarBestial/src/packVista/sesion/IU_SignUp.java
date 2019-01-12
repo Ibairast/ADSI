@@ -50,15 +50,15 @@ public class IU_SignUp {
         if (cbTerminos.isSelected()) {
             if (Controlador.getMiControlador().registrarUsuario(txtCorreo.getText(), txtPass1.getText(), txtPass2.getText())) {
                 JOptionPane.showConfirmDialog(null,
-                        "Usuario registrado", "Éxito", JOptionPane.DEFAULT_OPTION);
+                        "Registro completo", "Éxito", JOptionPane.DEFAULT_OPTION);
                 eventOpenLogin(mouseEvent);
             } else {
                 JOptionPane.showConfirmDialog(null,
-                        "No se ha podido registrar", "Error", JOptionPane.DEFAULT_OPTION);
+                        "Registro fallido", "Error", JOptionPane.DEFAULT_OPTION);
             }
         } else {
             JOptionPane.showConfirmDialog(null,
-                    "Fallo en la introducción de datos", "Error", JOptionPane.DEFAULT_OPTION);
+                    "Registro fallido", "Error", JOptionPane.DEFAULT_OPTION);
         }
     }
 

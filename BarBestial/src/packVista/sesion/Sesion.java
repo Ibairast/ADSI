@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import packControlador.Controlador;
 
 
 public class Sesion extends Application {
@@ -18,7 +17,7 @@ public class Sesion extends Application {
     }
 
     /**
-     * Inicializador de las interfaces "IU_SignUp", "IU_Login" y "IU_RPass".
+     * Inicializador de las interfaces "IU_SignUp", "IU_Login" y "IU_RContra".
      * Carga todos los archivos fxml correspondiendes a las interfaces anteriormente mencionadas y se crea una escena con cada uno.
      * Obtiene el controlador de cada interfaz y se le pasa las interfaces que puede acceder.
      * Finalmente indica a "IU_Login" como interfaz inicial y la muestra.
@@ -39,17 +38,17 @@ public class Sesion extends Application {
 
         IU_SignUp registroController = fxmlRegistro.getController();
         IU_Login identificacionController = fxmlIdentificacion.getController();
-        IU_RPass rPassController = fxmlRContrasena.getController();
+        IU_RContra rPassController = fxmlRContrasena.getController();
 
 
         // "IU_SignUp" puede acceder a "IU_Login".
         registroController.setSceneIdentificacion(sceneIdentificacion);
 
-        // "IU_Login" puede acceder a "IU_SignUp" y "IU_RPass".
+        // "IU_Login" puede acceder a "IU_SignUp" y "IU_RContra".
         identificacionController.setSceneRegistro(sceneRegistro);
         identificacionController.setSceneRPassword(sceneRContrasena);
 
-        // "IU_RPass" puede acceder a "IU_Login"
+        // "IU_RContra" puede acceder a "IU_Login"
         rPassController.setSceneIdentificacion(sceneIdentificacion);
 
         stage.setTitle("Sesión");

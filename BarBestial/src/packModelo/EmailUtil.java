@@ -19,11 +19,6 @@ public class EmailUtil {
 
     /**
      * Utility method to send simple HTML email
-     *
-     * @param session
-     * @param toEmail
-     * @param subject
-     * @param body
      */
     public static boolean sendEmail(Session session, String toEmail, String subject, String body) {
         try {

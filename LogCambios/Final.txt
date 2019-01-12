@@ -1,6 +1,7 @@
 Funcionalidad 1:
 -Se ha corregido errores en los diagramas de secuencia de la funcionalidad Registro y Enviar contraseña.
 
+
 Funcionalidad 2:
 - Del plan de pruebas se ha quitado la opción "Hay pocas lineas" y también se ha quitado la opción de hacer scroll de la prueba "hay muchas lineas" ya que todos los datos entran en las dimensiones de la interfaz.
 

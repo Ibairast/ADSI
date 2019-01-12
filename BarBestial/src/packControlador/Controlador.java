@@ -95,7 +95,7 @@ public class Controlador {
     }
 
     private void mostrarVentanaCarga() {
-        this.ventanaCarga=new IU_Carga();
+        this.ventanaCarga = new IU_Carga();
         this.ventanaCarga.setVisible(true);
     }
 
@@ -136,17 +136,19 @@ public class Controlador {
     public JSONArray obtenerUsuarios(String fecha) {
         return GestorUsuario.getGestorUsuario().obtenerUsuarios(fecha);
     }
-   // Llamamos al metodo del GestorUsuario pasandole el json que hemos recibido de la interfaz.
+
+    // Llamamos al metodo del GestorUsuario pasandole el json que hemos recibido de la interfaz.
     public void eliminarUsuarios(JSONArray json) {
         GestorUsuario.getGestorUsuario().eliminarUsuarios(json);
     }
 
     //PERSONALIZAR
-    public void inicializarVentanaPersonalizar(){
+    public void inicializarVentanaPersonalizar() {
         this.ventanaPersonalizar = new VentanaPersonalizar();
         mostrarVentanaPersonalizar();
     }
-    public Vector<String> llenar_combo(){
+
+    public Vector<String> llenar_combo() {
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
     }
 
@@ -154,16 +156,16 @@ public class Controlador {
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarImagenCarta(pInformacionCarta, iduser);
     }
 
-    public void seleccionarPersonalizacion(String mazo, String iduser){
+    public void seleccionarPersonalizacion(String mazo, String iduser) {
         GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion(mazo, iduser);
     }
 
-    public boolean eliminarPersonalizacion(String mazo, String iduser){
-       return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo, iduser);
+    public boolean eliminarPersonalizacion(String mazo, String iduser) {
+        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo, iduser);
     }
 
-    public boolean anadirPersonalizacion(String nombre, String path, String iduser){
-       return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path, iduser);
+    public boolean anadirPersonalizacion(String nombre, String path, String iduser) {
+        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre, path, iduser);
     }
 
     /**
@@ -179,7 +181,7 @@ public class Controlador {
      * Si se accede al ranking desde el menú principal cuando se pulsa
      * cancelar se ejecuta este método que cierra la ventana iRanking
      */
-    public void cerrarVentanaRankingMenu(){
+    public void cerrarVentanaRankingMenu() {
         this.iRanking.setVisible(false);
     }
 
@@ -188,15 +190,19 @@ public class Controlador {
      * cancelar se ejecuta este método que cierra la ventana iRanking
      * y abre la ventana publicaciones
      */
-    public void cerrarVentanaRankingJuego(){
+    public void cerrarVentanaRankingJuego() {
         this.iRanking.setVisible(false);
         //Abrir ventana publicaciones
 
     }
 
-    public JSONArray obtenerMisMejoresPartidas() {return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas(); }
+    public JSONArray obtenerMisMejoresPartidas() {
+        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
+    }
 
-    public JSONArray obtenerMejorPuntuacionDia() { return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia(); }
+    public JSONArray obtenerMejorPuntuacionDia() {
+        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
+    }
 
     public JSONArray obtenerMejoresPartidas() {
         return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
@@ -205,7 +211,6 @@ public class Controlador {
     public JSONArray obtenerMejorMedia() {
         return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
     }
-
 
 
     //FUNCIONALIDAD 1
@@ -236,7 +241,7 @@ public class Controlador {
     }
 
     public void identificarRRSS(String correo) {
-         GestorUsuario.getGestorUsuario().identificarRRSS(correo);
+        GestorUsuario.getGestorUsuario().identificarRRSS(correo);
     }
 
     public boolean comprobarInternet() {
@@ -345,8 +350,6 @@ public class Controlador {
             ventanaJuego.desactivarBotonSiguiente();
         }
     }
-
-
 
 
 }

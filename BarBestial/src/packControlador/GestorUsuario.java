@@ -237,7 +237,7 @@ public class GestorUsuario {
      * <p>Funcionamiento</p>
      * Autor: About Pankaj
      *
-     * @param correo Correo introducido en la interfaz "IU_RPass".
+     * @param correo Correo introducido en la interfaz "IU_RContra".
      * @postcondicion TRUE o FALSE, dependiendo si se envía la contraseña o se genera un error en el proceso de envío.
      */
     public boolean recuperarContrasena(String correo) {
