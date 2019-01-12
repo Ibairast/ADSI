@@ -73,7 +73,7 @@ public class SGBD {
                 "FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario))";
 
         String partida ="CREATE TABLE `Partida` ( `IdPartida` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `IdMazoP` TEXT, `NAyudas` INTEGER, PRIMARY KEY(`IdPartida`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
-        String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, PRIMARY KEY(`IdCartas`,`IdUsuario`,`Grupo`,`Color`,`Animal`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
+        String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, PRIMARY KEY(`IdCartas`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
 
         String personalizar = "CREATE TABLE MAZOP" +
                 "(IdMazoP VARCHAR(100) NOT NULL," +

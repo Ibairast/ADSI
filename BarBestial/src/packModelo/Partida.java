@@ -178,7 +178,6 @@ public class Partida extends Observable {
      */
     public void guardarPartida(String nombreP) {
         //Guardar datos partida
-        System.out.println("guardar-"+this.user);
         String sql= "INSERT INTO Partida VALUES('"+nombreP+"','"+ this.user +"','"+mazoP+"','"+NAyudas+"')";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
