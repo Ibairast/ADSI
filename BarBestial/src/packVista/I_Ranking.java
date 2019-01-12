@@ -152,7 +152,6 @@ public class I_Ranking extends JFrame {
             puntuaciones.add(puntuacion);
         }
 
-
         // Se crean los campos de la tabla
         Vector<String> columnas = new Vector<>();
         columnas.add("Puntuacion");
@@ -238,7 +237,6 @@ public class I_Ranking extends JFrame {
 
         // Se crea la tabla
         crearTabla(puntuaciones, columnas);
-
     }
 
     /**

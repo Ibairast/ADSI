@@ -25,10 +25,8 @@ public class Controlador {
     private VentanaAyuda ventanaAyuda;
     private I_Ranking iRanking;
     private VentanaFecha ventanaFecha;
-
     private IU_Carga ventanaCarga;
     private VentanaPersonalizar ventanaPersonalizar;
-
     private IU_Contrasena ventanaContrasena;
 
     public Controlador() {
@@ -69,8 +67,6 @@ public class Controlador {
 
         /* Listeners VentanaUsuario */
         //  this.ventanaUsuario.addVolver(new VolverFecha());
-
-
     }
 
 
@@ -118,7 +114,6 @@ public class Controlador {
     private void mostrarVentanafecha() {
         this.ventanaFecha.setVisible(true);
         this.ventanaInicio.setVisible(false);
-
     }
 
     private void setUpObservers() {
@@ -171,7 +166,9 @@ public class Controlador {
        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path, iduser);
     }
 
-    //Ranking
+    /**
+     * FUNCIONALIDAD 2: VISUALIZAR RANKING
+     */
     public void mostarVentanaRanking() {
         this.iRanking.accesoJuego();
         this.mostrarVentanaRanking();
@@ -197,13 +194,9 @@ public class Controlador {
 
     }
 
-    public JSONArray obtenerMisMejoresPartidas() {
-        return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas();
-    }
+    public JSONArray obtenerMisMejoresPartidas() {return GestorRanking.getMiGestorRanking().obtenerMisMejoresPartidas(); }
 
-    public JSONArray obtenerMejorPuntuacionDia() {
-        return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia();
-    }
+    public JSONArray obtenerMejorPuntuacionDia() { return GestorRanking.getMiGestorRanking().obtenerMejorPuntuacionDia(); }
 
     public JSONArray obtenerMejoresPartidas() {
         return GestorRanking.getMiGestorRanking().obtenerMejoresPartidas();
@@ -212,6 +205,8 @@ public class Controlador {
     public JSONArray obtenerMejorMedia() {
         return GestorRanking.getMiGestorRanking().obtenerMejorMedia();
     }
+
+
 
     //FUNCIONALIDAD 1
     public boolean registrarUsuario(String txtCorreo, String txtPass1, String txtPass2) {

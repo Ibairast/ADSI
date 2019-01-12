@@ -15,6 +15,7 @@ public class FuncionalidadTest2 {
 
     /**
      * No hay datos en la tabla ranking de la base de datos
+     * por tanto no se carga ningún dato en la base de datos
      */
     @Test
     public void sinDatos() {
@@ -169,6 +170,7 @@ public class FuncionalidadTest2 {
 
     /**
      * Método para cargar los datos en la base de datos para las pruebas
+     * (Estos son los datos que se van a utilizar en las pruebas)
      */
     private void cargarDatos(){
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
