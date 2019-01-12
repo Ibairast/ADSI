@@ -563,11 +563,20 @@ public class VentanaJuego extends JFrame implements Observer {
 
     }
 
+    /** Metodo para Seleccionar la imagen de una carta
+     *
+     * @param pInformacionCarta nombre de la imagen ejemplo : CamaleonAzul
+     * @return la imagen de dicha carta
+     *
+     * Comentada la seccion de la funcionalidad 5 Personalizar, que se utilizaria en vez de la actual de funcionar el "añadirPersonalizacion"
+     */
     private ImageIcon seleccionarImagenCarta(String pInformacionCarta) {
         try {
             return new ImageIcon(VentanaJuego.class.getResource("/images/" + pInformacionCarta + ".jpg"));
         } catch (NullPointerException e) {
             return null;
         }
+        // String iduser = Usuario.getUsuario().getIdUsuario();
+        // return Controlador.getMiControlador().seleccionarImagenCarta(pInformacionCarta, iduser);
     }
 }
