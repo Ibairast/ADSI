@@ -47,7 +47,7 @@ public class Carta implements Comparable<Carta> {
 
     public void guardarCarta(String nombreP,String grupo) {
 
-        String sql = "INSERT INTO Cartas VALUES('"+nombreP+"','"+grupo+"','"+this.color.toString()+"','"+this.animal.toString()+"')";
+        String sql = "INSERT INTO Cartas VALUES('"+nombreP+"','"+Usuario.getUsuario().getIdUsuario()+"','"+grupo+"','"+this.color.toString()+"','"+this.animal.toString()+"')";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.executeUpdate();

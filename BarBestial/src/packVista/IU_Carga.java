@@ -87,7 +87,7 @@ public class IU_Carga extends JFrame{
 	public void cargar(){
 		ArrayList<String> temp =GestorCarga.getGestor().getPartidas();
 		this.partidas = new String[temp.size()];
-		this.partidas= (String[]) temp.toArray();
+		this.partidas= (String[]) temp.toArray(partidas);
 		this.list = new JList<String>(partidas);
 	}
 
