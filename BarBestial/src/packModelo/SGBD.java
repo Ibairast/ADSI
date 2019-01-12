@@ -1,7 +1,10 @@
 package packModelo;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SGBD {
 
@@ -69,43 +72,43 @@ public class SGBD {
                 "PRIMARY KEY(IdRanking), " +
                 "FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario))";
 
-        String partida ="CREATE TABLE `Partida` ( `IdPartida` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `IdMazoP` TEXT, `NAyudas` INTEGER, PRIMARY KEY(`IdPartida`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
+        String partida = "CREATE TABLE `Partida` ( `IdPartida` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `IdMazoP` TEXT, `NAyudas` INTEGER, PRIMARY KEY(`IdPartida`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
         String cartas = "CREATE TABLE `Cartas` ( `IdCartas` TEXT NOT NULL, `IdUsuario` TEXT NOT NULL, `Grupo` TEXT, `Color` TEXT, `Animal` TEXT, PRIMARY KEY(`IdCartas`,`IdUsuario`), FOREIGN KEY(`IdUsuario`) REFERENCES `Usuario`(`IdUsuario`) )";
 
-        String personalizar = "CREATE TABLE MAZOP"+
-                "(IdMazoP VARCHAR(100) NOT NULL,"+
-                "IdUsuario VARCHAR(100) NOT NULL,"+
-                "CamaleonAzul BLOB,"+
-                "CamaleonVerde BLOB,"+
-                "CanguroAzul BLOB,"+
-                "CanguroVerde BLOB,"+
-                "CebraAzul BLOB,"+
-                "CebraVerde BLOB,"+
-                "CocodriloAzul BLOB,"+
-                "CocodriloVerde BLOB,"+
-                "FocaAzul BLOB,"+
-                "FocaVerde BLOB,"+
-                "HipoAzul BLOB,"+
-                "HipoVerde BLOB,"+
-                "JiraAzul BLOB,"+
-                "JiraVerde BLOB,"+
-                "LeonAzul BLOB,"+
-                "LeonVerde BLOB,"+
-                "LoroAzul BLOB,"+
-                "LoroVerde BLOB,"+
-                "MofetaAzul BLOB,"+
-                "MofetaVerde BLOB,"+
-                "MonoAzul BLOB,"+
-                "MonoVerde BLOB,"+
-                "SerpienteAzul BLOB,"+
-                "SerpienteVerde BLOB,"+
-                "Patada BLOB,"+
-                "PuertaCielo BLOB,"+
-                "Reverso BLOB,"+
-                "Vacio BLOB,"+
+        String personalizar = "CREATE TABLE MAZOP" +
+                "(IdMazoP VARCHAR(100) NOT NULL," +
+                "IdUsuario VARCHAR(100) NOT NULL," +
+                "CamaleonAzul BLOB," +
+                "CamaleonVerde BLOB," +
+                "CanguroAzul BLOB," +
+                "CanguroVerde BLOB," +
+                "CebraAzul BLOB," +
+                "CebraVerde BLOB," +
+                "CocodriloAzul BLOB," +
+                "CocodriloVerde BLOB," +
+                "FocaAzul BLOB," +
+                "FocaVerde BLOB," +
+                "HipoAzul BLOB," +
+                "HipoVerde BLOB," +
+                "JiraAzul BLOB," +
+                "JiraVerde BLOB," +
+                "LeonAzul BLOB," +
+                "LeonVerde BLOB," +
+                "LoroAzul BLOB," +
+                "LoroVerde BLOB," +
+                "MofetaAzul BLOB," +
+                "MofetaVerde BLOB," +
+                "MonoAzul BLOB," +
+                "MonoVerde BLOB," +
+                "SerpienteAzul BLOB," +
+                "SerpienteVerde BLOB," +
+                "Patada BLOB," +
+                "PuertaCielo BLOB," +
+                "Reverso BLOB," +
+                "Vacio BLOB," +
 
 
-                "PRIMARY KEY(IdMazoP,IdUsuario),"+
+                "PRIMARY KEY(IdMazoP,IdUsuario)," +
                 "FOREIGN KEY(IdUsuario) REFERENCES USUARIO(IdUsuario))";
 
         try (Connection con = this.conectarBD();
@@ -209,11 +212,12 @@ public class SGBD {
         System.out.println("Insertados datos en usuario");
 
     }
-    private void pruebasPersonalizar(){
-        String sql1 = "INSERT INTO MAZOP(IdMazoP,IdUsuario)"+
+
+    private void pruebasPersonalizar() {
+        String sql1 = "INSERT INTO MAZOP(IdMazoP,IdUsuario)" +
                 "VALUES ('defecto','alain')";
 
-        String sql2 = "INSERT INTO MAZOP(IdMazoP,IdUsuario)"+
+        String sql2 = "INSERT INTO MAZOP(IdMazoP,IdUsuario)" +
                 "VALUES ('mazoPrueba2','alain')";
 
 

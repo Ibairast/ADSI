@@ -246,7 +246,6 @@ public class GestorUsuario {
             if (usuario != null) {
                 final String fromEmail = "barbesadsi2018@gmail.com"; //requires valid gmail id
                 final String password = "ADSIbarbes2018"; // correct password for gmail id
-                System.out.println("TLSEmail Start");
                 Properties props = new Properties();
                 props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
                 props.put("mail.smtp.port", "587"); //TLS Port
