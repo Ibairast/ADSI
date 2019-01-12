@@ -51,10 +51,19 @@ public class FuncionalidadTest5 {
             //Insertar mazos
             stmt.executeUpdate("INSERT INTO MAZOP (IdMazoP,IdUsuario) VALUES ('defecto','perso@gmail.com')");
             stmt.executeUpdate("INSERT INTO MAZOP (IdMazoP,IdUsuario) VALUES ('mazoprueba','perso@gmail.com')");
+            stmt.executeUpdate("INSERT INTO MAZOP (IdMazoP,IdUsuario) VALUES ('mazoprueba2','perso@gmail.com')");
 
             //Borrar mazo defecto. Devolvera false porque no le deja eliminarlo.
             Boolean bol = GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion("defecto", "perso@gmail.com");
             assertFalse(bol);
+
+            //Borrar el mazo en uso. Devolvera True al eliminarse y se pondra por defecto el defecto.
+            GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion("mazoprueba2", "perso@gmail.com");
+            Boolean bol3 = GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion("mazoprueba2", "perso@gmail.com");
+            assertTrue(bol3);
+            ResultSet rs = stmt.executeQuery(("SELECT IDMazo FROM USUARIO WHERE IdUsuario='perso@gmail.com'"));
+            String nombremazo = rs.getString("IDMazo");
+            assertEquals("defecto", nombremazo);
 
             //Borrar otro mazo. Devolvera True al eliminarse.
             Boolean bol2 = GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion("mazoprueba", "perso@gmail.com");
