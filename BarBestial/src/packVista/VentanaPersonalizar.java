@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import packControlador.Controlador;
 import packModelo.Partida;
+import packModelo.Usuario;
 
 import java.awt.event.ActionListener;
 
@@ -125,22 +126,25 @@ public class VentanaPersonalizar extends JFrame {
     }
 
     public void seleccionarPersonalizacion(){
+        String iduser= Usuario.getUsuario().getIdUsuario();
         Object eleccion = this.combobox.getSelectedItem();
         String mazo = String.valueOf(eleccion);
-        Controlador.getMiControlador().seleccionarPersonalizacion(mazo);
+        Controlador.getMiControlador().seleccionarPersonalizacion(mazo, iduser);
     }
 
     public void eliminarPersonalizacion(){
+        String iduser= Usuario.getUsuario().getIdUsuario();
         Object eleccion = this.combobox.getSelectedItem();
         String mazo = String.valueOf(eleccion);
-        Boolean bol = Controlador.getMiControlador().eliminarPersonalizacion(mazo);
+        Boolean bol = Controlador.getMiControlador().eliminarPersonalizacion(mazo, iduser);
         if (bol==true){this.dispose();}
     } //Cerrar y abrir ventana para refrescar
 
     public void anadirPersonalizacion(){//Cerrar y abrir ventana para refrescar
+        String iduser= Usuario.getUsuario().getIdUsuario();
         String nombre = this.nombremazo.getText();
         String path=this.path.getText();
-        Boolean bol = Controlador.getMiControlador().anadirPersonalizacion(nombre, path);
+        Boolean bol = Controlador.getMiControlador().anadirPersonalizacion(nombre, path, iduser);
         if (bol==true){this.dispose();}
     }
 

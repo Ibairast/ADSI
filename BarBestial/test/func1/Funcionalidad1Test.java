@@ -107,12 +107,6 @@ public class Funcionalidad1Test {
         assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailVacio));
     }
 
-    /**
-     * Usuario RRSS, depende de la API de GOOGLE.
-     */
-    @Test
-    public void registroPrueba05_06() {
-    }
 
     /**
      * Correo usuario y contraseña correcto.

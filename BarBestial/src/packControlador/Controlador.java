@@ -155,20 +155,20 @@ public class Controlador {
         return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().llenar_combo();
     }
 
-    public ImageIcon seleccionarImagenCarta(String pInformacionCarta) {
-        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarImagenCarta(pInformacionCarta);
+    public ImageIcon seleccionarImagenCarta(String pInformacionCarta, String iduser) {
+        return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarImagenCarta(pInformacionCarta, iduser);
     }
 
-    public void seleccionarPersonalizacion(String mazo){
-        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion(mazo);
+    public void seleccionarPersonalizacion(String mazo, String iduser){
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion(mazo, iduser);
     }
 
-    public boolean eliminarPersonalizacion(String mazo){
-       return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo);
+    public boolean eliminarPersonalizacion(String mazo, String iduser){
+       return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().eliminarPersonalizacion(mazo, iduser);
     }
 
-    public boolean anadirPersonalizacion(String nombre, String path){
-       return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path);
+    public boolean anadirPersonalizacion(String nombre, String path, String iduser){
+       return GestorMazoPersonalizado.getMiGestorMazoPersonalizado().anadirPersonalizacion(nombre,path, iduser);
     }
 
     //Ranking
