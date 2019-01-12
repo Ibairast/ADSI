@@ -63,14 +63,6 @@ public class Usuario {
         Ayuda = ayuda;
     }
 
-    public String getMazoP() {
-        /**
-
-         Alain Please ;)
-         **/
-        return null;
-    }
-
     public String getIDMazo() {
         return IDMazo;
     }

@@ -3,6 +3,7 @@ package packControlador;
 import packModelo.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -126,18 +127,26 @@ public class GestorCarga {
      */
     public void eliminarPartida(String NombreP) {
         // TODO - implement GestorCarga.eliminarPartida
-        String sql="Delete From Partida where IdPartida = '"+NombreP+"'";
+        String sql="Delete From Partida where IdPartida = '"+NombreP+"' AND IdUsuario = '"+this.user+"'";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        String sql2="Delete From Cartas where IdCartas = '"+NombreP+"' AND IdUsuario = '"+this.user+"'";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             PreparedStatement pstmt = conn.prepareStatement(sql2)) {
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
     }
 
     public ArrayList<String> getPartidas() {
         ArrayList<String> partidas = new ArrayList<>();
-        System.out.println(this.user);
         String sql="Select IdPartida From Partida Where IdUsuario = '"+this.user+"'";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();

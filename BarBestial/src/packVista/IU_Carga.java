@@ -4,14 +4,9 @@ import packControlador.GestorCarga;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
 import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JList;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -68,7 +63,7 @@ public class IU_Carga extends JFrame{
 		JButton btnCargar = new JButton("Cargar");
 		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cargar();
+				GestorCarga.getGestor().cargarPartida(list.getSelectedValue());
 			}
 		});
 		btnCargar.setBounds(326, 103, 94, 25);
@@ -77,7 +72,9 @@ public class IU_Carga extends JFrame{
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cargar();
+				GestorCarga.getGestor().eliminarPartida(list.getSelectedValue());
+				new IU_Carga().setVisible(true);
+				frame.dispose();
 			}
 		});
 		btnEliminar.setBounds(326, 162, 94, 25);

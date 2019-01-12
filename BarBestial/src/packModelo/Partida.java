@@ -11,9 +11,9 @@ import java.util.Observable;
 
 public class Partida extends Observable {
     private static Partida miPartida;
-    private String user=Usuario.getUsuario().getIdUsuario();
-    private String mazoP="defecto";//Usuario.getUsuario().getMazoP();
-    private int NAyudas=Usuario.getUsuario().getAyuda();
+    private String user;
+    private String mazoP;
+    private int NAyudas;
 
     /* El turno se representa como un numero
      * que indica la posicion de la lista de jugadores
@@ -177,8 +177,11 @@ public class Partida extends Observable {
      * @param nombreP: String con el id de la partida de la bd
      */
     public void guardarPartida(String nombreP) {
+        this.mazoP=Usuario.getUsuario().getIDMazo();
+        this.NAyudas= Usuario.getUsuario().getAyuda();
+        this.user=Usuario.getUsuario().getIdUsuario();
+
         //Guardar datos partida
-        System.out.println("guardar-"+this.user);
         String sql= "INSERT INTO Partida VALUES('"+nombreP+"','"+ this.user +"','"+mazoP+"','"+NAyudas+"')";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -187,6 +190,7 @@ public class Partida extends Observable {
              e.printStackTrace();
              JOptionPane.showMessageDialog(null,"Error al guardar la partida","Error",JOptionPane.INFORMATION_MESSAGE);
         }
+
         //Guardar Listas
         Bar.getMiBar().guardarCielo(nombreP);
         Tablero.getMiTablero().guardarCola(nombreP);
@@ -194,5 +198,9 @@ public class Partida extends Observable {
             j.guardarMazos(nombreP);
         }
         JOptionPane.showMessageDialog(null, "Partida guardada correctamente", "Partida Guardada", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void cargarPartida(){
+
     }
 }
