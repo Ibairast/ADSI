@@ -15,6 +15,14 @@ public class Funcionalidad1Test {
 
 
     /**
+     * Hay conexión con Internet.
+     */
+    @Test
+    public void conexionInternetPrueba() {
+        assertTrue(GestorUsuario.getGestorUsuario().comprobarInternet());
+    }
+
+    /**
      * Correo sin registrar y datos bien.
      */
     @Test
@@ -25,7 +33,7 @@ public class Funcionalidad1Test {
             stmt.executeUpdate("DELETE FROM Usuario");
             String correo = "pguerrerolinares@gmail.com";
             boolean test;
-            test =  GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123", "123");
+            test = GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123", "123");
             assertTrue(test);
             ResultSet rs = stmt.executeQuery("SELECT IdUsuario FROM Usuario");
             assertTrue(rs.next());
@@ -39,7 +47,6 @@ public class Funcionalidad1Test {
 
     /***
      * Correo ya registrado.
-     *
      */
     @Test
     public void registroPrueba02() {
@@ -53,13 +60,12 @@ public class Funcionalidad1Test {
             boolean test;
             stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
                     " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
-            test =  GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123", "123");
+            test = GestorUsuario.getGestorUsuario().registrarUsuario(correo, "123", "123");
             assertFalse(test);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
 
     /**
@@ -180,7 +186,7 @@ public class Funcionalidad1Test {
         String nuevaContra1 = "321";
 
         String nuevaContra2 = "321";
-        assertTrue(GestorUsuario.getGestorUsuario().contrasenaValida(nuevaContra1,nuevaContra2));
+        assertTrue(GestorUsuario.getGestorUsuario().contrasenaValida(nuevaContra1, nuevaContra2));
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement()) {
             //Limpieza inicial
@@ -202,7 +208,7 @@ public class Funcionalidad1Test {
     public void cambiarContraPrueba02() {
         String nuevaContra1 = "123";
         String nuevaContra2 = "321";
-        assertFalse(GestorUsuario.getGestorUsuario().contrasenaValida(nuevaContra1,nuevaContra2));
+        assertFalse(GestorUsuario.getGestorUsuario().contrasenaValida(nuevaContra1, nuevaContra2));
 
     }
 

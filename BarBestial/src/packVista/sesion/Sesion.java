@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import packControlador.Controlador;
 
 
 public class Sesion extends Application {
@@ -54,6 +55,7 @@ public class Sesion extends Application {
         stage.setTitle("Sesión");
         stage.setScene(sceneIdentificacion);
         stage.show();
+
     }
 }
 

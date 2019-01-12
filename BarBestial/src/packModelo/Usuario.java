@@ -70,4 +70,12 @@ public class Usuario {
          **/
         return null;
     }
+
+    public String getIDMazo() {
+        return IDMazo;
+    }
+
+    public void setIDMazo(String IDMazo) {
+        this.IDMazo = IDMazo;
+    }
 }

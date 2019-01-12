@@ -35,13 +35,19 @@ public class IU_RPass {
      * mostrará un determinado pop up.
      */
     public void eventEnviarContrasena(MouseEvent mouseEvent) {
-        if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
+        if (Controlador.getMiControlador().comprobarInternet()){
+            if (Controlador.getMiControlador().recuperarContrasena(txtCorreo.getText())) {
+                JOptionPane.showConfirmDialog(null,
+                        "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
+            } else {
+                JOptionPane.showConfirmDialog(null,
+                        "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
+            }
+        }else {
             JOptionPane.showConfirmDialog(null,
-                    "Su contraseña ha sido enviada", "Éxito", JOptionPane.DEFAULT_OPTION);
-        } else {
-            JOptionPane.showConfirmDialog(null,
-                    "Error en el envío de contraseña", "Error", JOptionPane.DEFAULT_OPTION);
+                    "No tienes acceso a Internet", "Error", JOptionPane.DEFAULT_OPTION);
         }
+
     }
 
     /**

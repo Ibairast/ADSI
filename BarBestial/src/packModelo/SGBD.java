@@ -13,8 +13,8 @@ public class SGBD {
             this.crearBD();
             this.crearTablas();
             //this.pruebasRanking();
-            this.pruebasPersonalizar();
-            this.pruebasUsuarios();
+//            this.pruebasPersonalizar();
+//            this.pruebasUsuarios();
         }
     }
 

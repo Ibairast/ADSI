@@ -244,6 +244,10 @@ public class Controlador {
          GestorUsuario.getGestorUsuario().identificarRRSS(correo);
     }
 
+    public boolean comprobarInternet() {
+        return GestorUsuario.getGestorUsuario().comprobarInternet();
+    }
+
 
     class NuevaPartidaListener implements ActionListener {
         @Override

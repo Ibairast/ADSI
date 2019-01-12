@@ -106,17 +106,23 @@ public class IU_Login {
      * Carga el archivo "LoginRRSS.fxml", crea una escena a partir de éste y muestra la interfaz.
      */
     public void eventOpenRRSS(MouseEvent mouseEvent) {
-        try {
-            FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("LoginRRSS.fxml"));
-            Parent panelIdentificacionRRSS = fxmlIdentificacionRRSS.load();
-            Scene sceneIdentificacionRRSS = new Scene(panelIdentificacionRRSS);
-            Stage stage = new Stage();
-            stage.setTitle("Identificación Google");
-            stage.setScene(sceneIdentificacionRRSS);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Controlador.getMiControlador().comprobarInternet()){
+            try {
+                FXMLLoader fxmlIdentificacionRRSS = new FXMLLoader(getClass().getResource("LoginRRSS.fxml"));
+                Parent panelIdentificacionRRSS = fxmlIdentificacionRRSS.load();
+                Scene sceneIdentificacionRRSS = new Scene(panelIdentificacionRRSS);
+                Stage stage = new Stage();
+                stage.setTitle("Identificación Google");
+                stage.setScene(sceneIdentificacionRRSS);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            JOptionPane.showConfirmDialog(null,
+                    "No tienes acceso a Internet", "Error", JOptionPane.DEFAULT_OPTION);
         }
+
     }
 }
 

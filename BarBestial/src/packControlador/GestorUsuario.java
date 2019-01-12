@@ -11,6 +11,8 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.io.IOException;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,7 +62,6 @@ public class GestorUsuario {
                     pstmt.executeUpdate();
                     return true;
                 } catch (Exception e) {
-                    e.printStackTrace();
                     return false;
                 }
             }
@@ -169,8 +170,8 @@ public class GestorUsuario {
                     int ayuda = rs.getInt("Ayuda");
                     usuario.put("Ayuda", ayuda);
                     String idmazo = rs.getString("IDMazo");
-                    usuario.put("IDMazo",idmazo);
-                    
+                    usuario.put("IDMazo", idmazo);
+
                     String sqlUpdate = "UPDATE USUARIO SET LogFecha='" + now().toString() + "' WHERE IdUsuario = '" + correo + "'";
                     PreparedStatement pstmt = conn.prepareStatement(sqlUpdate);
                     pstmt.executeUpdate();
@@ -210,7 +211,7 @@ public class GestorUsuario {
 
     /**
      * @param correo Correo utilizado en la identificación con RRSS.
-     * @precondicion Tener un correo registrado con Google.
+     * @precondicion Tener un correo registrado con Google. No tener ningún servicio como "TOMCAT" abierto.
      * @postcondicion Se identifica en el Bar Bestial.
      * <p>Funcionamiento</p>
      * Utiliza el método "buscarCorreo" para comprobar si ya existe una cuenta en "barbes.bd"(base de datos) con
@@ -237,7 +238,7 @@ public class GestorUsuario {
      * Autor: About Pankaj
      *
      * @param correo Correo introducido en la interfaz "IU_RPass".
-     * @return TRUE o FALSE, dependiendo si se envía la contraseña o se genera un error en el proceso de envío.
+     * @postcondicion TRUE o FALSE, dependiendo si se envía la contraseña o se genera un error en el proceso de envío.
      */
     public boolean recuperarContrasena(String correo) {
         if (validarFormatoCorreo(correo)) {
@@ -265,6 +266,25 @@ public class GestorUsuario {
         }
         return false;
     }
+
+    /**
+     * @precondicion Ninguna.
+     * @postcondicion TRUE o FALSE, dependiendo si se puede establecer conexión con Internet.
+     * <p>
+     * Utiliza el método "isConnected" de la clase "Socket" de Java, comprobando si puede conectarse a la url especificada
+     * por el puerto 80.
+     */
+    public boolean comprobarInternet() {
+        String url = "www.google.com";
+        int puerto = 80;
+        try {
+            Socket socket = new Socket(url, puerto);
+            return socket.isConnected();
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
 
     /* *********************************************** FUNCIONALIDAD 6 ************************************************/
 
