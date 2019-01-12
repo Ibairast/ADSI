@@ -1,5 +1,6 @@
 package packVista;
 
+import packControlador.Controlador;
 import packControlador.GestorCarga;
 
 import java.awt.EventQueue;
@@ -64,6 +65,9 @@ public class IU_Carga extends JFrame{
 		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GestorCarga.getGestor().cargarPartida(list.getSelectedValue());
+				Controlador.getMiControlador().mostrarVentanaJuego();
+				Controlador.getMiControlador().setUpObservers();
+				frame.dispose();
 			}
 		});
 		btnCargar.setBounds(326, 103, 94, 25);

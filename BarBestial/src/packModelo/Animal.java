@@ -18,4 +18,9 @@ public abstract class Animal {
         Tablero tablero = Tablero.getMiTablero();
         return tablero.obtenerPosicionAnimal(this);
     }
+
+    @Override
+    public String toString() {
+        return this.especie;
+    }
 }

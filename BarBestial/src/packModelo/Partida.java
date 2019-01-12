@@ -37,7 +37,8 @@ public class Partida extends Observable {
         return this.mazoP;
     }
     
-    public void inicializarPartida(String pNombreJugador) {
+    public void inicializarPartida() {
+        this.user=Usuario.getUsuario().getIdUsuario();
         Tablero tablero = Tablero.getMiTablero();
         tablero.vaciar();
 
@@ -47,7 +48,7 @@ public class Partida extends Observable {
         EsLoQueHay elqh = EsLoQueHay.getMiEsLoQueHay();
         elqh.vaciar();
 
-        this.listaJugadores.add(new JugadorReal(pNombreJugador, EnumColor.AZUL));
+        this.listaJugadores.add(new JugadorReal(this.user, EnumColor.AZUL));
         this.listaJugadores.add(new Maquina("Maquina", EnumColor.VERDE));
 
         this.repartirCartas();
@@ -200,7 +201,14 @@ public class Partida extends Observable {
         JOptionPane.showMessageDialog(null, "Partida guardada correctamente", "Partida Guardada", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Crea los jugadores y asigna el turno
+     */
     public void cargarPartida(){
+        this.user=Usuario.getUsuario().getIdUsuario();
+        this.listaJugadores.add(new JugadorReal(this.user, EnumColor.AZUL));
+        this.listaJugadores.add(new Maquina("Maquina", EnumColor.VERDE));
 
+        this.turnoActual = 0;
     }
 }

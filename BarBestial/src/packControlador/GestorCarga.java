@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class GestorCarga {
     private static GestorCarga mGestor=null;
     private String user=Usuario.getUsuario().getIdUsuario();
+    private String mazoP;
 
     private GestorCarga() {
     }
@@ -26,19 +27,20 @@ public class GestorCarga {
      * @param NombreP
      */
     public void cargarPartida(String NombreP) {
+        Partida.getMiPartida().cargarPartida();
         //Get datos partida
         String sql = "SELECT * FROM Partida WHERE IdUsuario = '" + user + "' AND IdPartida = '"+NombreP+"'";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             if (rs.next()) {
-                Partida.getMiPartida().setUser(rs.getString("IdUsuario"));
-                Partida.getMiPartida().setMazoP(rs.getString("MazoP"));
+                this.mazoP=rs.getString("IdMazoP");
                 Partida.getMiPartida().setNAyudas(rs.getInt("NAyudas"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion(this.mazoP,this.user);
         //Get Cartas
 
         ListaCartas cielo = new ListaCartas();
@@ -64,7 +66,7 @@ public class GestorCarga {
                         c=new Carta(AnimalFactory.getMiAnimalFactory().crearAnimal(rs.getString("Animal")),color);
                         cielo.anadirCarta(c);
                         break;
-                    case "manoJ":
+                    case "ManoJ":
                         if (rs.getString("Color")=="AZUL"){
                             color=EnumColor.AZUL;
                         }else{
@@ -73,7 +75,7 @@ public class GestorCarga {
                         c=new Carta(AnimalFactory.getMiAnimalFactory().crearAnimal(rs.getString("Animal")),color);
                         manoJ.anadirCarta(c);
                         break;
-                    case "mazoJ":
+                    case "MazoJ":
                         if (rs.getString("Color")=="AZUL"){
                             color=EnumColor.AZUL;
                         }else{
@@ -82,7 +84,7 @@ public class GestorCarga {
                         c=new Carta(AnimalFactory.getMiAnimalFactory().crearAnimal(rs.getString("Animal")),color);
                         mazoJ.anadirCarta(c);
                         break;
-                    case "manoIA":
+                    case "ManoIA":
                         if (rs.getString("Color")=="AZUL"){
                             color=EnumColor.AZUL;
                         }else{
@@ -91,7 +93,7 @@ public class GestorCarga {
                         c=new Carta(AnimalFactory.getMiAnimalFactory().crearAnimal(rs.getString("Animal")),color);
                         manoIA.anadirCarta(c);
                         break;
-                    case "mazoIA":
+                    case "MazoIA":
                         if (rs.getString("Color")=="AZUL"){
                             color=EnumColor.AZUL;
                         }else{
@@ -100,7 +102,7 @@ public class GestorCarga {
                         c=new Carta(AnimalFactory.getMiAnimalFactory().crearAnimal(rs.getString("Animal")),color);
                         mazoIA.anadirCarta(c);
                         break;
-                    case "cola":
+                    case "Cola":
                         if (rs.getString("Color")=="AZUL"){
                             color=EnumColor.AZUL;
                         }else{
@@ -118,6 +120,16 @@ public class GestorCarga {
         //Colocar las cartas
         Bar.getMiBar().setCielo(cielo);
         Tablero.getMiTablero().setCola(cola);
+        ArrayList<Jugador> js=Partida.getMiPartida().obtenerJugadores();
+        for (Jugador j:js) {
+            if (j instanceof JugadorReal) {
+                j.setMano(manoJ);
+                j.setMazo(mazoJ);
+            }else{
+                j.setMazo(mazoIA);
+                j.setMano(manoIA);
+            }
+        }
 
     }
 

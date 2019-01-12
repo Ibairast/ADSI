@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1"
-            fx:controller="packVista.sesion.IU_RPass">
+            fx:controller="packVista.sesion.IU_RContra">
     <VBox prefHeight="330.0" prefWidth="297.0" style="-fx-background-color: #151a23;">
         <VBox alignment="CENTER" prefHeight="86.0" prefWidth="322.0">
             <Label text="¿HAS OLVIDADO LA" textFill="WHITE">

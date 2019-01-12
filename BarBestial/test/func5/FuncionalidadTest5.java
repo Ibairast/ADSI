@@ -29,7 +29,7 @@ public class FuncionalidadTest5 {
             ResultSet rs = stmt.executeQuery("SELECT IDMazo FROM USUARIO WHERE IdUsuario='perso@gmail.com'");
             String nombremazo = rs.getString("IDMazo");
 
-            //Selecciona un mazo del desplegable, el cual muestra los nombres de sus mazos añadidos.
+            //Selecciona un mazo             mostrarVentanaJuego();del desplegable, el cual muestra los nombres de sus mazos añadidos.
             //Tenemos Añadido el mazo 'defecto' y seleccionamos 'mazoprueba'
             GestorMazoPersonalizado.getMiGestorMazoPersonalizado().seleccionarPersonalizacion("mazoprueba", "perso@gmail.com");
             assertEquals("mazoprueba", nombremazo);

@@ -88,9 +88,10 @@ public class Controlador {
 
     private void mostrarVentanaInicio() {
         this.ventanaInicio.setVisible(true);
+        setUpObservers();
     }
 
-    private void mostrarVentanaJuego() {
+    public void mostrarVentanaJuego() {
         this.ventanaJuego.setVisible(true);
     }
 
@@ -116,7 +117,7 @@ public class Controlador {
         this.ventanaInicio.setVisible(false);
     }
 
-    private void setUpObservers() {
+    public void setUpObservers() {
         ArrayList<Jugador> jugadores = this.partida.obtenerJugadores();
         for (Jugador jug : jugadores) {
             jug.anadirObservador(ventanaJuego);
@@ -254,7 +255,7 @@ public class Controlador {
         public void actionPerformed(ActionEvent e) {
             //ocultarVentanaInicio();
             mostrarVentanaJuego();
-            partida.inicializarPartida("test"); //Aquí se debe acceder a la base de datos y pillar el nombre
+            partida.inicializarPartida();
             setUpObservers();
         }
     }
@@ -262,7 +263,6 @@ public class Controlador {
     private class CargarPartidaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO mostrar ventana carga
             mostrarVentanaCarga();
         }
     }
