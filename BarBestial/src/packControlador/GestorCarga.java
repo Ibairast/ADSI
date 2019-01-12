@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class GestorCarga {
     private static GestorCarga mGestor=null;
-    private String user;
+    private String user=Usuario.getUsuario().getIdUsuario();
 
     private GestorCarga() {
     }
@@ -126,7 +126,13 @@ public class GestorCarga {
      */
     public void eliminarPartida(String NombreP) {
         // TODO - implement GestorCarga.eliminarPartida
-        throw new UnsupportedOperationException();
+        String sql="Delete From Partida where IdPartida = '"+NombreP+"'";
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<String> getPartidas() {
@@ -137,7 +143,7 @@ public class GestorCarga {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                partidas.add(rs.getString("IdUsuario"));
+                partidas.add(rs.getString("IdPartida"));
             }
 
         } catch (Exception e) {
