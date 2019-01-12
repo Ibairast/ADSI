@@ -33,6 +33,10 @@ public class Partida extends Observable {
         return miPartida;
     }
 
+    public String getMazo(){
+        return this.mazoP;
+    }
+    
     public void inicializarPartida(String pNombreJugador) {
         Tablero tablero = Tablero.getMiTablero();
         tablero.vaciar();
