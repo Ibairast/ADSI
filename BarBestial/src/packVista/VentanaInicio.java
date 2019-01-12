@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import packControlador.Controlador;
+import java.awt.event.ActionEvent;
 
 public class VentanaInicio extends JFrame {
 
@@ -65,6 +67,11 @@ public class VentanaInicio extends JFrame {
 
         this.btnPersonalizar = new JButton("Personalizar");
         this.btnPersonalizar.setBackground(new Color (51, 204, 204));
+        this.btnPersonalizar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                Controlador.getMiControlador().inicializarVentanaPersonalizar();
+            }
+        });
         panelMenu.add(btnPersonalizar);
 
         this.btnCambiarContrasena = new JButton("Cambiar contraseña");
@@ -110,9 +117,6 @@ public class VentanaInicio extends JFrame {
     }
     public void addCambiarContraseniaListener(ActionListener listenForBtnCambiarContrasenia) {
         btnCambiarContrasena.addActionListener(listenForBtnCambiarContrasenia);
-    }
-    public void addPersonalizarListener(ActionListener listenForBtnPersonalizar) {
-        btnPersonalizar.addActionListener(listenForBtnPersonalizar);
     }
 
     public void showNombreErrorMessage() {
