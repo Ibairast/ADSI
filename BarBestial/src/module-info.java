@@ -9,6 +9,7 @@ module BarBestial {
 
     requires java.activation;
     requires javafx.web;
+    requires org.twitter4j.core;
 
     opens packVista.sesion;
     opens packVista;
