@@ -184,6 +184,7 @@ public class IU_DatosTwitter extends JFrame {
                         Controlador.getMiControlador().twittearResultado(resultado);
                         // Se le muestra el mensaje enviado (Visible por pruebas)
                         JOptionPane.showMessageDialog(null, resultado, "Tweet Enviado", JOptionPane.INFORMATION_MESSAGE);
+                        System.exit(0);
                     }
                     // Si los datos introducidos no son correctos se le muestra un mensaje de error y se le solicita volver a identificarse
                     catch (TwitterException e)
