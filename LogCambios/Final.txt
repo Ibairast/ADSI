@@ -15,4 +15,6 @@ Funcionalidad 6:
 -Se han cambiado funciones en el diagrama de clases
 
 Funcionalidad 7:
+- Ahora las interfaces IU_DatosTwitter / IU_DatosFacebook reciben el resultado de la partida como parámetro.
+- El método obtenerMiMejorPuntuacion() ya no recibe como parámetro el usuario actual.
 - Corrección de los diagramas de secuencia. Ahora aparecen las condiciones especificadas en los propios diagramas.
