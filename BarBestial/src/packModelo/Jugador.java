@@ -158,6 +158,10 @@ public abstract class Jugador extends Observable {
     	return !this.mano.vacia();
     }
 
+    /**
+     * Guardar los mazos y las manos
+     * @param nombreP
+     */
     public void guardarMazos(String nombreP){
         if (this instanceof JugadorReal) {
             this.mano.guardarLista(nombreP, "ManoJ");
@@ -168,10 +172,18 @@ public abstract class Jugador extends Observable {
         }
     }
 
+    /**
+     * Cargar los mazos
+     * @param mazo
+     */
     public void setMazo(ListaCartas mazo) {
         this.mazo = mazo;
     }
 
+    /**
+     * Cargar las manos
+     * @param mano
+     */
     public void setMano(ListaCartas mano) {
         this.mano = mano;
     }

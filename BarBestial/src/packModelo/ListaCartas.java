@@ -293,7 +293,9 @@ public class ListaCartas {
     }
 
     /**
-     *
+     * Guardar las cartas con su grupo y nombre de partida.
+     * La posición de la carta no se recoge como atributo.
+     * Las cartas se guardan en orden y cargan en orden.
      * @param nombreP
      * @param grupo
      */

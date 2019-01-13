@@ -47,10 +47,18 @@ public class Bar {
         this.lista.anadirCarta(pCarta);
     }
 
+    /**
+     * Guardar el cielo
+     * @param nombreP
+     */
     public void guardarCielo(String nombreP) {
         this.lista.guardarLista(nombreP,"Cielo");
     }
 
+    /**
+     * Cargar el cielo
+     * @param lista
+     */
     public void setCielo(ListaCartas lista) {
         this.lista = lista;
     }

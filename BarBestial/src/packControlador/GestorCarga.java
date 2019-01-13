@@ -27,6 +27,7 @@ public class GestorCarga {
      * @param NombreP
      */
     public void cargarPartida(String NombreP) {
+        //Crear en partida la lista de jugadores
         Partida.getMiPartida().cargarPartida();
         //Get datos partida
         String sql = "SELECT * FROM Partida WHERE IdUsuario = '" + user + "' AND IdPartida = '"+NombreP+"'";
@@ -55,10 +56,11 @@ public class GestorCarga {
              ResultSet rs = stmt.executeQuery(sql)) {
             EnumColor color;
             Carta c;
+            //En base al grupo al que pertenecen, su color, y el animal, se crean los objetos Carta y se asignan a la lista correspondiente
             while (rs.next()) {
                 switch (rs.getString("Grupo")) {
                     case "Cielo":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                              color=EnumColor.AZUL;
                         }else{
                             color =EnumColor.VERDE;
@@ -67,7 +69,7 @@ public class GestorCarga {
                         cielo.anadirCarta(c);
                         break;
                     case "ManoJ":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -76,7 +78,7 @@ public class GestorCarga {
                         manoJ.anadirCarta(c);
                         break;
                     case "MazoJ":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -85,7 +87,7 @@ public class GestorCarga {
                         mazoJ.anadirCarta(c);
                         break;
                     case "ManoIA":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -94,7 +96,7 @@ public class GestorCarga {
                         manoIA.anadirCarta(c);
                         break;
                     case "MazoIA":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -103,7 +105,7 @@ public class GestorCarga {
                         mazoIA.anadirCarta(c);
                         break;
                     case "Cola":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -134,11 +136,10 @@ public class GestorCarga {
     }
 
     /**
-     *
+     *Eliminar la partida dada
      * @param NombreP
      */
     public void eliminarPartida(String NombreP) {
-        // TODO - implement GestorCarga.eliminarPartida
         String sql="Delete From Partida where IdPartida = '"+NombreP+"' AND IdUsuario = '"+this.user+"'";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -157,6 +158,10 @@ public class GestorCarga {
         }
     }
 
+    /**
+     * Select con los nombres de las partidas para la ventana de carga
+     * @return
+     */
     public ArrayList<String> getPartidas() {
         ArrayList<String> partidas = new ArrayList<>();
         String sql="Select IdPartida From Partida Where IdUsuario = '"+this.user+"'";

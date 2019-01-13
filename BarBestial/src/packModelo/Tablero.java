@@ -157,10 +157,18 @@ public class Tablero extends Observable {
         }
     }
 
+    /**
+     * Guardar la cola
+     * @param nombreP
+     */
     public void guardarCola(String nombreP) {
         this.cola.guardarLista(nombreP,"Cola");
     }
 
+    /**
+     * Poner la cola al cargar
+     * @param cola
+     */
     public void setCola(ListaCartas cola) {
         this.cola = cola;
     }

@@ -221,7 +221,6 @@ public class Controlador {
 
     public int identificarUsuario(String correo, String pass) {
         return GestorUsuario.getGestorUsuario().identificarUsuario(correo, pass);
-
     }
 
     public void mostarVentanaInicio() {
@@ -277,7 +276,7 @@ public class Controlador {
             setUpObservers();
         }
     }
-
+    //Funcionalidad 3
     private class CargarPartidaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

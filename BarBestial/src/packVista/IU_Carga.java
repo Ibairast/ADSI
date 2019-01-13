@@ -64,6 +64,8 @@ public class IU_Carga extends JFrame{
 		JButton btnCargar = new JButton("Cargar");
 		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Listenner que carga la partida seleccionada
+				//Muestra la ventana de juego y se cierra
 				GestorCarga.getGestor().cargarPartida(list.getSelectedValue());
 				Controlador.getMiControlador().mostrarVentanaJuego();
 				Controlador.getMiControlador().setUpObservers();
@@ -76,6 +78,8 @@ public class IU_Carga extends JFrame{
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Listenner que coje el valor seleccionado de la lista y lo elimina
+				//Se refresca la ventana
 				GestorCarga.getGestor().eliminarPartida(list.getSelectedValue());
 				new IU_Carga().setVisible(true);
 				frame.dispose();
@@ -85,6 +89,10 @@ public class IU_Carga extends JFrame{
 		frame.getContentPane().add(btnEliminar);
 	}
 
+	/**
+	 * Llena la lista con el array de partidas guardadas de la bd
+	 *Hay que pasar de ArrayList a Array y crear la lista con eso.
+	 */
 	public void cargar(){
 		ArrayList<String> temp =GestorCarga.getGestor().getPartidas();
 		this.partidas = new String[temp.size()];
@@ -92,6 +100,10 @@ public class IU_Carga extends JFrame{
 		this.list = new JList<String>(partidas);
 	}
 
+	/**
+	 * Hay que hacer el set visible del frame, sino se veia una ventana en blanco
+	 * @param b
+	 */
 	@Override
 	public void setVisible(boolean b) {
 		this.frame.setVisible(b);
