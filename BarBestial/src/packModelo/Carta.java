@@ -45,8 +45,14 @@ public class Carta implements Comparable<Carta> {
         }
     }
 
+    /**
+     * Guardar la carta con su grupo y nombre de partida.
+     * La posición de la carta no se recoge como atributo.
+     * Las cartas se guardan en orden y cargan en orden.
+     * @param nombreP
+     * @param grupo
+     */
     public void guardarCarta(String nombreP,String grupo) {
-
         String sql = "INSERT INTO Cartas VALUES('"+nombreP+"','"+Usuario.getUsuario().getIdUsuario()+"','"+grupo+"','"+this.color.toString()+"','"+this.animal.toString()+"')";
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
