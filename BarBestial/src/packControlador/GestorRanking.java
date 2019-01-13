@@ -212,5 +212,30 @@ public class GestorRanking {
             System.exit(0);
         }
     }
+    
+    // Metodo que obtiene la mejor puntuacion del usuario actual
+    public int obtenerMiMejorPuntuacion()
+    {
+        int puntuacion = 0;
+        String sql = "SELECT MAX(Puntuacion) FROM RANKING WHERE IdUsuario = '" + Usuario.getUsuario().getIdUsuario() + "'";
+
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql))
+        {
+            // Solo hay una puntuacion maxima
+            while (rs.next())
+            {
+                puntuacion = rs.getInt("MAX(Puntuacion)");
+            }
+        }
+        // Si se produce un error se informa por consola
+        catch (Exception e)
+        {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return puntuacion;
+    }
 
 }
