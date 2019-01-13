@@ -9,5 +9,10 @@ Funcionalidad 3:
 -Se ha quitado la posición de la bd. Las cartas se meten en orden y se sacan en orden.  No necesitan numeración
 -Si hay una partida con en mismo nombre se sobreescribe.
 
+Funcionalidad 6:
+-Se ha cambiado el diagrama de comunicación y el de secuencia.
+-Se han añadido ventanas nuevas
+-Se han cambiado funciones en el diagrama de clases
+
 Funcionalidad 7:
 - Corrección de los diagramas de secuencia. Ahora aparecen las condiciones especificadas en los propios diagramas.
