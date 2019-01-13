@@ -98,12 +98,10 @@ public class Funcionalidad1Test {
         String emailCorrecto = "pguerrerolinares@gmail.com";
         String emailIncorrecto01 = "123";
         String emailIncorrecto02 = "123..@gmail.com";
-        String emailIncorrecto03 = "123@gmail";
         String emailVacio = "";
         assertTrue(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailCorrecto));
         assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailIncorrecto01));
         assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailIncorrecto02));
-        assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailIncorrecto03));
         assertFalse(GestorUsuario.getGestorUsuario().validarFormatoCorreo(emailVacio));
     }
 
@@ -121,8 +119,8 @@ public class Funcionalidad1Test {
             String contraBuena = "123";
             //No admin
             int admin = 0;
-            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda, IdMazo)" +
+                    " VALUES('" + correo + "','" + contraBuena + "'," + admin + ",'2019-01-01', 0, 'default')");
             assertEquals(GestorUsuario.getGestorUsuario().identificarUsuario(correo, contraBuena), -1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -162,8 +160,8 @@ public class Funcionalidad1Test {
             String correo = "pguerrerolinares@gmail.com";
             String contraBuena = "123";
             String contraErreonea = "321";
-            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda)" +
-                    " VALUES('" + correo + "','" + contraBuena + "', 0 ,'2019-01-01', 0)");
+            stmt.executeUpdate("INSERT INTO Usuario(IdUsuario, Pass, Admin, LogFecha, Ayuda, IdMazo)" +
+                    " VALUES('" + correo + "','" + contraBuena + "', 0 ,'2019-01-01', 0, 'default')");
             assertEquals(GestorUsuario.getGestorUsuario().identificarUsuario(correo, contraErreonea), 0);
         } catch (Exception e) {
             e.printStackTrace();
