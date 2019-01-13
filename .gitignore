@@ -21,3 +21,5 @@ BarBestial/\.extract/
 *.kotlin_module
 
 BarBestial/barbes\.db
+
+*.kate-swp
