@@ -219,6 +219,14 @@ public class Partida extends Observable {
      * Crea los jugadores y asigna el turno
      */
     public void cargarPartida(){
+        Tablero tablero = Tablero.getMiTablero();
+        tablero.vaciar();
+
+        Bar bar = Bar.getMiBar();
+        bar.vaciar();
+
+        EsLoQueHay elqh = EsLoQueHay.getMiEsLoQueHay();
+        elqh.vaciar();
         this.user=Usuario.getUsuario().getIdUsuario();
         this.listaJugadores.add(new JugadorReal(this.user, EnumColor.AZUL));
         this.listaJugadores.add(new Maquina("Maquina", EnumColor.VERDE));

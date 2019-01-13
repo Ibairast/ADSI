@@ -60,7 +60,7 @@ public class GestorCarga {
             while (rs.next()) {
                 switch (rs.getString("Grupo")) {
                     case "Cielo":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                              color=EnumColor.AZUL;
                         }else{
                             color =EnumColor.VERDE;
@@ -69,7 +69,7 @@ public class GestorCarga {
                         cielo.anadirCarta(c);
                         break;
                     case "ManoJ":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -78,7 +78,7 @@ public class GestorCarga {
                         manoJ.anadirCarta(c);
                         break;
                     case "MazoJ":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -87,7 +87,7 @@ public class GestorCarga {
                         mazoJ.anadirCarta(c);
                         break;
                     case "ManoIA":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -96,7 +96,7 @@ public class GestorCarga {
                         manoIA.anadirCarta(c);
                         break;
                     case "MazoIA":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
@@ -105,7 +105,7 @@ public class GestorCarga {
                         mazoIA.anadirCarta(c);
                         break;
                     case "Cola":
-                        if (rs.getString("Color")=="AZUL"){
+                        if (rs.getString("Color").equals("AZUL")){
                             color=EnumColor.AZUL;
                         }else{
                             color=EnumColor.VERDE;
