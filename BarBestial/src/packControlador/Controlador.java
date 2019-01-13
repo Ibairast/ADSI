@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import packModelo.*;
 import packVista.*;
 import packVista.sesion.Sesion;
+import twitter4j.TwitterException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -249,7 +250,25 @@ public class Controlador {
         return GestorUsuario.getGestorUsuario().comprobarInternet();
     }
 
+    // FUNCIONALIDAD 7
+    // Metodo que llama al metodo homonimo de la clase TwitterJava
+    public void iniciarSesionTwitter(String pConsumerKey, String pConsumerSecret, String pAccessToken, String pAccessTokenSecret) throws TwitterException
+    {
+        TwitterJava.getTwitterJava().iniciarSesionTwitter(pConsumerKey, pConsumerSecret, pAccessToken, pAccessTokenSecret);
+    }
 
+    // Metodo que llama al metodo homonimo de la clase TwitterJava
+    public void twittearResultado(String pResultado)
+    {
+        TwitterJava.getTwitterJava().twittearResultado(pResultado);
+    }
+
+    // Metodo que llama al metodo homonimo de la clase GestorRanking
+    public int obtenerMiMejorPuntuacion()
+    {
+        return GestorRanking.getMiGestorRanking().obtenerMiMejorPuntuacion();
+    }
+    
     class NuevaPartidaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
