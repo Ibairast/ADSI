@@ -12,10 +12,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+
+import java.net.Socket;
 
 public class VentanaJuego extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
@@ -54,6 +59,7 @@ public class VentanaJuego extends JFrame implements Observer {
     private JButton btnSiguiente;
     private JButton btnGuardar;
     private JButton btnAyuda;
+    private String resultado;
 
     /**
      * Create the frame.
@@ -238,6 +244,7 @@ public class VentanaJuego extends JFrame implements Observer {
             frameSize.width = screenSize.width;
         }
         setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
+	this.resultado = new String();
     }
 
     /**
@@ -558,11 +565,92 @@ public class VentanaJuego extends JFrame implements Observer {
                     "No quedan más cartas, el ganador es: " + ganador
                             + " con un total de " + numeroDeCartasGanador + " cartas"
                             + " y " + fuerzaGanador + " puntos de fuerza.");
+	    this.resultado = pInfoGanador;
             Controlador.getMiControlador().mostarVentanaRanking();
         }
 
     }
 
+    // En este metodo se pregunta al usuario si desea publicar su resultado
+    public void publicarResultados1()
+    {
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Deseas publicar tu resultado en RRSS?", "RRSS", JOptionPane.YES_NO_OPTION);
+
+        // Si desea publicar el resultado, se genera un String que contiene parte de información del resultado
+        if (opcion==0)
+        {
+            Date date = new Date();
+            DateFormat hourDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            String rdo = "(" + hourDateFormat.format(date) + ") Acabo de jugar a Bar Bestial y el resultado ha sido -> ";
+            String ganador = this.resultado.split(" ")[0];
+            String numeroDeCartasGanador = this.resultado.split(" ")[1];
+            String fuerzaGanador = this.resultado.split(" ")[2];
+            if (ganador.equals("Empate"))
+            {
+                rdo = rdo + ganador;
+            }
+            else
+            {
+                rdo = rdo + "Ganador: " + ganador + " con un total de " + numeroDeCartasGanador + " cartas" + " y " + fuerzaGanador + " puntos de fuerza.";
+            }
+            rdo = rdo + " Mi mejor puntuacion historica es de ";
+            this.setVisible(false);
+            this.publicarResultados2(rdo);
+        }
+        // Si no desea publicar el resultado se cierra directamente la ventana del juego
+        else
+        {
+            this.setVisible(false);
+        }
+    }
+
+    // En este metodo se pregunta al usuario que red social desea utilizar para publicar su resultado
+    private void publicarResultados2(String pResultado)
+    {
+        int opcion = JOptionPane.showOptionDialog(null, "¿Que red social deseas utilizar?", "Publicación resultados", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Facebook", "Twitter"}, "Facebook");
+
+        // Si la opcion es Facebook
+        if(opcion==0)
+        {
+            // Se comprueba si hay conexion a Internet
+            try
+            {
+                Socket socket = new Socket("www.facebook.com", 80);
+                // Si hay conexion se le solicitarian los datos de identificacion (No se ha llegado a implementar)
+                // Se ha dejado para tener una idea de como quedaria
+                if (socket.isConnected())
+                {
+                    JOptionPane.showMessageDialog(null, "Requisito: El usuario debe poder publicar sus resultados en al menos una red social (Twitter)", "¡PROXIMAMENTE!", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            // Si no hay conexion se le muestra un mensaje de error
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Se ha perdido la conexión a Internet", "Sin Internet", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        // Si la opcion es Twitter
+        else
+        {
+            // Se comprueba si hay conexion a Internet
+            try
+            {
+                Socket socket = new Socket("www.twitter.com", 80);
+                // Si hay conexion se le solicitan los datos de identificacion
+                if (socket.isConnected())
+                {
+                    IU_DatosTwitter twitter = new IU_DatosTwitter(pResultado);
+                    twitter.setVisible(true);
+                }
+            }
+            // Si no hay conexion se le muestra un mensaje de error
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Se ha perdido la conexión a Internet", "Sin Internet", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+	
     /** Metodo para Seleccionar la imagen de una carta
      *
      * @param pInformacionCarta nombre de la imagen ejemplo : CamaleonAzul
