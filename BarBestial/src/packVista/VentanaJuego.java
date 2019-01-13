@@ -594,13 +594,12 @@ public class VentanaJuego extends JFrame implements Observer {
                 rdo = rdo + "Ganador: " + ganador + " con un total de " + numeroDeCartasGanador + " cartas" + " y " + fuerzaGanador + " puntos de fuerza.";
             }
             rdo = rdo + " Mi mejor puntuacion historica es de ";
-            this.setVisible(false);
             this.publicarResultados2(rdo);
         }
-        // Si no desea publicar el resultado se cierra directamente la ventana del juego
+        // Si no desea publicar el resultado se cierran directamente las ventanas del juego
         else
         {
-            this.setVisible(false);
+            System.exit(0);
         }
     }
 
@@ -621,13 +620,15 @@ public class VentanaJuego extends JFrame implements Observer {
                 if (socket.isConnected())
                 {
                     JOptionPane.showMessageDialog(null, "Requisito: El usuario debe poder publicar sus resultados en al menos una red social (Twitter)", "¡PROXIMAMENTE!", JOptionPane.WARNING_MESSAGE);
-                }
+                    System.exit(0);
+		}
             }
             // Si no hay conexion se le muestra un mensaje de error
             catch(Exception e)
             {
                 JOptionPane.showMessageDialog(null, "Se ha perdido la conexión a Internet", "Sin Internet", JOptionPane.ERROR_MESSAGE);
-            }
+           	System.exit(0);
+	    }
         }
         // Si la opcion es Twitter
         else
@@ -647,7 +648,8 @@ public class VentanaJuego extends JFrame implements Observer {
             catch(Exception e)
             {
                 JOptionPane.showMessageDialog(null, "Se ha perdido la conexión a Internet", "Sin Internet", JOptionPane.ERROR_MESSAGE);
-            }
+            	System.exit(0);
+	    }
         }
     }
 	
