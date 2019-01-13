@@ -194,8 +194,7 @@ public class Controlador {
      */
     public void cerrarVentanaRankingJuego() {
         this.iRanking.setVisible(false);
-        //Abrir ventana publicaciones
-
+        this.ventanaJuego.publicarResultados1();
     }
 
     public JSONArray obtenerMisMejoresPartidas() {
