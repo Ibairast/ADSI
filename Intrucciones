@@ -1,2 +1,5 @@
 Funcionalidad 2: Visualizar Ranking
 - Para cerrar la ventana hay que usar el botón "Cancelar".
+
+Funcionalidad 7: Publicación de resultados
+- Es necesario tener los datos de desarrollador asociados a una cuenta Twitter para poder twittear el resultado.
