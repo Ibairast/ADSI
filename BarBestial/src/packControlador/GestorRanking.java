@@ -7,6 +7,8 @@ import packModelo.Usuario;
 
 import java.sql.*;
 
+import static java.time.LocalDate.now;
+
 public class GestorRanking {
     private static GestorRanking miGestorRanking;
 
@@ -32,7 +34,7 @@ public class GestorRanking {
         JSONArray json = new JSONArray();
 
         // Sentencia sql que obtiene las mejores puntuaciones
-        String sql = "SELECT Puntuacion FROM RANKING WHERE IdUsuario = '" + Usuario.getUsuario().getIdUsuario() +
+        String sql = "SELECT Puntuacion FROM Ranking WHERE IdUsuario = '" + Usuario.getUsuario().getIdUsuario() +
         "' ORDER BY Puntuacion DESC LIMIT 10;";
 
         // Conexión con la base de datos
@@ -66,7 +68,7 @@ public class GestorRanking {
         JSONArray json = new JSONArray();
 
         // Sentencia sql que obtiene la mejor puntuación del día
-        String sql = "SELECT IdUsuario, Puntuacion FROM RANKING WHERE Fecha = strftime('%Y-%m-%d') ORDER BY Puntuacion DESC LIMIT 1;";
+        String sql = "SELECT IdUsuario, Puntuacion FROM Ranking WHERE Fecha = strftime('%Y-%m-%d') ORDER BY Puntuacion DESC LIMIT 1;";
 
         // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
@@ -102,7 +104,7 @@ public class GestorRanking {
         JSONArray json = new JSONArray();
 
         // Sentencia sql que obtiene las mejores partidas
-        String sql = "SELECT IdUsuario, Puntuacion, Fecha FROM RANKING ORDER BY Puntuacion DESC LIMIT 10;";
+        String sql = "SELECT IdUsuario, Puntuacion, Fecha FROM Ranking ORDER BY Puntuacion DESC LIMIT 10;";
 
         // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
@@ -143,7 +145,7 @@ public class GestorRanking {
         JSONArray json = new JSONArray();
 
         // Sentencia sql que obtiene las mejores medias
-        String sql = "SELECT IdUsuario, AVG(Puntuacion) AS Media FROM RANKING WHERE Gana = 1 GROUP BY IdUsuario ORDER BY Media DESC LIMIT 10;";
+        String sql = "SELECT IdUsuario, AVG(Puntuacion) AS Media FROM Ranking WHERE Gana = 1 GROUP BY IdUsuario ORDER BY Media DESC LIMIT 10;";
 
         // Conexión con la base de datos
         try (Connection conn = SGBD.getMiSGBD().conectarBD();
@@ -167,6 +169,48 @@ public class GestorRanking {
         }
         System.out.println("Consulta obtenerMejorMedia terminada");
         return json;
+    }
+
+    public void insertarPuntuacion(String pDatos){
+        //info = info + fuerza + "1";
+        String idUsuario = Usuario.getUsuario().getIdUsuario();
+        String fuerza = pDatos.split(" ")[1];
+        //int fuerza = Integer.parseInt(f);
+        String gana = pDatos.split(" ")[2];
+        //int gana = Integer.parseInt(g);
+
+
+        // Sentencia sql que obtiene las mejores medias
+        String sql = "SELECT * FROM Ranking ;";
+
+        // Conexión con la base de datos
+        try (Connection conn = SGBD.getMiSGBD().conectarBD();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // Se crean los objetos json con los datos recogidos del select
+            int i = 0;
+            while (rs.next()) { //Solo se hace una vez
+                i++;
+            }
+            i++;
+            System.out.println(i);
+            System.out.println(idUsuario);
+            System.out.println(fuerza);
+            System.out.println(gana);
+
+            if (gana.equals("0")) {
+                stmt.executeUpdate("INSERT INTO Ranking(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                        "VALUES('" + i + "' , '" + idUsuario + "' , '" + fuerza + "' , '" + now().toString() + "' , 0)");
+            }else{
+                stmt.executeUpdate("INSERT INTO Ranking(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                        "VALUES('" + i + "' , '" + idUsuario + "' , '" + fuerza + "' , '" + now().toString() + "' , 1)");
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
 }

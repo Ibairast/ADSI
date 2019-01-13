@@ -1,6 +1,7 @@
 package packModelo;
 
 import packControlador.GestorCarga;
+import packControlador.GestorRanking;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -101,7 +102,7 @@ public class Partida extends Observable {
     private void finalizar() {
         String infoGanador = this.obtenerInformacionGanador();
         /* Guardar ganador en la base de datos */
-
+        GestorRanking.getMiGestorRanking().insertarPuntuacion(obtenerInformacionJugador());
 
         /* Notificar a la interfaz */
         this.notificar("fin-" + infoGanador);
@@ -144,6 +145,19 @@ public class Partida extends Observable {
             infoGanador = infoGanador + " " + numeroDeCartasGanador + " " + fuerzaGanador;
         }
         return infoGanador;
+    }
+
+    private String obtenerInformacionJugador(){
+        String info = null;
+        String fuerza = Integer.toString(this.obtenerFuerzaColorEnBar(EnumColor.AZUL));
+        EnumColor color = Bar.getMiBar().calcularGanador();
+        if (color == EnumColor.AZUL){
+            info =  " " + fuerza + " " + 1;
+        }else{
+            info = " " + fuerza + " " + 0;
+
+        }
+        return info;
     }
 
     private int obtenerNumeroDeCartasColorEnBar(EnumColor pColor) {

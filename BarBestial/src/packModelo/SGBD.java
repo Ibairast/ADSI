@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static java.time.LocalDate.now;
+
 public class SGBD {
 
     private static SGBD miSGBD;
@@ -169,6 +171,20 @@ public class SGBD {
                     "VALUES(13, 'andrea@gmail.com', 55, '2019-01-14', 1)");
             stmt.executeUpdate("INSERT INTO Ranking(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
                     "VALUES(14, 'andrea@gmail.com', 36, '2019-01-14', 0)");
+
+/*            String idUsuario = "andrea@gmail.com";
+            String fuerza = "20";
+            String gana = "0";
+            int i = 20;
+
+            if (gana.equals("0")) {
+                stmt.executeUpdate("INSERT INTO Ranking(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                        "VALUES('" + i + "' , '" + idUsuario + "' , '" + fuerza + "' , '" + now().toString() + "' , 0)");
+            }else{
+                stmt.executeUpdate("INSERT INTO Ranking(IdRanking, IdUsuario, Puntuacion, Fecha, Gana)" +
+                        "VALUES('" + i + "' , '" + idUsuario + "' , '" + fuerza + "' , '" + now().toString() + "' , 1)");
+            }*/
+
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
