@@ -1,3 +1,17 @@
+Funcionalidad 1:
+Para poder ser ejecutada correctamente la funcionalidad identificación con redes sociales, se tiene que seguir unos pasos especificos:
+
+a. Si tenéis TOMCAT instalado y activo, habrá que desactivarlo. En ubuntu he utilizado el comando "sudo systemctl stop tomcat". Esto se hace ya que como he comentado antes, se genera un entorno con TOMCAT y si hay uno activo puede interferir con el usado en la funcionalidad.
+b. Se seguirá con la pulsación sobre el botón "Google", el cual nos abrirá una ventana con tres de botones, si se quiere acceder a la identificación se tendrá que pulsar el botón "Acceder" y si se quiere salir simplemente habrá que cerrar la ventana. En ningún caso se podrá tocar el botón "Aceptar" en este paso. 
+c. Si se ha pulsado sobre "Acceder" se redigirá a la ventana para identificarse con Google, se procederá a la identificación.
+d. Una vez identificado, la pantalla se quedará en blanco y se tendrá que pulsar el botón "Aceptar", el cual nos redigirá a una pantalla, la cual nos pedirá que creemos un enlace con nuestra aplicación. Pulsaremos sobre ella.
+e.Se nos mostrará una nueva pantalla mostrando el correo utilizado para la identificación con Google y pulsaremos el botón "Finalizar".
+f. Finalmente se nos mostrará un aviso de bienvenida y se accederá al juego.
+
+Notas:
+El usuario se podrá identificar siempre con su cuenta de Google, si no tiene cuenta en nuestra base de datos, se le creará y si ya tiene, accederá a ella.
+El usuario que se haya identificado, al menos una vez usando los servicios de Google, también podrá acceder a su cuenta a través de la identificación estándar de nuestro proyecto, pero antes tendrá que cambiar su contraseña, porque al identificarse con Google se le asignará una aletoria.
+
 Funcionalidad 2: Visualizar Ranking
 - Para cerrar la ventana hay que usar el botón "Cancelar".
 
